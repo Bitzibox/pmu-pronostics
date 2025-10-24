@@ -25,8 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const pronosticsData = await pronosticsRes.json();
             const resultatsData = resultatsRes.ok ? await resultatsRes.json() : { courses: [] };
 
-            // Vérifier la structure des données
-            const reunions = coursesData.programme?.reunions || [];
+            // Vérifier la structure des données - CORRECTION: gérer le cas où c'est un tableau
+            const coursesObj = Array.isArray(coursesData) ? coursesData[0] : coursesData;
+            const reunions = coursesObj?.programme?.reunions || coursesObj?.reunions || [];
             const pronostics = pronosticsData.pronostics || [];
             const resultats = resultatsData.courses || [];
 
@@ -35,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             renderTabsAndCourses(reunions, pronostics);
+            setupTabListeners(); // AJOUT: Configuration des listeners pour les onglets
             updateComparaisonTable(pronostics, resultats);
             updateDashboard(pronostics, resultats);
             setupFilters(reunions);
@@ -46,6 +48,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // NOUVELLE FONCTION: Gestion des clics sur les onglets
+    function setupTabListeners() {
+        const tabs = document.querySelectorAll('.nav-link[data-bs-toggle="tab"]');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Retirer la classe 'active' de tous les onglets
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                
+                // Ajouter la classe 'active' à l'onglet cliqué
+                this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+                
+                // Récupérer l'ID du contenu cible
+                const targetId = this.getAttribute('data-bs-target');
+                
+                // Masquer tous les contenus
+                document.querySelectorAll('.tab-pane').forEach(pane => {
+                    pane.classList.remove('show', 'active');
+                });
+                
+                // Afficher le contenu ciblé
+                const targetPane = document.querySelector(targetId);
+                if (targetPane) {
+                    targetPane.classList.add('show', 'active');
+                }
+            });
+        });
+    }
+
     // --- FONCTIONS D'AFFICHAGE ---
     function renderTabsAndCourses(reunions, pronostics) {
         const tabsContainer = document.getElementById('reunions-tabs');
@@ -55,24 +92,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
         reunions.forEach((reunion, index) => {
             const isActive = index === 0;
+            const reunionNum = reunion.numOfficiel;
+            const hippodromeLibelle = reunion.hippodrome?.libelleCourt || 'Hippodrome';
+            
             // Création de l'onglet
             tabsContainer.innerHTML += `
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link ${isActive ? 'active' : ''}" id="tab-r${reunion.numOfficiel}" data-bs-toggle="tab" data-bs-target="#content-r${reunion.numOfficiel}" type="button" role="tab">${reunion.hippodrome?.libelleCourt || 'Hippodrome'} (R${reunion.numOfficiel})</button>
+                    <button class="nav-link ${isActive ? 'active' : ''}" 
+                            id="tab-r${reunionNum}" 
+                            data-bs-toggle="tab" 
+                            data-bs-target="#content-r${reunionNum}" 
+                            type="button" 
+                            role="tab"
+                            aria-controls="content-r${reunionNum}"
+                            aria-selected="${isActive}">
+                        ${hippodromeLibelle} (R${reunionNum})
+                    </button>
                 </li>`;
 
             // Création du contenu de l'onglet
             let coursesHtml = '';
             const courses = reunion.courses || [];
+            
             courses.forEach(course => {
-                const courseId = `R${reunion.numOfficiel}C${course.numOrdre}`;
+                const courseId = `R${reunionNum}C${course.numOrdre}`;
                 const prono = pronostics.find(p => p.courseId === courseId);
+                const heureDepart = course.heureDepart 
+                    ? new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) 
+                    : 'N/A';
 
                 coursesHtml += `
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
                             <strong>${course.libelle || 'Course'} - C${course.numOrdre}</strong>
-                            <span>Départ: ${course.heureDepart ? new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : 'N/A'}</span>
+                            <span>Départ: ${heureDepart}</span>
                         </div>
                         <div class="card-body">
                             ${prono ? renderProno(prono) : '<p class="text-muted">Pronostic en attente de génération...</p>'}
@@ -81,7 +134,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             contentContainer.innerHTML += `
-                <div class="tab-pane fade ${isActive ? 'show active' : ''}" id="content-r${reunion.numOfficiel}" role="tabpanel">
+                <div class="tab-pane fade ${isActive ? 'show active' : ''}" 
+                     id="content-r${reunionNum}" 
+                     role="tabpanel"
+                     aria-labelledby="tab-r${reunionNum}">
                     ${coursesHtml || '<p class="text-muted">Aucune course disponible pour cette réunion.</p>'}
                 </div>`;
         });
@@ -92,11 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return '<p class="text-muted">Aucun classement disponible</p>';
         }
 
+        const scoreConfiance = prono.scoreConfiance ? `(Confiance: ${prono.scoreConfiance.toFixed(2)}%)` : '';
+        
         let tableHtml = `
-            <h5 class="card-title">Pronostic ${prono.scoreConfiance ? `(Confiance: ${prono.scoreConfiance.toFixed(2)}%)` : ''}</h5>
+            <h5 class="card-title">Pronostic ${scoreConfiance}</h5>
             <table class="table table-sm">
                 <thead><tr><th>Rang</th><th>Cheval</th><th>Jockey</th><th>Cote</th></tr></thead>
                 <tbody>`;
+        
         prono.classement.slice(0, 5).forEach((cheval, i) => {
             tableHtml += `
                 <tr>
@@ -106,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${cheval.cote || 'N/A'}</td>
                 </tr>`;
         });
+        
         tableHtml += '</tbody></table>';
         return tableHtml;
     }
