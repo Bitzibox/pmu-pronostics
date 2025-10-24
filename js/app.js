@@ -13,40 +13,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- FONCTIONS DE CHARGEMENT DES DONNÉES ---
     async function fetchData() {
-        try {
-            const date = getFormattedDate();
-            const [coursesRes, pronosticsRes, resultatsRes] = await Promise.all([
-                fetch(`${API_BASE_URL}courses-${date}.json?v=${new Date().getTime()}`),
-                fetch(`${API_BASE_URL}pronostics-${date}.json?v=${new Date().getTime()}`),
-                fetch(`${API_BASE_URL}resultats-${date}.json?v=${new Date().getTime()}`)
-            ]);
+    try {
+        const date = getFormattedDate();
+        console.log('Date actuelle:', date);
+        
+        const [coursesRes, pronosticsRes, resultatsRes] = await Promise.all([
+            fetch(`${API_BASE_URL}courses-${date}.json?v=${new Date().getTime()}`),
+            fetch(`${API_BASE_URL}pronostics-${date}.json?v=${new Date().getTime()}`),
+            fetch(`${API_BASE_URL}resultats-${date}.json?v=${new Date().getTime()}`)
+        ]);
 
-            const coursesData = await coursesRes.json();
-            const pronosticsData = await pronosticsRes.json();
-            const resultatsData = resultatsRes.ok ? await resultatsRes.json() : { courses: [] };
+        const coursesData = await coursesRes.json();
+        const pronosticsData = await pronosticsRes.json();
+        const resultatsData = resultatsRes.ok ? await resultatsRes.json() : { courses: [] };
 
-            // Vérifier la structure des données - CORRECTION: gérer le cas où c'est un tableau
-            const coursesObj = Array.isArray(coursesData) ? coursesData[0] : coursesData;
-            const reunions = coursesObj?.programme?.reunions || coursesObj?.reunions || [];
-            const pronostics = pronosticsData.pronostics || [];
-            const resultats = resultatsData.courses || [];
+        console.log('Données courses:', coursesData);
+        console.log('Données pronostics:', pronosticsData);
+        console.log('Données résultats:', resultatsData);
 
-            if (reunions.length === 0) {
-                throw new Error('Aucune réunion trouvée dans les données');
-            }
+        // Vérifier la structure des données
+        const coursesObj = Array.isArray(coursesData) ? coursesData[0] : coursesData;
+        const reunions = coursesObj?.programme?.reunions || coursesObj?.reunions || [];
+        const pronostics = pronosticsData.pronostics || [];
+        const resultats = resultatsData.courses || [];
 
-            renderTabsAndCourses(reunions, pronostics);
-            setupTabListeners(); // AJOUT: Configuration des listeners pour les onglets
-            updateComparaisonTable(pronostics, resultats);
-            updateDashboard(pronostics, resultats);
-            setupFilters(reunions);
+        console.log('Réunions trouvées:', reunions.length);
+        console.log('Pronostics trouvés:', pronostics.length);
+        console.log('Résultats trouvés:', resultats.length);
+        
+        // Afficher les courseId des pronostics
+        console.log('CourseIds des pronostics:', pronostics.map(p => p.courseId));
 
-        } catch (error) {
-            console.error("Erreur lors de la récupération des données:", error);
-            // Afficher un message d'erreur sur la page
-            document.getElementById('reunions-content').innerHTML = `<div class="alert alert-danger">Impossible de charger les données. Veuillez vérifier que les workflows n8n fonctionnent correctement.<br>Erreur: ${error.message}</div>`;
+        if (reunions.length === 0) {
+            throw new Error('Aucune réunion trouvée dans les données');
         }
+
+        renderTabsAndCourses(reunions, pronostics);
+        setupTabListeners();
+        updateComparaisonTable(pronostics, resultats);
+        updateDashboard(pronostics, resultats);
+        setupFilters(reunions);
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données:", error);
+        document.getElementById('reunions-content').innerHTML = `<div class="alert alert-danger">Impossible de charger les données. Veuillez vérifier que les workflows n8n fonctionnent correctement.<br>Erreur: ${error.message}</div>`;
     }
+}
 
     // NOUVELLE FONCTION: Gestion des clics sur les onglets
     function setupTabListeners() {
