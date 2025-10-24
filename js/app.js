@@ -34,12 +34,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Vérifier la structure des données
         const coursesObj = Array.isArray(coursesData) ? coursesData[0] : coursesData;
         const reunions = coursesObj?.programme?.reunions || coursesObj?.reunions || [];
-        const pronostics = pronosticsData.pronostics || [];
-        const resultats = resultatsData.courses || [];
+        const pronosticsObj = Array.isArray(pronosticsData) ? pronosticsData[0] : pronosticsData;
+        const pronostics = pronosticsObj?.pronostics || [];
+        const resultatsObj = Array.isArray(resultatsData) ? resultatsData[0] : resultatsData;
+        const resultats = resultatsObj?.courses || [];
 
         console.log('Réunions trouvées:', reunions.length);
         console.log('Pronostics trouvés:', pronostics.length);
         console.log('Résultats trouvés:', resultats.length);
+        console.log('pronosticsObj:', pronosticsObj);
+        console.log('Pronostics extraits:', pronostics);
+        console.log('Premier pronostic:', pronostics[0]);
         
         // Afficher les courseId des pronostics
         console.log('CourseIds des pronostics:', pronostics.map(p => p.courseId));
