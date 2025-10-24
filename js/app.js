@@ -23,17 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const coursesData = await coursesRes.json();
             const pronosticsData = await pronosticsRes.json();
-            const resultatsData = resultatsRes.ok ? await resultatsRes.json() : [];
+            const resultatsData = resultatsRes.ok ? await resultatsRes.json() : { courses: [] };
 
-            renderTabsAndCourses(coursesData.programme.reunions, pronosticsData);
-            updateComparaisonTable(pronosticsData, resultatsData);
-            updateDashboard(pronosticsData, resultatsData);
-            setupFilters(coursesData.programme.reunions);
+            // Vérifier la structure des données
+            const reunions = coursesData.programme?.reunions || [];
+            const pronostics = pronosticsData.pronostics || [];
+            const resultats = resultatsData.courses || [];
+
+            if (reunions.length === 0) {
+                throw new Error('Aucune réunion trouvée dans les données');
+            }
+
+            renderTabsAndCourses(reunions, pronostics);
+            updateComparaisonTable(pronostics, resultats);
+            updateDashboard(pronostics, resultats);
+            setupFilters(reunions);
 
         } catch (error) {
             console.error("Erreur lors de la récupération des données:", error);
             // Afficher un message d'erreur sur la page
-            document.getElementById('reunions-content').innerHTML = `<div class="alert alert-danger">Impossible de charger les données. Veuillez vérifier que les workflows n8n fonctionnent correctement.</div>`;
+            document.getElementById('reunions-content').innerHTML = `<div class="alert alert-danger">Impossible de charger les données. Veuillez vérifier que les workflows n8n fonctionnent correctement.<br>Erreur: ${error.message}</div>`;
         }
     }
 
@@ -49,20 +58,21 @@ document.addEventListener('DOMContentLoaded', () => {
             // Création de l'onglet
             tabsContainer.innerHTML += `
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link ${isActive ? 'active' : ''}" id="tab-r${reunion.numOfficiel}" data-bs-toggle="tab" data-bs-target="#content-r${reunion.numOfficiel}" type="button" role="tab">${reunion.hippodrome.libelleCourt} (R${reunion.numOfficiel})</button>
+                    <button class="nav-link ${isActive ? 'active' : ''}" id="tab-r${reunion.numOfficiel}" data-bs-toggle="tab" data-bs-target="#content-r${reunion.numOfficiel}" type="button" role="tab">${reunion.hippodrome?.libelleCourt || 'Hippodrome'} (R${reunion.numOfficiel})</button>
                 </li>`;
 
             // Création du contenu de l'onglet
             let coursesHtml = '';
-            reunion.courses.forEach(course => {
+            const courses = reunion.courses || [];
+            courses.forEach(course => {
                 const courseId = `R${reunion.numOfficiel}C${course.numOrdre}`;
                 const prono = pronostics.find(p => p.courseId === courseId);
 
                 coursesHtml += `
                     <div class="card mb-3">
                         <div class="card-header d-flex justify-content-between">
-                            <strong>${course.libelle} - C${course.numOrdre}</strong>
-                            <span>Départ: ${new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}</span>
+                            <strong>${course.libelle || 'Course'} - C${course.numOrdre}</strong>
+                            <span>Départ: ${course.heureDepart ? new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }) : 'N/A'}</span>
                         </div>
                         <div class="card-body">
                             ${prono ? renderProno(prono) : '<p class="text-muted">Pronostic en attente de génération...</p>'}
@@ -72,14 +82,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             contentContainer.innerHTML += `
                 <div class="tab-pane fade ${isActive ? 'show active' : ''}" id="content-r${reunion.numOfficiel}" role="tabpanel">
-                    ${coursesHtml}
+                    ${coursesHtml || '<p class="text-muted">Aucune course disponible pour cette réunion.</p>'}
                 </div>`;
         });
     }
 
     function renderProno(prono) {
+        if (!prono.classement || prono.classement.length === 0) {
+            return '<p class="text-muted">Aucun classement disponible</p>';
+        }
+
         let tableHtml = `
-            <h5 class="card-title">Pronostic (Confiance: ${prono.scoreConfiance.toFixed(2)}%)</h5>
+            <h5 class="card-title">Pronostic ${prono.scoreConfiance ? `(Confiance: ${prono.scoreConfiance.toFixed(2)}%)` : ''}</h5>
             <table class="table table-sm">
                 <thead><tr><th>Rang</th><th>Cheval</th><th>Jockey</th><th>Cote</th></tr></thead>
                 <tbody>`;
@@ -87,8 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
             tableHtml += `
                 <tr>
                     <td>${i + 1}</td>
-                    <td>${cheval.nom} (${cheval.numPmu})</td>
-                    <td>${cheval.jockey}</td>
+                    <td>${cheval.nom || 'N/A'} (${cheval.numPmu || 'N/A'})</td>
+                    <td>${cheval.jockey || 'N/A'}</td>
                     <td>${cheval.cote || 'N/A'}</td>
                 </tr>`;
         });
@@ -101,16 +115,16 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.innerHTML = '';
 
         pronostics.forEach(prono => {
-            if (!prono.classement.length) return;
+            if (!prono.classement || prono.classement.length === 0) return;
 
             const chevalPronostique = prono.classement[0];
-            const resultatCourse = resultats.find(r => r.courseId === prono.courseId);
+            const resultatCourse = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
             
-            let statut = 'pending';
+            let statut = 'En attente';
             let resultatReel = 'En attente';
             let rowClass = '';
 
-            if (resultatCourse && resultatCourse.arrivee) {
+            if (resultatCourse && resultatCourse.arrivee && resultatCourse.arrivee.length > 0) {
                 const positionReelle = resultatCourse.arrivee.indexOf(chevalPronostique.numPmu) + 1;
                 if (positionReelle === 1) {
                     statut = 'Gagnant';
@@ -120,18 +134,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     statut = 'Placé';
                     resultatReel = `${positionReelle}ème`;
                     rowClass = 'status-placed';
-                } else {
+                } else if (positionReelle > 0) {
                     statut = 'Perdu';
-                    resultatReel = positionReelle > 0 ? `${positionReelle}ème` : 'Non placé';
+                    resultatReel = `${positionReelle}ème`;
                     rowClass = 'status-fail';
                 }
             }
 
+            const courseId = `R${prono.reunion}C${prono.course}`;
+            const reunionNum = prono.reunion || courseId.split('C')[0].replace('R','');
+            const confiance = prono.scoreConfiance || 0;
+
             const row = `
-                <tr class="${rowClass}" data-reunion="R${prono.courseId.split('C')[0].replace('R','')}" data-confiance="${prono.scoreConfiance}">
-                    <td>${prono.courseId}</td>
-                    <td>${chevalPronostique.nom} (${chevalPronostique.numPmu})</td>
-                    <td>${chevalPronostique.cote}</td>
+                <tr class="${rowClass}" data-reunion="R${reunionNum}" data-confiance="${confiance}">
+                    <td>${courseId}</td>
+                    <td>${chevalPronostique.nom || 'N/A'} (${chevalPronostique.numPmu || 'N/A'})</td>
+                    <td>${chevalPronostique.cote || 'N/A'}</td>
                     <td>1er</td>
                     <td>${resultatReel}</td>
                     <td>${statut}</td>
@@ -147,12 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let roi = 0;
 
         pronostics.forEach(prono => {
-            const chevalPronostique = prono.classement[0];
-            if (!chevalPronostique) return;
+            if (!prono.classement || prono.classement.length === 0) return;
             
-            const resultatCourse = resultats.find(r => r.courseId === prono.courseId);
+            const chevalPronostique = prono.classement[0];
+            const resultatCourse = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
 
-            if (resultatCourse && resultatCourse.arrivee) {
+            if (resultatCourse && resultatCourse.arrivee && resultatCourse.arrivee.length > 0) {
                 coursesTerminees++;
                 const positionReelle = resultatCourse.arrivee.indexOf(chevalPronostique.numPmu) + 1;
                 
@@ -225,7 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const filterReunion = document.getElementById('filter-reunion');
         filterReunion.innerHTML = '<option value="">Toutes les réunions</option>';
         reunions.forEach(reunion => {
-            filterReunion.innerHTML += `<option value="R${reunion.numOfficiel}">R${reunion.numOfficiel} - ${reunion.hippodrome.libelleCourt}</option>`;
+            const libelle = reunion.hippodrome?.libelleCourt || 'Hippodrome';
+            filterReunion.innerHTML += `<option value="R${reunion.numOfficiel}">R${reunion.numOfficiel} - ${libelle}</option>`;
         });
 
         document.getElementById('filter-reunion').addEventListener('change', applyFilters);
