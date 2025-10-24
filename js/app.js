@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const resultatsData = resultatsRes.ok ? await resultatsRes.json() : { courses: [] };
 
             // Vérifier la structure des données
-            const reunions = coursesData.programme?.reunions || [];
+            const coursesObj = Array.isArray(coursesData) ? coursesData[0] : coursesData;
+            const reunions = coursesObj?.programme?.reunions || coursesObj?.reunions || [];
             const pronostics = pronosticsData.pronostics || [];
             const resultats = resultatsData.courses || [];
 
