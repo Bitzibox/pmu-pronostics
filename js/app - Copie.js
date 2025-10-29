@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const API_BASE_URL = 'data/'; // Chemin vers les données JSON locales
-    const PMU_API_BASE = 'https://offline.turfinfo.api.pmu.fr/rest/client/7/programme';
     let performanceChart;
-    let participantsCache = {}; // Cache pour les participants
 
     // Fonction pour obtenir la date au format DDMMYYYY
     const getFormattedDate = () => {
@@ -13,109 +11,59 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${day}${month}${year}`;
     };
 
-    // 🆕 FONCTION POUR RÉCUPÉRER LES PARTICIPANTS DEPUIS L'API PMU
-    async function fetchParticipants(date, reunionNum, courseNum) {
-        const cacheKey = `R${reunionNum}C${courseNum}`;
-        
-        // Vérifier le cache
-        if (participantsCache[cacheKey]) {
-            console.log(`✅ Participants R${reunionNum}C${courseNum} : depuis le cache`);
-            return participantsCache[cacheKey];
-        }
-
-        try {
-            const url = `${PMU_API_BASE}/${date}/R${reunionNum}/C${courseNum}/participants`;
-            console.log(`🔄 Chargement participants: ${url}`);
-            
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-            
-            const data = await response.json();
-            const participants = data.participants || [];
-            
-            // Mettre en cache
-            participantsCache[cacheKey] = participants;
-            console.log(`✅ ${participants.length} participants chargés pour ${cacheKey}`);
-            
-            return participants;
-        } catch (error) {
-            console.error(`❌ Erreur chargement participants ${cacheKey}:`, error);
-            return [];
-        }
-    }
-
     // --- FONCTIONS DE CHARGEMENT DES DONNÉES ---
     async function fetchData() {
-        try {
-            const date = getFormattedDate();
-            console.log('Date actuelle:', date);
-            
-            const [coursesRes, pronosticsRes, resultatsRes] = await Promise.all([
-                fetch(`${API_BASE_URL}courses-${date}.json?v=${new Date().getTime()}`),
-                fetch(`${API_BASE_URL}pronostics-${date}.json?v=${new Date().getTime()}`),
-                fetch(`${API_BASE_URL}resultats-${date}.json?v=${new Date().getTime()}`)
-            ]);
-
-            const coursesData = await coursesRes.json();
-            const pronosticsData = await pronosticsRes.json();
-            const resultatsData = resultatsRes.ok ? await resultatsRes.json() : { courses: [] };
-
-            console.log('Données courses:', coursesData);
-            console.log('Données pronostics:', pronosticsData);
-            console.log('Données résultats:', resultatsData);
-
-            // Vérifier la structure des données
-            const coursesObj = Array.isArray(coursesData) ? coursesData[0] : coursesData;
-            const reunions = coursesObj?.programme?.reunions || coursesObj?.reunions || [];
-            const pronosticsObj = Array.isArray(pronosticsData) ? pronosticsData[0] : pronosticsData;
-            const pronostics = pronosticsObj?.pronostics || [];
-            const resultatsObj = Array.isArray(resultatsData) ? resultatsData[0] : resultatsData;
-            const resultats = resultatsObj?.courses || [];
-
-            console.log('Réunions trouvées:', reunions.length);
-            console.log('Pronostics trouvés:', pronostics.length);
-            console.log('Résultats trouvés:', resultats.length);
-            console.log('pronosticsObj:', pronosticsObj);
-            console.log('Pronostics extraits:', pronostics);
-            console.log('Premier pronostic:', pronostics[0]);
-            
-            // Afficher les courseId des pronostics
-            console.log('CourseIds des pronostics:', pronostics.map(p => p.courseId));
-
-            if (reunions.length === 0) {
-                throw new Error('Aucune réunion trouvée dans les données');
-            }
-
-            // 🆕 Pré-charger les participants pour tous les pronostics disponibles
-            await preloadParticipants(date, pronostics);
-
-            renderTabsAndCourses(date, reunions, pronostics);
-            setupTabListeners();
-            updateComparaisonTable(pronostics, resultats);
-            updateDashboard(pronostics, resultats);
-            setupFilters(reunions);
-
-        } catch (error) {
-            console.error("Erreur lors de la récupération des données:", error);
-            document.getElementById('reunions-content').innerHTML = `<div class="alert alert-danger">Impossible de charger les données. Veuillez vérifier que les workflows n8n fonctionnent correctement.<br>Erreur: ${error.message}</div>`;
-        }
-    }
-
-    // 🆕 PRÉ-CHARGER LES PARTICIPANTS POUR TOUS LES PRONOSTICS
-    async function preloadParticipants(date, pronostics) {
-        console.log(`🔄 Pré-chargement des participants pour ${pronostics.length} pronostics...`);
+    try {
+        const date = getFormattedDate();
+        console.log('Date actuelle:', date);
         
-        const promises = pronostics.map(prono => {
-            const reunionNum = prono.reunion.replace('R', '');
-            const courseNum = prono.course.replace('C', '');
-            return fetchParticipants(date, reunionNum, courseNum);
-        });
+        const [coursesRes, pronosticsRes, resultatsRes] = await Promise.all([
+            fetch(`${API_BASE_URL}courses-${date}.json?v=${new Date().getTime()}`),
+            fetch(`${API_BASE_URL}pronostics-${date}.json?v=${new Date().getTime()}`),
+            fetch(`${API_BASE_URL}resultats-${date}.json?v=${new Date().getTime()}`)
+        ]);
 
-        await Promise.all(promises);
-        console.log('✅ Tous les participants ont été pré-chargés');
+        const coursesData = await coursesRes.json();
+        const pronosticsData = await pronosticsRes.json();
+        const resultatsData = resultatsRes.ok ? await resultatsRes.json() : { courses: [] };
+
+        console.log('Données courses:', coursesData);
+        console.log('Données pronostics:', pronosticsData);
+        console.log('Données résultats:', resultatsData);
+
+        // Vérifier la structure des données
+        const coursesObj = Array.isArray(coursesData) ? coursesData[0] : coursesData;
+        const reunions = coursesObj?.programme?.reunions || coursesObj?.reunions || [];
+        const pronosticsObj = Array.isArray(pronosticsData) ? pronosticsData[0] : pronosticsData;
+        const pronostics = pronosticsObj?.pronostics || [];
+        const resultatsObj = Array.isArray(resultatsData) ? resultatsData[0] : resultatsData;
+        const resultats = resultatsObj?.courses || [];
+
+        console.log('Réunions trouvées:', reunions.length);
+        console.log('Pronostics trouvés:', pronostics.length);
+        console.log('Résultats trouvés:', resultats.length);
+        console.log('pronosticsObj:', pronosticsObj);
+        console.log('Pronostics extraits:', pronostics);
+        console.log('Premier pronostic:', pronostics[0]);
+        
+        // Afficher les courseId des pronostics
+        console.log('CourseIds des pronostics:', pronostics.map(p => p.courseId));
+
+        if (reunions.length === 0) {
+            throw new Error('Aucune réunion trouvée dans les données');
+        }
+
+        renderTabsAndCourses(reunions, pronostics);
+        setupTabListeners();
+        updateComparaisonTable(pronostics, resultats);
+        updateDashboard(pronostics, resultats);
+        setupFilters(reunions);
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données:", error);
+        document.getElementById('reunions-content').innerHTML = `<div class="alert alert-danger">Impossible de charger les données. Veuillez vérifier que les workflows n8n fonctionnent correctement.<br>Erreur: ${error.message}</div>`;
     }
+}
 
     // NOUVELLE FONCTION: Gestion des clics sur les onglets
     function setupTabListeners() {
@@ -153,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- FONCTIONS D'AFFICHAGE ---
-    function renderTabsAndCourses(date, reunions, pronostics) {
+    function renderTabsAndCourses(reunions, pronostics) {
         const tabsContainer = document.getElementById('reunions-tabs');
         const contentContainer = document.getElementById('reunions-content');
         tabsContainer.innerHTML = '';
@@ -196,8 +144,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             <strong>${course.libelle || 'Course'} - C${course.numOrdre}</strong>
                             <span>Départ: ${heureDepart}</span>
                         </div>
-                        <div class="card-body" id="course-${courseId}">
-                            ${prono ? `<div class="loading">Chargement du pronostic...</div>` : '<p class="text-muted">Pronostic en attente de génération...</p>'}
+                        <div class="card-body">
+                            ${prono ? renderProno(prono) : '<p class="text-muted">Pronostic en attente de génération...</p>'}
                         </div>
                     </div>`;
             });
@@ -210,79 +158,33 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${coursesHtml || '<p class="text-muted">Aucune course disponible pour cette réunion.</p>'}
                 </div>`;
         });
-
-        // 🆕 Rendre les pronostics avec les participants
-        pronostics.forEach(prono => {
-            renderPronoWithParticipants(date, prono);
-        });
     }
 
-    // 🆕 NOUVELLE FONCTION: Afficher le pronostic avec les participants chargés
-    async function renderPronoWithParticipants(date, prono) {
-        const courseContainer = document.getElementById(`course-${prono.courseId}`);
-        if (!courseContainer) return;
-
-        const reunionNum = prono.reunion.replace('R', '');
-        const courseNum = prono.course.replace('C', '');
-        
-        // Récupérer les participants (depuis le cache ou API)
-        const participants = await fetchParticipants(date, reunionNum, courseNum);
-        
+    function renderProno(prono) {
         if (!prono.classement || prono.classement.length === 0) {
-            courseContainer.innerHTML = '<p class="text-muted">Aucun classement disponible</p>';
-            return;
+            return '<p class="text-muted">Aucun classement disponible</p>';
         }
 
         const scoreConfiance = prono.scoreConfiance ? `(Confiance: ${prono.scoreConfiance.toFixed(2)}%)` : '';
         
         let tableHtml = `
             <h5 class="card-title">Pronostic ${scoreConfiance}</h5>
-            <table class="table table-sm table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Rang</th>
-                        <th>N°</th>
-                        <th>Cheval</th>
-                        <th>Jockey</th>
-                        <th>Cote</th>
-                    </tr>
-                </thead>
+            <table class="table table-sm">
+                <thead><tr><th>Rang</th><th>Cheval</th><th>Jockey</th><th>Cote</th></tr></thead>
                 <tbody>`;
         
-        // 🔥 CORRECTION PRINCIPALE : Mapper les numéros aux participants
-        prono.classement.slice(0, 5).forEach((numPmu, i) => {
-            const participant = participants.find(p => p.numPmu === numPmu);
-            
-            if (participant) {
-                const chevalNom = participant.nom || 'N/A';
-                const jockeyNom = participant.driver?.nom || participant.jockey?.nom || 'N/A';
-                const cote = participant.rapport || participant.rapportDirect?.rapportProbable || 'N/A';
-                
-                tableHtml += `
-                    <tr>
-                        <td><strong>${i + 1}</strong></td>
-                        <td><span class="badge bg-primary">${numPmu}</span></td>
-                        <td><strong>${chevalNom}</strong></td>
-                        <td>${jockeyNom}</td>
-                        <td>${cote}</td>
-                    </tr>`;
-            } else {
-                tableHtml += `
-                    <tr>
-                        <td><strong>${i + 1}</strong></td>
-                        <td><span class="badge bg-secondary">${numPmu}</span></td>
-                        <td colspan="3" class="text-muted">Participant non trouvé</td>
-                    </tr>`;
-            }
+        prono.classement.slice(0, 5).forEach((cheval, i) => {
+            tableHtml += `
+                <tr>
+                    <td>${i + 1}</td>
+                    <td>${cheval.nom || 'N/A'} (${cheval.numPmu || 'N/A'})</td>
+                    <td>${cheval.jockey || 'N/A'}</td>
+                    <td>${cheval.cote || 'N/A'}</td>
+                </tr>`;
         });
         
-        tableHtml += `</tbody></table>`;
-        
-        if (prono.commentaire) {
-            tableHtml += `<div class="alert alert-info mt-2"><small><strong>Commentaire :</strong> ${prono.commentaire}</small></div>`;
-        }
-        
-        courseContainer.innerHTML = tableHtml;
+        tableHtml += '</tbody></table>';
+        return tableHtml;
     }
 
     function updateComparaisonTable(pronostics, resultats) {
@@ -292,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         pronostics.forEach(prono => {
             if (!prono.classement || prono.classement.length === 0) return;
 
-            const numPmuPronostique = prono.classement[0]; // Numéro du cheval pronostiqué
+            const chevalPronostique = prono.classement[0];
             const resultatCourse = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
             
             let statut = 'En attente';
@@ -300,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let rowClass = '';
 
             if (resultatCourse && resultatCourse.arrivee && resultatCourse.arrivee.length > 0) {
-                const positionReelle = resultatCourse.arrivee.indexOf(numPmuPronostique) + 1;
+                const positionReelle = resultatCourse.arrivee.indexOf(chevalPronostique.numPmu) + 1;
                 if (positionReelle === 1) {
                     statut = 'Gagnant';
                     resultatReel = '1er';
@@ -322,12 +224,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const row = `
                 <tr class="${rowClass}" data-reunion="R${reunionNum}" data-confiance="${confiance}">
-                    <td><strong>${courseId}</strong></td>
-                    <td>Cheval n°${numPmuPronostique}</td>
-                    <td>N/A</td>
+                    <td>${courseId}</td>
+                    <td>${chevalPronostique.nom || 'N/A'} (${chevalPronostique.numPmu || 'N/A'})</td>
+                    <td>${chevalPronostique.cote || 'N/A'}</td>
                     <td>1er</td>
                     <td>${resultatReel}</td>
-                    <td><span class="badge ${statut === 'Gagnant' ? 'bg-success' : statut === 'Placé' ? 'bg-warning' : 'bg-secondary'}">${statut}</span></td>
+                    <td>${statut}</td>
                 </tr>`;
             tbody.innerHTML += row;
         });
@@ -342,19 +244,19 @@ document.addEventListener('DOMContentLoaded', () => {
         pronostics.forEach(prono => {
             if (!prono.classement || prono.classement.length === 0) return;
             
-            const numPmuPronostique = prono.classement[0];
+            const chevalPronostique = prono.classement[0];
             const resultatCourse = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
 
             if (resultatCourse && resultatCourse.arrivee && resultatCourse.arrivee.length > 0) {
                 coursesTerminees++;
-                const positionReelle = resultatCourse.arrivee.indexOf(numPmuPronostique) + 1;
+                const positionReelle = resultatCourse.arrivee.indexOf(chevalPronostique.numPmu) + 1;
                 
                 // Calcul ROI : mise de 1€ sur le gagnant
                 roi -= 1; // La mise
                 if (positionReelle === 1) {
                     gagnants++;
                     places++;
-                    // roi += parseFloat(cote || 0); // TODO: récupérer la vraie cote
+                    roi += parseFloat(chevalPronostique.cote || 0);
                 } else if (positionReelle > 1 && positionReelle <= 3) {
                     places++;
                 }
@@ -467,5 +369,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INITIALISATION ET RAFRAÎCHISSEMENT ---
     fetchData(); // Premier chargement
-    setInterval(fetchData, 60000); // Rafraîchissement toutes les 60 secondes
+    setInterval(fetchData, 30000); // Rafraîchissement toutes les 30 secondes
 });
