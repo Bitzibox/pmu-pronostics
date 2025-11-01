@@ -16,7 +16,6 @@ console.log('Date actuelle:', dateStr);
 // Charger les données
 async function loadData() {
     try {
-        // ✅ Les fichiers sont dans /data/
         const [coursesData, pronosticsData, resultatsData] = await Promise.all([
             fetch(`${BASE_URL}/data/courses-${dateStr}.json`).then(r => r.json()),
             fetch(`${BASE_URL}/data/pronostics-${dateStr}.json`).then(r => r.json()),
@@ -41,14 +40,15 @@ async function displayData() {
 
     const { coursesData, pronosticsData, resultatsData } = data;
 
-    // Extraire les réunions uniques
-    const reunions = [...new Set(coursesData[0].reunions.map(r => `${r.hippodrome} (R${r.num})`))];
+    // ✅ CORRECTION : La structure est coursesData[0].programme.reunions
+    const reunions = coursesData[0].programme.reunions;
+    
     console.log('Réunions trouvées:', reunions.length);
     console.log('Pronostics trouvés:', pronosticsData[0].pronostics.length);
     console.log('Résultats trouvés:', resultatsData[0].courses.length);
 
     // Afficher les réunions (onglets)
-    displayReunions(coursesData[0].reunions);
+    displayReunions(reunions);
 
     // Créer un map des résultats pour un accès rapide
     const resultatsMap = {};
@@ -73,7 +73,7 @@ function displayReunions(reunions) {
 
     reunions.forEach((reunion, index) => {
         // Créer l'onglet
-        const tabId = `reunion-${reunion.num}`;
+        const tabId = `reunion-${reunion.numOfficiel}`;
         const tab = document.createElement('li');
         tab.className = 'nav-item';
         tab.innerHTML = `
@@ -82,7 +82,7 @@ function displayReunions(reunions) {
                     data-bs-toggle="tab" 
                     data-bs-target="#${tabId}" 
                     type="button">
-                ${reunion.hippodrome} (R${reunion.num})
+                ${reunion.hippodrome.libelleCourt} (R${reunion.numOfficiel})
             </button>
         `;
         tabsList.appendChild(tab);
@@ -182,7 +182,7 @@ function calculateStats(pronostics, resultatsMap) {
     document.getElementById('taux-gagnant').textContent = `${tauxGagnant}%`;
     document.getElementById('taux-place').textContent = `${tauxPlace}%`;
     document.getElementById('courses-analysees').textContent = totalCourses;
-    document.getElementById('roi-theorique').textContent = '0.00€'; // À calculer plus tard
+    document.getElementById('roi-theorique').textContent = '0.00€';
 
     console.log('Stats:', { totalCourses, gagnants, places, tauxGagnant, tauxPlace });
 }
