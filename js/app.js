@@ -136,7 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     return; // Pas de pronostic pour cette course
                 }
 
-                const heureDepart = course.heureDepart || 'N/A';
+                // ✅ Convertir le timestamp en heure lisible HH:MM
+                const heureDepart = course.heureDepart 
+                    ? new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+                    : 'N/A';
                 const libelle = course.libelleCourt || 'Course';
                 const nombrePartants = course.nombrePartants || prono.nombrePartants || 0;
                 const confiance = prono.scoreConfiance || 0;
