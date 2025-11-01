@@ -1,5 +1,5 @@
 // Configuration
-const BASE_URL = 'https://bitzibox.github.io';
+const API_BASE_URL = 'data/';
 const today = new Date();
 const dateStr = formatDate(today);
 
@@ -17,9 +17,9 @@ console.log('Date actuelle:', dateStr);
 async function loadData() {
     try {
         const [coursesData, pronosticsData, resultatsData] = await Promise.all([
-            fetch(`${BASE_URL}/data/courses-${dateStr}.json`).then(r => r.json()),
-            fetch(`${BASE_URL}/data/pronostics-${dateStr}.json`).then(r => r.json()),
-            fetch(`${BASE_URL}/data/resultats-${dateStr}.json`).then(r => r.json())
+            fetch(`${API_BASE_URL}courses-${date}.json?v=${new Date().getTime()}`),
+            fetch(`${API_BASE_URL}pronostics-${date}.json?v=${new Date().getTime()}`),
+            fetch(`${API_BASE_URL}resultats-${date}.json?v=${new Date().getTime()}`)
         ]);
 
         console.log('Données courses:', coursesData);
