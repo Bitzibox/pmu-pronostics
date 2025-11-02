@@ -112,14 +112,21 @@ function displayReunions(reunions, pronosticsMap, resultatsMap) {
             const resultat = resultatsMap[courseId];
             const heure = new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
             
+            // Détecter si c'est une course française
+            const isFrench = reunion.pays.code === 'FRA';
+            const badgePays = isFrench ? 
+                '<span class="badge bg-light text-dark ms-2">🇫🇷 France</span>' : 
+                '<span class="badge bg-secondary ms-2">🌍 International</span>';
+            
             html += `
-                <div class="card mb-3">
-                    <div class="card-header bg-primary text-white">
+                <div class="card mb-3 ${!isFrench ? 'course-international' : 'course-french'}">
+                    <div class="card-header ${isFrench ? 'bg-primary' : 'bg-secondary'} text-white">
                         <div class="row align-items-center">
                             <div class="col-md-2"><strong>${heure}</strong></div>
-                            <div class="col-md-6"><strong>C${course.numOrdre}</strong> - ${course.libelleCourt}</div>
+                            <div class="col-md-5"><strong>C${course.numOrdre}</strong> - ${course.libelleCourt}</div>
                             <div class="col-md-2">${course.distance}m</div>
-                            <div class="col-md-2">${course.nombreDeclaresPartants} partants</div>
+                            <div class="col-md-1">${course.nombreDeclaresPartants} partants</div>
+                            <div class="col-md-2">${badgePays}</div>
                         </div>
                     </div>
                     <div class="card-body">
