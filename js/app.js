@@ -40,14 +40,13 @@ async function displayData() {
 
     const { coursesData, pronosticsData, resultatsData } = data;
 
-    // ✅ CORRECTION : La structure est coursesData[0].programme.reunions
     const reunions = coursesData[0].programme.reunions;
     
     console.log('Réunions trouvées:', reunions.length);
     console.log('Pronostics trouvés:', pronosticsData[0].pronostics.length);
     console.log('Résultats trouvés:', resultatsData[0].courses.length);
 
-    // Afficher les réunions (onglets)
+    // Afficher les réunions (onglets avec contenu)
     displayReunions(reunions);
 
     // Créer un map des résultats pour un accès rapide
@@ -66,14 +65,15 @@ async function displayData() {
     calculateStats(pronosticsData[0].pronostics, resultatsMap);
 }
 
-// Afficher les réunions
+// Afficher les réunions avec leurs courses
 function displayReunions(reunions) {
     const tabsList = document.getElementById('reunions-tabs');
     const tabsContent = document.getElementById('reunions-content');
 
     reunions.forEach((reunion, index) => {
-        // Créer l'onglet
         const tabId = `reunion-${reunion.numOfficiel}`;
+        
+        // Créer l'onglet
         const tab = document.createElement('li');
         tab.className = 'nav-item';
         tab.innerHTML = `
@@ -81,17 +81,39 @@ function displayReunions(reunions) {
                     id="${tabId}-tab" 
                     data-bs-toggle="tab" 
                     data-bs-target="#${tabId}" 
-                    type="button">
+                    type="button"
+                    role="tab"
+                    aria-controls="${tabId}"
+                    aria-selected="${index === 0 ? 'true' : 'false'}">
                 ${reunion.hippodrome.libelleCourt} (R${reunion.numOfficiel})
             </button>
         `;
         tabsList.appendChild(tab);
 
-        // Créer le contenu
+        // Créer le contenu avec la liste des courses
         const content = document.createElement('div');
         content.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
         content.id = tabId;
-        content.innerHTML = '<p class="mt-3">Aucune course disponible pour cette réunion.</p>';
+        content.setAttribute('role', 'tabpanel');
+        content.setAttribute('aria-labelledby', `${tabId}-tab`);
+        
+        // Générer le tableau des courses
+        let coursesHTML = '<div class="mt-3"><table class="table table-striped"><thead><tr><th>Heure</th><th>Course</th><th>Distance</th><th>Partants</th></tr></thead><tbody>';
+        
+        reunion.courses.forEach(course => {
+            const heure = new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+            coursesHTML += `
+                <tr>
+                    <td>${heure}</td>
+                    <td><strong>C${course.numOrdre}</strong> - ${course.libelleCourt}</td>
+                    <td>${course.distance}m</td>
+                    <td>${course.nombreDeclaresPartants}</td>
+                </tr>
+            `;
+        });
+        
+        coursesHTML += '</tbody></table></div>';
+        content.innerHTML = coursesHTML;
         tabsContent.appendChild(content);
     });
 }
@@ -104,11 +126,10 @@ function displayComparaison(pronostics, resultatsMap) {
     console.log('Affichage comparaison:', pronostics.length, 'pronostics');
 
     pronostics.forEach(prono => {
-        // Le pronostic a le format: { courseId: "R1C1", classement: [...] }
-        const courseKey = prono.courseId; // "R1C1"
+        const courseKey = prono.courseId;
         const resultat = resultatsMap[courseKey];
 
-        console.log(`Prono ${courseKey}:`, resultat ? 'résultat trouvé' : 'pas de résultat');
+        console.log(`Prono ${courseKey}:`, resultat ? `résultat trouvé (arrivee: ${resultat.arrivee})` : 'pas de résultat');
 
         // Afficher les 5 premiers chevaux pronostiqués
         prono.classement.slice(0, 5).forEach((cheval, index) => {
