@@ -46,27 +46,33 @@ async function displayData() {
     console.log('Pronostics trouvés:', pronosticsData[0].pronostics.length);
     console.log('Résultats trouvés:', resultatsData[0].courses.length);
 
-    // Afficher les réunions (onglets avec contenu)
-    displayReunions(reunions);
-
-    // Créer un map des résultats pour un accès rapide
+    // Créer des maps pour un accès rapide
     const resultatsMap = {};
     resultatsData[0].courses.forEach(course => {
         const key = `${course.reunion}${course.course}`;
         resultatsMap[key] = course;
     });
 
-    console.log('Map des résultats créée:', Object.keys(resultatsMap).length, 'entrées');
+    const pronosticsMap = {};
+    pronosticsData[0].pronostics.forEach(prono => {
+        pronosticsMap[prono.courseId] = prono;
+    });
 
-    // Afficher le tableau de comparaison
+    console.log('Map des résultats créée:', Object.keys(resultatsMap).length, 'entrées');
+    console.log('Map des pronostics créée:', Object.keys(pronosticsMap).length, 'entrées');
+
+    // Afficher les réunions avec pronostics
+    displayReunions(reunions, pronosticsMap, resultatsMap);
+
+    // Afficher le tableau de comparaison global
     displayComparaison(pronosticsData[0].pronostics, resultatsMap);
 
     // Calculer les statistiques
     calculateStats(pronosticsData[0].pronostics, resultatsMap);
 }
 
-// Afficher les réunions avec leurs courses
-function displayReunions(reunions) {
+// Afficher les réunions avec pronostics et résultats
+function displayReunions(reunions, pronosticsMap, resultatsMap) {
     const tabsList = document.getElementById('reunions-tabs');
     const tabsContent = document.getElementById('reunions-content');
 
@@ -90,35 +96,104 @@ function displayReunions(reunions) {
         `;
         tabsList.appendChild(tab);
 
-        // Créer le contenu avec la liste des courses
+        // Créer le contenu avec les courses + pronostics
         const content = document.createElement('div');
         content.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
         content.id = tabId;
         content.setAttribute('role', 'tabpanel');
         content.setAttribute('aria-labelledby', `${tabId}-tab`);
         
-        // Générer le tableau des courses
-        let coursesHTML = '<div class="mt-3"><table class="table table-striped"><thead><tr><th>Heure</th><th>Course</th><th>Distance</th><th>Partants</th></tr></thead><tbody>';
+        // Générer le contenu
+        let html = '<div class="mt-3">';
         
         reunion.courses.forEach(course => {
+            const courseId = `R${reunion.numOfficiel}C${course.numOrdre}`;
+            const prono = pronosticsMap[courseId];
+            const resultat = resultatsMap[courseId];
             const heure = new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-            coursesHTML += `
-                <tr>
-                    <td>${heure}</td>
-                    <td><strong>C${course.numOrdre}</strong> - ${course.libelleCourt}</td>
-                    <td>${course.distance}m</td>
-                    <td>${course.nombreDeclaresPartants}</td>
-                </tr>
+            
+            html += `
+                <div class="card mb-3">
+                    <div class="card-header bg-primary text-white">
+                        <div class="row align-items-center">
+                            <div class="col-md-2"><strong>${heure}</strong></div>
+                            <div class="col-md-6"><strong>C${course.numOrdre}</strong> - ${course.libelleCourt}</div>
+                            <div class="col-md-2">${course.distance}m</div>
+                            <div class="col-md-2">${course.nombreDeclaresPartants} partants</div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+            `;
+            
+            if (prono) {
+                // Afficher les pronostics
+                html += `
+                    <h6>🎯 Pronostics (Confiance: ${prono.scoreConfiance}%)</h6>
+                    <table class="table table-sm table-striped mb-3">
+                        <thead>
+                            <tr>
+                                <th>Position</th>
+                                <th>Cheval</th>
+                                <th>Cote</th>
+                                <th>Jockey</th>
+                                <th>Résultat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+                
+                prono.classement.slice(0, 5).forEach((cheval, idx) => {
+                    let statutBadge = '<span class="badge bg-secondary">En attente</span>';
+                    let resultatText = 'En attente';
+                    
+                    if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
+                        const gagnant = resultat.arrivee[0];
+                        
+                        if (cheval.numero === gagnant && idx === 0) {
+                            statutBadge = '<span class="badge bg-success">✅ Gagnant !</span>';
+                            resultatText = `1er (n°${gagnant})`;
+                        } else if (cheval.numero === gagnant) {
+                            statutBadge = '<span class="badge bg-warning">🎯 Trouvé</span>';
+                            resultatText = `1er (n°${gagnant})`;
+                        } else {
+                            statutBadge = '<span class="badge bg-danger">❌ Perdu</span>';
+                            resultatText = `1er: n°${gagnant}`;
+                        }
+                    }
+                    
+                    html += `
+                        <tr>
+                            <td><strong>${idx + 1}er</strong></td>
+                            <td>n°${cheval.numero} - ${cheval.nom || 'N/A'}</td>
+                            <td>${cheval.cote || 'N/A'}</td>
+                            <td>${cheval.jockey || 'N/A'}</td>
+                            <td>${statutBadge}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += `
+                        </tbody>
+                    </table>
+                    <p class="text-muted small"><em>💡 ${prono.commentaire}</em></p>
+                `;
+            } else {
+                html += '<p class="text-muted">Aucun pronostic disponible pour cette course.</p>';
+            }
+            
+            html += `
+                    </div>
+                </div>
             `;
         });
         
-        coursesHTML += '</tbody></table></div>';
-        content.innerHTML = coursesHTML;
+        html += '</div>';
+        content.innerHTML = html;
         tabsContent.appendChild(content);
     });
 }
 
-// Afficher la comparaison
+// Afficher la comparaison globale
 function displayComparaison(pronostics, resultatsMap) {
     const tbody = document.getElementById('comparaison-body');
     tbody.innerHTML = '';
