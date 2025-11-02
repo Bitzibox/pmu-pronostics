@@ -132,10 +132,11 @@ function displayReunions(reunions, pronosticsMap, resultatsMap) {
                     <table class="table table-sm table-striped mb-3">
                         <thead>
                             <tr>
-                                <th>Position</th>
+                                <th>Position Prédite</th>
                                 <th>Cheval</th>
                                 <th>Cote</th>
                                 <th>Jockey</th>
+                                <th>Place Réelle</th>
                                 <th>Résultat</th>
                             </tr>
                         </thead>
@@ -144,20 +145,29 @@ function displayReunions(reunions, pronosticsMap, resultatsMap) {
                 
                 prono.classement.slice(0, 5).forEach((cheval, idx) => {
                     let statutBadge = '<span class="badge bg-secondary">En attente</span>';
-                    let resultatText = 'En attente';
+                    let placeReelle = '-';
                     
                     if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
-                        const gagnant = resultat.arrivee[0];
+                        // Trouver la place réelle du cheval dans l'arrivée
+                        const position = resultat.arrivee.indexOf(cheval.numero);
                         
-                        if (cheval.numero === gagnant && idx === 0) {
-                            statutBadge = '<span class="badge bg-success">✅ Gagnant !</span>';
-                            resultatText = `1er (n°${gagnant})`;
-                        } else if (cheval.numero === gagnant) {
-                            statutBadge = '<span class="badge bg-warning">🎯 Trouvé</span>';
-                            resultatText = `1er (n°${gagnant})`;
+                        if (position !== -1) {
+                            // Le cheval est dans l'arrivée
+                            placeReelle = `${position + 1}${position === 0 ? 'er' : 'e'}`;
+                            
+                            if (position === 0 && idx === 0) {
+                                statutBadge = '<span class="badge bg-success">✅ Gagnant !</span>';
+                            } else if (position === 0) {
+                                statutBadge = '<span class="badge bg-warning">🎯 Trouvé</span>';
+                            } else if (position <= 2) {
+                                statutBadge = '<span class="badge bg-info">📍 Placé</span>';
+                            } else {
+                                statutBadge = '<span class="badge bg-danger">❌ Hors places</span>';
+                            }
                         } else {
+                            // Le cheval n'est pas dans l'arrivée (top positions seulement)
+                            placeReelle = 'Non classé';
                             statutBadge = '<span class="badge bg-danger">❌ Perdu</span>';
-                            resultatText = `1er: n°${gagnant}`;
                         }
                     }
                     
@@ -167,6 +177,7 @@ function displayReunions(reunions, pronosticsMap, resultatsMap) {
                             <td>n°${cheval.numero} - ${cheval.nom || 'N/A'}</td>
                             <td>${cheval.cote || 'N/A'}</td>
                             <td>${cheval.jockey || 'N/A'}</td>
+                            <td><strong>${placeReelle}</strong></td>
                             <td>${statutBadge}</td>
                         </tr>
                     `;
