@@ -1,305 +1,375 @@
-// Configuration
-const BASE_URL = 'https://bitzibox.github.io/pmu-pronostics';
-const today = new Date();
-const dateStr = formatDate(today);
+// Configuration GitHub
+const GITHUB_USERNAME = 'TON_USERNAME'; // ⚠️ À REMPLACER
+const REPO_NAME = 'pmu-pronostics'; // ⚠️ À REMPLACER si différent
+const BRANCH = 'main'; // ou 'master'
+const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data/`;
 
-// Fonction pour formater la date en DDMMYYYY
-function formatDate(date) {
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}${month}${year}`;
-}
+// Variables globales
+let performanceChart = null;
+let allData = {
+    analyse: null,
+    pronostics: null,
+    resultats: null,
+    courses: null
+};
 
-console.log('Date actuelle:', dateStr);
-
-// Charger les données
-async function loadData() {
+// Fonction principale de chargement
+async function loadAllData() {
+    console.log('🔄 Chargement des données depuis GitHub...');
+    
     try {
-        const [coursesData, pronosticsData, resultatsData] = await Promise.all([
-            fetch(`${BASE_URL}/data/courses-${dateStr}.json`).then(r => r.json()),
-            fetch(`${BASE_URL}/data/pronostics-${dateStr}.json`).then(r => r.json()),
-            fetch(`${BASE_URL}/data/resultats-${dateStr}.json`).then(r => r.json())
+        // Charger tous les fichiers en parallèle
+        const [analyseRes, pronosticsRes, resultatsRes, coursesRes] = await Promise.all([
+            fetch(GITHUB_RAW_BASE + 'analyse.json').catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'pronostics.json').catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'resultats.json').catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'courses-' + getDateString() + '.json').catch(e => null)
         ]);
 
-        console.log('Données courses:', coursesData);
-        console.log('Données pronostics:', pronosticsData);
-        console.log('Données résultats:', resultatsData);
+        // Parser les réponses
+        if (analyseRes && analyseRes.ok) {
+            allData.analyse = await analyseRes.json();
+        }
+        if (pronosticsRes && pronosticsRes.ok) {
+            allData.pronostics = await pronosticsRes.json();
+        }
+        if (resultatsRes && resultatsRes.ok) {
+            allData.resultats = await resultatsRes.json();
+        }
+        if (coursesRes && coursesRes.ok) {
+            allData.courses = await coursesRes.json();
+        }
 
-        return { coursesData, pronosticsData, resultatsData };
+        console.log('✅ Données chargées:', allData);
+
+        // Mettre à jour l'interface
+        updateDashboard();
+        updateHistorique();
+        updateCoursesSection();
+        updateComparaisonSection();
+        updateLastUpdateTime();
+
     } catch (error) {
-        console.error('Erreur chargement:', error);
-        return null;
+        console.error('❌ Erreur lors du chargement des données:', error);
+        showError('Erreur de chargement des données. Vérifiez la configuration GitHub.');
     }
 }
 
-// Afficher les données
-async function displayData() {
-    const data = await loadData();
-    if (!data) return;
-
-    const { coursesData, pronosticsData, resultatsData } = data;
-
-    const reunions = coursesData[0].programme.reunions;
-    
-    console.log('Réunions trouvées:', reunions.length);
-    console.log('Pronostics trouvés:', pronosticsData[0].pronostics.length);
-    console.log('Résultats trouvés:', resultatsData[0].courses.length);
-
-    // Créer des maps pour un accès rapide
-    const resultatsMap = {};
-    resultatsData[0].courses.forEach(course => {
-        const key = `${course.reunion}${course.course}`;
-        resultatsMap[key] = course;
-    });
-
-    const pronosticsMap = {};
-    pronosticsData[0].pronostics.forEach(prono => {
-        pronosticsMap[prono.courseId] = prono;
-    });
-
-    console.log('Map des résultats créée:', Object.keys(resultatsMap).length, 'entrées');
-    console.log('Map des pronostics créée:', Object.keys(pronosticsMap).length, 'entrées');
-
-    // Afficher les réunions avec pronostics
-    displayReunions(reunions, pronosticsMap, resultatsMap);
-
-    // Afficher le tableau de comparaison global
-    displayComparaison(pronosticsData[0].pronostics, resultatsMap);
-
-    // Calculer les statistiques
-    calculateStats(pronosticsData[0].pronostics, resultatsMap);
+// Fonction pour obtenir la date au format DDMMYYYY
+function getDateString() {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const year = today.getFullYear();
+    return `${day}${month}${year}`;
 }
 
-// Afficher les réunions avec pronostics et résultats
-function displayReunions(reunions, pronosticsMap, resultatsMap) {
-    const tabsList = document.getElementById('reunions-tabs');
-    const tabsContent = document.getElementById('reunions-content');
+// Mettre à jour le dashboard de performance
+function updateDashboard() {
+    if (!allData.analyse || !allData.analyse.historique || allData.analyse.historique.length === 0) {
+        console.warn('⚠️ Pas de données d\'analyse disponibles');
+        return;
+    }
 
-    reunions.forEach((reunion, index) => {
-        const tabId = `reunion-${reunion.numOfficiel}`;
-        
-        // Créer l'onglet
-        const tab = document.createElement('li');
-        tab.className = 'nav-item';
-        tab.innerHTML = `
-            <button class="nav-link ${index === 0 ? 'active' : ''}" 
-                    id="${tabId}-tab" 
-                    data-bs-toggle="tab" 
-                    data-bs-target="#${tabId}" 
-                    type="button"
-                    role="tab"
-                    aria-controls="${tabId}"
-                    aria-selected="${index === 0 ? 'true' : 'false'}">
-                ${reunion.hippodrome.libelleCourt} (R${reunion.numOfficiel})
-            </button>
-        `;
-        tabsList.appendChild(tab);
+    // Prendre le dernier jour (le plus récent)
+    const dernierJour = allData.analyse.historique[0];
 
-        // Créer le contenu avec les courses + pronostics
-        const content = document.createElement('div');
-        content.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
-        content.id = tabId;
-        content.setAttribute('role', 'tabpanel');
-        content.setAttribute('aria-labelledby', `${tabId}-tab`);
-        
-        // Générer le contenu
-        let html = '<div class="mt-3">';
-        
-        reunion.courses.forEach(course => {
-            const courseId = `R${reunion.numOfficiel}C${course.numOrdre}`;
-            const prono = pronosticsMap[courseId];
-            const resultat = resultatsMap[courseId];
-            const heure = new Date(course.heureDepart).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-            
-            // Détecter si c'est une course française
-            const isFrench = reunion.pays.code === 'FRA';
-            const badgePays = isFrench ? 
-                '<span class="badge bg-light text-dark ms-2">🇫🇷 France</span>' : 
-                '<span class="badge bg-secondary ms-2">🌍 International</span>';
-            
-            html += `
-                <div class="card mb-3 ${!isFrench ? 'course-international' : 'course-french'}">
-                    <div class="card-header ${isFrench ? 'bg-primary' : 'bg-secondary'} text-white">
-                        <div class="row align-items-center">
-                            <div class="col-md-2"><strong>${heure}</strong></div>
-                            <div class="col-md-5"><strong>C${course.numOrdre}</strong> - ${course.libelleCourt}</div>
-                            <div class="col-md-2">${course.distance}m</div>
-                            <div class="col-md-1">${course.nombreDeclaresPartants} partants</div>
-                            <div class="col-md-2">${badgePays}</div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-            `;
-            
-            if (prono) {
-                // Afficher les pronostics
-                html += `
-                    <h6>🎯 Pronostics (Confiance: ${prono.scoreConfiance}%)</h6>
-                    <table class="table table-sm table-striped mb-3">
-                        <thead>
-                            <tr>
-                                <th>Position Prédite</th>
-                                <th>Cheval</th>
-                                <th>Cote</th>
-                                <th>Jockey</th>
-                                <th>Place Réelle</th>
-                                <th>Résultat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                `;
-                
-                prono.classement.slice(0, 5).forEach((cheval, idx) => {
-                    let statutBadge = '<span class="badge bg-secondary">En attente</span>';
-                    let placeReelle = '-';
-                    
-                    if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
-                        // Trouver la place réelle du cheval dans l'arrivée
-                        const position = resultat.arrivee.indexOf(cheval.numero);
-                        
-                        if (position !== -1) {
-                            // Le cheval est dans l'arrivée
-                            placeReelle = `${position + 1}${position === 0 ? 'er' : 'e'}`;
-                            
-                            if (position === 0 && idx === 0) {
-                                statutBadge = '<span class="badge bg-success">✅ Gagnant !</span>';
-                            } else if (position === 0) {
-                                statutBadge = '<span class="badge bg-warning">🎯 Trouvé</span>';
-                            } else if (position <= 2) {
-                                statutBadge = '<span class="badge bg-info">📍 Placé</span>';
-                            } else {
-                                statutBadge = '<span class="badge bg-danger">❌ Hors places</span>';
-                            }
-                        } else {
-                            // Le cheval n'est pas dans l'arrivée (top positions seulement)
-                            placeReelle = 'Non classé';
-                            statutBadge = '<span class="badge bg-danger">❌ Perdu</span>';
-                        }
-                    }
-                    
-                    html += `
-                        <tr>
-                            <td><strong>${idx + 1}er</strong></td>
-                            <td>n°${cheval.numero} - ${cheval.nom || 'N/A'}</td>
-                            <td>${cheval.cote || 'N/A'}</td>
-                            <td>${cheval.jockey || 'N/A'}</td>
-                            <td><strong>${placeReelle}</strong></td>
-                            <td>${statutBadge}</td>
-                        </tr>
-                    `;
-                });
-                
-                html += `
-                        </tbody>
-                    </table>
-                    <p class="text-muted small"><em>💡 ${prono.commentaire}</em></p>
-                `;
-            } else {
-                html += '<p class="text-muted">Aucun pronostic disponible pour cette course.</p>';
-            }
-            
-            html += `
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += '</div>';
-        content.innerHTML = html;
-        tabsContent.appendChild(content);
-    });
+    document.getElementById('taux-gagnant').textContent = `${dernierJour.taux_gagnant || 0}%`;
+    document.getElementById('taux-place').textContent = `${dernierJour.taux_place || 0}%`;
+    document.getElementById('roi-theorique').textContent = `${(dernierJour.roi_theorique || 0).toFixed(2)}€`;
+    document.getElementById('courses-analysees').textContent = dernierJour.total_courses || 0;
+
+    // Mettre à jour le graphique avec les 7 derniers jours
+    const historique7j = allData.analyse.historique.slice(0, 7).reverse();
+    renderPerformanceChart(historique7j);
+
+    console.log('✅ Dashboard mis à jour avec les données du', dernierJour.date);
 }
 
-// Afficher la comparaison globale
-function displayComparaison(pronostics, resultatsMap) {
-    const tbody = document.getElementById('comparaison-body');
-    tbody.innerHTML = '';
+// Afficher le graphique de performance
+function renderPerformanceChart(historique) {
+    const ctx = document.getElementById('performance-chart');
+    if (!ctx) return;
 
-    console.log('Affichage comparaison:', pronostics.length, 'pronostics');
+    const dates = historique.map(h => h.date);
+    const tauxGagnants = historique.map(h => h.taux_gagnant || 0);
+    const tauxPlaces = historique.map(h => h.taux_place || 0);
 
-    pronostics.forEach(prono => {
-        const courseKey = prono.courseId;
-        const resultat = resultatsMap[courseKey];
+    // Détruire l'ancien graphique s'il existe
+    if (performanceChart) {
+        performanceChart.destroy();
+    }
 
-        console.log(`Prono ${courseKey}:`, resultat ? `résultat trouvé (arrivee: ${resultat.arrivee})` : 'pas de résultat');
-
-        // Afficher les 5 premiers chevaux pronostiqués
-        prono.classement.slice(0, 5).forEach((cheval, index) => {
-            let statut = 'En attente';
-            let statutClass = 'bg-secondary';
-            let resultatReel = 'En attente';
-
-            if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
-                const gagnant = resultat.arrivee[0];
-                
-                if (cheval.numero === gagnant && index === 0) {
-                    statut = '✅ Gagnant !';
-                    statutClass = 'bg-success';
-                    resultatReel = `1er (n°${gagnant})`;
-                } else if (cheval.numero === gagnant) {
-                    statut = '🎯 Trouvé (mauvaise position)';
-                    statutClass = 'bg-warning';
-                    resultatReel = `1er (n°${gagnant})`;
-                } else {
-                    statut = '❌ Perdu';
-                    statutClass = 'bg-danger';
-                    resultatReel = `1er: n°${gagnant}`;
+    performanceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: dates,
+            datasets: [
+                {
+                    label: 'Taux Gagnant (%)',
+                    data: tauxGagnants,
+                    borderColor: 'rgba(40, 167, 69, 1)',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
+                },
+                {
+                    label: 'Taux Placé (%)',
+                    data: tauxPlaces,
+                    borderColor: 'rgba(255, 193, 7, 1)',
+                    backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true
                 }
-            }
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${prono.courseId}</td>
-                <td>n°${cheval.numero} - ${cheval.nom || 'N/A'}</td>
-                <td>${cheval.cote || 'N/A'}</td>
-                <td>${index + 1}er</td>
-                <td>${resultatReel}</td>
-                <td><span class="badge ${statutClass}">${statut}</span></td>
-            `;
-            tbody.appendChild(row);
-        });
-    });
-}
-
-// Calculer les statistiques
-function calculateStats(pronostics, resultatsMap) {
-    let totalCourses = 0;
-    let gagnants = 0;
-    let places = 0;
-
-    pronostics.forEach(prono => {
-        const resultat = resultatsMap[prono.courseId];
-        
-        if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
-            totalCourses++;
-            const gagnant = resultat.arrivee[0];
-            const premier = prono.classement[0];
-
-            if (premier && premier.numero === gagnant) {
-                gagnants++;
-                places++;
-            } else {
-                // Vérifier si le gagnant est dans le top 3
-                const top3 = prono.classement.slice(0, 3);
-                if (top3.some(c => c.numero === gagnant)) {
-                    places++;
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: value => value + '%'
+                    }
                 }
             }
         }
     });
-
-    // Afficher les stats
-    const tauxGagnant = totalCourses > 0 ? ((gagnants / totalCourses) * 100).toFixed(1) : 0;
-    const tauxPlace = totalCourses > 0 ? ((places / totalCourses) * 100).toFixed(1) : 0;
-
-    document.getElementById('taux-gagnant').textContent = `${tauxGagnant}%`;
-    document.getElementById('taux-place').textContent = `${tauxPlace}%`;
-    document.getElementById('courses-analysees').textContent = totalCourses;
-    document.getElementById('roi-theorique').textContent = '0.00€';
-
-    console.log('Stats:', { totalCourses, gagnants, places, tauxGagnant, tauxPlace });
 }
 
-// Lancer l'affichage au chargement
-document.addEventListener('DOMContentLoaded', displayData);
+// Mettre à jour l'historique des performances
+function updateHistorique() {
+    const tbody = document.getElementById('historique-body');
+    if (!tbody) return;
+
+    if (!allData.analyse || !allData.analyse.historique || allData.analyse.historique.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">Aucune donnée d\'historique disponible</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = '';
+
+    for (const jour of allData.analyse.historique) {
+        const row = document.createElement('tr');
+        
+        const tauxGagnantClass = jour.taux_gagnant >= 30 ? 'text-success fw-bold' : 
+                                 jour.taux_gagnant >= 20 ? 'text-warning' : 'text-danger';
+        const tauxPlaceClass = jour.taux_place >= 60 ? 'text-success fw-bold' : 
+                               jour.taux_place >= 40 ? 'text-warning' : 'text-danger';
+        const roiClass = jour.roi_theorique > 0 ? 'text-success fw-bold' : 'text-danger';
+        
+        row.innerHTML = `
+            <td>${jour.date}</td>
+            <td class="text-center">${jour.total_courses}</td>
+            <td class="text-center">${jour.courses_gagnantes || 0}</td>
+            <td class="text-center">${jour.courses_placees || 0}</td>
+            <td class="text-center ${tauxGagnantClass}">${jour.taux_gagnant || 0}%</td>
+            <td class="text-center ${tauxPlaceClass}">${jour.taux_place || 0}%</td>
+            <td class="text-center ${roiClass}">${jour.roi_theorique > 0 ? '+' : ''}${(jour.roi_theorique || 0).toFixed(2)}€</td>
+        `;
+        tbody.appendChild(row);
+    }
+
+    console.log('✅ Historique mis à jour avec', allData.analyse.historique.length, 'jours');
+}
+
+// Mettre à jour la section des courses du jour
+function updateCoursesSection() {
+    if (!allData.courses || !allData.courses.programme || !allData.courses.programme.reunions) {
+        console.warn('⚠️ Pas de données de courses disponibles');
+        return;
+    }
+
+    const reunions = allData.courses.programme.reunions;
+    const tabsList = document.getElementById('reunions-tabs');
+    const tabsContent = document.getElementById('reunions-content');
+
+    tabsList.innerHTML = '';
+    tabsContent.innerHTML = '';
+
+    reunions.forEach((reunion, index) => {
+        const reunionId = `reunion-${reunion.numOfficiel}`;
+        const isActive = index === 0 ? 'active' : '';
+
+        // Créer l'onglet
+        const tab = document.createElement('li');
+        tab.className = 'nav-item';
+        tab.innerHTML = `
+            <button class="nav-link ${isActive}" id="${reunionId}-tab" data-bs-toggle="tab" 
+                    data-bs-target="#${reunionId}" type="button" role="tab">
+                R${reunion.numOfficiel} - ${reunion.hippodrome?.libelleCourt || 'N/A'}
+            </button>
+        `;
+        tabsList.appendChild(tab);
+
+        // Créer le contenu
+        const content = document.createElement('div');
+        content.className = `tab-pane fade ${isActive ? 'show active' : ''}`;
+        content.id = reunionId;
+        content.role = 'tabpanel';
+
+        let coursesHTML = '<div class="table-responsive mt-3"><table class="table table-sm table-striped">';
+        coursesHTML += '<thead class="table-light"><tr><th>Course</th><th>Départ</th><th>Distance</th><th>Partants</th></tr></thead><tbody>';
+
+        if (reunion.courses) {
+            reunion.courses.forEach(course => {
+                coursesHTML += `
+                    <tr>
+                        <td><strong>C${course.numOrdre}</strong></td>
+                        <td>${course.heureDepart || 'N/A'}</td>
+                        <td>${course.distance || 'N/A'}m</td>
+                        <td>${course.nombreDeclaresPartants || 'N/A'}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        coursesHTML += '</tbody></table></div>';
+        content.innerHTML = coursesHTML;
+        tabsContent.appendChild(content);
+    });
+
+    console.log('✅ Section courses mise à jour avec', reunions.length, 'réunions');
+}
+
+// Mettre à jour la section de comparaison
+function updateComparaisonSection() {
+    const tbody = document.getElementById('comparaison-body');
+    if (!tbody) return;
+
+    if (!allData.pronostics || !allData.pronostics.pronostics || allData.pronostics.pronostics.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Aucun pronostic disponible</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = '';
+
+    for (const prono of allData.pronostics.pronostics) {
+        // Trouver le résultat correspondant
+        let resultatReel = 'En attente';
+        let statut = 'En attente';
+        let statutClass = 'bg-secondary';
+
+        if (allData.resultats && allData.resultats.resultats) {
+            const resultat = allData.resultats.resultats.find(r => 
+                r.numero_course === prono.numero_course
+            );
+
+            if (resultat) {
+                resultatReel = `#${resultat.numero_gagnant}`;
+                
+                // Comparer avec le pronostic
+                const pronoGagnant = prono.top3_prevu ? prono.top3_prevu[0] : prono.numero_gagnant_prevu;
+                
+                if (pronoGagnant === resultat.numero_gagnant) {
+                    statut = '✅ Gagnant';
+                    statutClass = 'bg-success text-white';
+                } else if (prono.top3_prevu && prono.top3_prevu.includes(resultat.numero_gagnant)) {
+                    statut = '✓ Placé';
+                    statutClass = 'bg-warning';
+                } else {
+                    statut = '❌ Raté';
+                    statutClass = 'bg-danger text-white';
+                }
+            }
+        }
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><strong>${prono.numero_course}</strong></td>
+            <td>#${prono.top3_prevu ? prono.top3_prevu[0] : prono.numero_gagnant_prevu}</td>
+            <td>${prono.cote || 'N/A'}</td>
+            <td>${prono.top3_prevu ? prono.top3_prevu.join(', ') : prono.numero_gagnant_prevu}</td>
+            <td>${resultatReel}</td>
+            <td><span class="badge ${statutClass}">${statut}</span></td>
+        `;
+        tbody.appendChild(row);
+    }
+
+    console.log('✅ Section comparaison mise à jour avec', allData.pronostics.pronostics.length, 'pronostics');
+}
+
+// Mettre à jour l'heure de dernière mise à jour
+function updateLastUpdateTime() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('last-update').textContent = timeString;
+}
+
+// Afficher une erreur
+function showError(message) {
+    const sections = ['historique-body', 'comparaison-body'];
+    sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.innerHTML = `<tr><td colspan="7" class="text-center text-danger">${message}</td></tr>`;
+        }
+    });
+}
+
+// Export CSV
+document.getElementById('export-csv')?.addEventListener('click', () => {
+    if (!allData.pronostics || !allData.pronostics.pronostics) {
+        alert('Aucune donnée à exporter');
+        return;
+    }
+
+    let csv = 'Course,Cheval Pronostiqué,Cote,Position Prédite,Résultat Réel,Statut\n';
+    
+    for (const prono of allData.pronostics.pronostics) {
+        let resultatReel = 'En attente';
+        let statut = 'En attente';
+
+        if (allData.resultats && allData.resultats.resultats) {
+            const resultat = allData.resultats.resultats.find(r => 
+                r.numero_course === prono.numero_course
+            );
+
+            if (resultat) {
+                resultatReel = `#${resultat.numero_gagnant}`;
+                const pronoGagnant = prono.top3_prevu ? prono.top3_prevu[0] : prono.numero_gagnant_prevu;
+                
+                if (pronoGagnant === resultat.numero_gagnant) {
+                    statut = 'Gagnant';
+                } else if (prono.top3_prevu && prono.top3_prevu.includes(resultat.numero_gagnant)) {
+                    statut = 'Placé';
+                } else {
+                    statut = 'Raté';
+                }
+            }
+        }
+
+        csv += `${prono.numero_course},#${prono.top3_prevu ? prono.top3_prevu[0] : prono.numero_gagnant_prevu},${prono.cote || 'N/A'},${prono.top3_prevu ? prono.top3_prevu.join('-') : prono.numero_gagnant_prevu},${resultatReel},${statut}\n`;
+    }
+
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `pronostics-pmu-${getDateString()}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+});
+
+// Initialisation au chargement de la page
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Application démarrée');
+    loadAllData();
+    
+    // Rafraîchir toutes les 5 minutes
+    setInterval(loadAllData, 5 * 60 * 1000);
+});
