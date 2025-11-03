@@ -65,9 +65,24 @@ async function loadAllData() {
         
         if (pronosticsRes && pronosticsRes.ok) {
             const rawPronostics = await pronosticsRes.json();
-            // Gérer les deux formats possibles
+            // Gérer les multiples niveaux d'imbrication
             if (Array.isArray(rawPronostics)) {
-                allData.pronostics = { pronostics: rawPronostics };
+                // Format: [{pronostics: [{pronostics: [...]}]}]
+                if (rawPronostics[0] && rawPronostics[0].pronostics) {
+                    // Vérifier s'il y a un 3ème niveau
+                    if (Array.isArray(rawPronostics[0].pronostics) && 
+                        rawPronostics[0].pronostics[0] && 
+                        rawPronostics[0].pronostics[0].pronostics) {
+                        // Triple imbrication : prendre le niveau le plus profond
+                        allData.pronostics = { pronostics: rawPronostics[0].pronostics[0].pronostics };
+                    } else {
+                        // Double imbrication
+                        allData.pronostics = { pronostics: rawPronostics[0].pronostics };
+                    }
+                } else {
+                    // Simple tableau
+                    allData.pronostics = { pronostics: rawPronostics };
+                }
             } else if (rawPronostics.pronostics) {
                 allData.pronostics = rawPronostics;
             } else {
