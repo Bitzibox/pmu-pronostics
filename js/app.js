@@ -17,30 +17,54 @@ let allData = {
 async function loadAllData() {
     console.log('🔄 Chargement des données depuis GitHub...');
     
+    const dateString = getDateString(); // Format: DDMMYYYY
+    console.log('📅 Date du jour:', dateString);
+    
     try {
-        // Charger tous les fichiers en parallèle
+        // Charger tous les fichiers en parallèle avec la date du jour
         const [analyseRes, pronosticsRes, resultatsRes, coursesRes] = await Promise.all([
             fetch(GITHUB_RAW_BASE + 'analyse.json').catch(e => null),
-            fetch(GITHUB_RAW_BASE + 'pronostics.json').catch(e => null),
-            fetch(GITHUB_RAW_BASE + 'resultats.json').catch(e => null),
-            fetch(GITHUB_RAW_BASE + 'courses-' + getDateString() + '.json').catch(e => null)
+            fetch(GITHUB_RAW_BASE + 'pronostics-' + dateString + '.json').catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'resultats-' + dateString + '.json').catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'courses-' + dateString + '.json').catch(e => null)
         ]);
+
+        console.log('📡 URLs chargées:');
+        console.log('  - analyse.json');
+        console.log('  - pronostics-' + dateString + '.json');
+        console.log('  - resultats-' + dateString + '.json');
+        console.log('  - courses-' + dateString + '.json');
 
         // Parser les réponses
         if (analyseRes && analyseRes.ok) {
             allData.analyse = await analyseRes.json();
+            console.log('✅ Analyse chargée:', allData.analyse.historique?.length || 0, 'jours');
+        } else {
+            console.warn('⚠️ analyse.json non disponible');
         }
+        
         if (pronosticsRes && pronosticsRes.ok) {
             allData.pronostics = await pronosticsRes.json();
+            console.log('✅ Pronostics chargés:', allData.pronostics.pronostics?.length || 0, 'pronostics');
+        } else {
+            console.warn('⚠️ pronostics-' + dateString + '.json non disponible');
         }
+        
         if (resultatsRes && resultatsRes.ok) {
             allData.resultats = await resultatsRes.json();
+            console.log('✅ Résultats chargés:', allData.resultats.resultats?.length || 0, 'résultats');
+        } else {
+            console.warn('⚠️ resultats-' + dateString + '.json non disponible');
         }
+        
         if (coursesRes && coursesRes.ok) {
             allData.courses = await coursesRes.json();
+            console.log('✅ Courses chargées');
+        } else {
+            console.warn('⚠️ courses-' + dateString + '.json non disponible');
         }
 
-        console.log('✅ Données chargées:', allData);
+        console.log('📊 Données complètes:', allData);
 
         // Mettre à jour l'interface
         updateDashboard();
