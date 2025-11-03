@@ -8,7 +8,6 @@ rem === 2️⃣ Vérifier s’il y a des changements à committer ===
 for /f %%i in ('"C:\Program Files\Git\bin\git.exe" diff --cached --name-only') do set changes=true
 if not defined changes (
     echo Aucun changement à envoyer.
-    pause
     exit 0
 )
 
