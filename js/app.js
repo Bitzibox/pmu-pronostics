@@ -1,5 +1,5 @@
 // Configuration GitHub
-const GITHUB_USERNAME = 'TON_USERNAME'; // ⚠️ À REMPLACER
+const GITHUB_USERNAME = 'Bitzibox'; // ⚠️ À REMPLACER
 const REPO_NAME = 'pmu-pronostics'; // ⚠️ À REMPLACER si différent
 const BRANCH = 'main'; // ou 'master'
 const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data/`;
