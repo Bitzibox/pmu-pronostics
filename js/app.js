@@ -20,13 +20,16 @@ async function loadAllData() {
     const dateString = getDateString(); // Format: DDMMYYYY
     console.log('📅 Date du jour:', dateString);
     
+    // Ajouter un timestamp pour éviter le cache
+    const timestamp = new Date().getTime();
+    
     try {
         // Charger tous les fichiers en parallèle avec la date du jour
         const [analyseRes, pronosticsRes, resultatsRes, coursesRes] = await Promise.all([
-            fetch(GITHUB_RAW_BASE + 'analyse.json').catch(e => null),
-            fetch(GITHUB_RAW_BASE + 'pronostics-' + dateString + '.json').catch(e => null),
-            fetch(GITHUB_RAW_BASE + 'resultats-' + dateString + '.json').catch(e => null),
-            fetch(GITHUB_RAW_BASE + 'courses-' + dateString + '.json').catch(e => null)
+            fetch(GITHUB_RAW_BASE + 'analyse.json?t=' + timestamp).catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'pronostics-' + dateString + '.json?t=' + timestamp).catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'resultats-' + dateString + '.json?t=' + timestamp).catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'courses-' + dateString + '.json?t=' + timestamp).catch(e => null)
         ]);
 
         console.log('📡 URLs chargées:');
@@ -384,6 +387,11 @@ function updateComparaisonSection() {
         return;
     }
 
+    let gainsTotal = 0;
+    let misesTotal = 0;
+    let coursesGagnantes = 0;
+    let coursesPlacees = 0;
+
     for (const prono of allData.pronostics.pronostics) {
         const courseId = prono.courseId || `${prono.reunion}${prono.course}`;
         const top5 = prono.classement ? prono.classement.slice(0, 5) : [];
@@ -396,16 +404,90 @@ function updateComparaisonSection() {
             );
         }
 
+        // Calcul des gains pour cette course
+        let gainsCourse = 0;
+        let misesCourse = 0;
+        const detailsGains = [];
+
+        if (resultat && resultat.arrivee && resultat.arrivee.length > 0 && top5.length > 0) {
+            const numeroGagnantReel = resultat.arrivee[0];
+            const numeroPronostique = top5[0].numero;
+
+            // Simple Gagnant (1€)
+            misesCourse += 1;
+            if (numeroPronostique === numeroGagnantReel) {
+                // Chercher le rapport Simple Gagnant
+                const rapportGagnant = resultat.rapports.find(r => 
+                    r.typePari === 'SIMPLE_GAGNANT' || r.libelle?.includes('Simple gagnant')
+                );
+                if (rapportGagnant && rapportGagnant.dividende) {
+                    const gain = rapportGagnant.dividende / 100; // Dividende pour 1€
+                    gainsCourse += gain;
+                    detailsGains.push(`Simple Gagnant: +${gain.toFixed(2)}€`);
+                    coursesGagnantes++;
+                }
+            }
+
+            // Simple Placé (1€)
+            misesCourse += 1;
+            const indexPlace = resultat.arrivee.indexOf(numeroPronostique);
+            if (indexPlace >= 0 && indexPlace <= 2) {
+                // Chercher le rapport Simple Placé
+                const rapportPlace = resultat.rapports.find(r => 
+                    r.typePari === 'SIMPLE_PLACE' || r.libelle?.includes('Simple placé')
+                );
+                if (rapportPlace && rapportPlace.dividende) {
+                    const gain = rapportPlace.dividende / 100;
+                    gainsCourse += gain;
+                    detailsGains.push(`Simple Placé: +${gain.toFixed(2)}€`);
+                    if (indexPlace > 0) coursesPlacees++; // Ne pas compter 2 fois si gagnant
+                }
+            }
+        } else if (resultat) {
+            // Course terminée mais pas de résultat exploitable
+            misesCourse = 2; // Mise perdue
+        }
+
+        const gainNet = gainsCourse - misesCourse;
+        gainsTotal += gainsCourse;
+        misesTotal += misesCourse;
+
         // Créer la card pour la course
         const courseCard = document.createElement('div');
         courseCard.className = 'card mb-4';
         
         let cardHTML = `
-            <div class="card-header bg-primary text-white">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                 <h5 class="mb-0">${courseId} - ${prono.nombrePartants || 0} partants</h5>
+                ${resultat && resultat.arrivee && resultat.arrivee.length > 0 ? `
+                    <div class="text-end">
+                        <span class="badge ${gainNet > 0 ? 'bg-success' : gainNet < 0 ? 'bg-danger' : 'bg-secondary'} fs-6">
+                            ${gainNet > 0 ? '+' : ''}${gainNet.toFixed(2)}€
+                        </span>
+                        <small class="ms-2">Mise: ${misesCourse}€</small>
+                    </div>
+                ` : '<span class="badge bg-secondary">En attente</span>'}
             </div>
             <div class="card-body">
         `;
+
+        // Afficher les détails des gains si disponibles
+        if (detailsGains.length > 0) {
+            cardHTML += `
+                <div class="alert alert-success mb-3">
+                    <strong>💰 Gains:</strong><br>
+                    ${detailsGains.join('<br>')}
+                    <hr class="my-2">
+                    <strong>Total: ${gainsCourse.toFixed(2)}€ - ${misesCourse}€ = ${gainNet > 0 ? '+' : ''}${gainNet.toFixed(2)}€</strong>
+                </div>
+            `;
+        } else if (misesCourse > 0) {
+            cardHTML += `
+                <div class="alert alert-danger mb-3">
+                    <strong>❌ Mise perdue: -${misesCourse.toFixed(2)}€</strong>
+                </div>
+            `;
+        }
 
         // Afficher les pronostics
         if (top5.length > 0) {
@@ -499,8 +581,10 @@ function updateComparaisonSection() {
                     <div class="mt-2 small text-muted">
                         <strong>Rapports:</strong> 
                 `;
-                resultat.rapports.forEach(r => {
-                    cardHTML += `${r.libelle}: ${r.dividende}€ | `;
+                resultat.rapports.slice(0, 3).forEach(r => {
+                    if (r.dividende) {
+                        cardHTML += `${r.libelle}: ${(r.dividende / 100).toFixed(2)}€ | `;
+                    }
                 });
                 cardHTML += '</div>';
             }
@@ -516,7 +600,46 @@ function updateComparaisonSection() {
         container.appendChild(courseCard);
     }
 
+    // Ajouter un récapitulatif global en haut
+    const recapGlobal = document.createElement('div');
+    recapGlobal.className = 'alert alert-primary mb-4';
+    const gainNetTotal = gainsTotal - misesTotal;
+    const roi = misesTotal > 0 ? ((gainNetTotal / misesTotal) * 100) : 0;
+    
+    recapGlobal.innerHTML = `
+        <h5>💰 Récapitulatif Global</h5>
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Mises totales:</strong> ${misesTotal.toFixed(2)}€
+            </div>
+            <div class="col-md-3">
+                <strong>Gains bruts:</strong> ${gainsTotal.toFixed(2)}€
+            </div>
+            <div class="col-md-3">
+                <strong>Gains nets:</strong> <span class="${gainNetTotal >= 0 ? 'text-success' : 'text-danger'}">${gainNetTotal > 0 ? '+' : ''}${gainNetTotal.toFixed(2)}€</span>
+            </div>
+            <div class="col-md-3">
+                <strong>ROI:</strong> <span class="${roi >= 0 ? 'text-success' : 'text-danger'}">${roi > 0 ? '+' : ''}${roi.toFixed(1)}%</span>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <strong>Courses gagnantes:</strong> ${coursesGagnantes}
+            </div>
+            <div class="col-md-4">
+                <strong>Courses placées:</strong> ${coursesPlacees}
+            </div>
+            <div class="col-md-4">
+                <strong>Total courses:</strong> ${allData.pronostics.pronostics.length}
+            </div>
+        </div>
+    `;
+    
+    container.insertBefore(recapGlobal, container.firstChild.nextSibling);
+
     console.log('✅ Section pronostics par course mise à jour avec', allData.pronostics.pronostics.length, 'courses');
+    console.log(`💰 Gains: ${gainsTotal.toFixed(2)}€ | Mises: ${misesTotal.toFixed(2)}€ | Net: ${gainNetTotal.toFixed(2)}€ | ROI: ${roi.toFixed(1)}%`);
 }
 
 // Mettre à jour l'heure de dernière mise à jour
