@@ -83,16 +83,23 @@ async function loadAllData() {
             const rawResultats = await resultatsRes.json();
             // Gérer les deux formats possibles
             if (Array.isArray(rawResultats)) {
-                allData.resultats = { resultats: rawResultats };
-            } else if (rawResultats.resultats) {
+                // Format: [{date: "...", courses: [...]}]
+                if (rawResultats[0] && rawResultats[0].courses) {
+                    allData.resultats = rawResultats[0];
+                } else {
+                    allData.resultats = { courses: rawResultats };
+                }
+            } else if (rawResultats.courses) {
                 allData.resultats = rawResultats;
+            } else if (rawResultats.resultats) {
+                allData.resultats = { courses: rawResultats.resultats };
             } else {
-                allData.resultats = { resultats: [] };
+                allData.resultats = { courses: [] };
             }
-            console.log('✅ Résultats chargés:', allData.resultats.resultats?.length || 0, 'résultats');
+            console.log('✅ Résultats chargés:', allData.resultats.courses?.length || 0, 'résultats');
         } else {
             console.warn('⚠️ resultats-' + dateString + '.json non disponible');
-            allData.resultats = { resultats: [] };
+            allData.resultats = { courses: [] };
         }
         
         if (coursesRes && coursesRes.ok) {
@@ -362,52 +369,49 @@ function updateComparaisonSection() {
     tbody.innerHTML = '';
 
     for (const prono of allData.pronostics.pronostics) {
-        // Construire l'identifiant de course
-        const courseId = prono.numero_course || `${prono.reunion}${prono.course}` || 'N/A';
+        // ID de la course
+        const courseId = prono.courseId || `${prono.reunion}${prono.course}`;
+        
+        // Extraire le top 3 prévu du classement
+        const top3Prevu = prono.classement ? prono.classement.slice(0, 3).map(c => c.numero) : [];
+        const numeroGagnantPrevu = top3Prevu[0] || 'N/A';
+        const nomGagnantPrevu = prono.classement && prono.classement[0] ? prono.classement[0].nom : '';
+        const coteGagnantPrevu = prono.classement && prono.classement[0] ? prono.classement[0].cote : 'N/A';
         
         // Trouver le résultat correspondant
         let resultatReel = 'En attente';
         let statut = 'En attente';
         let statutClass = 'bg-secondary';
 
-        if (allData.resultats && allData.resultats.resultats) {
-            const resultat = allData.resultats.resultats.find(r => {
-                const resultCourseId = r.numero_course || `${r.reunion}${r.course}`;
-                return resultCourseId === courseId;
-            });
+        if (allData.resultats && allData.resultats.courses) {
+            const resultat = allData.resultats.courses.find(r => 
+                r.reunion === prono.reunion && r.course === prono.course
+            );
 
-            if (resultat) {
-                const numeroGagnant = resultat.numero_gagnant || (resultat.arrivee_complete && resultat.arrivee_complete[0]);
+            if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
+                const numeroGagnantReel = resultat.arrivee[0];
+                resultatReel = `#${numeroGagnantReel}`;
                 
-                if (numeroGagnant) {
-                    resultatReel = `#${numeroGagnant}`;
-                    
-                    // Comparer avec le pronostic
-                    const pronoGagnant = prono.numero_gagnant_prevu || (prono.top3_prevu && prono.top3_prevu[0]);
-                    
-                    if (pronoGagnant == numeroGagnant) {
-                        statut = '✅ Gagnant';
-                        statutClass = 'bg-success text-white';
-                    } else if (prono.top3_prevu && prono.top3_prevu.includes(numeroGagnant)) {
-                        statut = '✓ Placé';
-                        statutClass = 'bg-warning';
-                    } else {
-                        statut = '❌ Raté';
-                        statutClass = 'bg-danger text-white';
-                    }
+                // Comparer avec le pronostic
+                if (numeroGagnantPrevu == numeroGagnantReel) {
+                    statut = '✅ Gagnant';
+                    statutClass = 'bg-success text-white';
+                } else if (top3Prevu.includes(numeroGagnantReel)) {
+                    statut = '✓ Placé';
+                    statutClass = 'bg-warning';
+                } else {
+                    statut = '❌ Raté';
+                    statutClass = 'bg-danger text-white';
                 }
             }
         }
 
-        const pronoGagnant = prono.numero_gagnant_prevu || (prono.top3_prevu && prono.top3_prevu[0]) || 'N/A';
-        const top3 = prono.top3_prevu ? prono.top3_prevu.join(', ') : pronoGagnant;
-
         const row = document.createElement('tr');
         row.innerHTML = `
             <td><strong>${courseId}</strong></td>
-            <td>#${pronoGagnant}</td>
-            <td>${prono.cote || prono.score_confiance || 'N/A'}</td>
-            <td>${top3}</td>
+            <td>#${numeroGagnantPrevu}${nomGagnantPrevu ? ' - ' + nomGagnantPrevu : ''}</td>
+            <td>${coteGagnantPrevu}</td>
+            <td>${top3Prevu.join(', ')}</td>
             <td>${resultatReel}</td>
             <td><span class="badge ${statutClass}">${statut}</span></td>
         `;
