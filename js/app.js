@@ -1,7 +1,7 @@
 // Configuration GitHub
-const GITHUB_USERNAME = 'Bitzibox'; // ⚠️ À REMPLACER
-const REPO_NAME = 'pmu-pronostics'; // ⚠️ À REMPLACER si différent
-const BRANCH = 'main'; // ou 'master'
+const GITHUB_USERNAME = 'Bitzibox';
+const REPO_NAME = 'pmu-pronostics';
+const BRANCH = 'main';
 const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data/`;
 
 // Variables globales
