@@ -22,5 +22,4 @@ rem === 5️⃣ Envoyer les changements ===
 
 echo.
 echo ✅ Synchronisation terminee avec succes !
-pause
 exit 0
