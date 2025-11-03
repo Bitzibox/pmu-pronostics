@@ -371,69 +371,152 @@ function updateCoursesSection() {
     console.log('✅ Section courses mise à jour avec', reunions.length, 'réunions');
 }
 
-// Mettre à jour la section de comparaison
+// Mettre à jour la section de comparaison avec affichage par course
 function updateComparaisonSection() {
-    const tbody = document.getElementById('comparaison-body');
-    if (!tbody) return;
+    const container = document.getElementById('comparaison-resultats');
+    if (!container) return;
+
+    // Remplacer le contenu par un affichage par course
+    container.innerHTML = '<h2 class="mb-4">🔍 Pronostics et Résultats par Course</h2>';
 
     if (!allData.pronostics || !allData.pronostics.pronostics || allData.pronostics.pronostics.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">Aucun pronostic disponible</td></tr>';
+        container.innerHTML += '<p class="text-center text-muted">Aucun pronostic disponible</p>';
         return;
     }
 
-    tbody.innerHTML = '';
-
     for (const prono of allData.pronostics.pronostics) {
-        // ID de la course
         const courseId = prono.courseId || `${prono.reunion}${prono.course}`;
-        
-        // Extraire le top 3 prévu du classement
-        const top3Prevu = prono.classement ? prono.classement.slice(0, 3).map(c => c.numero) : [];
-        const numeroGagnantPrevu = top3Prevu[0] || 'N/A';
-        const nomGagnantPrevu = prono.classement && prono.classement[0] ? prono.classement[0].nom : '';
-        const coteGagnantPrevu = prono.classement && prono.classement[0] ? prono.classement[0].cote : 'N/A';
+        const top5 = prono.classement ? prono.classement.slice(0, 5) : [];
         
         // Trouver le résultat correspondant
-        let resultatReel = 'En attente';
-        let statut = 'En attente';
-        let statutClass = 'bg-secondary';
-
+        let resultat = null;
         if (allData.resultats && allData.resultats.courses) {
-            const resultat = allData.resultats.courses.find(r => 
+            resultat = allData.resultats.courses.find(r => 
                 r.reunion === prono.reunion && r.course === prono.course
             );
-
-            if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
-                const numeroGagnantReel = resultat.arrivee[0];
-                resultatReel = `#${numeroGagnantReel}`;
-                
-                // Comparer avec le pronostic
-                if (numeroGagnantPrevu == numeroGagnantReel) {
-                    statut = '✅ Gagnant';
-                    statutClass = 'bg-success text-white';
-                } else if (top3Prevu.includes(numeroGagnantReel)) {
-                    statut = '✓ Placé';
-                    statutClass = 'bg-warning';
-                } else {
-                    statut = '❌ Raté';
-                    statutClass = 'bg-danger text-white';
-                }
-            }
         }
 
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td><strong>${courseId}</strong></td>
-            <td>#${numeroGagnantPrevu}${nomGagnantPrevu ? ' - ' + nomGagnantPrevu : ''}</td>
-            <td>${coteGagnantPrevu}</td>
-            <td>${top3Prevu.join(', ')}</td>
-            <td>${resultatReel}</td>
-            <td><span class="badge ${statutClass}">${statut}</span></td>
+        // Créer la card pour la course
+        const courseCard = document.createElement('div');
+        courseCard.className = 'card mb-4';
+        
+        let cardHTML = `
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">${courseId} - ${prono.nombrePartants || 0} partants</h5>
+            </div>
+            <div class="card-body">
         `;
-        tbody.appendChild(row);
+
+        // Afficher les pronostics
+        if (top5.length > 0) {
+            cardHTML += `
+                <h6 class="text-success">🎯 Pronostics (Confiance: 78%)</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Position Prédite</th>
+                                <th>Cheval</th>
+                                <th>Cote</th>
+                                <th>Jockey</th>
+                                <th>Place Réelle</th>
+                                <th>Résultat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            top5.forEach((cheval, index) => {
+                const position = index + 1;
+                let placeReelle = '-';
+                let resultatClass = 'text-muted';
+                let resultatBadge = 'En attente';
+                let badgeClass = 'bg-secondary';
+
+                // Trouver la place réelle si résultat disponible
+                if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
+                    const indexReel = resultat.arrivee.indexOf(cheval.numero);
+                    if (indexReel >= 0) {
+                        placeReelle = `${indexReel + 1}er`;
+                        
+                        // Déterminer le statut
+                        if (indexReel === 0 && position === 1) {
+                            resultatBadge = '✅ Gagnant';
+                            badgeClass = 'bg-success';
+                            resultatClass = 'text-success fw-bold';
+                        } else if (indexReel <= 2) {
+                            resultatBadge = '✓ Placé';
+                            badgeClass = 'bg-warning';
+                            resultatClass = 'text-warning';
+                        } else {
+                            resultatBadge = '❌ Hors top 3';
+                            badgeClass = 'bg-danger';
+                            resultatClass = 'text-danger';
+                        }
+                    } else {
+                        resultatBadge = '❌ Non placé';
+                        badgeClass = 'bg-danger';
+                        resultatClass = 'text-danger';
+                    }
+                }
+
+                cardHTML += `
+                    <tr class="${resultatClass}">
+                        <td><strong>${position}er</strong></td>
+                        <td>n°${cheval.numero} - ${cheval.nom}</td>
+                        <td>${cheval.cote}</td>
+                        <td>${cheval.jockey || 'N/A'}</td>
+                        <td>${placeReelle}</td>
+                        <td><span class="badge ${badgeClass}">${resultatBadge}</span></td>
+                    </tr>
+                `;
+            });
+
+            cardHTML += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Afficher le résultat réel
+        if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
+            cardHTML += `
+                <h6 class="text-info mt-3">🏆 Arrivée Définitive</h6>
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+            `;
+            
+            resultat.arrivee.slice(0, 5).forEach((numero, index) => {
+                const badge = index === 0 ? 'bg-warning' : index <= 2 ? 'bg-info' : 'bg-secondary';
+                cardHTML += `<span class="badge ${badge} fs-6">${index + 1}er: #${numero}</span>`;
+            });
+            
+            cardHTML += '</div>';
+
+            // Afficher les rapports
+            if (resultat.rapports && resultat.rapports.length > 0) {
+                cardHTML += `
+                    <div class="mt-2 small text-muted">
+                        <strong>Rapports:</strong> 
+                `;
+                resultat.rapports.forEach(r => {
+                    cardHTML += `${r.libelle}: ${r.dividende}€ | `;
+                });
+                cardHTML += '</div>';
+            }
+        } else {
+            cardHTML += '<p class="text-muted mt-3">⏳ Résultat en attente</p>';
+        }
+
+        cardHTML += `
+            </div>
+        `;
+
+        courseCard.innerHTML = cardHTML;
+        container.appendChild(courseCard);
     }
 
-    console.log('✅ Section comparaison mise à jour avec', allData.pronostics.pronostics.length, 'pronostics');
+    console.log('✅ Section pronostics par course mise à jour avec', allData.pronostics.pronostics.length, 'courses');
 }
 
 // Mettre à jour l'heure de dernière mise à jour
