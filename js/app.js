@@ -318,10 +318,22 @@ function updateCoursesSection() {
 
         if (reunion.courses) {
             reunion.courses.forEach(course => {
+                // Convertir le timestamp de l'heure de départ
+                let heureDepart = 'N/A';
+                if (course.heureDepart) {
+                    if (typeof course.heureDepart === 'number') {
+                        // Timestamp en millisecondes
+                        const date = new Date(course.heureDepart);
+                        heureDepart = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+                    } else {
+                        heureDepart = course.heureDepart;
+                    }
+                }
+                
                 coursesHTML += `
                     <tr>
                         <td><strong>C${course.numOrdre}</strong></td>
-                        <td>${course.heureDepart || 'N/A'}</td>
+                        <td>${heureDepart}</td>
                         <td>${course.distance || 'N/A'}m</td>
                         <td>${course.nombreDeclaresPartants || course.nombrePartants || 'N/A'}</td>
                     </tr>
@@ -350,41 +362,52 @@ function updateComparaisonSection() {
     tbody.innerHTML = '';
 
     for (const prono of allData.pronostics.pronostics) {
+        // Construire l'identifiant de course
+        const courseId = prono.numero_course || `${prono.reunion}${prono.course}` || 'N/A';
+        
         // Trouver le résultat correspondant
         let resultatReel = 'En attente';
         let statut = 'En attente';
         let statutClass = 'bg-secondary';
 
         if (allData.resultats && allData.resultats.resultats) {
-            const resultat = allData.resultats.resultats.find(r => 
-                r.numero_course === prono.numero_course
-            );
+            const resultat = allData.resultats.resultats.find(r => {
+                const resultCourseId = r.numero_course || `${r.reunion}${r.course}`;
+                return resultCourseId === courseId;
+            });
 
             if (resultat) {
-                resultatReel = `#${resultat.numero_gagnant}`;
+                const numeroGagnant = resultat.numero_gagnant || (resultat.arrivee_complete && resultat.arrivee_complete[0]);
                 
-                // Comparer avec le pronostic
-                const pronoGagnant = prono.top3_prevu ? prono.top3_prevu[0] : prono.numero_gagnant_prevu;
-                
-                if (pronoGagnant === resultat.numero_gagnant) {
-                    statut = '✅ Gagnant';
-                    statutClass = 'bg-success text-white';
-                } else if (prono.top3_prevu && prono.top3_prevu.includes(resultat.numero_gagnant)) {
-                    statut = '✓ Placé';
-                    statutClass = 'bg-warning';
-                } else {
-                    statut = '❌ Raté';
-                    statutClass = 'bg-danger text-white';
+                if (numeroGagnant) {
+                    resultatReel = `#${numeroGagnant}`;
+                    
+                    // Comparer avec le pronostic
+                    const pronoGagnant = prono.numero_gagnant_prevu || (prono.top3_prevu && prono.top3_prevu[0]);
+                    
+                    if (pronoGagnant == numeroGagnant) {
+                        statut = '✅ Gagnant';
+                        statutClass = 'bg-success text-white';
+                    } else if (prono.top3_prevu && prono.top3_prevu.includes(numeroGagnant)) {
+                        statut = '✓ Placé';
+                        statutClass = 'bg-warning';
+                    } else {
+                        statut = '❌ Raté';
+                        statutClass = 'bg-danger text-white';
+                    }
                 }
             }
         }
 
+        const pronoGagnant = prono.numero_gagnant_prevu || (prono.top3_prevu && prono.top3_prevu[0]) || 'N/A';
+        const top3 = prono.top3_prevu ? prono.top3_prevu.join(', ') : pronoGagnant;
+
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td><strong>${prono.numero_course}</strong></td>
-            <td>#${prono.top3_prevu ? prono.top3_prevu[0] : prono.numero_gagnant_prevu}</td>
-            <td>${prono.cote || 'N/A'}</td>
-            <td>${prono.top3_prevu ? prono.top3_prevu.join(', ') : prono.numero_gagnant_prevu}</td>
+            <td><strong>${courseId}</strong></td>
+            <td>#${pronoGagnant}</td>
+            <td>${prono.cote || prono.score_confiance || 'N/A'}</td>
+            <td>${top3}</td>
             <td>${resultatReel}</td>
             <td><span class="badge ${statutClass}">${statut}</span></td>
         `;
