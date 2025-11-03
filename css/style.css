@@ -1,20 +1,185 @@
+/* Style personnalisé pour le dashboard PMU */
+
+:root {
+    --primary-color: #0d6efd;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+}
+
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
 }
 
-.status-success {
-    background-color: #d1e7dd !important; /* Vert */
-    font-weight: bold;
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.status-placed {
-    background-color: #fff3cd !important; /* Orange */
+header h1 {
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
-.status-fail {
-    background-color: #f8d7da !important; /* Rouge */
+/* Cards du dashboard */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.card-text.fs-1 {
+    font-size: 2.5rem !important;
+}
+
+/* Badges de statut */
+.badge {
+    padding: 0.5em 0.75em;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Tables */
+.table {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead {
+    font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0,0,0,0.02);
+    cursor: pointer;
+}
+
+/* Onglets */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    color: #6c757d;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: transparent;
+    color: #495057;
+    background-color: #f8f9fa;
 }
 
 .nav-tabs .nav-link.active {
-    font-weight: bold;
+    color: #495057;
+    background-color: white;
+    border: none;
+    border-bottom: 3px solid #667eea;
+    font-weight: 600;
+}
+
+/* Graphique */
+#performance-chart {
+    max-height: 400px;
+}
+
+/* Sections */
+section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+section h2 {
+    color: #495057;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #f1f3f5;
+}
+
+/* Footer */
+footer {
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+}
+
+/* Loading spinner */
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+    border-width: 0.2em;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-text.fs-1 {
+        font-size: 2rem !important;
+    }
+    
+    section {
+        padding: 1rem;
+    }
+    
+    .nav-tabs .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card, section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Highlight des bonnes performances */
+.text-success.fw-bold {
+    color: var(--success-color) !important;
+}
+
+.text-warning {
+    color: var(--warning-color) !important;
+}
+
+.text-danger {
+    color: var(--danger-color) !important;
+}
+
+/* Borders colorés pour les cards */
+.border-success {
+    border-left: 4px solid var(--success-color) !important;
+}
+
+.border-warning {
+    border-left: 4px solid var(--warning-color) !important;
+}
+
+.border-info {
+    border-left: 4px solid var(--info-color) !important;
+}
+
+.border-primary {
+    border-left: 4px solid var(--primary-color) !important;
 }
