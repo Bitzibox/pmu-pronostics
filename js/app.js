@@ -40,21 +40,39 @@ async function loadAllData() {
             allData.analyse = await analyseRes.json();
             console.log('✅ Analyse chargée:', allData.analyse.historique?.length || 0, 'jours');
         } else {
-            console.warn('⚠️ analyse.json non disponible');
+            console.warn('⚠️ analyse.json non disponible (peut être bloqué par un ad-blocker)');
         }
         
         if (pronosticsRes && pronosticsRes.ok) {
-            allData.pronostics = await pronosticsRes.json();
+            const rawPronostics = await pronosticsRes.json();
+            // Gérer les deux formats possibles
+            if (Array.isArray(rawPronostics)) {
+                allData.pronostics = { pronostics: rawPronostics };
+            } else if (rawPronostics.pronostics) {
+                allData.pronostics = rawPronostics;
+            } else {
+                allData.pronostics = { pronostics: [] };
+            }
             console.log('✅ Pronostics chargés:', allData.pronostics.pronostics?.length || 0, 'pronostics');
         } else {
             console.warn('⚠️ pronostics-' + dateString + '.json non disponible');
+            allData.pronostics = { pronostics: [] };
         }
         
         if (resultatsRes && resultatsRes.ok) {
-            allData.resultats = await resultatsRes.json();
+            const rawResultats = await resultatsRes.json();
+            // Gérer les deux formats possibles
+            if (Array.isArray(rawResultats)) {
+                allData.resultats = { resultats: rawResultats };
+            } else if (rawResultats.resultats) {
+                allData.resultats = rawResultats;
+            } else {
+                allData.resultats = { resultats: [] };
+            }
             console.log('✅ Résultats chargés:', allData.resultats.resultats?.length || 0, 'résultats');
         } else {
             console.warn('⚠️ resultats-' + dateString + '.json non disponible');
+            allData.resultats = { resultats: [] };
         }
         
         if (coursesRes && coursesRes.ok) {
