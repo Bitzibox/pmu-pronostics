@@ -37,10 +37,30 @@ async function loadAllData() {
 
         // Parser les réponses
         if (analyseRes && analyseRes.ok) {
-            allData.analyse = await analyseRes.json();
-            console.log('✅ Analyse chargée:', allData.analyse.historique?.length || 0, 'jours');
+            const rawAnalyse = await analyseRes.json();
+            // Gérer les différents formats possibles
+            if (Array.isArray(rawAnalyse)) {
+                // Si c'est un tableau, prendre le premier élément
+                if (rawAnalyse[0] && rawAnalyse[0].historique) {
+                    allData.analyse = rawAnalyse[0];
+                    console.log('✅ Analyse chargée (depuis tableau):', allData.analyse.historique?.length || 0, 'jours');
+                } else {
+                    // Tableau d'objets historique direct
+                    allData.analyse = { historique: rawAnalyse, stats_globales: {} };
+                    console.log('✅ Analyse chargée (tableau direct):', rawAnalyse.length, 'jours');
+                }
+            } else if (rawAnalyse.historique) {
+                // Structure correcte avec historique
+                allData.analyse = rawAnalyse;
+                console.log('✅ Analyse chargée:', allData.analyse.historique?.length || 0, 'jours');
+            } else {
+                // Structure inconnue, créer une structure vide
+                allData.analyse = { historique: [], stats_globales: {} };
+                console.warn('⚠️ Structure analyse.json inconnue');
+            }
         } else {
-            console.warn('⚠️ analyse.json non disponible (peut être bloqué par un ad-blocker)');
+            console.warn('⚠️ analyse.json non disponible');
+            allData.analyse = { historique: [], stats_globales: {} };
         }
         
         if (pronosticsRes && pronosticsRes.ok) {
@@ -231,14 +251,43 @@ function updateHistorique() {
 
 // Mettre à jour la section des courses du jour
 function updateCoursesSection() {
-    if (!allData.courses || !allData.courses.programme || !allData.courses.programme.reunions) {
+    // Gérer les différents formats possibles
+    let reunions = [];
+    
+    if (allData.courses) {
+        if (Array.isArray(allData.courses)) {
+            // Format: tableau direct avec un objet contenant programme
+            if (allData.courses[0] && allData.courses[0].programme && allData.courses[0].programme.reunions) {
+                reunions = allData.courses[0].programme.reunions;
+            }
+            // Format: tableau direct de réunions
+            else if (allData.courses[0] && allData.courses[0].numOfficiel) {
+                reunions = allData.courses;
+            }
+        }
+        // Format: objet avec programme
+        else if (allData.courses.programme && allData.courses.programme.reunions) {
+            reunions = allData.courses.programme.reunions;
+        }
+        // Format: objet avec reunions direct
+        else if (allData.courses.reunions) {
+            reunions = allData.courses.reunions;
+        }
+    }
+    
+    if (!reunions || reunions.length === 0) {
         console.warn('⚠️ Pas de données de courses disponibles');
+        console.log('Structure courses reçue:', allData.courses);
         return;
     }
 
-    const reunions = allData.courses.programme.reunions;
     const tabsList = document.getElementById('reunions-tabs');
     const tabsContent = document.getElementById('reunions-content');
+
+    if (!tabsList || !tabsContent) {
+        console.warn('⚠️ Éléments DOM reunions-tabs ou reunions-content introuvables');
+        return;
+    }
 
     tabsList.innerHTML = '';
     tabsContent.innerHTML = '';
@@ -253,7 +302,7 @@ function updateCoursesSection() {
         tab.innerHTML = `
             <button class="nav-link ${isActive}" id="${reunionId}-tab" data-bs-toggle="tab" 
                     data-bs-target="#${reunionId}" type="button" role="tab">
-                R${reunion.numOfficiel} - ${reunion.hippodrome?.libelleCourt || 'N/A'}
+                R${reunion.numOfficiel} - ${reunion.hippodrome?.libelleCourt || reunion.hippodrome?.libelle || 'N/A'}
             </button>
         `;
         tabsList.appendChild(tab);
@@ -274,7 +323,7 @@ function updateCoursesSection() {
                         <td><strong>C${course.numOrdre}</strong></td>
                         <td>${course.heureDepart || 'N/A'}</td>
                         <td>${course.distance || 'N/A'}m</td>
-                        <td>${course.nombreDeclaresPartants || 'N/A'}</td>
+                        <td>${course.nombreDeclaresPartants || course.nombrePartants || 'N/A'}</td>
                     </tr>
                 `;
             });
