@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": true,
+      "cached": false,
       "date": 1762210800000,
       "dateProgrammeActif": 1762210800000,
       "timezoneOffset": 3600000,
@@ -13474,7 +13474,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT_INTERNATIONAL",
                   "miseBase": 100,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -13488,7 +13488,7 @@
                 {
                   "typePari": "SIMPLE_PLACE_INTERNATIONAL",
                   "miseBase": 100,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -13504,7 +13504,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -13520,7 +13520,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -13536,7 +13536,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -13548,8 +13548,8 @@
                   "complement": true
                 }
               ],
-              "statut": "JOKEYS_MONTENT_A_CHEVAL",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "categorieStatut": "ARRIVEE",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -13573,6 +13573,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  8
+                ],
+                [
+                  12
+                ],
+                [
+                  7
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -13863,7 +13874,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 8,
+          "prochaineCourse": 9,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1762157700000,
@@ -14009,8 +14020,9 @@
                   "complement": true
                 }
               ],
-              "statut": "ARRIVEE_DEFINITIVE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 76680,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -14019,6 +14031,22 @@
                 "intitule": "Lourd",
                 "commentaire": ""
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    3,
+                    6,
+                    9,
+                    13,
+                    15,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
@@ -14044,6 +14072,33 @@
                 ],
                 [
                   11
+                ],
+                [
+                  1
+                ],
+                [
+                  10
+                ],
+                [
+                  7
+                ],
+                [
+                  4
+                ],
+                [
+                  16
+                ],
+                [
+                  12
+                ],
+                [
+                  2
+                ],
+                [
+                  14
+                ],
+                [
+                  17
                 ]
               ],
               "hasEParis": true
@@ -15715,8 +15770,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 6,
-          "numCourse": 8
+          "numReunion": 7,
+          "numCourse": 7
         }
       ],
       "datesProgrammesDisponibles": [
@@ -15725,7 +15780,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1762231537276,
+      "timestamp": 1762232437547,
       "timezoneOffset": 3600000
     },
     "date": "04112025"
