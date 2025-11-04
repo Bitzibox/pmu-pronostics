@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": true,
+      "cached": false,
       "date": 1762210800000,
       "dateProgrammeActif": 1762210800000,
       "timezoneOffset": 3600000,
@@ -14871,6 +14871,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -14909,7 +14910,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT_INTERNATIONAL",
                   "spotAutorise": false,
                   "nbChevauxReglementaire": 1,
@@ -14923,7 +14924,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE_INTERNATIONAL",
                   "spotAutorise": false,
                   "nbChevauxReglementaire": 1,
@@ -14995,7 +14996,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "ARRIVEE_DEFINITIVE",
               "categorieStatut": "ARRIVEE",
               "participants": [],
               "ecuries": [],
@@ -15005,7 +15006,8 @@
                 "intitule": "Très souple",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -15035,7 +15037,7 @@
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "PLAT"
           ],
@@ -16108,7 +16110,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1762240528383,
+      "timestamp": 1762240677565,
       "timezoneOffset": 3600000
     },
     "date": "04112025"
