@@ -172,11 +172,13 @@ function updateDashboard() {
     document.getElementById('nb-places').textContent = dernierJour.nb_places || 0;
     document.getElementById('nb-rates').textContent = dernierJour.nb_rates || 0;
 
-    // Mettre à jour le graphique avec les 7 derniers jours
-    const historique7j = allData.analyse.historique.slice(0, 7).reverse();
+    // Mettre à jour le graphique avec tous les jours disponibles (jusqu'à 7)
+    const nbJoursDisponibles = allData.analyse.historique.length;
+    const historique7j = allData.analyse.historique.slice(0, Math.min(7, nbJoursDisponibles)).reverse();
     renderPerformanceChart(historique7j);
 
     console.log('✅ Dashboard mis à jour avec les données du', dernierJour.date);
+    console.log(`📊 Historique : ${nbJoursDisponibles} jour(s) disponible(s), ${historique7j.length} jour(s) affiché(s) dans le graphique`);
 }
 
 // Afficher le graphique de performance
