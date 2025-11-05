@@ -27,8 +27,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -156,10 +156,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -189,10 +189,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -222,11 +222,11 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -249,10 +249,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -273,10 +273,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -306,16 +306,16 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -332,15 +332,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -379,11 +379,22 @@
               "dureeCourse": 228770,
               "participants": [],
               "ecuries": [],
+              "incidents": [
+                {
+                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                  "numeroParticipants": [
+                    1,
+                    2,
+                    12
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "PET",
@@ -434,6 +445,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -471,7 +483,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -515,7 +527,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -559,12 +571,12 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -592,12 +604,12 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -625,13 +637,13 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -654,10 +666,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -676,18 +688,18 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -704,15 +716,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -725,12 +737,12 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TIERCE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -746,10 +758,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_TIERCE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -761,12 +773,12 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "QUARTE_PLUS",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -782,10 +794,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_QUARTE_PLUS",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -824,13 +836,13 @@
                       }
                     ]
                   },
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "QUINTE_PLUS",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 5,
@@ -872,11 +884,11 @@
                     ]
                   },
                   "codePari": "E_QUINTE_PLUS",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 5,
@@ -923,15 +935,27 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "FIN_COURSE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 217160,
               "participants": [],
               "ecuries": [],
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                  "numeroParticipants": [
+                    1,
+                    9
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "replayDisponible": false,
+              "pronosticsExpires": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "PET",
                 "libelleCourt": "NANTES",
@@ -941,6 +965,50 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  6
+                ],
+                [
+                  4
+                ],
+                [
+                  11
+                ],
+                [
+                  5
+                ],
+                [
+                  12
+                ],
+                [
+                  14
+                ],
+                [
+                  7
+                ],
+                [
+                  13
+                ],
+                [
+                  10
+                ],
+                [
+                  16
+                ],
+                [
+                  8
+                ],
+                [
+                  3
+                ],
+                [
+                  2
+                ],
+                [
+                  15
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -951,7 +1019,7 @@
               "numExterneReunion": 1,
               "numOrdre": 3,
               "numExterne": 3,
-              "heureDepart": 1762349400000,
+              "heureDepart": 1762349520000,
               "libelle": "PRIX MG STORE NANTES",
               "libelleCourt": "MG STORE NANTES",
               "montantPrix": 8000,
@@ -1073,10 +1141,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1106,10 +1174,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1139,11 +1207,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1166,10 +1234,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1190,10 +1258,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -1223,16 +1291,16 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1249,15 +1317,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1291,7 +1359,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -1299,6 +1367,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PET",
@@ -1441,10 +1510,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1474,10 +1543,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1507,11 +1576,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1534,10 +1603,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1558,10 +1627,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -1591,16 +1660,16 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1617,15 +1686,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1667,6 +1736,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PET",
@@ -1809,10 +1879,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1842,10 +1912,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1875,11 +1945,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1902,10 +1972,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -1926,10 +1996,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -1959,16 +2029,16 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1985,15 +2055,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -2035,6 +2105,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PET",
@@ -2177,10 +2248,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2210,10 +2281,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2243,11 +2314,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2270,10 +2341,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2294,10 +2365,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -2327,16 +2398,16 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -2353,15 +2424,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -2376,12 +2447,12 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "PICK5",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     10,
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 5,
@@ -2397,11 +2468,11 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_PICK5",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 5,
@@ -2442,6 +2513,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PET",
@@ -2584,10 +2656,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2617,10 +2689,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2650,11 +2722,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2677,10 +2749,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2701,10 +2773,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -2734,16 +2806,16 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -2760,15 +2832,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -2810,6 +2882,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PET",
@@ -2952,10 +3025,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -2985,10 +3058,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3018,11 +3091,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3045,10 +3118,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3069,10 +3142,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -3102,16 +3175,16 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3128,15 +3201,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3151,12 +3224,12 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "PICK5",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     10,
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 5,
@@ -3172,11 +3245,11 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_PICK5",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 5,
@@ -3217,6 +3290,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PET",
@@ -3325,8 +3399,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -3455,10 +3529,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3488,10 +3562,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3521,11 +3595,11 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3548,10 +3622,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3572,10 +3646,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -3605,15 +3679,15 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3630,14 +3704,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3685,6 +3759,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HWM",
@@ -3731,8 +3806,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -3861,10 +3936,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3894,10 +3969,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3927,11 +4002,11 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3954,10 +4029,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -3978,10 +4053,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -4011,15 +4086,15 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4036,14 +4111,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4086,11 +4161,20 @@
               "penetrometre": {
                 "intitule": "PSF"
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    5
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HWM",
@@ -4137,8 +4221,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -4267,10 +4351,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -4300,10 +4384,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -4333,11 +4417,11 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -4360,10 +4444,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -4384,10 +4468,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -4417,15 +4501,15 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4442,14 +4526,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4492,11 +4576,20 @@
               "penetrometre": {
                 "intitule": "PSF"
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    11
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HWM",
@@ -4543,8 +4636,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -4673,10 +4766,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -4706,10 +4799,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -4739,11 +4832,11 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -4766,10 +4859,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -4790,10 +4883,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -4823,16 +4916,16 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4849,15 +4942,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4900,11 +4993,20 @@
               "penetrometre": {
                 "intitule": "PSF"
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    6
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HWM",
@@ -4960,8 +5062,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -5090,10 +5192,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -5123,10 +5225,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -5156,11 +5258,11 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -5183,10 +5285,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -5207,10 +5309,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -5240,16 +5342,16 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -5266,15 +5368,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -5317,11 +5419,21 @@
               "penetrometre": {
                 "intitule": "PSF"
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    7,
+                    13
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HWM",
@@ -5417,8 +5529,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -5546,10 +5658,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -5579,10 +5691,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -5612,10 +5724,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -5631,10 +5743,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -5684,6 +5796,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -5721,8 +5834,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -5850,10 +5963,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -5883,10 +5996,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -5916,10 +6029,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -5949,10 +6062,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -5968,10 +6081,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -6016,11 +6129,26 @@
                 "intitule": "Collant",
                 "commentaire": ""
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    7
+                  ]
+                },
+                {
+                  "type": "TOMBE",
+                  "numeroParticipants": [
+                    9
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -6058,8 +6186,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -6187,10 +6315,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -6220,10 +6348,10 @@
                   "reportable": true,
                   "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -6253,10 +6381,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -6286,10 +6414,10 @@
                   "reportable": false,
                   "misEnPaiement": true,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -6305,10 +6433,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -6353,11 +6481,23 @@
                 "intitule": "Collant",
                 "commentaire": ""
               },
+              "incidents": [
+                {
+                  "type": "TOMBE",
+                  "numeroParticipants": [
+                    3,
+                    4,
+                    6,
+                    7
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -6392,7 +6532,7 @@
               "numExterneReunion": 3,
               "numOrdre": 4,
               "numExterne": 4,
-              "heureDepart": 1762348320000,
+              "heureDepart": 1762348500000,
               "libelle": "PRIX PRE CATELAN",
               "libelleCourt": "PRE CATELAN",
               "montantPrix": 51000,
@@ -6514,10 +6654,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -6547,10 +6687,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -6580,11 +6720,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -6607,10 +6747,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -6631,10 +6771,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -6664,16 +6804,16 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -6690,15 +6830,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -6733,7 +6873,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -6747,6 +6887,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -6889,10 +7030,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -6922,10 +7063,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -6955,10 +7096,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -6988,10 +7129,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -7007,10 +7148,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -7058,6 +7199,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -7200,10 +7342,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -7233,10 +7375,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -7266,11 +7408,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -7293,10 +7435,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -7317,10 +7459,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -7350,15 +7492,15 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7375,14 +7517,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7431,6 +7573,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -7573,10 +7716,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -7606,10 +7749,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -7639,11 +7782,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -7666,10 +7809,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -7690,10 +7833,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -7723,15 +7866,15 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7748,14 +7891,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7804,6 +7947,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -7991,10 +8135,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -8024,10 +8168,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -8057,10 +8201,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -8090,10 +8234,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -8109,10 +8253,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -8157,6 +8301,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -8300,10 +8445,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -8333,10 +8478,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -8366,11 +8511,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -8393,10 +8538,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -8417,10 +8562,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -8450,15 +8595,15 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -8475,14 +8620,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -8528,6 +8673,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -8671,10 +8817,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -8704,10 +8850,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -8737,10 +8883,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -8770,10 +8916,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -8789,10 +8935,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -8837,6 +8983,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -8980,10 +9127,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -9013,10 +9160,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -9046,10 +9193,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -9079,10 +9226,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -9098,10 +9245,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -9146,6 +9293,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -9289,10 +9437,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -9322,10 +9470,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -9355,11 +9503,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -9382,10 +9530,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -9406,10 +9554,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -9439,15 +9587,15 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -9464,14 +9612,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -9486,10 +9634,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "QUARTE_PLUS",
+                  "spotAutorise": false,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": false,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -9534,6 +9682,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -9677,10 +9826,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -9710,10 +9859,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -9743,10 +9892,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -9762,10 +9911,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -9810,6 +9959,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -9953,10 +10103,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -9986,10 +10136,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -10019,10 +10169,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -10038,10 +10188,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -10086,6 +10236,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -10229,10 +10380,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -10262,10 +10413,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -10295,10 +10446,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -10328,10 +10479,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -10347,10 +10498,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -10395,6 +10546,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -10583,10 +10735,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -10616,10 +10768,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -10649,11 +10801,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -10676,10 +10828,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -10700,10 +10852,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -10733,16 +10885,16 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -10759,15 +10911,15 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -10815,6 +10967,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "KEM",
@@ -10958,10 +11111,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -10991,10 +11144,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -11024,10 +11177,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -11043,10 +11196,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -11093,6 +11246,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "KEM",
@@ -11236,10 +11390,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -11269,10 +11423,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -11302,11 +11456,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -11329,10 +11483,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -11353,10 +11507,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -11386,15 +11540,15 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -11411,14 +11565,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -11466,6 +11620,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "KEM",
@@ -11609,10 +11764,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -11642,10 +11797,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO_ORDRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -11675,10 +11830,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -11694,10 +11849,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -11744,6 +11899,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "KEM",
@@ -11931,10 +12087,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -11964,10 +12120,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -11997,11 +12153,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -12024,10 +12180,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -12048,10 +12204,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -12081,15 +12237,15 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -12106,14 +12262,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -12155,6 +12311,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VPR",
@@ -12298,10 +12455,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -12331,10 +12488,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -12364,10 +12521,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -12397,10 +12554,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -12416,10 +12573,10 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
@@ -12460,6 +12617,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VPR",
@@ -12603,10 +12761,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -12636,10 +12794,10 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -12669,11 +12827,11 @@
                   "reportable": true,
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -12696,10 +12854,10 @@
                   "cagnotte": 0,
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
@@ -12720,10 +12878,10 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "TRIO",
+                  "spotAutorise": true,
                   "valeursFlexiAutorisees": [
                     50
                   ],
-                  "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
@@ -12753,15 +12911,15 @@
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -12778,14 +12936,14 @@
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -12827,6 +12985,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VPR",
@@ -12992,6 +13151,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VPR",
@@ -13157,6 +13317,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VPR",
@@ -13322,6 +13483,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VPR",
@@ -13487,6 +13649,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VPR",
@@ -13652,6 +13815,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VPR",
@@ -13710,8 +13874,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -13820,6 +13984,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -13857,8 +14022,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -14014,6 +14179,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -14066,8 +14232,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -14223,6 +14389,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -14275,8 +14442,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -14432,6 +14599,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -14484,8 +14652,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -14641,6 +14809,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -14729,7 +14898,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT_INTERNATIONAL",
                   "miseBase": 100,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -14743,7 +14912,7 @@
                 {
                   "typePari": "SIMPLE_PLACE_INTERNATIONAL",
                   "miseBase": 100,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -14759,7 +14928,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -14775,7 +14944,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -14789,7 +14958,7 @@
                 {
                   "typePari": "COUPLE_ORDRE_INTERNATIONAL",
                   "miseBase": 100,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -14805,7 +14974,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -14833,8 +15002,8 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ROUGE_AUX_PARTANTS",
-              "categorieStatut": "A_PARTIR",
+              "statut": "DEPART_CONFIRME",
+              "categorieStatut": "EN_COURS",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -14847,6 +15016,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -15015,6 +15185,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -15183,6 +15354,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -15351,6 +15523,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "HPV",
@@ -15373,7 +15546,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 6,
+          "prochaineCourse": 7,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1762244100000,
@@ -15558,6 +15731,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -15722,6 +15896,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -15886,6 +16061,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -16050,6 +16226,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -16214,6 +16391,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -16378,6 +16556,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -16542,6 +16721,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -16706,6 +16886,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -16870,6 +17051,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -17034,6 +17216,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "SOL",
@@ -17226,6 +17409,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -17375,6 +17559,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -17540,6 +17725,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -17705,6 +17891,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -17744,8 +17931,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 7,
-          "numCourse": 6
+          "numReunion": 3,
+          "numCourse": 4
         }
       ],
       "datesProgrammesDisponibles": [
@@ -17756,7 +17943,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1762347600693,
+      "timestamp": 1762348500707,
       "timezoneOffset": 3600000
     },
     "date": "05112025"
