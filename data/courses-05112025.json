@@ -14609,7 +14609,7 @@
               "numExterneReunion": 6,
               "numOrdre": 9,
               "numExterne": 9,
-              "heureDepart": 1762380000000,
+              "heureDepart": 1762380120000,
               "libelle": "IBERO DIABLO H.",
               "libelleCourt": "IBERO DIABLO H.",
               "montantPrix": 1988,
@@ -14746,7 +14746,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -19152,6 +19152,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 9,
               "numExterneReunion": 9,
@@ -19189,7 +19190,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19212,7 +19213,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19235,7 +19236,7 @@
                   "typePari": "E_COUPLE_ORDRE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -19251,7 +19252,7 @@
                   "typePari": "E_TRIO_ORDRE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -19278,8 +19279,9 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_DANS_TROIS_MINUTES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 85820,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -19287,7 +19289,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    1
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -19302,6 +19313,26 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  3
+                ],
+                [
+                  6
+                ],
+                [
+                  4
+                ],
+                [
+                  7
+                ],
+                [
+                  5
+                ],
+                [
+                  2
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -19449,7 +19480,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -19656,7 +19687,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 9,
+          "prochaineCourse": 10,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1762330500000,
@@ -19673,7 +19704,7 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 9,
+          "numReunion": 6,
           "numCourse": 9
         }
       ],
@@ -19685,7 +19716,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1762379105999,
+      "timestamp": 1762380003913,
       "timezoneOffset": 3600000
     },
     "date": "05112025"
