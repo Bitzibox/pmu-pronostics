@@ -8,23 +8,50 @@ const CONFIG = {
     DATE_FORMAT: 'DD/MM/YYYY'
 };
 
+// Mapping des hippodromes PAR PAYS et numéro de réunion
+const HIPPODROMES_PAR_PAYS = {
+    'FRA': {
+        1: { nom: 'Vincennes', ville: 'Paris' },
+        2: { nom: 'Enghien', ville: 'Enghien' },
+        3: { nom: 'Auteuil', ville: 'Paris' },
+        4: { nom: 'Chantilly', ville: 'Chantilly' },
+        5: { nom: 'Deauville', ville: 'Deauville' },
+        6: { nom: 'Lyon-Parilly', ville: 'Lyon' },
+        7: { nom: 'Marseille-Borély', ville: 'Marseille' },
+        8: { nom: 'Cagnes-sur-Mer', ville: 'Cagnes-sur-Mer' }
+    },
+    'DEU': {
+        2: { nom: 'Gelsenkirchen', ville: 'Gelsenkirchen' }
+    },
+    'NLD': {
+        5: { nom: 'Wolvega', ville: 'Wolvega' }
+    },
+    'USA': {
+        6: { nom: 'Charles Town', ville: 'Charles Town' }
+    }
+};
+
+// Gardez aussi l'ancien HIPPODROMES comme fallback
 const HIPPODROMES = {
     'R1': { nom: 'Vincennes', ville: 'Paris', discipline: 'trot' },
-    'R2': { nom: 'Longchamp', ville: 'Paris', discipline: 'plat' },
+    'R2': { nom: 'Enghien', ville: 'Enghien', discipline: 'trot' },
     'R3': { nom: 'Auteuil', ville: 'Paris', discipline: 'obstacle' },
     'R4': { nom: 'Chantilly', ville: 'Chantilly', discipline: 'plat' },
     'R5': { nom: 'Deauville', ville: 'Deauville', discipline: 'plat' },
     'R6': { nom: 'Lyon-Parilly', ville: 'Lyon', discipline: 'trot' },
     'R7': { nom: 'Marseille-Borély', ville: 'Marseille', discipline: 'plat' },
-    'R8': { nom: 'Cagnes-sur-Mer', ville: 'Cagnes-sur-Mer', discipline: 'plat' },
-    // Ajoutez d'autres hippodromes selon vos besoins
+    'R8': { nom: 'Cagnes-sur-Mer', ville: 'Cagnes-sur-Mer', discipline: 'plat' }
 };
 
 const DISCIPLINES = {
-    'TROT': { label: 'Trot', icon: '🏇', color: '#2196F3' },
-    'PLAT': { label: 'Plat', icon: '🐎', color: '#9C27B0' },
-    'OBSTACLE': { label: 'Obstacle', icon: '🏆', color: '#FF9800' },
-    'STEEPLECHASE': { label: 'Steeple', icon: '🎯', color: '#4CAF50' }
+    'ATTELE': { label: 'Trot Attelé', icon: '🏇', color: '#2196F3', type: 'trot' },
+    'MONTE': { label: 'Trot Monté', icon: '🐎', color: '#1976D2', type: 'trot' },
+    'PLAT': { label: 'Plat', icon: '🏃', color: '#9C27B0', type: 'plat' },
+    'HAIE': { label: 'Haies', icon: '🏆', color: '#FF9800', type: 'obstacle' },
+    'STEEPLECHASE': { label: 'Steeple-Chase', icon: '🎯', color: '#F57C00', type: 'obstacle' },
+    'CROSS': { label: 'Cross-Country', icon: '🌲', color: '#4CAF50', type: 'obstacle' },
+    'TROT': { label: 'Trot', icon: '🏇', color: '#2196F3', type: 'trot' },
+    'OBSTACLE': { label: 'Obstacle', icon: '🏆', color: '#FF9800', type: 'obstacle' }
 };
 
 // Variables globales
@@ -33,7 +60,8 @@ let allData = {
     analyse: null,
     pronostics: null,
     resultats: null,
-    courses: null
+    courses: null,
+    programme: null
 };
 
 // Fonction principale de chargement
@@ -52,7 +80,8 @@ async function loadAllData() {
             fetch(GITHUB_RAW_BASE + 'analyse.json?t=' + timestamp).catch(e => null),
             fetch(GITHUB_RAW_BASE + 'pronostics-' + dateString + '.json?t=' + timestamp).catch(e => null),
             fetch(GITHUB_RAW_BASE + 'resultats-' + dateString + '.json?t=' + timestamp).catch(e => null),
-            fetch(GITHUB_RAW_BASE + 'courses-' + dateString + '.json?t=' + timestamp).catch(e => null)
+            fetch(GITHUB_RAW_BASE + 'courses-' + dateString + '.json?t=' + timestamp).catch(e => null),
+            fetch(GITHUB_RAW_BASE + 'programme-' + dateString + '.json?t=' + timestamp).catch(e => null)
         ]);
 
         console.log('📡 URLs chargées:');
@@ -60,6 +89,7 @@ async function loadAllData() {
         console.log('  - pronostics-' + dateString + '.json');
         console.log('  - resultats-' + dateString + '.json');
         console.log('  - courses-' + dateString + '.json');
+        console.log('  - programme-' + dateString + '.json'); 
 
         // Parser les réponses
         if (analyseRes && analyseRes.ok) {
@@ -150,6 +180,20 @@ async function loadAllData() {
             console.warn('⚠️ courses-' + dateString + '.json non disponible');
         }
 
+         if (programmeRes && programmeRes.ok) {
+            const rawProgramme = await programmeRes.json();
+            // Gérer le format tableau ou objet
+            if (Array.isArray(rawProgramme) && rawProgramme.length > 0) {
+                allData.programme = rawProgramme[0];
+            } else {
+                allData.programme = rawProgramme;
+            }
+            console.log('✅ Programme chargé:', allData.programme?.reunions?.length || 0, 'réunions');
+        } else {
+            console.warn('⚠️ programme-' + dateString + '.json non disponible');
+            allData.programme = { reunions: [] };
+        }
+
         console.log('📊 Données complètes:', allData);
 
         // Mettre à jour l'interface
@@ -158,6 +202,7 @@ async function loadAllData() {
         updateCoursesSection();
         updateComparaisonSection();
         updateLastUpdateTime();
+        enrichirPronostics();
 
     } catch (error) {
         console.error('❌ Erreur lors du chargement des données:', error);
@@ -172,6 +217,77 @@ function getDateString() {
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const year = today.getFullYear();
     return `${day}${month}${year}`;
+}
+
+// Convertir un timestamp Unix (millisecondes) en heure HH:MM
+function timestampToHeure(timestamp) {
+    if (!timestamp) return '--:--';
+    const date = new Date(timestamp);
+    const heures = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${heures}:${minutes}`;
+}
+
+// Enrichir les pronostics avec les données du programme
+function enrichirPronostics() {
+    if (!allData.programme || !allData.programme.reunions || !allData.pronostics || !allData.pronostics.pronostics) {
+        console.warn('⚠️ Données manquantes pour enrichissement');
+        return;
+    }
+    
+    console.log('🔄 Enrichissement des pronostics avec le programme...');
+    
+    allData.pronostics.pronostics.forEach(prono => {
+        const reunionNum = parseInt(prono.reunion.replace('R', ''));
+        const courseNum = parseInt(prono.course.replace('C', ''));
+        
+        // Trouver la réunion dans le programme
+        const reunion = allData.programme.reunions.find(r => r.numOfficiel === reunionNum);
+        
+        if (reunion) {
+            // Nom de l'hippodrome
+            const codePays = reunion.pays?.code || 'FRA';
+            const hippoInfo = HIPPODROMES_PAR_PAYS[codePays]?.[reunionNum];
+            
+            if (hippoInfo) {
+                prono.hippodrome = hippoInfo.nom;
+                prono.ville = hippoInfo.ville;
+            } else {
+                prono.hippodrome = reunion.hippodrome?.nom || `Réunion ${reunionNum}`;
+                prono.ville = reunion.hippodrome?.ville || '';
+            }
+            
+            prono.pays = reunion.pays?.libelle || '';
+            prono.codePays = codePays;
+            
+            // Trouver la course spécifique
+            const course = reunion.courses.find(c => c.numOrdre === courseNum);
+            
+            if (course) {
+                // Convertir le timestamp en heure
+                prono.heure = timestampToHeure(course.heureDepart);
+                
+                // Discipline
+                const disciplineInfo = DISCIPLINES[course.discipline];
+                if (disciplineInfo) {
+                    prono.discipline = course.discipline;
+                    prono.disciplineLabel = disciplineInfo.label;
+                    prono.disciplineIcon = disciplineInfo.icon;
+                    prono.disciplineColor = disciplineInfo.color;
+                    prono.disciplineType = disciplineInfo.type;
+                } else {
+                    prono.discipline = course.discipline;
+                    prono.disciplineLabel = course.discipline;
+                }
+                
+                // Autres infos
+                prono.distance = course.distance;
+                prono.libelle = course.libelleCourt;
+            }
+        }
+    });
+    
+    console.log('✅ Enrichissement terminé');
 }
 
 // Mettre à jour le dashboard de performance
@@ -578,6 +694,7 @@ function renderReunionCourses(container, reunion, courses) {
                     <div class="card-header bg-light">
                         <div class="d-flex justify-content-between align-items-center">
                             <strong>${reunion}${prono.course}</strong>
+                            <small>${premierProno.hippodrome || reunion}${premierProno.ville ? ` (${premierProno.ville})` : ''}</small>
                             ${statusBadge}
                         </div>
                         <small class="text-muted">${hippodrome} - ${heureDepart}</small>
