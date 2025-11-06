@@ -3648,6 +3648,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -3684,7 +3685,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3728,7 +3729,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3772,7 +3773,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3805,7 +3806,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3838,7 +3839,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3871,7 +3872,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SUPER_QUATRE",
                   "spotAutorise": true,
                   "ordre": true,
@@ -3928,11 +3929,21 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "FIN_COURSE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 151800,
               "participants": [],
               "ecuries": [],
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    8
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -3959,6 +3970,15 @@
                 ],
                 [
                   5
+                ],
+                [
+                  2
+                ],
+                [
+                  6
+                ],
+                [
+                  3
                 ]
               ],
               "hasEParis": true
@@ -4246,7 +4266,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -5694,10 +5714,16 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,9",
+                "heureMesure": "2025-11-06T09:00",
+                "intitule": "Très souple",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -6004,6 +6030,12 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,9",
+                "heureMesure": "2025-11-06T09:00",
+                "intitule": "Très souple",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -6372,6 +6404,12 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,9",
+                "heureMesure": "2025-11-06T09:00",
+                "intitule": "Très souple",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -6740,6 +6778,12 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,9",
+                "heureMesure": "2025-11-06T09:00",
+                "intitule": "Très souple",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -7108,6 +7152,12 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,9",
+                "heureMesure": "2025-11-06T09:00",
+                "intitule": "Très souple",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -7476,6 +7526,12 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,9",
+                "heureMesure": "2025-11-06T09:00",
+                "intitule": "Très souple",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -7844,6 +7900,12 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,9",
+                "heureMesure": "2025-11-06T09:00",
+                "intitule": "Très souple",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -13494,7 +13556,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1762424132709,
+      "timestamp": 1762425032719,
       "timezoneOffset": 3600000
     },
     "date": "06112025"
