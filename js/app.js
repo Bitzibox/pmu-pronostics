@@ -755,134 +755,20 @@ function renderReunionCourses(container, reunion, courses) {
         `;
 
         if (prono.classement && prono.classement.length > 0) {
-            prono.classement.slice(0, 1).forEach((cheval, index) => { // Affiche seulement le 1er prono
+            // MODIFICATION: slice(0, 1) changé en slice(0, 4) pour afficher les 4 premiers
+            prono.classement.slice(0, 4).forEach((cheval, index) => {
+                
+                // Logique pour assigner la bonne classe de couleur au badge
+                let positionClass = `position-${index + 1}`;
+                if (index >= 3) { // 4ème (index 3) et au-delà
+                    positionClass = 'position-other';
+                }
+
                 html += `
                     <div class="pronostic-item">
                         <div class="d-flex align-items-center">
-                            <div class="position-badge position-${index + 1}">
+                            <div class="position-badge ${positionClass}">
                                 ${index + 1}
                             </div>
                             <div class="ms-3 flex-grow-1">
-                                <h5 class="mb-0 fw-bold">#${cheval.numero} - ${cheval.nom}</h5>
-                                <small class="text-muted">${prono.libelle || ''}</small>
-                            </div>
-                            <div class="cote-badge">
-                                ${cheval.cote || 'N/A'}
-                            </div>
-                        </div>
-                        <div class="confiance-container">
-                            <div class="confiance-bar">
-                                <div class="confiance-fill ${confianceClass}" style="width: ${confiance}%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-        } else {
-             html += `<div class="pronostic-item"><p class="text-muted mb-0">Aucun pronostic disponible pour cette course.</p></div>`;
-        }
-
-        // Afficher les résultats si disponibles
-        if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
-            html += `
-                        <hr>
-                        <h6 class="text-success fw-bold"><i class="bi bi-trophy-fill"></i> Résultat Arrivée</h6>
-                        <div class="d-flex gap-2 flex-wrap">
-            `;
-            
-            resultat.arrivee.slice(0, 5).forEach((numero, index) => {
-                const badgeClass = index === 0 ? 'resultat-1er' : index === 1 ? 'resultat-2er' : index === 2 ? 'resultat-3er' : 'resultat-autres';
-                html += `<span class="resultat-badge ${badgeClass}">${index + 1}er: <strong>#${numero}</strong></span>`;
-            });
-            
-            html += '</div>';
-        }
-
-        html += `
-                    </div>
-                </div>
-            </div>
-        `;
-    });
-
-    html += '</div>';
-    container.innerHTML = html;
-}
-
-// Mettre à jour l'heure de dernière mise à jour
-function updateLastUpdateTime() {
-    const now = new Date();
-    const timeString = now.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-    document.getElementById('last-update').textContent = timeString;
-}
-
-// Afficher une erreur
-function showError(message) {
-    const sections = ['historique-body', 'comparaison-body'];
-    sections.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) {
-            element.innerHTML = `<tr><td colspan="9" class="text-center text-danger">${message}</td></tr>`;
-        }
-    });
-}
-
-// Export CSV
-document.getElementById('export-csv')?.addEventListener('click', () => {
-    if (!allData.pronostics || !allData.pronostics.pronostics) {
-        alert('Aucune donnée à exporter');
-        return;
-    }
-
-    let csv = 'Hippodrome,Heure,Course,Cheval Pronostiqué,Cote,Confiance,Position Prédite,Résultat Réel,Statut\n';
-    
-    allData.pronostics.pronostics.forEach(prono => {
-        let resultatReel = 'En attente';
-        let statut = 'En attente';
-
-        if (allData.resultats && allData.resultats.courses) {
-            const resultat = allData.resultats.courses.find(r => 
-                r.reunion === prono.reunion && r.course === prono.course
-            );
-
-            if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
-                resultatReel = `#${resultat.arrivee[0]}`;
-                const chevalPronostique = prono.classement && prono.classement.length > 0 ? 
-                    prono.classement[0].numero : null;
-                
-                if (chevalPronostique === resultat.arrivee[0]) {
-                    statut = 'Gagnant';
-                } else if (resultat.arrivee.slice(0, 3).includes(chevalPronostique)) {
-                    statut = 'Placé';
-                } else {
-                    statut = 'Raté';
-                }
-            }
-        }
-
-        const chevalInfo = prono.classement && prono.classement.length > 0 ? 
-            `#${prono.classement[0].numero} - ${prono.classement[0].nom}` : 'N/A';
-        const cote = prono.classement && prono.classement.length > 0 && prono.classement[0].cote ? 
-            prono.classement[0].cote : 'N/A';
-        const confiance = prono.scoreConfiance || 0;
-
-        csv += `"${prono.hippodrome || prono.reunion}","${prono.heure || '--:--'}","${prono.reunion}${prono.course}","${chevalInfo}",${cote},${confiance}%,1er,"${resultatReel}","${statut}"\n`;
-    });
-
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `pronostics-pmu-${getDateString()}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-});
-
-// Initialisation au chargement de la page
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Application démarrée');
-    loadAllData();
-    
-    // Rafraîchir toutes les 5 minutes
-    setInterval(loadAllData, CONFIG.REFRESH_INTERVAL);
-});
+// ... existing code ... -->
