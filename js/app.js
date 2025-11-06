@@ -83,6 +83,7 @@ async function loadAllData() {
     try {
         // --- MODIFICATION 4 ---
         // Charger tous les fichiers en parallèle avec la date du jour
+        // C'EST CETTE LIGNE QUI CORRIGE L'ERREUR : 'programmeRes' est ajouté à la liste
         const [analyseRes, pronosticsRes, resultatsRes, coursesRes, programmeRes] = await Promise.all([
             fetch(GITHUB_RAW_BASE + 'analyse.json?t=' + timestamp).catch(e => null),
             fetch(GITHUB_RAW_BASE + 'pronostics-' + dateString + '.json?t=' + timestamp).catch(e => null),
@@ -189,6 +190,7 @@ async function loadAllData() {
         }
         
         // --- MODIFICATION 5 ---
+        // Ce bloc ne causera plus d'erreur car 'programmeRes' est défini Ligne 79
         if (programmeRes && programmeRes.ok) {
             const rawProgramme = await programmeRes.json();
             // Gérer le format tableau ou objet
@@ -859,7 +861,7 @@ document.getElementById('export-csv')?.addEventListener('click', () => {
         }
 
         const chevalInfo = prono.classement && prono.classement.length > 0 ? 
-            `#${prono.classement[0].numero} ${prono.classement[0].nom}` : 'N/A';
+            `#${prono.classement[0].numero} - ${prono.classement[0].nom}` : 'N/A';
         const cote = prono.classement && prono.classement.length > 0 && prono.classement[0].cote ? 
             prono.classement[0].cote : 'N/A';
         const confiance = prono.scoreConfiance || 0;
