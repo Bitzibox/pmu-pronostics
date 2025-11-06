@@ -466,7 +466,7 @@ function updateComparaisonSection() {
     if (!tbody) return;
 
     if (!allData.pronostics || !allData.pronostics.pronostics || allData.pronostics.pronostics.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">Aucun pronostic disponible</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="9" class="text-center text-muted">Aucun pronostic disponible</td></tr>';
         return;
     }
 
@@ -536,7 +536,11 @@ function updateComparaisonSection() {
         row.setAttribute('data-statut', statut.toLowerCase().includes('gagnant') ? 'gagnant' : 
                                         statut.toLowerCase().includes('placé') ? 'place' : 'rate');
         
+        // ==== CORRECTION ICI ====
+        // Génère 9 colonnes pour correspondre aux 9 en-têtes
         row.innerHTML = `
+            <td>${prono.hippodrome || prono.reunion}</td>
+            <td>${prono.heure || '--:--'}</td>
             <td><strong>${prono.reunion}${prono.course}</strong></td>
             <td>${chevalInfo}</td>
             <td>${cote}</td>
@@ -549,6 +553,7 @@ function updateComparaisonSection() {
             <td>${resultatReel}</td>
             <td><span class="badge ${statutClass}">${statut}</span></td>
         `;
+        // ==== FIN CORRECTION ====
         
         tbody.appendChild(row);
     });
@@ -618,6 +623,7 @@ function applyFilters() {
 function updateCoursesSection() {
     if (!allData.pronostics || !allData.pronostics.pronostics || allData.pronostics.pronostics.length === 0) {
         console.warn('⚠️ Pas de pronostics disponibles pour afficher les courses');
+        document.getElementById('reunions-tabs').innerHTML = '<li class="nav-item"><span class="nav-link disabled">Aucun pronostic pour aujourd\'hui.</span></li>';
         return;
     }
 
@@ -649,15 +655,15 @@ function updateCoursesSection() {
         // Créer l'onglet
         const tab = document.createElement('li');
         tab.className = 'nav-item';
+        // Utilisation de la classe CSS 'reunion-tab' de votre nouveau CSS
         tab.innerHTML = `
-            <button class="nav-link ${isFirst ? 'active' : ''}" 
+            <button class="reunion-tab ${isFirst ? 'active' : ''}" 
                     data-bs-toggle="tab" 
                     data-bs-target="#${tabId}" 
                     type="button">
-                <div class="d-flex flex-column align-items-start">
-                    <strong>${reunion} (${pronosticsParReunion[reunion].length})</strong>
-                    <small>${premierProno.hippodrome || reunion}${premierProno.ville ? ` (${premierProno.ville})` : ''}</small>
-                </div>
+                <strong>${reunion} (${pronosticsParReunion[reunion].length})</strong>
+                <br>
+                <small>${premierProno.hippodrome || reunion}${premierProno.ville ? ` (${premierProno.ville})` : ''}</small>
             </button>
         `;
         // --- FIN MODIFICATION 8 ---
@@ -679,7 +685,7 @@ function updateCoursesSection() {
 
 // Afficher les courses d'une réunion
 function renderReunionCourses(container, reunion, courses) {
-    let html = '<div class="row g-3 mt-3">';
+    let html = '<div class="row g-4 mt-1">'; // g-4 pour plus d'espace
 
     courses.forEach(prono => {
         // Chercher le résultat
@@ -690,13 +696,13 @@ function renderReunionCourses(container, reunion, courses) {
             );
         }
 
-        // --- MODIFICATION 9 (retrait des variables 'heureDepart' et 'hippodrome' qui sont maintenant enrichies) ---
-        // const heureDepart = prono.heureDepart || 'N/A'; // RETIRÉ
-        // const hippodrome = prono.hippodrome || reunion; // RETIRÉ
         const confiance = prono.scoreConfiance || 0;
+        let confianceClass = 'confiance-low';
+        if (confiance >= 80) confianceClass = 'confiance-high';
+        else if (confiance >= 60) confianceClass = 'confiance-medium';
 
-        let cardClass = 'border-secondary';
-        let statusBadge = '<span class="badge bg-secondary">⏳ En attente</span>';
+
+        let statusBadge = '<span class="statut-badge statut-attente"><i class="bi bi-hourglass-split"></i> En attente</span>';
 
         if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
             const numeroGagnant = resultat.arrivee[0];
@@ -704,97 +710,89 @@ function renderReunionCourses(container, reunion, courses) {
                 prono.classement[0].numero : null;
 
             if (chevalPronostique === numeroGagnant) {
-                cardClass = 'border-success';
-                statusBadge = '<span class="badge bg-success">✅ Gagnant</span>';
+                statusBadge = '<span class="statut-badge statut-gagnant"><i class="bi bi-check-circle-fill"></i> Gagnant</span>';
             } else if (resultat.arrivee.slice(0, 3).includes(chevalPronostique)) {
-                cardClass = 'border-warning';
-                statusBadge = '<span class="badge bg-warning">🥉 Placé</span>';
+                statusBadge = '<span class="statut-badge statut-place"><i class="bi bi-award-fill"></i> Placé</span>';
             } else {
-                cardClass = 'border-danger';
-                statusBadge = '<span class="badge bg-danger">❌ Raté</span>';
+                statusBadge = '<span class="statut-badge statut-rate"><i class="bi bi-x-circle-fill"></i> Raté</span>';
             }
         }
-
-        // --- MODIFICATION 9 (Mise à jour de la structure de la carte) ---
+        
+        // Utilisation des nouvelles classes CSS de index.html
         html += `
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 ${cardClass}">
-                    <div class="card-header bg-light">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="mb-1">${reunion}${prono.course}</h5>
-                            ${statusBadge}
-                        </div>
-                        <div class="hippodrome-info mt-1">
-                            <span class="hippodrome-badge" style="font-size: 0.9em; color: #6c757d;">
-                                <i class="bi bi-geo-alt-fill"></i>
-                                ${prono.hippodrome || reunion}${prono.ville ? ` - ${prono.ville}` : ''}
-                            </span>
+            <div class="col-md-6 col-lg-4 fade-in">
+                <div class="course-card">
+                    <!-- En-tête de la carte -->
+                    <div class="course-header">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="mb-0 fw-bold">${reunion}${prono.course}</h4>
                             ${prono.heure ? `
-                                <span class="time-badge" style="font-size: 0.9em; color: #6c757d; margin-left: 10px;">
+                                <span class="time-badge">
                                     <i class="bi bi-clock-fill"></i>
                                     ${prono.heure}
                                 </span>
                             ` : ''}
                         </div>
-                    </div>
-                    <div class="card-body">
-                        ${prono.disciplineLabel ? `
-                            <span class="discipline-badge d-inline-block mb-2" style="background: ${prono.disciplineColor}; color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.875em;">
-                                ${prono.disciplineIcon || ''} ${prono.disciplineLabel}
+                        <div class="hippodrome-info">
+                            <span class="hippodrome-badge">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                ${prono.hippodrome || reunion}${prono.ville ? ` - ${prono.ville}` : ''}
                             </span>
-                        ` : ''}
-                        ${prono.distance ? `
-                            <small class="text-muted d-block mb-2">
-                                <i class="bi bi-rulers"></i> ${prono.distance}m
-                            </small>
-                        ` : ''}
-                        <h6 class="card-title">🎯 Pronostic</h6>
-        
-        <!-- --- FIN MODIFICATION 9 --- -->
-        
-                        <div class="table-responsive">
-                            <table class="table table-sm table-borderless mb-0">
-                                <tbody>
+                            ${prono.disciplineLabel ? `
+                                <span class="discipline-badge discipline-${prono.disciplineType || 'trot'}">
+                                    ${prono.disciplineIcon || ''} ${prono.disciplineLabel} ${prono.distance ? ` - ${prono.distance}m` : ''}
+                                </span>
+                            ` : ''}
+                        </div>
+                    </div>
+                    
+                    <!-- Corps de la carte -->
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="card-title mb-0 fw-bold"><i class="bi bi-person-check-fill"></i> Pronostic (Confiance ${confiance}%)</h6>
+                            ${statusBadge}
+                        </div>
         `;
 
         if (prono.classement && prono.classement.length > 0) {
-            prono.classement.slice(0, 3).forEach((cheval, index) => {
-                const badge = index === 0 ? 'bg-warning' : index === 1 ? 'bg-info' : 'bg-secondary';
+            prono.classement.slice(0, 1).forEach((cheval, index) => { // Affiche seulement le 1er prono
                 html += `
-                    <tr>
-                        <td><span class="badge ${badge}">${index + 1}er</span></td>
-                        <td><strong>#${cheval.numero}</strong> ${cheval.nom}</td>
-                        <td class="text-end">${cheval.cote || 'N/A'}</td>
-                    </tr>
+                    <div class="pronostic-item">
+                        <div class="d-flex align-items-center">
+                            <div class="position-badge position-${index + 1}">
+                                ${index + 1}
+                            </div>
+                            <div class="ms-3 flex-grow-1">
+                                <h5 class="mb-0 fw-bold">#${cheval.numero} - ${cheval.nom}</h5>
+                                <small class="text-muted">${prono.libelle || ''}</small>
+                            </div>
+                            <div class="cote-badge">
+                                ${cheval.cote || 'N/A'}
+                            </div>
+                        </div>
+                        <div class="confiance-container">
+                            <div class="confiance-bar">
+                                <div class="confiance-fill ${confianceClass}" style="width: ${confiance}%;"></div>
+                            </div>
+                        </div>
+                    </div>
                 `;
             });
+        } else {
+             html += `<div class="pronostic-item"><p class="text-muted mb-0">Aucun pronostic disponible pour cette course.</p></div>`;
         }
-
-        html += `
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="mt-2">
-                            <small class="text-muted">
-                                Score confiance: 
-                                <span class="badge ${confiance >= 80 ? 'bg-success' : confiance >= 60 ? 'bg-warning' : 'bg-secondary'}">
-                                    ${confiance}%
-                                </span>
-                            </small>
-                        </div>
-        `;
 
         // Afficher les résultats si disponibles
         if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
             html += `
                         <hr>
-                        <h6 class="text-success">🏆 Résultat</h6>
+                        <h6 class="text-success fw-bold"><i class="bi bi-trophy-fill"></i> Résultat Arrivée</h6>
                         <div class="d-flex gap-2 flex-wrap">
             `;
             
             resultat.arrivee.slice(0, 5).forEach((numero, index) => {
-                const badge = index === 0 ? 'bg-warning' : index <= 2 ? 'bg-info' : 'bg-secondary';
-                html += `<span class="badge ${badge}">${index + 1}er: #${numero}</span>`;
+                const badgeClass = index === 0 ? 'resultat-1er' : index === 1 ? 'resultat-2er' : index === 2 ? 'resultat-3er' : 'resultat-autres';
+                html += `<span class="resultat-badge ${badgeClass}">${index + 1}er: <strong>#${numero}</strong></span>`;
             });
             
             html += '</div>';
@@ -824,7 +822,7 @@ function showError(message) {
     sections.forEach(id => {
         const element = document.getElementById(id);
         if (element) {
-            element.innerHTML = `<tr><td colspan="8" class="text-center text-danger">${message}</td></tr>`;
+            element.innerHTML = `<tr><td colspan="9" class="text-center text-danger">${message}</td></tr>`;
         }
     });
 }
@@ -836,7 +834,7 @@ document.getElementById('export-csv')?.addEventListener('click', () => {
         return;
     }
 
-    let csv = 'Course,Cheval Pronostiqué,Cote,Confiance,Position Prédite,Résultat Réel,Statut\n';
+    let csv = 'Hippodrome,Heure,Course,Cheval Pronostiqué,Cote,Confiance,Position Prédite,Résultat Réel,Statut\n';
     
     allData.pronostics.pronostics.forEach(prono => {
         let resultatReel = 'En attente';
@@ -868,7 +866,7 @@ document.getElementById('export-csv')?.addEventListener('click', () => {
             prono.classement[0].cote : 'N/A';
         const confiance = prono.scoreConfiance || 0;
 
-        csv += `${prono.reunion}${prono.course},"${chevalInfo}",${cote},${confiance}%,1er,${resultatReel},${statut}\n`;
+        csv += `"${prono.hippodrome || prono.reunion}","${prono.heure || '--:--'}","${prono.reunion}${prono.course}","${chevalInfo}",${cote},${confiance}%,1er,"${resultatReel}","${statut}"\n`;
     });
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -886,5 +884,5 @@ document.addEventListener('DOMContentLoaded', () => {
     loadAllData();
     
     // Rafraîchir toutes les 5 minutes
-    setInterval(loadAllData, 5 * 60 * 1000);
+    setInterval(loadAllData, CONFIG.REFRESH_INTERVAL);
 });
