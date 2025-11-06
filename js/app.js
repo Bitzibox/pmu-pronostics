@@ -108,15 +108,17 @@ async function loadAllData() {
                 // Si c'est un tableau, prendre le premier élément
                 if (rawAnalyse[0] && rawAnalyse[0].historique) {
                     allData.analyse = rawAnalyse[0];
+                    allData.analyse.historique.reverse(); // <-- AJOUTER CETTE LIGNE
                     console.log('✅ Analyse chargée (depuis tableau):', allData.analyse.historique?.length || 0, 'jours');
                 } else {
                     // Tableau d'objets historique direct
-                    allData.analyse = { historique: rawAnalyse, stats_globales: {} };
+                    allData.analyse = { historique: rawAnalyse.reverse(), stats_globales: {} }; // <-- MODIFIER CETTE LIGNE (ajouter .reverse())
                     console.log('✅ Analyse chargée (tableau direct):', rawAnalyse.length, 'jours');
                 }
             } else if (rawAnalyse.historique) {
                 // Structure correcte avec historique
                 allData.analyse = rawAnalyse;
+                allData.analyse.historique.reverse(); // <-- AJOUTER CETTE LIGNE
                 console.log('✅ Analyse chargée:', allData.analyse.historique?.length || 0, 'jours');
             } else {
                 // Structure inconnue, créer une structure vide
