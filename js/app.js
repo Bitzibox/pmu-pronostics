@@ -8,6 +8,7 @@ const CONFIG = {
     DATE_FORMAT: 'DD/MM/YYYY'
 };
 
+// --- MODIFICATION 1 ---
 // Mapping des hippodromes PAR PAYS et numéro de réunion
 const HIPPODROMES_PAR_PAYS = {
     'FRA': {
@@ -42,7 +43,9 @@ const HIPPODROMES = {
     'R7': { nom: 'Marseille-Borély', ville: 'Marseille', discipline: 'plat' },
     'R8': { nom: 'Cagnes-sur-Mer', ville: 'Cagnes-sur-Mer', discipline: 'plat' }
 };
+// --- FIN MODIFICATION 1 ---
 
+// --- MODIFICATION 2 ---
 const DISCIPLINES = {
     'ATTELE': { label: 'Trot Attelé', icon: '🏇', color: '#2196F3', type: 'trot' },
     'MONTE': { label: 'Trot Monté', icon: '🐎', color: '#1976D2', type: 'trot' },
@@ -53,16 +56,19 @@ const DISCIPLINES = {
     'TROT': { label: 'Trot', icon: '🏇', color: '#2196F3', type: 'trot' },
     'OBSTACLE': { label: 'Obstacle', icon: '🏆', color: '#FF9800', type: 'obstacle' }
 };
+// --- FIN MODIFICATION 2 ---
 
 // Variables globales
 let performanceChart = null;
+// --- MODIFICATION 3 ---
 let allData = {
     analyse: null,
     pronostics: null,
     resultats: null,
     courses: null,
-    programme: null
+    programme: null  // ← AJOUT
 };
+// --- FIN MODIFICATION 3 ---
 
 // Fonction principale de chargement
 async function loadAllData() {
@@ -75,13 +81,14 @@ async function loadAllData() {
     const timestamp = new Date().getTime();
     
     try {
+        // --- MODIFICATION 4 ---
         // Charger tous les fichiers en parallèle avec la date du jour
-        const [analyseRes, pronosticsRes, resultatsRes, coursesRes] = await Promise.all([
+        const [analyseRes, pronosticsRes, resultatsRes, coursesRes, programmeRes] = await Promise.all([
             fetch(GITHUB_RAW_BASE + 'analyse.json?t=' + timestamp).catch(e => null),
             fetch(GITHUB_RAW_BASE + 'pronostics-' + dateString + '.json?t=' + timestamp).catch(e => null),
             fetch(GITHUB_RAW_BASE + 'resultats-' + dateString + '.json?t=' + timestamp).catch(e => null),
             fetch(GITHUB_RAW_BASE + 'courses-' + dateString + '.json?t=' + timestamp).catch(e => null),
-            fetch(GITHUB_RAW_BASE + 'programme-' + dateString + '.json?t=' + timestamp).catch(e => null)
+            fetch(GITHUB_RAW_BASE + 'programme-' + dateString + '.json?t=' + timestamp).catch(e => null)  // ← AJOUTER
         ]);
 
         console.log('📡 URLs chargées:');
@@ -89,7 +96,8 @@ async function loadAllData() {
         console.log('  - pronostics-' + dateString + '.json');
         console.log('  - resultats-' + dateString + '.json');
         console.log('  - courses-' + dateString + '.json');
-        console.log('  - programme-' + dateString + '.json'); 
+        console.log('  - programme-' + dateString + '.json');  // ← AJOUTER
+        // --- FIN MODIFICATION 4 ---
 
         // Parser les réponses
         if (analyseRes && analyseRes.ok) {
@@ -179,8 +187,9 @@ async function loadAllData() {
         } else {
             console.warn('⚠️ courses-' + dateString + '.json non disponible');
         }
-
-         if (programmeRes && programmeRes.ok) {
+        
+        // --- MODIFICATION 5 ---
+        if (programmeRes && programmeRes.ok) {
             const rawProgramme = await programmeRes.json();
             // Gérer le format tableau ou objet
             if (Array.isArray(rawProgramme) && rawProgramme.length > 0) {
@@ -193,8 +202,13 @@ async function loadAllData() {
             console.warn('⚠️ programme-' + dateString + '.json non disponible');
             allData.programme = { reunions: [] };
         }
+        // --- FIN MODIFICATION 5 ---
 
         console.log('📊 Données complètes:', allData);
+
+        // --- MODIFICATION 7 ---
+        enrichirPronostics();
+        // --- FIN MODIFICATION 7 ---
 
         // Mettre à jour l'interface
         updateDashboard();
@@ -202,7 +216,6 @@ async function loadAllData() {
         updateCoursesSection();
         updateComparaisonSection();
         updateLastUpdateTime();
-        enrichirPronostics();
 
     } catch (error) {
         console.error('❌ Erreur lors du chargement des données:', error);
@@ -219,6 +232,7 @@ function getDateString() {
     return `${day}${month}${year}`;
 }
 
+// --- MODIFICATION 6 ---
 // Convertir un timestamp Unix (millisecondes) en heure HH:MM
 function timestampToHeure(timestamp) {
     if (!timestamp) return '--:--';
@@ -289,6 +303,7 @@ function enrichirPronostics() {
     
     console.log('✅ Enrichissement terminé');
 }
+// --- FIN MODIFICATION 6 ---
 
 // Mettre à jour le dashboard de performance
 function updateDashboard() {
@@ -624,6 +639,9 @@ function updateCoursesSection() {
     Object.keys(pronosticsParReunion).sort().forEach(reunion => {
         const tabId = `reunion-${reunion}`;
         
+        // --- MODIFICATION 8 ---
+        const premierProno = pronosticsParReunion[reunion][0];
+        
         // Créer l'onglet
         const tab = document.createElement('li');
         tab.className = 'nav-item';
@@ -632,9 +650,13 @@ function updateCoursesSection() {
                     data-bs-toggle="tab" 
                     data-bs-target="#${tabId}" 
                     type="button">
-                ${reunion} (${pronosticsParReunion[reunion].length})
+                <div class="d-flex flex-column align-items-start">
+                    <strong>${reunion} (${pronosticsParReunion[reunion].length})</strong>
+                    <small>${premierProno.hippodrome || reunion}${premierProno.ville ? ` (${premierProno.ville})` : ''}</small>
+                </div>
             </button>
         `;
+        // --- FIN MODIFICATION 8 ---
         tabsContainer.appendChild(tab);
 
         // Créer le contenu
@@ -664,8 +686,9 @@ function renderReunionCourses(container, reunion, courses) {
             );
         }
 
-        const heureDepart = prono.heureDepart || 'N/A';
-        const hippodrome = prono.hippodrome || reunion;
+        // --- MODIFICATION 9 (retrait des variables 'heureDepart' et 'hippodrome' qui sont maintenant enrichies) ---
+        // const heureDepart = prono.heureDepart || 'N/A'; // RETIRÉ
+        // const hippodrome = prono.hippodrome || reunion; // RETIRÉ
         const confiance = prono.scoreConfiance || 0;
 
         let cardClass = 'border-secondary';
@@ -688,19 +711,43 @@ function renderReunionCourses(container, reunion, courses) {
             }
         }
 
+        // --- MODIFICATION 9 (Mise à jour de la structure de la carte) ---
         html += `
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 ${cardClass}">
                     <div class="card-header bg-light">
                         <div class="d-flex justify-content-between align-items-center">
-                            <strong>${reunion}${prono.course}</strong>
-                            <small>${premierProno.hippodrome || reunion}${premierProno.ville ? ` (${premierProno.ville})` : ''}</small>
+                            <h5 class="mb-1">${reunion}${prono.course}</h5>
                             ${statusBadge}
                         </div>
-                        <small class="text-muted">${hippodrome} - ${heureDepart}</small>
+                        <div class="hippodrome-info mt-1">
+                            <span class="hippodrome-badge" style="font-size: 0.9em; color: #6c757d;">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                ${prono.hippodrome || reunion}${prono.ville ? ` - ${prono.ville}` : ''}
+                            </span>
+                            ${prono.heure ? `
+                                <span class="time-badge" style="font-size: 0.9em; color: #6c757d; margin-left: 10px;">
+                                    <i class="bi bi-clock-fill"></i>
+                                    ${prono.heure}
+                                </span>
+                            ` : ''}
+                        </div>
                     </div>
                     <div class="card-body">
+                        ${prono.disciplineLabel ? `
+                            <span class="discipline-badge d-inline-block mb-2" style="background: ${prono.disciplineColor}; color: white; padding: 0.25rem 0.5rem; border-radius: 0.25rem; font-size: 0.875em;">
+                                ${prono.disciplineIcon || ''} ${prono.disciplineLabel}
+                            </span>
+                        ` : ''}
+                        ${prono.distance ? `
+                            <small class="text-muted d-block mb-2">
+                                <i class="bi bi-rulers"></i> ${prono.distance}m
+                            </small>
+                        ` : ''}
                         <h6 class="card-title">🎯 Pronostic</h6>
+        
+        <!-- --- FIN MODIFICATION 9 --- -->
+        
                         <div class="table-responsive">
                             <table class="table table-sm table-borderless mb-0">
                                 <tbody>
