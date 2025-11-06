@@ -3,6 +3,10 @@ const GITHUB_USERNAME = 'Bitzibox';
 const REPO_NAME = 'pmu-pronostics';
 const BRANCH = 'main';
 const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data/`;
+const CONFIG = {
+    REFRESH_INTERVAL: 300000, // 5 minutes
+    DATE_FORMAT: 'DD/MM/YYYY'
+};
 
 // Variables globales
 let performanceChart = null;
