@@ -8,6 +8,25 @@ const CONFIG = {
     DATE_FORMAT: 'DD/MM/YYYY'
 };
 
+const HIPPODROMES = {
+    'R1': { nom: 'Vincennes', ville: 'Paris', discipline: 'trot' },
+    'R2': { nom: 'Longchamp', ville: 'Paris', discipline: 'plat' },
+    'R3': { nom: 'Auteuil', ville: 'Paris', discipline: 'obstacle' },
+    'R4': { nom: 'Chantilly', ville: 'Chantilly', discipline: 'plat' },
+    'R5': { nom: 'Deauville', ville: 'Deauville', discipline: 'plat' },
+    'R6': { nom: 'Lyon-Parilly', ville: 'Lyon', discipline: 'trot' },
+    'R7': { nom: 'Marseille-Borély', ville: 'Marseille', discipline: 'plat' },
+    'R8': { nom: 'Cagnes-sur-Mer', ville: 'Cagnes-sur-Mer', discipline: 'plat' },
+    // Ajoutez d'autres hippodromes selon vos besoins
+};
+
+const DISCIPLINES = {
+    'TROT': { label: 'Trot', icon: '🏇', color: '#2196F3' },
+    'PLAT': { label: 'Plat', icon: '🐎', color: '#9C27B0' },
+    'OBSTACLE': { label: 'Obstacle', icon: '🏆', color: '#FF9800' },
+    'STEEPLECHASE': { label: 'Steeple', icon: '🎯', color: '#4CAF50' }
+};
+
 // Variables globales
 let performanceChart = null;
 let allData = {
