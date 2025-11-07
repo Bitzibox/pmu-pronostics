@@ -343,6 +343,77 @@ function enrichirPronostics() {
 }
 // --- FIN MODIFICATION 6 ---
 
+// NOUVEAU: Calculer les statistiques en temps réel depuis les pronostics et résultats
+function calculerStatsTempsReel() {
+    if (!allData.pronostics || !allData.pronostics.pronostics || allData.pronostics.pronostics.length === 0) {
+        return null;
+    }
+
+    let total_courses = allData.pronostics.pronostics.length;
+    let nb_gagnants = 0;
+    let nb_places = 0;
+    let nb_rates = 0;
+    let somme_confiance = 0;
+    let courses_avec_resultats = 0;
+
+    allData.pronostics.pronostics.forEach(prono => {
+        // Ajouter la confiance
+        somme_confiance += prono.scoreConfiance || 0;
+
+        // Chercher le résultat correspondant
+        if (allData.resultats && allData.resultats.courses) {
+            const resultat = allData.resultats.courses.find(r => 
+                r.reunion === prono.reunion && r.course === prono.course
+            );
+
+            if (resultat && resultat.arrivee && resultat.arrivee.length > 0) {
+                courses_avec_resultats++;
+                
+                const numeroGagnant = resultat.arrivee[0];
+                const top3 = resultat.arrivee.slice(0, 3);
+                
+                const chevalPronostique = prono.classement && prono.classement.length > 0 ? 
+                    prono.classement[0].numero : null;
+
+                if (chevalPronostique) {
+                    if (chevalPronostique === numeroGagnant) {
+                        nb_gagnants++;
+                        nb_places++; // Un gagnant est aussi placé
+                    } else if (top3.includes(chevalPronostique)) {
+                        nb_places++;
+                    } else {
+                        nb_rates++;
+                    }
+                }
+            }
+        }
+    });
+
+    // Calculer les taux
+    const taux_gagnant = courses_avec_resultats > 0 ? 
+        Math.round((nb_gagnants / courses_avec_resultats) * 100 * 10) / 10 : 0;
+    
+    const taux_place = courses_avec_resultats > 0 ? 
+        Math.round((nb_places / courses_avec_resultats) * 100 * 10) / 10 : 0;
+    
+    const confiance_moyenne = total_courses > 0 ? 
+        Math.round(somme_confiance / total_courses) : 0;
+
+    return {
+        date: ddmmyyyyToDisplay(currentDateString),
+        total_courses: total_courses,
+        nb_gagnants: nb_gagnants,
+        nb_places: nb_places,
+        nb_rates: nb_rates,
+        taux_gagnant: taux_gagnant,
+        taux_place: taux_place,
+        confiance_moyenne: confiance_moyenne,
+        pronostics_disponibles: true,
+        courses_avec_resultats: courses_avec_resultats,
+        calcule_temps_reel: true
+    };
+}
+
 // Mettre à jour le dashboard de performance
 function updateDashboard() {
     if (!allData.analyse || !allData.analyse.historique || allData.analyse.historique.length === 0) {
@@ -352,20 +423,27 @@ function updateDashboard() {
 
     // MODIFICATION: Utiliser la date en cours au lieu de 'historique[0]'
     const currentDisplayDate = ddmmyyyyToDisplay(currentDateString);
-    const dernierJour = allData.analyse.historique.find(j => j.date === currentDisplayDate);
+    let dernierJour = allData.analyse.historique.find(j => j.date === currentDisplayDate);
 
-    // Si on ne trouve pas le jour (ex: 1er chargement, analyse.json pas encore à jour)
-    // On affiche des zéros pour éviter une erreur
-    if (!dernierJour) {
-        console.warn(`⚠️ Aucune donnée d'analyse trouvée pour le ${currentDisplayDate}`);
-        document.getElementById('taux-gagnant').textContent = `0%`;
-        document.getElementById('taux-place').textContent = `0%`;
-        document.getElementById('confiance-moyenne').textContent = `0%`;
-        document.getElementById('courses-analysees').textContent = `0`;
-        document.getElementById('nb-gagnants').textContent = `0`;
-        document.getElementById('nb-places').textContent = `0`;
-        document.getElementById('nb-rates').textContent = `0`;
-        return;
+    // NOUVEAU: Si le jour n'existe pas OU si les stats sont à zéro, calculer en temps réel
+    if (!dernierJour || (dernierJour.total_courses === 0 && allData.pronostics && allData.pronostics.pronostics && allData.pronostics.pronostics.length > 0)) {
+        console.log('📊 Calcul des statistiques en temps réel...');
+        const statsTempsReel = calculerStatsTempsReel();
+        
+        if (statsTempsReel) {
+            dernierJour = statsTempsReel;
+            console.log('✅ Statistiques calculées en temps réel:', dernierJour);
+        } else if (!dernierJour) {
+            console.warn(`⚠️ Aucune donnée d'analyse trouvée pour le ${currentDisplayDate}`);
+            document.getElementById('taux-gagnant').textContent = `0%`;
+            document.getElementById('taux-place').textContent = `0%`;
+            document.getElementById('confiance-moyenne').textContent = `0%`;
+            document.getElementById('courses-analysees').textContent = `0`;
+            document.getElementById('nb-gagnants').textContent = `0`;
+            document.getElementById('nb-places').textContent = `0`;
+            document.getElementById('nb-rates').textContent = `0`;
+            return;
+        }
     }
 
     // Mise à jour des KPIs principaux
