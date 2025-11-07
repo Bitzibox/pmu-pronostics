@@ -360,7 +360,11 @@ function updateDashboard() {
         console.warn(`⚠️ Aucune donnée d'analyse trouvée pour le ${currentDisplayDate}`);
         document.getElementById('taux-gagnant').textContent = `0%`;
         document.getElementById('taux-place').textContent = `0%`;
-        // ... (mettre tous les champs à 0)
+        document.getElementById('confiance-moyenne').textContent = `0%`;
+        document.getElementById('courses-analysees').textContent = `0`;
+        document.getElementById('nb-gagnants').textContent = `0`;
+        document.getElementById('nb-places').textContent = `0`;
+        document.getElementById('nb-rates').textContent = `0`;
         return;
     }
 
@@ -676,7 +680,8 @@ function applyFilters() {
 function updateCoursesSection() {
     if (!allData.pronostics || !allData.pronostics.pronostics || allData.pronostics.pronostics.length === 0) {
         console.warn('⚠️ Pas de pronostics disponibles pour afficher les courses');
-        document.getElementById('reunions-tabs').innerHTML = '<li class="nav-item"><span class="nav-link disabled">Aucun pronostic pour aujourd\'hui.</span></li>';
+        document.getElementById('reunions-tabs').innerHTML = '<li class="nav-item"><span class="nav-link disabled">Aucun pronostic pour ce jour.</span></li>';
+        document.getElementById('reunions-content').innerHTML = ''; // Vider le contenu
         return;
     }
 
@@ -868,7 +873,7 @@ function renderReunionCourses(container, reunion, courses) {
 
     html += '</div>';
     container.innerHTML = html;
-// ... (Toute la fonction renderReunionCourses reste identique) ...
+}
 
 // Mettre à jour l'heure de dernière mise à jour
 function updateLastUpdateTime() {
@@ -920,6 +925,24 @@ document.getElementById('export-csv')?.addEventListener('click', () => {
                 }
             }
         }
+
+        const chevalInfo = prono.classement && prono.classement.length > 0 ? 
+            `#${prono.classement[0].numero} - ${prono.classement[0].nom}` : 'N/A';
+        const cote = prono.classement && prono.classement.length > 0 && prono.classement[0].cote ? 
+            prono.classement[0].cote : 'N/A';
+        const confiance = prono.scoreConfiance || 0;
+
+        csv += `"${prono.hippodrome || prono.reunion}","${prono.heure || '--:--'}","${prono.reunion}${prono.course}","${chevalInfo}",${cote},${confiance}%,1er,"${resultatReel}","${statut}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    // CORRECTION: Utiliser getDateString(new Date())
+    a.download = `pronostics-pmu-${getDateString(new Date())}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
 });
 
 // NOUVEAU: Fonction pour peupler le sélecteur de date
