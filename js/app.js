@@ -70,11 +70,19 @@ let allData = {
 };
 // --- FIN MODIFICATION 3 ---
 
+// NOUVEAU: Variable pour suivre la date affichée
+let currentDateString = '';
+
 // Fonction principale de chargement
-async function loadAllData() {
-    console.log('🔄 Chargement des données depuis GitHub...');
+// MODIFICATION: Accepte maintenant une date en paramètre
+async function loadAllData(dateStringDDMMYYYY) {
+    console.log(`🔄 Chargement des données depuis GitHub pour le ${dateStringDDMMYYYY}...`);
+    showLoadingState(true); // Afficher les spinners
     
-    const dateString = getDateString(); // Format: DDMMYYYY
+    currentDateString = dateStringDDMMYYYY; // Mémoriser la date en cours
+    
+    // const dateString = getDateString(); // Format: DDMMYYYY -> ANCIEN
+    const dateString = dateStringDDMMYYYY; // NOUVEAU
     console.log('📅 Date du jour:', dateString);
     
     // Ajouter un timestamp pour éviter le cache
@@ -125,6 +133,10 @@ async function loadAllData() {
                 allData.analyse = { historique: [], stats_globales: {} };
                 console.warn('⚠️ Structure analyse.json inconnue');
             }
+            
+            // NOUVEAU: Mettre à jour le sélecteur de date une fois que l'analyse est chargée
+            populateDateSelector();
+
         } else {
             console.warn('⚠️ analyse.json non disponible');
             allData.analyse = { historique: [], stats_globales: {} };
@@ -224,16 +236,38 @@ async function loadAllData() {
     } catch (error) {
         console.error('❌ Erreur lors du chargement des données:', error);
         showError('Erreur de chargement des données. Vérifiez la configuration GitHub.');
+    } finally {
+        showLoadingState(false); // Cacher les spinners
     }
 }
 
 // Fonction pour obtenir la date au format DDMMYYYY
-function getDateString() {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const year = today.getFullYear();
+// MODIFICATION: Accepte un objet Date
+function getDateString(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
     return `${day}${month}${year}`;
+}
+
+// NOUVEAU: Convertir une date DD/MM/YYYY en DDMMYYYY
+function displayDateToDDMMYYYY(displayDate) {
+    const parts = displayDate.split('/');
+    if (parts.length === 3) {
+        return `${parts[0]}${parts[1]}${parts[2]}`;
+    }
+    return '';
+}
+
+// NOUVEAU: Convertir une date DDMMYYYY en DD/MM/YYYY
+function ddmmyyyyToDisplay(ddmmyyyy) {
+    if (ddmmyyyy.length === 8) {
+        const day = ddmmyyyy.substring(0, 2);
+        const month = ddmmyyyy.substring(2, 4);
+        const year = ddmmyyyy.substring(4, 8);
+        return `${day}/${month}/${year}`;
+    }
+    return ddmmyyyy; // Retourne tel quel si le format est mauvais
 }
 
 // --- MODIFICATION 6 ---
@@ -316,8 +350,19 @@ function updateDashboard() {
         return;
     }
 
-    // Prendre le dernier jour (le plus récent)
-    const dernierJour = allData.analyse.historique[0];
+    // MODIFICATION: Utiliser la date en cours au lieu de 'historique[0]'
+    const currentDisplayDate = ddmmyyyyToDisplay(currentDateString);
+    const dernierJour = allData.analyse.historique.find(j => j.date === currentDisplayDate);
+
+    // Si on ne trouve pas le jour (ex: 1er chargement, analyse.json pas encore à jour)
+    // On affiche des zéros pour éviter une erreur
+    if (!dernierJour) {
+        console.warn(`⚠️ Aucune donnée d'analyse trouvée pour le ${currentDisplayDate}`);
+        document.getElementById('taux-gagnant').textContent = `0%`;
+        document.getElementById('taux-place').textContent = `0%`;
+        // ... (mettre tous les champs à 0)
+        return;
+    }
 
     // Mise à jour des KPIs principaux
     document.getElementById('taux-gagnant').textContent = `${dernierJour.taux_gagnant || 0}%`;
@@ -421,6 +466,9 @@ function updateHistorique() {
 
     tbody.innerHTML = '';
     
+    // NOUVEAU: Récupérer la date affichée pour la surbrillance
+    const currentDisplayDate = ddmmyyyyToDisplay(currentDateString);
+    
     allData.analyse.historique.forEach(jour => {
         const row = document.createElement('tr');
         
@@ -429,6 +477,11 @@ function updateHistorique() {
             row.classList.add('table-success');
         } else if (jour.taux_place >= 60) {
             row.classList.add('table-warning');
+        }
+        
+        // NOUVEAU: Surligner la ligne du jour sélectionné
+        if (jour.date === currentDisplayDate) {
+            row.classList.add('table-primary', 'fw-bold');
         }
 
         row.innerHTML = `
@@ -815,7 +868,7 @@ function renderReunionCourses(container, reunion, courses) {
 
     html += '</div>';
     container.innerHTML = html;
-}
+// ... (Toute la fonction renderReunionCourses reste identique) ...
 
 // Mettre à jour l'heure de dernière mise à jour
 function updateLastUpdateTime() {
@@ -867,30 +920,102 @@ document.getElementById('export-csv')?.addEventListener('click', () => {
                 }
             }
         }
-
-        const chevalInfo = prono.classement && prono.classement.length > 0 ? 
-            `#${prono.classement[0].numero} - ${prono.classement[0].nom}` : 'N/A';
-        const cote = prono.classement && prono.classement.length > 0 && prono.classement[0].cote ? 
-            prono.classement[0].cote : 'N/A';
-        const confiance = prono.scoreConfiance || 0;
-
-        csv += `"${prono.hippodrome || prono.reunion}","${prono.heure || '--:--'}","${prono.reunion}${prono.course}","${chevalInfo}",${cote},${confiance}%,1er,"${resultatReel}","${statut}"\n`;
-    });
-
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `pronostics-pmu-${getDateString()}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
 });
+
+// NOUVEAU: Fonction pour peupler le sélecteur de date
+function populateDateSelector() {
+    const selector = document.getElementById('date-selector');
+    if (!selector || !allData.analyse || !allData.analyse.historique) return;
+    
+    const dates = allData.analyse.historique;
+    
+    // Garder en mémoire la valeur actuelle pour la restaurer
+    const currentValue = selector.value || currentDateString;
+    
+    selector.innerHTML = ''; // Vider les options
+    
+    // Ajouter "Aujourd'hui" en premier
+    const todayDDMMYYYY = getDateString(new Date());
+    const todayDisplay = ddmmyyyyToDisplay(todayDDMMYYYY);
+    const todayOption = document.createElement('option');
+    todayOption.value = todayDDMMYYYY;
+    todayOption.textContent = `Aujourd'hui (${todayDisplay})`;
+    selector.appendChild(todayOption);
+
+    // Ajouter les autres jours de l'historique
+    dates.forEach(jour => {
+        const dateDDMMYYYY = displayDateToDDMMYYYY(jour.date);
+        // Ne pas ajouter "Aujourd'hui" une seconde fois si présent dans l'historique
+        if (dateDDMMYYYY !== todayDDMMYYYY) {
+            const option = document.createElement('option');
+            option.value = dateDDMMYYYY;
+            option.textContent = jour.date;
+            selector.appendChild(option);
+        }
+    });
+    
+    // Resélectionner la date qui était active
+    selector.value = currentValue;
+}
+
+// NOUVEAU: Fonction pour afficher/cacher les spinners
+function showLoadingState(isLoading) {
+    const spinners = {
+        'historique-body': 8,
+        'reunions-content': 1, // Pas de colspan, on remplace le contenu
+        'comparaison-body': 9
+    };
+
+    Object.keys(spinners).forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            if (isLoading) {
+                if (id === 'reunions-content') {
+                    element.innerHTML = `<div class="text-center py-5"><div class="spinner-border text-primary" role="status"></div></div>`;
+                } else {
+                    const colspan = spinners[id];
+                    element.innerHTML = `<tr><td colspan="${colspan}" class="text-center py-5"><div class="spinner-border text-primary" role="status"></div></td></tr>`;
+                }
+            } else {
+                // Le contenu sera remplacé par les fonctions update()
+                // On s'assure juste de vider le spinner si aucune donnée n'est trouvée
+                if (element.innerHTML.includes('spinner')) {
+                     element.innerHTML = `<tr><td colspan="${spinners[id]}" class="text-center text-muted">Aucune donnée.</td></tr>`;
+                }
+            }
+        }
+    });
+    
+    // Désactiver les boutons pendant le chargement
+    document.getElementById('date-selector').disabled = isLoading;
+    document.getElementById('load-today').disabled = isLoading;
+}
+
 
 // Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Application démarrée');
-    loadAllData();
+    
+    // Charger les données du jour au démarrage
+    loadAllData(getDateString(new Date()));
     
     // Rafraîchir toutes les 5 minutes
-    setInterval(loadAllData, CONFIG.REFRESH_INTERVAL);
+    setInterval(() => {
+        // Ne rafraîchit que si l'utilisateur est sur "aujourd'hui"
+        if (currentDateString === getDateString(new Date())) {
+            console.log('🔄 Rafraîchissement automatique...');
+            loadAllData(currentDateString);
+        }
+    }, CONFIG.REFRESH_INTERVAL);
+    
+    // NOUVEAU: Écouteur pour le sélecteur de date
+    document.getElementById('date-selector').addEventListener('change', (e) => {
+        const nouvelleDate = e.target.value;
+        loadAllData(nouvelleDate);
+    });
+    
+    // NOUVEAU: Écouteur pour le bouton "Aujourd'hui"
+    document.getElementById('load-today').addEventListener('click', () => {
+        loadAllData(getDateString(new Date()));
+    });
 });
