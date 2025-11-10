@@ -187,207 +187,178 @@
             color: white;
         }
         
-        /* AJOUT: Style pour la 4ème position (et au-delà) */
         .position-other { 
             background: linear-gradient(135deg, #6c757d 0%, #2c3e50 100%); 
             color: white;
         }
         
+        .cheval-info {
+            flex: 1;
+        }
+        
+        .cheval-nom {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 4px;
+        }
+        
+        .cheval-numero {
+            color: #7f8c8d;
+            font-weight: 600;
+        }
+        
         .cote-badge {
-            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
             padding: 8px 16px;
             border-radius: 20px;
             font-weight: 700;
-            color: #4338ca;
-            font-size: 1.05rem;
+            box-shadow: 0 3px 10px rgba(240, 147, 251, 0.3);
         }
         
-        /* Barre de confiance */
-        .confiance-container {
-            margin-top: 10px;
-        }
-        
-        .confiance-bar {
-            height: 10px;
-            border-radius: 10px;
-            background: #e9ecef;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .confiance-fill {
-            height: 100%;
-            border-radius: 10px;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .confiance-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shine 2s infinite;
-        }
-        
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        .confiance-high { background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%); }
-        .confiance-medium { background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); }
-        .confiance-low { background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); }
-        
-        /* Onglets de réunions */
-        .reunion-tab {
-            border: none;
-            border-radius: 12px 12px 0 0;
-            padding: 15px 25px;
-            margin-right: 8px;
-            background: white;
-            color: #495057;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .reunion-tab:hover {
-            background: #f8f9fa;
-            transform: translateY(-3px);
-            border-color: #667eea;
-        }
-        
-        .reunion-tab.active {
-            background: var(--primary-gradient);
+        .confiance-badge {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            box-shadow: 0 3px 10px rgba(79, 172, 254, 0.3);
         }
         
-        /* Section de filtres */
+        .navbar {
+            background: var(--primary-gradient) !important;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: white !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
         .filter-section {
             background: white;
             padding: 25px;
             border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             margin-bottom: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         
-        .filter-section select {
+        .filter-section .form-select, 
+        .filter-section .form-control {
             border-radius: 10px;
             border: 2px solid #e9ecef;
-            padding: 10px 15px;
             transition: all 0.3s;
         }
         
-        .filter-section select:focus {
+        .filter-section .form-select:focus, 
+        .filter-section .form-control:focus {
             border-color: #667eea;
             box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
         }
         
-        /* Cartes de stats */
-        .stats-card {
+        .nav-tabs {
+            border: none;
+            gap: 10px;
+        }
+        
+        .nav-tabs .nav-link {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            color: #667eea;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+        
+        .nav-tabs .nav-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        }
+        
+        .nav-tabs .nav-link.active {
             background: var(--primary-gradient);
             color: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
-            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
-        
-        .stats-card:hover {
-            transform: scale(1.05);
+
+        /* NOUVEAU: Styles pour les stats historiques */
+        .highlight-success {
+            border-left: 4px solid #4caf50 !important;
         }
-        
-        /* Résultats */
-        .resultat-badge {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 700;
+
+        .highlight-danger {
+            border-left: 4px solid #f44336 !important;
+        }
+
+        .stat-detail {
             font-size: 0.9rem;
-            display: inline-block;
-            margin: 3px;
+            color: #666;
+            margin-top: 5px;
         }
-        
-        .resultat-1er { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #333; }
-        .resultat-2er { background: linear-gradient(135deg, #C0C0C0 0%, #808080 100%); color: white; }
-        .resultat-3er { background: linear-gradient(135deg, #CD7F32 0%, #8B4513 100%); color: white; }
-        .resultat-autres { background: #e9ecef; color: #495057; }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .chart-container-historique {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-top: 20px;
         }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-out;
+
+        .chart-container-historique h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #333;
         }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hippodrome-info {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .course-card {
-                margin-bottom: 15px;
-            }
+
+        #chart-historique-container {
+            height: 400px;
+            position: relative;
         }
     </style>
 </head>
 <body>
-    <header class="bg-primary text-white text-center p-4" style="background: var(--primary-gradient) !important;">
-        <h1><i class="bi bi-trophy-fill"></i> Pronostics PMU - Analyse Performance</h1>
-        <p class="mb-0">Dernière mise à jour : <span id="last-update" class="fw-bold">Chargement...</span></p>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-trophy-fill"></i> PMU Pronostics Dashboard
+            </a>
+            <span class="navbar-text text-white">
+                <i class="bi bi-calendar-date"></i> <span id="current-date"></span>
+            </span>
+        </div>
+    </nav>
 
-    <main class="container mt-4">
-
-        <!-- NOUVEAU: Sélecteur de date -->
-        <section id="date-selection" class="mb-4">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center p-3 p-md-4">
-                    <div class="d-flex align-items-center">
-                        <label for="date-selector" class="form-label mb-0 me-2 fw-bold fs-5"><i class="bi bi-calendar-fill text-primary"></i></label>
-                        <select id="date-selector" class="form-select" style="width: auto; font-weight: 500;"></select>
-                    </div>
-                    <button id="load-today" class="btn btn-primary mt-3 mt-md-0">
-                        <i class="bi bi-arrow-clockwise"></i> Revenir à aujourd'hui
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Dashboard -->
-        <section id="dashboard-performance" class="mb-5">
-            <h2 class="mb-4"><i class="bi bi-graph-up"></i> Performance Quotidienne</h2>
-            <div class="row text-center g-3">
+    <main class="container">
+        <!-- Statistiques Globales -->
+        <section id="statistiques-globales" class="mb-5">
+            <h2 class="mb-4"><i class="bi bi-bar-chart-fill"></i> Statistiques d'Aujourd'hui</h2>
+            
+            <div class="row g-4">
                 <div class="col-md-3">
                     <div class="card h-100 border-0" style="background: var(--success-gradient); color: white;">
                         <div class="card-body">
-                            <h5 class="card-title"><i class="bi bi-check-circle-fill"></i> Taux Gagnant</h5>
+                            <h5 class="card-title"><i class="bi bi-check-circle"></i> Taux Gagnant</h5>
                             <p class="card-text fs-1 fw-bold" id="taux-gagnant">0%</p>
-                            <small>Pronostics exacts</small>
+                            <small>Courses gagnées</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card h-100 border-0" style="background: var(--warning-gradient); color: white;">
                         <div class="card-body">
-                            <h5 class="card-title"><i class="bi bi-award-fill"></i> Taux Placé</h5>
+                            <h5 class="card-title"><i class="bi bi-award"></i> Taux Placé</h5>
                             <p class="card-text fs-1 fw-bold" id="taux-place">0%</p>
-                            <small>Dans le top 3</small>
+                            <small>Top 3 positions</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card h-100 border-0 stats-card">
+                    <div class="card h-100 border-0" style="background: var(--primary-gradient); color: white;">
                         <div class="card-body">
                             <h5 class="card-title"><i class="bi bi-bullseye"></i> Confiance</h5>
                             <p class="card-text fs-1 fw-bold" id="confiance-moyenne">0%</p>
@@ -436,16 +407,75 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- NOUVEAU: Section Historique des Statistiques -->
+        <section id="statistiques-historiques" class="mb-5">
+            <h2 class="mb-4"><i class="bi bi-graph-up"></i> Statistiques Historiques</h2>
             
-            <!-- Graphique -->
-            <div class="mt-4">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-header" style="background: var(--primary-gradient); color: white;">
-                        <h5 class="mb-0" id="graph-title"><i class="bi bi-graph-up-arrow"></i> Évolution sur 7 jours</h5>
+            <!-- Stats Globales Historiques -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title text-muted"><i class="bi bi-trophy"></i> Moyenne Taux Gagnant</h6>
+                            <p class="card-text fs-2 fw-bold text-success" id="hist-moyenne-gagnant">-</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <canvas id="performance-chart"></canvas>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title text-muted"><i class="bi bi-award"></i> Moyenne Taux Placé</h6>
+                            <p class="card-text fs-2 fw-bold text-warning" id="hist-moyenne-place">-</p>
+                        </div>
                     </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title text-muted"><i class="bi bi-bullseye"></i> Moyenne Confiance</h6>
+                            <p class="card-text fs-2 fw-bold text-primary" id="hist-moyenne-confiance">-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-title text-muted"><i class="bi bi-calendar-range"></i> Jours Analysés</h6>
+                            <p class="card-text fs-2 fw-bold text-info" id="hist-jours-analyses">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meilleur et Pire Jour -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm highlight-success">
+                        <div class="card-body">
+                            <h6 class="card-title"><i class="bi bi-star-fill text-warning"></i> Meilleur Jour</h6>
+                            <p class="card-text fs-4 fw-bold text-success mb-1" id="hist-meilleur-jour">-</p>
+                            <p class="stat-detail mb-0" id="hist-meilleur-taux">-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-0 shadow-sm highlight-danger">
+                        <div class="card-body">
+                            <h6 class="card-title"><i class="bi bi-graph-down text-danger"></i> Jour le Plus Faible</h6>
+                            <p class="card-text fs-4 fw-bold text-danger mb-1" id="hist-pire-jour">-</p>
+                            <p class="stat-detail mb-0" id="hist-pire-taux">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graphique d'Évolution -->
+            <div class="chart-container-historique">
+                <h3><i class="bi bi-graph-up-arrow"></i> Évolution des Taux de Réussite</h3>
+                <div id="chart-historique-container">
+                    <canvas id="chart-historique"></canvas>
                 </div>
             </div>
         </section>
@@ -544,10 +574,8 @@
                                     <th>Cote</th>
                                     <th>Confiance</th>
                                     <th>Position Prédite</th>
-                                    <!-- ==== CORRECTION ICI ==== -->
                                     <th>Résultat Réel</th>
                                     <th>Statut</th>
-                                    <!-- ==== FIN CORRECTION ==== -->
                                 </tr>
                             </thead>
                             <tbody id="comparaison-body">
@@ -576,7 +604,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Assurez-vous que ce chemin est correct -->
-    <script src="js/app.js"></script> 
+    <script src="js/app.js"></script>
 </body>
 </html>
