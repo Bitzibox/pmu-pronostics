@@ -206,13 +206,14 @@ function updateStatistiquesGlobales() {
     const tauxPlace = coursesAvecResultats > 0 ? Math.round((nbPlaces / coursesAvecResultats) * 100) : 0;
     const confianceMoyenne = pronostics.length > 0 ? Math.round(sommeConfiance / pronostics.length) : 0;
 
-    document.getElementById('taux-gagnant').textContent = tauxGagnant + '%';
-    document.getElementById('taux-place').textContent = tauxPlace + '%';
-    document.getElementById('confiance-moyenne').textContent = confianceMoyenne + '%';
-    document.getElementById('courses-analysees').textContent = pronostics.length;
-    document.getElementById('nb-gagnants').innerHTML = `<i class="bi bi-trophy"></i> ${nbGagnants}`;
-    document.getElementById('nb-places').innerHTML = `<i class="bi bi-award"></i> ${nbPlaces}`;
-    document.getElementById('nb-rates').innerHTML = `<i class="bi bi-x-circle"></i> ${nbRates}`;
+    const el = (id) => document.getElementById(id);
+    if (el('taux-gagnant')) el('taux-gagnant').textContent = tauxGagnant + '%';
+    if (el('taux-place')) el('taux-place').textContent = tauxPlace + '%';
+    if (el('confiance-moyenne')) el('confiance-moyenne').textContent = confianceMoyenne + '%';
+    if (el('courses-analysees')) el('courses-analysees').textContent = pronostics.length;
+    if (el('nb-gagnants')) el('nb-gagnants').innerHTML = `<i class="bi bi-trophy"></i> ${nbGagnants}`;
+    if (el('nb-places')) el('nb-places').innerHTML = `<i class="bi bi-award"></i> ${nbPlaces}`;
+    if (el('nb-rates')) el('nb-rates').innerHTML = `<i class="bi bi-x-circle"></i> ${nbRates}`;
 }
 
 function updateTableauHistorique() {
@@ -452,7 +453,8 @@ function setupFilters() {
     }
 
     ['filter-reunion', 'filter-confiance', 'filter-statut'].forEach(id => {
-        document.getElementById(id)?.addEventListener('change', applyFilters);
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('change', applyFilters);
     });
 }
 
@@ -482,35 +484,38 @@ function showError(message) {
     });
 }
 
-document.getElementById('export-csv')?.addEventListener('click', () => {
-    if (!allData.pronostics?.pronostics) return alert('Aucune donnée à exporter');
+const exportBtn = document.getElementById('export-csv');
+if (exportBtn) {
+    exportBtn.addEventListener('click', () => {
+        if (!allData.pronostics?.pronostics) return alert('Aucune donnée à exporter');
 
-    let csv = 'Hippodrome,Heure,Course,Cheval,Cote,Confiance,Position,Résultat,Statut\n';
-    
-    allData.pronostics.pronostics.forEach(prono => {
-        let resultatReel = 'En attente', statut = 'En attente';
-        const resultat = allData.resultats?.courses?.find(r => r.reunion === prono.reunion && r.course === prono.course);
-        const cheval = prono.classement?.[0];
+        let csv = 'Hippodrome,Heure,Course,Cheval,Cote,Confiance,Position,Résultat,Statut\n';
+        
+        allData.pronostics.pronostics.forEach(prono => {
+            let resultatReel = 'En attente', statut = 'En attente';
+            const resultat = allData.resultats?.courses?.find(r => r.reunion === prono.reunion && r.course === prono.course);
+            const cheval = prono.classement?.[0];
 
-        if (resultat?.arrivee?.length) {
-            resultatReel = `#${resultat.arrivee[0]}`;
-            if (cheval?.numero === resultat.arrivee[0]) statut = 'Gagnant';
-            else if (resultat.arrivee.slice(0, 3).includes(cheval?.numero)) statut = 'Placé';
-            else statut = 'Raté';
-        }
+            if (resultat?.arrivee?.length) {
+                resultatReel = `#${resultat.arrivee[0]}`;
+                if (cheval?.numero === resultat.arrivee[0]) statut = 'Gagnant';
+                else if (resultat.arrivee.slice(0, 3).includes(cheval?.numero)) statut = 'Placé';
+                else statut = 'Raté';
+            }
 
-        const chevalInfo = cheval ? `#${cheval.numero} - ${cheval.nom}` : 'N/A';
-        csv += `"${prono.hippodrome || prono.reunion}","${prono.heure || '--:--'}","${prono.reunion}${prono.course}","${chevalInfo}",${cheval?.cote || 'N/A'},${prono.scoreConfiance || 0}%,1er,"${resultatReel}","${statut}"\n`;
+            const chevalInfo = cheval ? `#${cheval.numero} - ${cheval.nom}` : 'N/A';
+            csv += `"${prono.hippodrome || prono.reunion}","${prono.heure || '--:--'}","${prono.reunion}${prono.course}","${chevalInfo}",${cheval?.cote || 'N/A'},${prono.scoreConfiance || 0}%,1er,"${resultatReel}","${statut}"\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `pronostics-pmu-${getDateString()}.csv`;
+        a.click();
+        URL.revokeObjectURL(url);
     });
-
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `pronostics-pmu-${getDateString()}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-});
+}
 
 function populateDateSelector() {
     const selector = document.getElementById('date-selector');
@@ -555,17 +560,26 @@ function showLoadingState(isLoading) {
         }
     });
     
-    document.getElementById('date-selector').disabled = isLoading;
-    document.getElementById('load-today').disabled = isLoading;
+    // CORRECTION: Vérifier l'existence avant manipulation
+    const dateSelector = document.getElementById('date-selector');
+    const loadToday = document.getElementById('load-today');
+    
+    if (dateSelector) dateSelector.disabled = isLoading;
+    if (loadToday) loadToday.disabled = isLoading;
 }
 
 // HISTORIQUE DES STATISTIQUES
 async function chargerHistorique() {
     try {
         const url = `${GITHUB_RAW_BASE}statistiques-${currentDateString}.json?t=${Date.now()}`;
+        console.log('📊 Chargement historique:', url);
         const response = await fetch(url);
-        if (!response.ok) return null;
+        if (!response.ok) {
+            console.log('⚠️ Pas de statistiques pour cette date');
+            return null;
+        }
         const data = await response.json();
+        console.log('✅ Historique chargé:', data);
         return data[0];
     } catch (error) {
         console.error('❌ Erreur historique:', error);
@@ -574,33 +588,35 @@ async function chargerHistorique() {
 }
 
 function afficherHistorique(statsHistorique) {
+    const el = (id) => document.getElementById(id);
+    
     if (!statsHistorique?.analyse) {
-        document.getElementById('hist-moyenne-gagnant').textContent = '-';
-        document.getElementById('hist-moyenne-place').textContent = '-';
-        document.getElementById('hist-moyenne-confiance').textContent = '-';
-        document.getElementById('hist-jours-analyses').textContent = '0/0';
-        document.getElementById('hist-meilleur-jour').textContent = '-';
-        document.getElementById('hist-meilleur-taux').textContent = '-';
-        document.getElementById('hist-pire-jour').textContent = '-';
-        document.getElementById('hist-pire-taux').textContent = '-';
+        if (el('hist-moyenne-gagnant')) el('hist-moyenne-gagnant').textContent = '-';
+        if (el('hist-moyenne-place')) el('hist-moyenne-place').textContent = '-';
+        if (el('hist-moyenne-confiance')) el('hist-moyenne-confiance').textContent = '-';
+        if (el('hist-jours-analyses')) el('hist-jours-analyses').textContent = '0/0';
+        if (el('hist-meilleur-jour')) el('hist-meilleur-jour').textContent = '-';
+        if (el('hist-meilleur-taux')) el('hist-meilleur-taux').textContent = '-';
+        if (el('hist-pire-jour')) el('hist-pire-jour').textContent = '-';
+        if (el('hist-pire-taux')) el('hist-pire-taux').textContent = '-';
         return;
     }
 
     const { stats_globales, historique } = statsHistorique.analyse;
 
-    document.getElementById('hist-moyenne-gagnant').textContent = stats_globales.moyenne_taux_gagnant.toFixed(1) + '%';
-    document.getElementById('hist-moyenne-place').textContent = stats_globales.moyenne_taux_place.toFixed(1) + '%';
-    document.getElementById('hist-moyenne-confiance').textContent = stats_globales.moyenne_confiance + '%';
-    document.getElementById('hist-jours-analyses').textContent = `${stats_globales.jours_avec_pronostics}/${stats_globales.total_jours}`;
+    if (el('hist-moyenne-gagnant')) el('hist-moyenne-gagnant').textContent = stats_globales.moyenne_taux_gagnant.toFixed(1) + '%';
+    if (el('hist-moyenne-place')) el('hist-moyenne-place').textContent = stats_globales.moyenne_taux_place.toFixed(1) + '%';
+    if (el('hist-moyenne-confiance')) el('hist-moyenne-confiance').textContent = stats_globales.moyenne_confiance + '%';
+    if (el('hist-jours-analyses')) el('hist-jours-analyses').textContent = `${stats_globales.jours_avec_pronostics}/${stats_globales.total_jours}`;
 
     if (stats_globales.meilleur_jour) {
-        document.getElementById('hist-meilleur-jour').textContent = stats_globales.meilleur_jour;
-        document.getElementById('hist-meilleur-taux').textContent = `Taux gagnant: ${stats_globales.meilleur_taux.toFixed(1)}%`;
+        if (el('hist-meilleur-jour')) el('hist-meilleur-jour').textContent = stats_globales.meilleur_jour;
+        if (el('hist-meilleur-taux')) el('hist-meilleur-taux').textContent = `Taux gagnant: ${stats_globales.meilleur_taux.toFixed(1)}%`;
     }
 
     if (stats_globales.pire_jour) {
-        document.getElementById('hist-pire-jour').textContent = stats_globales.pire_jour;
-        document.getElementById('hist-pire-taux').textContent = `Taux gagnant: ${stats_globales.pire_taux.toFixed(1)}%`;
+        if (el('hist-pire-jour')) el('hist-pire-jour').textContent = stats_globales.pire_jour;
+        if (el('hist-pire-taux')) el('hist-pire-taux').textContent = `Taux gagnant: ${stats_globales.pire_taux.toFixed(1)}%`;
     }
 
     creerGraphiqueHistorique(historique);
@@ -688,7 +704,10 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Application démarrée');
     
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('current-date').textContent = new Date().toLocaleDateString('fr-FR', dateOptions);
+    const currentDateEl = document.getElementById('current-date');
+    if (currentDateEl) {
+        currentDateEl.textContent = new Date().toLocaleDateString('fr-FR', dateOptions);
+    }
     
     loadAllData(getDateString());
     
@@ -699,6 +718,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, CONFIG.REFRESH_INTERVAL);
     
-    document.getElementById('date-selector')?.addEventListener('change', (e) => loadAllData(e.target.value));
-    document.getElementById('load-today')?.addEventListener('click', () => loadAllData(getDateString()));
+    // CORRECTION: Vérifier l'existence avant d'ajouter les écouteurs
+    const dateSelector = document.getElementById('date-selector');
+    if (dateSelector) {
+        dateSelector.addEventListener('change', (e) => loadAllData(e.target.value));
+    }
+    
+    const loadToday = document.getElementById('load-today');
+    if (loadToday) {
+        loadToday.addEventListener('click', () => loadAllData(getDateString()));
+    }
 });
