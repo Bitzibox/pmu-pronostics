@@ -457,13 +457,26 @@ function updateDashboard() {
     document.getElementById('nb-places').textContent = dernierJour.nb_places || 0;
     document.getElementById('nb-rates').textContent = dernierJour.nb_rates || 0;
 
-    // Mettre à jour le graphique avec tous les jours disponibles (jusqu'à 7)
-    const nbJoursDisponibles = allData.analyse.historique.length;
-    const historique7j = allData.analyse.historique.slice(0, Math.min(7, nbJoursDisponibles)).reverse();
-    renderPerformanceChart(historique7j);
+    // MODIFIÉ: Préparer l'historique pour le graphique en incluant le jour actuel si calculé
+    let historiqueComplet = [...allData.analyse.historique];
+    
+    // Si les stats actuelles sont calculées en temps réel, les intégrer dans l'historique pour le graphique
+    if (dernierJour.calcule_temps_reel) {
+        const indexJour = historiqueComplet.findIndex(h => h.date === dernierJour.date);
+        if (indexJour >= 0) {
+            historiqueComplet[indexJour] = dernierJour;
+        } else {
+            historiqueComplet.unshift(dernierJour);
+        }
+    }
+    
+    // Afficher tout l'historique disponible dans le graphique (pas de limite à 7 jours)
+    const nbJoursDisponibles = historiqueComplet.length;
+    const historiqueGraphique = historiqueComplet.slice(0, nbJoursDisponibles).reverse();
+    renderPerformanceChart(historiqueGraphique);
 
     console.log('✅ Dashboard mis à jour avec les données du', dernierJour.date);
-    console.log(`📊 Historique : ${nbJoursDisponibles} jour(s) disponible(s), ${historique7j.length} jour(s) affiché(s) dans le graphique`);
+    console.log(`📊 Historique : ${nbJoursDisponibles} jour(s) disponible(s) et affiché(s) dans le graphique`);
 }
 
 // Afficher le graphique de performance
@@ -478,6 +491,13 @@ function renderPerformanceChart(historique) {
     // Détruire l'ancien graphique s'il existe
     if (performanceChart) {
         performanceChart.destroy();
+    }
+
+    // NOUVEAU: Mettre à jour le titre dans le header de la carte
+    const nbJours = historique.length;
+    const titreElement = document.getElementById('graph-title');
+    if (titreElement) {
+        titreElement.innerHTML = `<i class="bi bi-graph-up-arrow"></i> Évolution sur ${nbJours} jour${nbJours > 1 ? 's' : ''}`;
     }
 
     performanceChart = new Chart(ctx, {
@@ -551,7 +571,31 @@ function updateHistorique() {
     // NOUVEAU: Récupérer la date affichée pour la surbrillance
     const currentDisplayDate = ddmmyyyyToDisplay(currentDateString);
     
-    allData.analyse.historique.forEach(jour => {
+    // NOUVEAU: Créer une copie de l'historique pour ajouter les stats calculées si nécessaire
+    let historiqueAffiche = [...allData.analyse.historique];
+    
+    // NOUVEAU: Vérifier si les stats du jour actuel sont à zéro et calculer en temps réel
+    const jourActuel = historiqueAffiche.find(j => j.date === currentDisplayDate);
+    if (jourActuel && jourActuel.total_courses === 0 && allData.pronostics && allData.pronostics.pronostics && allData.pronostics.pronostics.length > 0) {
+        const statsTempsReel = calculerStatsTempsReel();
+        if (statsTempsReel) {
+            // Remplacer l'entrée à zéro par les stats calculées
+            const index = historiqueAffiche.findIndex(j => j.date === currentDisplayDate);
+            if (index >= 0) {
+                historiqueAffiche[index] = statsTempsReel;
+            }
+        }
+    } else if (!jourActuel && currentDisplayDate !== ddmmyyyyToDisplay(getDateString(new Date()))) {
+        // Si on affiche un jour du passé qui n'existe pas dans l'historique
+        // Calculer les stats si possible
+        const statsTempsReel = calculerStatsTempsReel();
+        if (statsTempsReel && statsTempsReel.total_courses > 0) {
+            // Ajouter au début de l'historique temporairement (juste pour l'affichage)
+            historiqueAffiche.unshift(statsTempsReel);
+        }
+    }
+    
+    historiqueAffiche.forEach(jour => {
         const row = document.createElement('tr');
         
         // Colorer la ligne selon les performances
@@ -592,7 +636,7 @@ function updateHistorique() {
         tbody.appendChild(row);
     });
 
-    console.log('✅ Historique mis à jour avec', allData.analyse.historique.length, 'jours');
+    console.log('✅ Historique mis à jour avec', historiqueAffiche.length, 'jours');
 }
 
 // Mettre à jour la section comparaison
