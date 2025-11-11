@@ -252,12 +252,34 @@ function enrichirPronosticsAvecCourses() {
         console.log('🔄 Enrichissement des pronostics avec les données des courses...');
         console.log('📊 Nombre de pronostics:', allData.pronostics.pronostics.length);
         
+        // DEBUG: Afficher la structure des courses
+        if (allData.courses && Array.isArray(allData.courses)) {
+            const coursesData = allData.courses[0];
+            if (coursesData?.programme?.reunions) {
+                console.log('📋 Réunions disponibles dans courses:', 
+                    coursesData.programme.reunions.map(r => `R${r.numOfficiel} (${r.courses?.length || 0} courses)`).join(', '));
+            }
+        }
+        
+        // DEBUG: Afficher les premiers pronostics
+        console.log('🔍 Premier pronostic:', {
+            reunion: allData.pronostics.pronostics[0].reunion,
+            course: allData.pronostics.pronostics[0].course,
+            type_reunion: typeof allData.pronostics.pronostics[0].reunion,
+            type_course: typeof allData.pronostics.pronostics[0].course
+        });
+        
         let enriched = 0;
         
         allData.pronostics.pronostics.forEach((prono, index) => {
             try {
                 // Récupérer les infos de la course
                 const courseInfo = getCourseInfoFromCoursesFile(prono.reunion, prono.course);
+                
+                // DEBUG: Afficher les infos pour les 3 premiers pronostics
+                if (index < 3) {
+                    console.log(`🔍 Pronostic ${index} (R${prono.reunion}C${prono.course}):`, courseInfo);
+                }
                 
                 // Enrichir le pronostic seulement si les données sont valides
                 if (courseInfo.heure && courseInfo.heure !== '--:--') {
