@@ -458,8 +458,6 @@ function updateStatistiquesHistoriques() {
 }
 
 // ✅ NOUVELLE FONCTION : Mettre à jour le graphique d'évolution historique
-let chartHistoriqueInstance = null;
-
 function updateChartHistorique(historique) {
     const canvas = document.getElementById('chart-historique');
     if (!canvas) return;
