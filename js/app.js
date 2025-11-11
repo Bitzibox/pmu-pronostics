@@ -335,10 +335,16 @@ function updateStatistiquesGlobales() {
     const tauxPlace = coursesAvecResultats > 0 ? ((nbPlaces / coursesAvecResultats) * 100).toFixed(0) : '0';
     const confianceMoyenne = pronostics.length > 0 ? (sommeConfiance / pronostics.length).toFixed(0) : '0';
 
-    document.getElementById('taux-gagnant').textContent = tauxGagnant + '%';
-    document.getElementById('taux-place').textContent = tauxPlace + '%';
-    document.getElementById('confiance-moyenne').textContent = confianceMoyenne + '%';
-    document.getElementById('jours-analyses').textContent = coursesAvecResultats + '/' + pronostics.length;
+    // Vérifier que les éléments existent avant de les modifier
+    const elTauxGagnant = document.getElementById('taux-gagnant');
+    const elTauxPlace = document.getElementById('taux-place');
+    const elConfianceMoyenne = document.getElementById('confiance-moyenne');
+    const elJoursAnalyses = document.getElementById('jours-analyses');
+    
+    if (elTauxGagnant) elTauxGagnant.textContent = tauxGagnant + '%';
+    if (elTauxPlace) elTauxPlace.textContent = tauxPlace + '%';
+    if (elConfianceMoyenne) elConfianceMoyenne.textContent = confianceMoyenne + '%';
+    if (elJoursAnalyses) elJoursAnalyses.textContent = coursesAvecResultats + '/' + pronostics.length;
 }
 
 async function chargerHistorique() {
