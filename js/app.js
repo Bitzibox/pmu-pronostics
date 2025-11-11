@@ -64,46 +64,50 @@ function getCourseInfoFromCoursesFile(reunion, course) {
         libelle: null
     };
     
-    if (!allData.courses || !Array.isArray(allData.courses)) {
-        return info;
-    }
-    
-    const coursesData = allData.courses[0];
-    if (!coursesData?.programme?.reunions) {
-        return info;
-    }
-    
-    const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === parseInt(reunion));
-    if (!reunionData) {
-        return info;
-    }
-    
-    // Récupérer le vrai nom de l'hippodrome
-    if (reunionData.hippodrome?.libelleCourt) {
-        info.hippodrome = reunionData.hippodrome.libelleCourt;
-    }
-    
-    // Trouver la course spécifique
-    const courseData = reunionData.courses?.find(c => c.numOrdre === parseInt(course));
-    if (courseData) {
-        // Convertir le timestamp en heure (format HH:MM)
-        if (courseData.heureDepart) {
-            const date = new Date(courseData.heureDepart);
-            info.heure = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    try {
+        if (!allData.courses || !Array.isArray(allData.courses)) {
+            return info;
         }
         
-        info.discipline = courseData.discipline || info.discipline;
-        info.distance = courseData.distance;
-        info.libelle = courseData.libelleCourt;
-        
-        // Déterminer le statut de la course
-        if (courseData.arriveeDefinitive) {
-            info.statut = 'TERMINÉ';
-        } else if (courseData.departImminent) {
-            info.statut = 'EN COURS';
-        } else {
-            info.statut = 'OUVERT';
+        const coursesData = allData.courses[0];
+        if (!coursesData?.programme?.reunions) {
+            return info;
         }
+        
+        const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === parseInt(reunion));
+        if (!reunionData) {
+            return info;
+        }
+        
+        // Récupérer le vrai nom de l'hippodrome
+        if (reunionData.hippodrome?.libelleCourt) {
+            info.hippodrome = reunionData.hippodrome.libelleCourt;
+        }
+        
+        // Trouver la course spécifique
+        const courseData = reunionData.courses?.find(c => c.numOrdre === parseInt(course));
+        if (courseData) {
+            // Convertir le timestamp en heure (format HH:MM)
+            if (courseData.heureDepart) {
+                const date = new Date(courseData.heureDepart);
+                info.heure = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            info.discipline = courseData.discipline || info.discipline;
+            info.distance = courseData.distance;
+            info.libelle = courseData.libelleCourt;
+            
+            // Déterminer le statut de la course
+            if (courseData.arriveeDefinitive) {
+                info.statut = 'TERMINÉ';
+            } else if (courseData.departImminent) {
+                info.statut = 'EN COURS';
+            } else {
+                info.statut = 'OUVERT';
+            }
+        }
+    } catch (error) {
+        console.warn(`⚠️ Erreur dans getCourseInfoFromCoursesFile pour R${reunion}C${course}:`, error);
     }
     
     return info;
@@ -113,31 +117,35 @@ function getCourseInfoFromCoursesFile(reunion, course) {
 function getCotesFromCoursesFile(reunion, course) {
     const cotes = {};
     
-    if (!allData.courses || !Array.isArray(allData.courses)) {
-        return cotes;
-    }
-    
-    const coursesData = allData.courses[0];
-    if (!coursesData?.programme?.reunions) {
-        return cotes;
-    }
-    
-    const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === parseInt(reunion));
-    if (!reunionData) {
-        return cotes;
-    }
-    
-    const courseData = reunionData.courses?.find(c => c.numOrdre === parseInt(course));
-    if (!courseData?.participants) {
-        return cotes;
-    }
-    
-    // Extraire les cotes depuis les rapports probables
-    courseData.participants.forEach(participant => {
-        if (participant.numPmu && participant.rapportDirect) {
-            cotes[participant.numPmu] = parseFloat(participant.rapportDirect);
+    try {
+        if (!allData.courses || !Array.isArray(allData.courses)) {
+            return cotes;
         }
-    });
+        
+        const coursesData = allData.courses[0];
+        if (!coursesData?.programme?.reunions) {
+            return cotes;
+        }
+        
+        const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === parseInt(reunion));
+        if (!reunionData) {
+            return cotes;
+        }
+        
+        const courseData = reunionData.courses?.find(c => c.numOrdre === parseInt(course));
+        if (!courseData?.participants) {
+            return cotes;
+        }
+        
+        // Extraire les cotes depuis les rapports probables
+        courseData.participants.forEach(participant => {
+            if (participant.numPmu && participant.rapportDirect) {
+                cotes[participant.numPmu] = parseFloat(participant.rapportDirect);
+            }
+        });
+    } catch (error) {
+        console.warn(`⚠️ Erreur dans getCotesFromCoursesFile pour R${reunion}C${course}:`, error);
+    }
     
     return cotes;
 }
@@ -235,39 +243,57 @@ async function loadAllData(dateStringDDMMYYYY) {
 
 // ✅ NOUVELLE FONCTION : Enrichir les pronostics avec les données des courses
 function enrichirPronosticsAvecCourses() {
-    if (!allData.pronostics?.pronostics) return;
-    
-    console.log('🔄 Enrichissement des pronostics avec les données des courses...');
-    
-    allData.pronostics.pronostics.forEach(prono => {
-        // Récupérer les infos de la course
-        const courseInfo = getCourseInfoFromCoursesFile(prono.reunion, prono.course);
-        
-        // Enrichir le pronostic
-        prono.heure = courseInfo.heure;
-        prono.discipline = courseInfo.discipline;
-        prono.statut = courseInfo.statut;
-        prono.distance = courseInfo.distance;
-        prono.libelleCourse = courseInfo.libelle;
-        
-        if (courseInfo.hippodrome) {
-            prono.hippodrome = courseInfo.hippodrome;
+    try {
+        if (!allData.pronostics?.pronostics) {
+            console.log('⚠️ Pas de pronostics à enrichir');
+            return;
         }
         
-        // Récupérer les cotes
-        const cotes = getCotesFromCoursesFile(prono.reunion, prono.course);
+        console.log('🔄 Enrichissement des pronostics avec les données des courses...');
+        console.log('📊 Nombre de pronostics:', allData.pronostics.pronostics.length);
         
-        // Mettre à jour les cotes des chevaux
-        if (prono.classement && Object.keys(cotes).length > 0) {
-            prono.classement.forEach(cheval => {
-                if (cotes[cheval.numero]) {
-                    cheval.cote = cotes[cheval.numero].toFixed(1);
+        let enriched = 0;
+        
+        allData.pronostics.pronostics.forEach((prono, index) => {
+            try {
+                // Récupérer les infos de la course
+                const courseInfo = getCourseInfoFromCoursesFile(prono.reunion, prono.course);
+                
+                // Enrichir le pronostic seulement si les données sont valides
+                if (courseInfo.heure && courseInfo.heure !== '--:--') {
+                    prono.heure = courseInfo.heure;
+                    prono.discipline = courseInfo.discipline;
+                    prono.statut = courseInfo.statut;
+                    prono.distance = courseInfo.distance;
+                    prono.libelleCourse = courseInfo.libelle;
+                    
+                    if (courseInfo.hippodrome) {
+                        prono.hippodrome = courseInfo.hippodrome;
+                    }
+                    
+                    enriched++;
                 }
-            });
-        }
-    });
-    
-    console.log('✅ Enrichissement terminé');
+                
+                // Récupérer les cotes
+                const cotes = getCotesFromCoursesFile(prono.reunion, prono.course);
+                
+                // Mettre à jour les cotes des chevaux
+                if (prono.classement && Object.keys(cotes).length > 0) {
+                    prono.classement.forEach(cheval => {
+                        if (cotes[cheval.numero]) {
+                            cheval.cote = cotes[cheval.numero].toFixed(1);
+                        }
+                    });
+                }
+            } catch (err) {
+                console.warn(`⚠️ Erreur lors de l'enrichissement du pronostic ${index}:`, err);
+            }
+        });
+        
+        console.log(`✅ Enrichissement terminé: ${enriched}/${allData.pronostics.pronostics.length} pronostics enrichis`);
+    } catch (error) {
+        console.error('❌ Erreur dans enrichirPronosticsAvecCourses:', error);
+    }
 }
 
 function updateAllSections() {
