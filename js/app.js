@@ -146,6 +146,7 @@ async function loadAllData(dateStringDDMMYYYY) {
 
 function updateAllSections() {
     updateStatistiquesGlobales();
+    updateStatistiquesHistoriques(); // ✅ AJOUT
     updateTableauHistorique();
     updateCoursesParReunion();
     updateTableauComparaison();
@@ -388,6 +389,154 @@ function updateStatistiquesGlobales() {
     if (el('nb-places')) el('nb-places').innerHTML = `<i class="bi bi-award"></i> ${nbPlaces}`;
     if (el('nb-rates')) el('nb-rates').innerHTML = `<i class="bi bi-x-circle"></i> ${nbRates}`;
 }
+
+// ✅ NOUVELLE FONCTION : Calculer les statistiques sur l'historique complet
+function updateStatistiquesHistoriques() {
+    if (!allData.analyse?.historique?.length) {
+        console.warn('⚠️ Pas de données historiques pour les statistiques');
+        return;
+    }
+    
+    const historique = allData.analyse.historique;
+    const nbJours = historique.length;
+    
+    // Calculer les moyennes
+    let sommeTauxGagnant = 0;
+    let sommeTauxPlace = 0;
+    let sommeConfiance = 0;
+    let meilleurJour = null;
+    let pireJour = null;
+    let meilleurTaux = -1;
+    let pireTaux = 101;
+    
+    historique.forEach(jour => {
+        sommeTauxGagnant += jour.taux_gagnant || 0;
+        sommeTauxPlace += jour.taux_place || 0;
+        sommeConfiance += jour.confiance_moyenne || 0;
+        
+        // Trouver le meilleur jour (basé sur taux_gagnant)
+        if ((jour.taux_gagnant || 0) > meilleurTaux) {
+            meilleurTaux = jour.taux_gagnant || 0;
+            meilleurJour = jour;
+        }
+        
+        // Trouver le pire jour (basé sur taux_gagnant)
+        if ((jour.taux_gagnant || 0) < pireTaux) {
+            pireTaux = jour.taux_gagnant || 0;
+            pireJour = jour;
+        }
+    });
+    
+    const moyenneGagnant = nbJours > 0 ? (sommeTauxGagnant / nbJours).toFixed(1) : 0;
+    const moyennePlace = nbJours > 0 ? (sommeTauxPlace / nbJours).toFixed(0) : 0;
+    const moyenneConfiance = nbJours > 0 ? (sommeConfiance / nbJours).toFixed(0) : 0;
+    
+    // Mettre à jour l'affichage
+    const el = (id) => document.getElementById(id);
+    
+    if (el('hist-moyenne-gagnant')) el('hist-moyenne-gagnant').textContent = moyenneGagnant + '%';
+    if (el('hist-moyenne-place')) el('hist-moyenne-place').textContent = moyennePlace + '%';
+    if (el('hist-moyenne-confiance')) el('hist-moyenne-confiance').textContent = moyenneConfiance + '%';
+    if (el('hist-jours-analyses')) el('hist-jours-analyses').textContent = nbJours;
+    
+    if (meilleurJour) {
+        if (el('hist-meilleur-jour')) el('hist-meilleur-jour').textContent = meilleurJour.date;
+        if (el('hist-meilleur-taux')) el('hist-meilleur-taux').textContent = 
+            `${meilleurJour.taux_gagnant}% gagnant • ${meilleurJour.taux_place}% placé`;
+    }
+    
+    if (pireJour) {
+        if (el('hist-pire-jour')) el('hist-pire-jour').textContent = pireJour.date;
+        if (el('hist-pire-taux')) el('hist-pire-taux').textContent = 
+            `${pireJour.taux_gagnant}% gagnant • ${pireJour.taux_place}% placé`;
+    }
+    
+    // Mettre à jour le graphique historique
+    updateChartHistorique(historique);
+    
+    console.log('✅ Statistiques historiques mises à jour:', nbJours, 'jours');
+}
+
+// ✅ NOUVELLE FONCTION : Mettre à jour le graphique d'évolution historique
+let chartHistoriqueInstance = null;
+
+function updateChartHistorique(historique) {
+    const canvas = document.getElementById('chart-historique');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    
+    // Prendre les 7 derniers jours ou moins
+    const data = historique.slice(-7).reverse();
+    const labels = data.map(j => j.date);
+    const tauxGagnants = data.map(j => j.taux_gagnant || 0);
+    const tauxPlaces = data.map(j => j.taux_place || 0);
+    
+    // Détruire l'ancien graphique
+    if (chartHistoriqueInstance) {
+        chartHistoriqueInstance.destroy();
+    }
+    
+    chartHistoriqueInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Taux Gagnant (%)',
+                    data: tauxGagnants,
+                    borderColor: '#28a745',
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                },
+                {
+                    label: 'Taux Placé (%)',
+                    data: tauxPlaces,
+                    borderColor: '#ffc107',
+                    backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
 
 function updateTableauHistorique() {
     const tbody = document.getElementById('historique-body');
