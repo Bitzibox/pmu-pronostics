@@ -53,6 +53,95 @@ let chartHistoriqueInstance = null;
 let allData = { analyse: null, pronostics: null, resultats: null, courses: null, programme: null };
 let currentDateString = '';
 
+// ✅ NOUVELLE FONCTION : Récupérer les infos d'une course depuis le fichier courses
+function getCourseInfoFromCoursesFile(reunion, course) {
+    const info = {
+        heure: '--:--',
+        discipline: 'Inconnue',
+        hippodrome: null,
+        statut: 'INCONNU',
+        distance: null,
+        libelle: null
+    };
+    
+    if (!allData.courses || !Array.isArray(allData.courses)) {
+        return info;
+    }
+    
+    const coursesData = allData.courses[0];
+    if (!coursesData?.programme?.reunions) {
+        return info;
+    }
+    
+    const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === parseInt(reunion));
+    if (!reunionData) {
+        return info;
+    }
+    
+    // Récupérer le vrai nom de l'hippodrome
+    if (reunionData.hippodrome?.libelleCourt) {
+        info.hippodrome = reunionData.hippodrome.libelleCourt;
+    }
+    
+    // Trouver la course spécifique
+    const courseData = reunionData.courses?.find(c => c.numOrdre === parseInt(course));
+    if (courseData) {
+        // Convertir le timestamp en heure (format HH:MM)
+        if (courseData.heureDepart) {
+            const date = new Date(courseData.heureDepart);
+            info.heure = date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+        }
+        
+        info.discipline = courseData.discipline || info.discipline;
+        info.distance = courseData.distance;
+        info.libelle = courseData.libelleCourt;
+        
+        // Déterminer le statut de la course
+        if (courseData.arriveeDefinitive) {
+            info.statut = 'TERMINÉ';
+        } else if (courseData.departImminent) {
+            info.statut = 'EN COURS';
+        } else {
+            info.statut = 'OUVERT';
+        }
+    }
+    
+    return info;
+}
+
+// ✅ NOUVELLE FONCTION : Récupérer les cotes depuis le fichier courses
+function getCotesFromCoursesFile(reunion, course) {
+    const cotes = {};
+    
+    if (!allData.courses || !Array.isArray(allData.courses)) {
+        return cotes;
+    }
+    
+    const coursesData = allData.courses[0];
+    if (!coursesData?.programme?.reunions) {
+        return cotes;
+    }
+    
+    const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === parseInt(reunion));
+    if (!reunionData) {
+        return cotes;
+    }
+    
+    const courseData = reunionData.courses?.find(c => c.numOrdre === parseInt(course));
+    if (!courseData?.participants) {
+        return cotes;
+    }
+    
+    // Extraire les cotes depuis les rapports probables
+    courseData.participants.forEach(participant => {
+        if (participant.numPmu && participant.rapportDirect) {
+            cotes[participant.numPmu] = parseFloat(participant.rapportDirect);
+        }
+    });
+    
+    return cotes;
+}
+
 // Fonction principale de chargement
 async function loadAllData(dateStringDDMMYYYY) {
     console.log(`🔄 Chargement des données pour le ${dateStringDDMMYYYY}...`);
@@ -127,6 +216,9 @@ async function loadAllData(dateStringDDMMYYYY) {
         if (coursesRes && coursesRes.ok) allData.courses = await coursesRes.json();
         if (programmeRes && programmeRes.ok) allData.programme = await programmeRes.json();
         
+        // ✅ ENRICHIR les pronostics avec les données des courses
+        enrichirPronosticsAvecCourses();
+        
         // Charger et afficher l'historique
         const statsHistorique = await chargerHistorique();
         afficherHistorique(statsHistorique);
@@ -139,6 +231,43 @@ async function loadAllData(dateStringDDMMYYYY) {
         showError('Erreur lors du chargement. Veuillez réessayer.');
         showLoadingState(false);
     }
+}
+
+// ✅ NOUVELLE FONCTION : Enrichir les pronostics avec les données des courses
+function enrichirPronosticsAvecCourses() {
+    if (!allData.pronostics?.pronostics) return;
+    
+    console.log('🔄 Enrichissement des pronostics avec les données des courses...');
+    
+    allData.pronostics.pronostics.forEach(prono => {
+        // Récupérer les infos de la course
+        const courseInfo = getCourseInfoFromCoursesFile(prono.reunion, prono.course);
+        
+        // Enrichir le pronostic
+        prono.heure = courseInfo.heure;
+        prono.discipline = courseInfo.discipline;
+        prono.statut = courseInfo.statut;
+        prono.distance = courseInfo.distance;
+        prono.libelleCourse = courseInfo.libelle;
+        
+        if (courseInfo.hippodrome) {
+            prono.hippodrome = courseInfo.hippodrome;
+        }
+        
+        // Récupérer les cotes
+        const cotes = getCotesFromCoursesFile(prono.reunion, prono.course);
+        
+        // Mettre à jour les cotes des chevaux
+        if (prono.classement && Object.keys(cotes).length > 0) {
+            prono.classement.forEach(cheval => {
+                if (cotes[cheval.numero]) {
+                    cheval.cote = cotes[cheval.numero].toFixed(1);
+                }
+            });
+        }
+    });
+    
+    console.log('✅ Enrichissement terminé');
 }
 
 function updateAllSections() {
@@ -202,46 +331,87 @@ function updateStatistiquesGlobales() {
         }
     });
 
-    const tauxGagnant = coursesAvecResultats > 0 ? Math.round((nbGagnants / coursesAvecResultats) * 100) : 0;
-    const tauxPlace = coursesAvecResultats > 0 ? Math.round((nbPlaces / coursesAvecResultats) * 100) : 0;
-    const confianceMoyenne = pronostics.length > 0 ? Math.round(sommeConfiance / pronostics.length) : 0;
+    const tauxGagnant = coursesAvecResultats > 0 ? ((nbGagnants / coursesAvecResultats) * 100).toFixed(1) : '0.0';
+    const tauxPlace = coursesAvecResultats > 0 ? ((nbPlaces / coursesAvecResultats) * 100).toFixed(0) : '0';
+    const confianceMoyenne = pronostics.length > 0 ? (sommeConfiance / pronostics.length).toFixed(0) : '0';
 
-    const el = (id) => document.getElementById(id);
-    if (el('taux-gagnant')) el('taux-gagnant').textContent = tauxGagnant + '%';
-    if (el('taux-place')) el('taux-place').textContent = tauxPlace + '%';
-    if (el('confiance-moyenne')) el('confiance-moyenne').textContent = confianceMoyenne + '%';
-    if (el('courses-analysees')) el('courses-analysees').textContent = pronostics.length;
-    if (el('nb-gagnants')) el('nb-gagnants').innerHTML = `<i class="bi bi-trophy"></i> ${nbGagnants}`;
-    if (el('nb-places')) el('nb-places').innerHTML = `<i class="bi bi-award"></i> ${nbPlaces}`;
-    if (el('nb-rates')) el('nb-rates').innerHTML = `<i class="bi bi-x-circle"></i> ${nbRates}`;
+    document.getElementById('taux-gagnant').textContent = tauxGagnant + '%';
+    document.getElementById('taux-place').textContent = tauxPlace + '%';
+    document.getElementById('confiance-moyenne').textContent = confianceMoyenne + '%';
+    document.getElementById('jours-analyses').textContent = coursesAvecResultats + '/' + pronostics.length;
+}
+
+async function chargerHistorique() {
+    if (!allData.analyse?.historique?.length) return [];
+    return allData.analyse.historique.slice(0, 7).reverse();
+}
+
+function afficherHistorique(statsHistorique) {
+    const canvas = document.getElementById('performanceChart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const labels = statsHistorique.map(j => j.date || 'N/A');
+    const gagnants = statsHistorique.map(j => j.taux_gagnant || 0);
+    const places = statsHistorique.map(j => j.taux_place || 0);
+
+    if (performanceChart) performanceChart.destroy();
+
+    performanceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                { label: 'Taux gagnant', data: gagnants, borderColor: '#4CAF50', backgroundColor: 'rgba(76, 175, 80, 0.1)', tension: 0.4 },
+                { label: 'Taux placé', data: places, borderColor: '#2196F3', backgroundColor: 'rgba(33, 150, 243, 0.1)', tension: 0.4 }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: true, position: 'top' },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { beginAtZero: true, max: 100, ticks: { callback: val => val + '%' } }
+            }
+        }
+    });
 }
 
 function updateTableauHistorique() {
     const tbody = document.getElementById('historique-body');
-    if (!tbody) return;
-
-    if (!allData.analyse?.historique?.length) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">Aucune donnée historique</td></tr>';
+    if (!tbody || !allData.analyse?.historique?.length) {
+        if (tbody) tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">Aucune donnée historique</td></tr>';
         return;
     }
 
     let html = '';
     allData.analyse.historique.forEach(jour => {
-        const tauxGagnantClass = jour.taux_gagnant >= 30 ? 'text-success fw-bold' : 
-                                 jour.taux_gagnant >= 15 ? 'text-warning fw-bold' : 'text-danger fw-bold';
-        const tauxPlaceClass = jour.taux_place >= 50 ? 'text-success fw-bold' : 
-                               jour.taux_place >= 30 ? 'text-warning fw-bold' : 'text-danger fw-bold';
+        const tauxGagnant = jour.taux_gagnant?.toFixed(1) || '0.0';
+        const tauxPlace = jour.taux_place || 0;
+        const confiance = jour.confiance_moyenne || 0;
+
+        const badgeGagnant = tauxGagnant >= 20 ? 'bg-success' : tauxGagnant >= 10 ? 'bg-warning' : 'bg-secondary';
+        const badgePlace = tauxPlace >= 50 ? 'bg-success' : tauxPlace >= 30 ? 'bg-warning' : 'bg-secondary';
 
         html += `
             <tr>
-                <td class="fw-bold">${jour.date}</td>
-                <td>${jour.total_courses}</td>
-                <td><span class="badge bg-success">${jour.nb_gagnants}</span></td>
-                <td><span class="badge bg-warning text-dark">${jour.nb_places}</span></td>
-                <td><span class="badge bg-secondary">${jour.nb_rates}</span></td>
-                <td class="${tauxGagnantClass}">${jour.taux_gagnant.toFixed(1)}%</td>
-                <td class="${tauxPlaceClass}">${jour.taux_place.toFixed(1)}%</td>
-                <td>${jour.confiance_moyenne}%</td>
+                <td><strong>${jour.date}</strong></td>
+                <td>${jour.total_courses || 0}</td>
+                <td><span class="badge ${badgeGagnant}">${tauxGagnant}%</span></td>
+                <td><span class="badge ${badgePlace}">${tauxPlace}%</span></td>
+                <td><span class="badge bg-info">${confiance}%</span></td>
+                <td>${jour.nb_gagnants || 0}</td>
+                <td>${jour.nb_places || 0}</td>
+                <td>${jour.nb_rates || 0}</td>
             </tr>
         `;
     });
@@ -256,12 +426,12 @@ function updateCoursesParReunion() {
     const reunions = {};
     
     pronostics.forEach(prono => {
-        const key = `${prono.pays}-R${prono.reunion}`;
+        const key = `${prono.pays || 'FRA'}-R${prono.reunion}`;
         if (!reunions[key]) {
             reunions[key] = {
-                pays: prono.pays,
+                pays: prono.pays || 'FRA',
                 reunion: prono.reunion,
-                hippodrome: getHippodromeName(prono.pays, prono.reunion),
+                hippodrome: prono.hippodrome || getHippodromeName(prono.pays || 'FRA', prono.reunion),
                 courses: []
             };
         }
@@ -301,27 +471,30 @@ function updateCoursesParReunion() {
     contentContainer.innerHTML = contentHtml;
 }
 
+// ✅ FONCTION CORRIGÉE : Maintenant utilise les données enrichies
 function renderCoursesForReunion(reunion) {
     let html = '';
     
     reunion.courses.forEach(prono => {
-        const courseKey = `R${prono.reunion}C${prono.course}`;
-        const courseInfo = allData.courses?.[courseKey] || {};
-        const disciplineInfo = getDisciplineInfo(courseInfo.discipline);
+        // Les données sont déjà enrichies dans le pronostic
+        const heure = prono.heure || '--:--';
+        const discipline = prono.discipline || 'Inconnue';
+        const hippodrome = prono.hippodrome || reunion.hippodrome;
+        const statut = prono.statut || 'INCONNU';
         
-        let heure = prono.heure || '--:--';
-        let discipline = courseInfo.discipline || 'Inconnue';
-        
-        if (allData.programme?.programme?.reunions) {
-            const reunionProg = allData.programme.programme.reunions.find(r => r.numOrdre === prono.reunion);
-            const courseProg = reunionProg?.courses?.find(c => c.numOrdre === prono.course);
-            if (courseProg) {
-                heure = courseProg.heureDepart?.substring(0, 5) || heure;
-                discipline = courseProg.discipline || discipline;
-            }
-        }
+        const disciplineInfo = getDisciplineInfo(discipline);
 
         let statutBadge = '<span class="statut-badge statut-attente"><i class="bi bi-clock"></i> En attente</span>';
+        
+        // Personnaliser le badge selon le statut
+        if (statut === 'TERMINÉ') {
+            statutBadge = '<span class="statut-badge statut-termine"><i class="bi bi-check-circle-fill"></i> Terminé</span>';
+        } else if (statut === 'EN COURS') {
+            statutBadge = '<span class="statut-badge statut-encours"><i class="bi bi-play-circle-fill"></i> En cours</span>';
+        } else if (statut === 'OUVERT') {
+            statutBadge = '<span class="statut-badge statut-ouvert"><i class="bi bi-unlock-fill"></i> Ouvert</span>';
+        }
+        
         let resultatHtml = '';
 
         if (allData.resultats?.courses) {
@@ -350,12 +523,16 @@ function renderCoursesForReunion(reunion) {
             <div class="course-card">
                 <div class="course-header">
                     <div class="hippodrome-info position-relative">
-                        <div class="hippodrome-badge"><i class="bi bi-flag-fill"></i> ${reunion.hippodrome}</div>
+                        <div class="hippodrome-badge"><i class="bi bi-flag-fill"></i> ${hippodrome}</div>
                         <div class="time-badge"><i class="bi bi-clock-fill"></i> ${heure}</div>
                         <span class="discipline-badge discipline-${disciplineInfo.type}">${disciplineInfo.icon} ${disciplineInfo.label}</span>
                         <div class="ms-auto">${statutBadge}</div>
                     </div>
-                    <div class="mt-2"><h5 class="mb-0">Course ${prono.course}</h5></div>
+                    <div class="mt-2">
+                        <h5 class="mb-0">Course ${prono.course}</h5>
+                        ${prono.libelleCourse ? `<small class="text-muted">${prono.libelleCourse}</small>` : ''}
+                        ${prono.distance ? `<small class="text-muted ms-2">${prono.distance}m</small>` : ''}
+                    </div>
                 </div>
                 <div class="card-body">
                     <h6 class="fw-bold mb-3">Pronostic IA:</h6>
@@ -400,7 +577,7 @@ function updateTableauComparaison() {
 
     let html = '';
     allData.pronostics.pronostics.forEach(prono => {
-        const hippodrome = getHippodromeName(prono.pays, prono.reunion);
+        const hippodrome = prono.hippodrome || getHippodromeName(prono.pays, prono.reunion);
         const cheval = prono.classement?.[0];
         
         let resultatReel = '<span class="badge bg-secondary">En attente</span>';
@@ -548,184 +725,28 @@ function showLoadingState(isLoading) {
 
     Object.keys(spinners).forEach(id => {
         const el = document.getElementById(id);
-        if (!el) return;
-        
-        if (isLoading) {
-            const spinner = '<div class="spinner-border text-primary" role="status"></div>';
-            el.innerHTML = id === 'reunions-content' ? 
-                `<div class="text-center py-5">${spinner}</div>` : 
-                `<tr><td colspan="${spinners[id]}" class="text-center py-5">${spinner}</td></tr>`;
-        } else if (el.innerHTML.includes('spinner')) {
-            el.innerHTML = `<tr><td colspan="${spinners[id]}" class="text-center text-muted">Aucune donnée</td></tr>`;
-        }
-    });
-    
-    // CORRECTION: Vérifier l'existence avant manipulation
-    const dateSelector = document.getElementById('date-selector');
-    const loadToday = document.getElementById('load-today');
-    
-    if (dateSelector) dateSelector.disabled = isLoading;
-    if (loadToday) loadToday.disabled = isLoading;
-}
-
-// HISTORIQUE DES STATISTIQUES
-async function chargerHistorique() {
-    try {
-        const url = `${GITHUB_RAW_BASE}statistiques-${currentDateString}.json?t=${Date.now()}`;
-        console.log('📊 Chargement historique:', url);
-        const response = await fetch(url);
-        if (!response.ok) {
-            console.log('⚠️ Pas de statistiques pour cette date');
-            return null;
-        }
-        const data = await response.json();
-        console.log('✅ Historique chargé:', data);
-        return data[0];
-    } catch (error) {
-        console.error('❌ Erreur historique:', error);
-        return null;
-    }
-}
-
-function afficherHistorique(statsHistorique) {
-    const el = (id) => document.getElementById(id);
-    
-    if (!statsHistorique?.analyse) {
-        if (el('hist-moyenne-gagnant')) el('hist-moyenne-gagnant').textContent = '-';
-        if (el('hist-moyenne-place')) el('hist-moyenne-place').textContent = '-';
-        if (el('hist-moyenne-confiance')) el('hist-moyenne-confiance').textContent = '-';
-        if (el('hist-jours-analyses')) el('hist-jours-analyses').textContent = '0/0';
-        if (el('hist-meilleur-jour')) el('hist-meilleur-jour').textContent = '-';
-        if (el('hist-meilleur-taux')) el('hist-meilleur-taux').textContent = '-';
-        if (el('hist-pire-jour')) el('hist-pire-jour').textContent = '-';
-        if (el('hist-pire-taux')) el('hist-pire-taux').textContent = '-';
-        return;
-    }
-
-    const { stats_globales, historique } = statsHistorique.analyse;
-
-    if (el('hist-moyenne-gagnant')) el('hist-moyenne-gagnant').textContent = stats_globales.moyenne_taux_gagnant.toFixed(1) + '%';
-    if (el('hist-moyenne-place')) el('hist-moyenne-place').textContent = stats_globales.moyenne_taux_place.toFixed(1) + '%';
-    if (el('hist-moyenne-confiance')) el('hist-moyenne-confiance').textContent = stats_globales.moyenne_confiance + '%';
-    if (el('hist-jours-analyses')) el('hist-jours-analyses').textContent = `${stats_globales.jours_avec_pronostics}/${stats_globales.total_jours}`;
-
-    if (stats_globales.meilleur_jour) {
-        if (el('hist-meilleur-jour')) el('hist-meilleur-jour').textContent = stats_globales.meilleur_jour;
-        if (el('hist-meilleur-taux')) el('hist-meilleur-taux').textContent = `Taux gagnant: ${stats_globales.meilleur_taux.toFixed(1)}%`;
-    }
-
-    if (stats_globales.pire_jour) {
-        if (el('hist-pire-jour')) el('hist-pire-jour').textContent = stats_globales.pire_jour;
-        if (el('hist-pire-taux')) el('hist-pire-taux').textContent = `Taux gagnant: ${stats_globales.pire_taux.toFixed(1)}%`;
-    }
-
-    creerGraphiqueHistorique(historique);
-}
-
-function creerGraphiqueHistorique(historique) {
-    const ctx = document.getElementById('chart-historique');
-    if (!ctx) return;
-
-    if (chartHistoriqueInstance) chartHistoriqueInstance.destroy();
-
-    const joursAvecData = historique.filter(h => h.pronostics_disponibles).reverse();
-
-    if (!joursAvecData.length) {
-        if (ctx.parentElement) {
-            ctx.parentElement.innerHTML = '<p class="text-center text-muted py-4">Pas de données historiques</p>';
-        }
-        return;
-    }
-
-    chartHistoriqueInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: joursAvecData.map(h => h.date),
-            datasets: [
-                {
-                    label: 'Taux Gagnant',
-                    data: joursAvecData.map(h => h.taux_gagnant),
-                    borderColor: '#4caf50',
-                    backgroundColor: 'rgba(76, 175, 80, 0.1)',
-                    tension: 0.4,
-                    fill: true,
-                    borderWidth: 3,
-                    pointRadius: 5
-                },
-                {
-                    label: 'Taux Placé',
-                    data: joursAvecData.map(h => h.taux_place),
-                    borderColor: '#2196f3',
-                    backgroundColor: 'rgba(33, 150, 243, 0.1)',
-                    tension: 0.4,
-                    fill: true,
-                    borderWidth: 3,
-                    pointRadius: 5
-                },
-                {
-                    label: 'Confiance',
-                    data: joursAvecData.map(h => h.confiance_moyenne),
-                    borderColor: '#ff9800',
-                    backgroundColor: 'rgba(255, 152, 0, 0.1)',
-                    tension: 0.4,
-                    borderWidth: 2,
-                    borderDash: [5, 5],
-                    pointRadius: 4
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { position: 'top' },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        label: (context) => `${context.dataset.label}: ${context.parsed.y.toFixed(1)}%`
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: { callback: (value) => value + '%' }
-                },
-                x: { ticks: { maxRotation: 45, minRotation: 45 } }
-            }
+        if (el) {
+            el.innerHTML = isLoading 
+                ? `<tr><td colspan="${spinners[id]}" class="text-center"><div class="spinner-border text-primary" role="status"></div></td></tr>`
+                : '';
         }
     });
 }
 
-// INITIALISATION
+// Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Application démarrée');
-    
-    const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const currentDateEl = document.getElementById('current-date');
-    if (currentDateEl) {
-        currentDateEl.textContent = new Date().toLocaleDateString('fr-FR', dateOptions);
-    }
-    
-    loadAllData(getDateString());
-    
-    setInterval(() => {
-        if (currentDateString === getDateString()) {
-            console.log('🔄 Rafraîchissement automatique');
-            loadAllData(currentDateString);
-        }
-    }, CONFIG.REFRESH_INTERVAL);
-    
-    // CORRECTION: Vérifier l'existence avant d'ajouter les écouteurs
+    const todayDate = getDateString();
+    loadAllData(todayDate);
+
     const dateSelector = document.getElementById('date-selector');
     if (dateSelector) {
-        dateSelector.addEventListener('change', (e) => loadAllData(e.target.value));
+        dateSelector.addEventListener('change', (e) => {
+            if (e.target.value) loadAllData(e.target.value);
+        });
     }
-    
-    const loadToday = document.getElementById('load-today');
-    if (loadToday) {
-        loadToday.addEventListener('click', () => loadAllData(getDateString()));
-    }
+
+    setInterval(() => {
+        const selectedDate = document.getElementById('date-selector')?.value || getDateString();
+        loadAllData(selectedDate);
+    }, CONFIG.REFRESH_INTERVAL);
 });
