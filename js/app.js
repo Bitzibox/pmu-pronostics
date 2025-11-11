@@ -74,7 +74,11 @@ function getCourseInfoFromCoursesFile(reunion, course) {
             return info;
         }
         
-        const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === parseInt(reunion));
+        // ✅ CORRECTION: Enlever le "R" et le "C" avant de parser
+        const reunionNum = parseInt(reunion.toString().replace('R', ''));
+        const courseNum = parseInt(course.toString().replace('C', ''));
+        
+        const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === reunionNum);
         if (!reunionData) {
             return info;
         }
@@ -85,7 +89,7 @@ function getCourseInfoFromCoursesFile(reunion, course) {
         }
         
         // Trouver la course spécifique
-        const courseData = reunionData.courses?.find(c => c.numOrdre === parseInt(course));
+        const courseData = reunionData.courses?.find(c => c.numOrdre === courseNum);
         if (courseData) {
             // Convertir le timestamp en heure (format HH:MM)
             if (courseData.heureDepart) {
@@ -127,12 +131,16 @@ function getCotesFromCoursesFile(reunion, course) {
             return cotes;
         }
         
-        const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === parseInt(reunion));
+        // ✅ CORRECTION: Enlever le "R" et le "C" avant de parser
+        const reunionNum = parseInt(reunion.toString().replace('R', ''));
+        const courseNum = parseInt(course.toString().replace('C', ''));
+        
+        const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === reunionNum);
         if (!reunionData) {
             return cotes;
         }
         
-        const courseData = reunionData.courses?.find(c => c.numOrdre === parseInt(course));
+        const courseData = reunionData.courses?.find(c => c.numOrdre === courseNum);
         if (!courseData?.participants) {
             return cotes;
         }
