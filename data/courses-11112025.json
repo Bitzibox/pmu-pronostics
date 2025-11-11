@@ -1127,7 +1127,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_SOUS_ORDRES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -8051,6 +8051,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -8088,7 +8089,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 1,
@@ -8132,7 +8133,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 1,
@@ -8176,7 +8177,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 2,
@@ -8209,7 +8210,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 2,
@@ -8242,7 +8243,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 2,
@@ -8293,7 +8294,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 3,
@@ -8326,7 +8327,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 4,
@@ -8395,8 +8396,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "FIN_COURSE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 288250,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -8405,11 +8407,12 @@
                 "intitule": "Collant",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "COM",
                 "libelleCourt": "COMPIEGNE",
@@ -8419,6 +8422,38 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  10
+                ],
+                [
+                  8
+                ],
+                [
+                  4
+                ],
+                [
+                  2
+                ],
+                [
+                  9
+                ],
+                [
+                  7
+                ],
+                [
+                  6
+                ],
+                [
+                  13
+                ],
+                [
+                  5
+                ],
+                [
+                  11
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -8706,7 +8741,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15429,7 +15464,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -15443,7 +15478,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -15457,7 +15492,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -15474,7 +15509,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -15491,7 +15526,7 @@
                 {
                   "typePari": "TRIO",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -15506,8 +15541,9 @@
                   "complement": true
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 211180,
               "participants": [],
               "ecuries": [],
               "rapportsDefinitifsDisponibles": false,
@@ -15524,6 +15560,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  8
+                ],
+                [
+                  12
+                ],
+                [
+                  9
+                ]
+              ],
               "hasEParis": false
             },
             {
@@ -15979,7 +16026,7 @@
             "TROT_ATTELE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 6,
+          "prochaineCourse": 7,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1762848900000,
@@ -17361,7 +17408,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -17377,7 +17424,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -17398,7 +17445,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -17414,7 +17461,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -17435,7 +17482,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -17454,7 +17501,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -17468,7 +17515,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -17487,7 +17534,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -17501,7 +17548,7 @@
                 {
                   "typePari": "TRIO",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -17520,7 +17567,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -17548,8 +17595,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 291790,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -17572,6 +17620,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  7
+                ],
+                [
+                  11
+                ],
+                [
+                  6
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -18572,7 +18631,7 @@
             "OBSTACLE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 5,
+          "prochaineCourse": 6,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1762848900000,
@@ -19449,6 +19508,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 10,
               "numExterneReunion": 8,
@@ -19560,12 +19620,13 @@
                   "complement": true
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 230210,
               "participants": [],
               "ecuries": [],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -19588,6 +19649,36 @@
                 ],
                 [
                   15
+                ],
+                [
+                  9
+                ],
+                [
+                  7
+                ],
+                [
+                  11
+                ],
+                [
+                  14
+                ],
+                [
+                  2
+                ],
+                [
+                  6
+                ],
+                [
+                  13
+                ],
+                [
+                  12
+                ],
+                [
+                  10
+                ],
+                [
+                  1
                 ]
               ],
               "hasEParis": false
@@ -19600,7 +19691,7 @@
               "numExterneReunion": 8,
               "numOrdre": 7,
               "numExterne": 7,
-              "heureDepart": 1762870500000,
+              "heureDepart": 1762870680000,
               "libelle": "GRAND PRIX DE LA METAIRIE NEUVE",
               "libelleCourt": "METAIRIE NEUVE",
               "montantPrix": 25000,
@@ -19706,7 +19797,7 @@
                   "complement": true
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -20663,6 +20754,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 8,
@@ -20774,12 +20866,13 @@
                   "complement": true
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 202770,
               "participants": [],
               "ecuries": [],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -20802,6 +20895,24 @@
                 ],
                 [
                   11
+                ],
+                [
+                  14
+                ],
+                [
+                  3
+                ],
+                [
+                  1
+                ],
+                [
+                  5
+                ],
+                [
+                  4
+                ],
+                [
+                  9
                 ]
               ],
               "hasEParis": false
@@ -20814,7 +20925,7 @@
               "numExterneReunion": 8,
               "numOrdre": 5,
               "numExterne": 5,
-              "heureDepart": 1762870800000,
+              "heureDepart": 1762870980000,
               "libelle": "PRIX JEAN-CLAUDE LANGLOIS",
               "libelleCourt": "J.-C. LANGLOIS",
               "montantPrix": 15000,
@@ -20920,7 +21031,7 @@
                   "complement": true
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -21686,6 +21797,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 12,
               "numExterneReunion": 8,
@@ -21798,8 +21910,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "FIN_COURSE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 276260,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -21808,7 +21921,8 @@
                 "intitule": "Collant",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -21831,6 +21945,12 @@
                 ],
                 [
                   3
+                ],
+                [
+                  4
+                ],
+                [
+                  7
                 ]
               ],
               "hasEParis": false
@@ -21843,7 +21963,7 @@
               "numExterneReunion": 8,
               "numOrdre": 3,
               "numExterne": 3,
-              "heureDepart": 1762870500000,
+              "heureDepart": 1762870800000,
               "libelle": "PRIX DE L'ILE D'HOEDIC",
               "libelleCourt": "L'ILE D'HOEDIC",
               "montantPrix": 9400,
@@ -21951,7 +22071,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -22403,8 +22523,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 8,
-          "numCourse": 5
+          "numReunion": 1,
+          "numCourse": 3
         }
       ],
       "datesProgrammesDisponibles": [
@@ -22414,7 +22534,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1762869615920,
+      "timestamp": 1762870516007,
       "timezoneOffset": 3600000
     },
     "date": "11112025"
