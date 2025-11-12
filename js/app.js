@@ -396,10 +396,14 @@ async function calculerHistoriqueTempsReel() {
     const historique = [];
     const today = new Date();
     
-    console.log('📊 Calcul de l\'historique des 7 derniers jours en temps réel...');
+    console.log('📊 Calcul de l\'historique complet en temps réel...');
     
-    // Charger les 7 derniers jours
-    for (let i = 0; i < 7; i++) {
+    // ✅ MODIFICATION : Charger TOUS les jours disponibles (maximum 30 jours)
+    // On va chercher jusqu'à ce qu'on trouve 3 jours consécutifs sans données
+    let joursConsecutifsSansDonnees = 0;
+    const maxJours = 30; // Limite de sécurité
+    
+    for (let i = 0; i < maxJours && joursConsecutifsSansDonnees < 3; i++) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
         const dateStr = getDateString(date);
@@ -425,6 +429,8 @@ async function calculerHistoriqueTempsReel() {
             };
             
             if (pronosticsRes && pronosticsRes.ok) {
+                joursConsecutifsSansDonnees = 0; // Reset le compteur
+                
                 const pronosticsData = await pronosticsRes.json();
                 let pronostics = [];
                 
@@ -482,17 +488,20 @@ async function calculerHistoriqueTempsReel() {
                     Math.round((stats.nb_gagnants / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
                 stats.taux_place = stats.courses_avec_resultats > 0 ? 
                     Math.round((stats.nb_places / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
+                
+                historique.push(stats);
+                console.log(`  ✅ ${dateDisplay}: ${stats.taux_gagnant}% gagnant, ${stats.taux_place}% placé`);
+            } else {
+                joursConsecutifsSansDonnees++;
             }
-            
-            historique.push(stats);
-            console.log(`  ✅ ${dateDisplay}: ${stats.taux_gagnant}% gagnant, ${stats.taux_place}% placé`);
             
         } catch (error) {
             console.warn(`  ⚠️ Erreur pour ${dateDisplay}:`, error);
+            joursConsecutifsSansDonnees++;
         }
     }
     
-    console.log('✅ Historique calculé:', historique.length, 'jours');
+    console.log(`✅ Historique calculé: ${historique.length} jours`);
     return historique.reverse(); // Inverser pour avoir du plus ancien au plus récent
 }
 
