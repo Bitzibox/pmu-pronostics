@@ -451,88 +451,9 @@ function updateStatistiquesHistoriques() {
             `${pireJour.taux_gagnant}% gagnant • ${pireJour.taux_place}% placé`;
     }
     
-    // Mettre à jour le graphique historique
-    updateChartHistorique(historique);
-    
     console.log('✅ Statistiques historiques mises à jour:', nbJours, 'jours');
 }
 
-// ✅ NOUVELLE FONCTION : Mettre à jour le graphique d'évolution historique
-function updateChartHistorique(historique) {
-    const canvas = document.getElementById('chart-historique');
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    
-    // Prendre les 7 derniers jours ou moins
-    const data = historique.slice(-7).reverse();
-    const labels = data.map(j => j.date);
-    const tauxGagnants = data.map(j => j.taux_gagnant || 0);
-    const tauxPlaces = data.map(j => j.taux_place || 0);
-    
-    // Détruire l'ancien graphique
-    if (chartHistoriqueInstance) {
-        chartHistoriqueInstance.destroy();
-    }
-    
-    chartHistoriqueInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'Taux Gagnant (%)',
-                    data: tauxGagnants,
-                    borderColor: '#28a745',
-                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                    tension: 0.4,
-                    fill: true,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
-                },
-                {
-                    label: 'Taux Placé (%)',
-                    data: tauxPlaces,
-                    borderColor: '#ffc107',
-                    backgroundColor: 'rgba(255, 193, 7, 0.1)',
-                    tension: 0.4,
-                    fill: true,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                },
-                tooltip: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        label: function(context) {
-                            return context.dataset.label + ': ' + context.parsed.y.toFixed(1) + '%';
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    max: 100,
-                    ticks: {
-                        callback: function(value) {
-                            return value + '%';
-                        }
-                    }
-                }
-            }
-        }
-    });
 }
 
 
@@ -952,7 +873,8 @@ function creerGraphiqueHistorique(historique) {
 
     if (chartHistoriqueInstance) chartHistoriqueInstance.destroy();
 
-    const joursAvecData = historique.filter(h => h.pronostics_disponibles).reverse();
+    // ✅ CORRECTION: Prendre tous les jours, pas seulement ceux avec pronostics_disponibles
+    const joursAvecData = historique.slice(-7).reverse(); // Prendre les 7 derniers jours
 
     if (!joursAvecData.length) {
         if (ctx.parentElement) {
