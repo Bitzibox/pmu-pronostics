@@ -625,21 +625,11 @@ function renderCoursesForReunion(reunion) {
     let html = '';
     
     reunion.courses.forEach(prono => {
-        const courseKey = `R${prono.reunion}C${prono.course}`;
-        const courseInfo = allData.courses?.[courseKey] || {};
-        const disciplineInfo = getDisciplineInfo(courseInfo.discipline);
+        // ✅ UTILISER LA DISCIPLINE ENRICHIE
+        const disciplineInfo = getDisciplineInfo(prono.discipline || 'Inconnue');
         
         let heure = prono.heure || '--:--';
-        let discipline = courseInfo.discipline || 'Inconnue';
-        
-        if (allData.programme?.programme?.reunions) {
-            const reunionProg = allData.programme.programme.reunions.find(r => r.numOrdre === prono.reunion);
-            const courseProg = reunionProg?.courses?.find(c => c.numOrdre === prono.course);
-            if (courseProg) {
-                heure = courseProg.heureDepart?.substring(0, 5) || heure;
-                discipline = courseProg.discipline || discipline;
-            }
-        }
+        let hippodrome = prono.hippodrome || reunion.hippodrome;
 
         // ✅ UTILISER LE STATUT ENRICHI
         let statutBadge = '<span class="statut-badge statut-attente"><i class="bi bi-clock"></i> En attente</span>';
