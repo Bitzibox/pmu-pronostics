@@ -134,7 +134,7 @@ async function loadAllData(dateStringDDMMYYYY) {
         const statsHistorique = await chargerHistorique();
         afficherHistorique(statsHistorique);
         
-        updateAllSections();
+        await updateAllSections(); // ✅ Attendre la fin des calculs
         showLoadingState(false);
         
     } catch (error) {
@@ -144,9 +144,9 @@ async function loadAllData(dateStringDDMMYYYY) {
     }
 }
 
-function updateAllSections() {
+async function updateAllSections() {
     updateStatistiquesGlobales();
-    updateStatistiquesHistoriques(); // ✅ AJOUT
+    await updateStatistiquesHistoriques(); // ✅ Attendre le calcul
     updateTableauHistorique();
     updateCoursesParReunion();
     updateTableauComparaison();
@@ -390,14 +390,121 @@ function updateStatistiquesGlobales() {
     if (el('nb-rates')) el('nb-rates').innerHTML = `<i class="bi bi-x-circle"></i> ${nbRates}`;
 }
 
-// ✅ NOUVELLE FONCTION : Calculer les statistiques sur l'historique complet
-function updateStatistiquesHistoriques() {
-    if (!allData.analyse?.historique?.length) {
-        console.warn('⚠️ Pas de données historiques pour les statistiques');
+// ✅ NOUVELLE FONCTION : Calculer l'historique en temps réel depuis les fichiers bruts
+async function calculerHistoriqueTempsReel() {
+    const historique = [];
+    const today = new Date();
+    
+    console.log('📊 Calcul de l\'historique des 7 derniers jours en temps réel...');
+    
+    // Charger les 7 derniers jours
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(today);
+        date.setDate(date.getDate() - i);
+        const dateStr = getDateString(date);
+        const dateDisplay = ddmmyyyyToDisplay(dateStr);
+        
+        try {
+            // Charger pronostics et résultats en parallèle
+            const [pronosticsRes, resultatsRes] = await Promise.all([
+                fetch(`${GITHUB_RAW_BASE}pronostics-${dateStr}.json`).catch(() => null),
+                fetch(`${GITHUB_RAW_BASE}resultats-${dateStr}.json`).catch(() => null)
+            ]);
+            
+            let stats = {
+                date: dateDisplay,
+                total_courses: 0,
+                nb_gagnants: 0,
+                nb_places: 0,
+                nb_rates: 0,
+                taux_gagnant: 0,
+                taux_place: 0,
+                confiance_moyenne: 0,
+                courses_avec_resultats: 0
+            };
+            
+            if (pronosticsRes && pronosticsRes.ok) {
+                const pronosticsData = await pronosticsRes.json();
+                let pronostics = [];
+                
+                // Parser le format (peut être imbriqué)
+                if (Array.isArray(pronosticsData)) {
+                    if (pronosticsData[0]?.pronostics) {
+                        if (Array.isArray(pronosticsData[0].pronostics) && pronosticsData[0].pronostics[0]?.pronostics) {
+                            pronostics = pronosticsData[0].pronostics[0].pronostics;
+                        } else {
+                            pronostics = pronosticsData[0].pronostics;
+                        }
+                    } else {
+                        pronostics = pronosticsData;
+                    }
+                } else if (pronosticsData.pronostics) {
+                    pronostics = pronosticsData.pronostics;
+                }
+                
+                stats.total_courses = pronostics.length;
+                let sommeConfiance = 0;
+                
+                if (resultatsRes && resultatsRes.ok) {
+                    const resultatsData = await resultatsRes.json();
+                    let resultats = [];
+                    
+                    if (Array.isArray(resultatsData)) {
+                        resultats = resultatsData[0]?.courses || resultatsData;
+                    } else {
+                        resultats = resultatsData.courses || [];
+                    }
+                    
+                    // Calculer les stats
+                    pronostics.forEach(prono => {
+                        sommeConfiance += prono.scoreConfiance || 0;
+                        
+                        const resultat = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
+                        if (resultat?.arrivee?.length > 0) {
+                            stats.courses_avec_resultats++;
+                            const chevalProno = prono.classement?.[0]?.numero;
+                            
+                            if (chevalProno === resultat.arrivee[0]) {
+                                stats.nb_gagnants++;
+                                stats.nb_places++;
+                            } else if (resultat.arrivee.slice(0, 3).includes(chevalProno)) {
+                                stats.nb_places++;
+                            } else {
+                                stats.nb_rates++;
+                            }
+                        }
+                    });
+                }
+                
+                stats.confiance_moyenne = pronostics.length > 0 ? Math.round(sommeConfiance / pronostics.length) : 0;
+                stats.taux_gagnant = stats.courses_avec_resultats > 0 ? 
+                    Math.round((stats.nb_gagnants / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
+                stats.taux_place = stats.courses_avec_resultats > 0 ? 
+                    Math.round((stats.nb_places / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
+            }
+            
+            historique.push(stats);
+            console.log(`  ✅ ${dateDisplay}: ${stats.taux_gagnant}% gagnant, ${stats.taux_place}% placé`);
+            
+        } catch (error) {
+            console.warn(`  ⚠️ Erreur pour ${dateDisplay}:`, error);
+        }
+    }
+    
+    console.log('✅ Historique calculé:', historique.length, 'jours');
+    return historique.reverse(); // Inverser pour avoir du plus ancien au plus récent
+}
+
+// ✅ MODIFIER LA FONCTION updateStatistiquesHistoriques pour utiliser les données calculées
+async function updateStatistiquesHistoriques() {
+    // ✅ CALCULER L'HISTORIQUE EN TEMPS RÉEL au lieu d'utiliser analyse.json
+    const historique = await calculerHistoriqueTempsReel();
+    
+    if (!historique || historique.length === 0) {
+        console.warn('⚠️ Pas de données historiques calculées');
         return;
     }
     
-    const historique = allData.analyse.historique;
     const nbJours = historique.length;
     
     // Calculer les moyennes
@@ -456,6 +563,9 @@ function updateStatistiquesHistoriques() {
     
     console.log('✅ Statistiques historiques mises à jour:', nbJours, 'jours');
 }
+
+}
+
 
 function updateTableauHistorique() {
     const tbody = document.getElementById('historique-body');
