@@ -457,6 +457,9 @@ function updateStatistiquesHistoriques() {
     console.log('✅ Statistiques historiques mises à jour:', nbJours, 'jours');
 }
 
+}
+
+
 function updateTableauHistorique() {
     const tbody = document.getElementById('historique-body');
     if (!tbody) return;
@@ -873,8 +876,13 @@ function creerGraphiqueHistorique(historique) {
 
     if (chartHistoriqueInstance) chartHistoriqueInstance.destroy();
 
+    // ✅ DEBUG: Afficher les données avant de créer le graphique
+    console.log('📊 Données pour le graphique:', historique);
+
     // ✅ CORRECTION: Prendre tous les jours, pas seulement ceux avec pronostics_disponibles
     const joursAvecData = historique.slice(-7).reverse(); // Prendre les 7 derniers jours
+    
+    console.log('📊 Jours affichés dans le graphique:', joursAvecData);
 
     if (!joursAvecData.length) {
         if (ctx.parentElement) {
