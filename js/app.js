@@ -50,6 +50,7 @@ const DISCIPLINES = {
 // Variables globales
 let performanceChart = null;
 let chartHistoriqueInstance = null;
+let historiqueCalcule = null; // ✅ Stocker l'historique calculé en temps réel
 let allData = { analyse: null, pronostics: null, resultats: null, courses: null, programme: null };
 let currentDateString = '';
 
@@ -500,6 +501,9 @@ async function updateStatistiquesHistoriques() {
     // ✅ CALCULER L'HISTORIQUE EN TEMPS RÉEL au lieu d'utiliser analyse.json
     const historique = await calculerHistoriqueTempsReel();
     
+    // ✅ STOCKER dans la variable globale pour réutilisation
+    historiqueCalcule = historique;
+    
     if (!historique || historique.length === 0) {
         console.warn('⚠️ Pas de données historiques calculées');
         return;
@@ -568,13 +572,14 @@ function updateTableauHistorique() {
     const tbody = document.getElementById('historique-body');
     if (!tbody) return;
 
-    if (!allData.analyse?.historique?.length) {
+    // ✅ UTILISER LES DONNÉES CALCULÉES EN TEMPS RÉEL
+    if (!historiqueCalcule || historiqueCalcule.length === 0) {
         tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">Aucune donnée historique</td></tr>';
         return;
     }
 
     let html = '';
-    allData.analyse.historique.forEach(jour => {
+    historiqueCalcule.forEach(jour => {
         const tauxGagnantClass = jour.taux_gagnant >= 30 ? 'text-success fw-bold' : 
                                  jour.taux_gagnant >= 15 ? 'text-warning fw-bold' : 'text-danger fw-bold';
         const tauxPlaceClass = jour.taux_place >= 50 ? 'text-success fw-bold' : 
@@ -595,6 +600,7 @@ function updateTableauHistorique() {
     });
 
     tbody.innerHTML = html;
+    console.log('✅ Tableau historique mis à jour avec', historiqueCalcule.length, 'jours calculés');
 }
 
 function updateCoursesParReunion() {
