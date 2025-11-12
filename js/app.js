@@ -641,9 +641,23 @@ function renderCoursesForReunion(reunion) {
             }
         }
 
+        // ✅ UTILISER LE STATUT ENRICHI
         let statutBadge = '<span class="statut-badge statut-attente"><i class="bi bi-clock"></i> En attente</span>';
+        
+        // Si le statut a été enrichi, l'utiliser
+        if (prono.statut) {
+            if (prono.statut === 'OUVERT') {
+                statutBadge = '<span class="statut-badge statut-ouvert"><i class="bi bi-unlock-fill"></i> Ouvert</span>';
+            } else if (prono.statut === 'EN COURS') {
+                statutBadge = '<span class="statut-badge statut-encours"><i class="bi bi-play-circle-fill"></i> En cours</span>';
+            } else if (prono.statut === 'TERMINÉ') {
+                statutBadge = '<span class="statut-badge statut-termine"><i class="bi bi-check-circle-fill"></i> Terminé</span>';
+            }
+        }
+        
         let resultatHtml = '';
 
+        // Si on a des résultats, le statut change en fonction du résultat du pronostic
         if (allData.resultats?.courses) {
             const resultat = allData.resultats.courses.find(r => r.reunion === prono.reunion && r.course === prono.course);
             const chevalPronostique = prono.classement?.[0]?.numero;
