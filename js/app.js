@@ -457,9 +457,6 @@ function updateStatistiquesHistoriques() {
     console.log('✅ Statistiques historiques mises à jour:', nbJours, 'jours');
 }
 
-}
-
-
 function updateTableauHistorique() {
     const tbody = document.getElementById('historique-body');
     if (!tbody) return;
