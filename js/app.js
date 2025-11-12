@@ -451,7 +451,12 @@ function updateStatistiquesHistoriques() {
             `${pireJour.taux_gagnant}% gagnant • ${pireJour.taux_place}% placé`;
     }
     
+    // ✅ APPELER LA FONCTION POUR CRÉER LE GRAPHIQUE
+    creerGraphiqueHistorique(historique);
+    
     console.log('✅ Statistiques historiques mises à jour:', nbJours, 'jours');
+}
+
 }
 
 
