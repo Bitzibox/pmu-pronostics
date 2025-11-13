@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": true,
+      "cached": false,
       "date": 1762988400000,
       "dateProgrammeActif": 1762988400000,
       "timezoneOffset": 3600000,
@@ -15521,8 +15521,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_DEFINITIVE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 88470,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -15530,6 +15531,14 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    8
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
@@ -15556,12 +15565,37 @@
                 ],
                 [
                   11
+                ],
+                [
+                  7
+                ],
+                [
+                  9
+                ],
+                [
+                  3
+                ],
+                [
+                  2
+                ],
+                [
+                  4
+                ],
+                [
+                  10
+                ],
+                [
+                  1
+                ],
+                [
+                  6
                 ]
               ]
             },
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 6,
               "numExterneReunion": 6,
@@ -15599,7 +15633,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15622,7 +15656,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15645,7 +15679,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15661,7 +15695,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15677,7 +15711,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15690,8 +15724,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ROUGE_AUX_PARTANTS",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 57160,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -15700,7 +15735,19 @@
                 "intitule": "Léger",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    4,
+                    7,
+                    14,
+                    16
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -15715,11 +15762,28 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
-              "hasEParis": true
+              "hasEParis": true,
+              "ordreArrivee": [
+                [
+                  12
+                ],
+                [
+                  11
+                ],
+                [
+                  1
+                ],
+                [
+                  2
+                ],
+                [
+                  10
+                ]
+              ]
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "PLAT"
           ],
@@ -15727,7 +15791,6 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 10,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1763021700000,
@@ -15742,12 +15805,7 @@
           "cagnottes": []
         }
       ],
-      "prochainesCoursesAPartir": [
-        {
-          "numReunion": 6,
-          "numCourse": 10
-        }
-      ],
+      "prochainesCoursesAPartir": [],
       "datesProgrammesDisponibles": [
         "13112025",
         "14112025",
@@ -15758,7 +15816,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1763072139194,
+      "timestamp": 1763073039326,
       "timezoneOffset": 3600000
     },
     "date": "13112025"
