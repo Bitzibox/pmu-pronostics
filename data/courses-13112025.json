@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": false,
+      "cached": true,
       "date": 1762988400000,
       "dateProgrammeActif": 1762988400000,
       "timezoneOffset": 3600000,
@@ -15299,8 +15299,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_DEFINITIVE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 70850,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -15308,6 +15309,18 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    3,
+                    11,
+                    14,
+                    15,
+                    16
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
@@ -15334,12 +15347,37 @@
                 ],
                 [
                   13
+                ],
+                [
+                  9
+                ],
+                [
+                  4
+                ],
+                [
+                  7
+                ],
+                [
+                  5
+                ],
+                [
+                  10
+                ],
+                [
+                  6
+                ],
+                [
+                  8
+                ],
+                [
+                  2
                 ]
               ]
             },
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 6,
               "numExterneReunion": 6,
@@ -15483,7 +15521,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE",
               "categorieStatut": "ARRIVEE",
               "participants": [],
               "ecuries": [],
@@ -15492,7 +15530,8 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -15651,7 +15690,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15719,7 +15758,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1763071239364,
+      "timestamp": 1763072139194,
       "timezoneOffset": 3600000
     },
     "date": "13112025"
