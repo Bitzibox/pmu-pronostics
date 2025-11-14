@@ -3197,6 +3197,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -3234,7 +3235,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3278,7 +3279,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3322,7 +3323,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3355,7 +3356,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3388,7 +3389,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3439,7 +3440,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3472,7 +3473,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3540,10 +3541,10 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "FIN_COURSE",
               "categorieStatut": "ARRIVEE",
               "indicateurEvenementArriveeProvisoire": "ENQUETE",
-              "detailsIndicateurEvenementArriveeProvisoire": "Notamment sur les allures du N°1 HENGY DU POMMEREUX, drivé par Mr Mathys DEMI\nSSY  dans la ligne droite d'arrivée.",
+              "detailsIndicateurEvenementArriveeProvisoire": "TERMINEE AVEC MODIFICATION",
               "dureeCourse": 170270,
               "participants": [],
               "ecuries": [],
@@ -3555,14 +3556,21 @@
                     4,
                     7
                   ]
+                },
+                {
+                  "type": "DISTANCE",
+                  "numeroParticipants": [
+                    1
+                  ]
                 }
               ],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "BOR",
                 "libelleCourt": "BORELY",
@@ -3584,6 +3592,21 @@
                 ],
                 [
                   9
+                ],
+                [
+                  3
+                ],
+                [
+                  6
+                ],
+                [
+                  10
+                ],
+                [
+                  8
+                ],
+                [
+                  13
                 ]
               ],
               "hasEParis": true
@@ -3936,7 +3959,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -13896,7 +13919,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1763116239696,
+      "timestamp": 1763117139700,
       "timezoneOffset": 3600000
     },
     "date": "14112025"
