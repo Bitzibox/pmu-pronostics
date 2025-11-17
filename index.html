@@ -341,16 +341,17 @@
 <div class="container mt-3">
     <div class="card border-0 shadow-sm">
         <div class="card-body">
-            <div class="row align-items-center">
+            <div class="row align-items-end">
                 <div class="col-md-6">
-                    <label for="date-selector" class="form-label fw-bold">
+                    <label for="date-selector" class="form-label fw-bold mb-2">
                         <i class="bi bi-calendar3"></i> Sélectionner une date
                     </label>
                     <select id="date-selector" class="form-select">
                         <option value="">Chargement...</option>
                     </select>
                 </div>
-                <div class="col-md-6 d-flex align-items-end">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold mb-2 invisible" aria-hidden="true">.</label>
                     <button id="load-today" class="btn btn-primary w-100">
                         <i class="bi bi-calendar-check"></i> Retour à aujourd'hui
                     </button>
