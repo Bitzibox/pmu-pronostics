@@ -5,7 +5,9 @@ const BRANCH = 'main';
 const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data/`;
 const CONFIG = {
     REFRESH_INTERVAL: 300000, // 5 minutes
-    DATE_FORMAT: 'DD/MM/YYYY'
+    DATE_FORMAT: 'DD/MM/YYYY',
+    CACHE_TTL: 3600000, // 1 heure pour le cache
+    HISTORIQUE_CACHE_TTL: 86400000 // 24 heures pour l'historique
 };
 
 // Mapping des hippodromes PAR PAYS et numéro de réunion
@@ -208,6 +210,69 @@ function escapeCsv(text) {
  */
 function el(id) {
     return document.getElementById(id);
+}
+
+// ✅ FONCTIONS DE CACHE LOCALSTORAGE
+
+/**
+ * Sauvegarde des données dans localStorage avec timestamp
+ * @param {string} key - La clé de stockage
+ * @param {any} data - Les données à stocker
+ * @param {number} ttl - Time to live en millisecondes
+ */
+function cacheSet(key, data, ttl = CONFIG.CACHE_TTL) {
+    try {
+        const item = {
+            data: data,
+            timestamp: Date.now(),
+            ttl: ttl
+        };
+        localStorage.setItem(key, JSON.stringify(item));
+        console.log(`💾 Cache sauvegardé: ${key}`);
+    } catch (error) {
+        console.warn(`⚠️ Erreur de cache (set ${key}):`, error);
+    }
+}
+
+/**
+ * Récupère des données du localStorage si elles sont encore valides
+ * @param {string} key - La clé de stockage
+ * @returns {any|null} Les données ou null si expirées/inexistantes
+ */
+function cacheGet(key) {
+    try {
+        const itemStr = localStorage.getItem(key);
+        if (!itemStr) return null;
+
+        const item = JSON.parse(itemStr);
+        const now = Date.now();
+
+        // Vérifier si le cache est expiré
+        if (now - item.timestamp > item.ttl) {
+            console.log(`🗑️ Cache expiré: ${key}`);
+            localStorage.removeItem(key);
+            return null;
+        }
+
+        console.log(`✅ Cache valide: ${key}`);
+        return item.data;
+    } catch (error) {
+        console.warn(`⚠️ Erreur de cache (get ${key}):`, error);
+        return null;
+    }
+}
+
+/**
+ * Supprime une entrée du cache
+ * @param {string} key - La clé à supprimer
+ */
+function cacheClear(key) {
+    try {
+        localStorage.removeItem(key);
+        console.log(`🗑️ Cache supprimé: ${key}`);
+    } catch (error) {
+        console.warn(`⚠️ Erreur de cache (clear ${key}):`, error);
+    }
 }
 
 // ✅ NOUVELLES FONCTIONS D'ENRICHISSEMENT
@@ -433,126 +498,155 @@ function updateStatistiquesGlobales() {
 
 // ✅ NOUVELLE FONCTION : Calculer l'historique en temps réel depuis les fichiers bruts
 async function calculerHistoriqueTempsReel() {
-    const historique = [];
     const today = new Date();
-    
-    console.log('📊 Calcul de l\'historique complet en temps réel...');
-    
-    // ✅ MODIFICATION : Charger TOUS les jours disponibles (maximum 30 jours)
-    // On va chercher jusqu'à ce qu'on trouve 3 jours consécutifs sans données
-    let joursConsecutifsSansDonnees = 0;
-    const maxJours = 30; // Limite de sécurité
-    
-    for (let i = 0; i < maxJours && joursConsecutifsSansDonnees < 3; i++) {
+    console.log('📊 Calcul de l\'historique complet en temps réel (parallèle)...');
+
+    // ✅ OPTIMISATION : Charger tous les jours en parallèle par batch
+    const maxJours = 30;
+    const batchSize = 5; // Charger 5 jours à la fois pour ne pas surcharger
+    const historique = [];
+
+    // Créer les dates à charger
+    const dates = [];
+    for (let i = 0; i < maxJours; i++) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
-        const dateStr = getDateString(date);
-        const dateDisplay = ddmmyyyyToDisplay(dateStr);
-        
-        try {
-            // Charger pronostics et résultats en parallèle
-            const [pronosticsRes, resultatsRes] = await Promise.all([
-                fetch(`${GITHUB_RAW_BASE}pronostics-${dateStr}.json`).catch(() => null),
-                fetch(`${GITHUB_RAW_BASE}resultats-${dateStr}.json`).catch(() => null)
-            ]);
-            
-            let stats = {
-                date: dateDisplay,
-                total_courses: 0,
-                nb_gagnants: 0,
-                nb_places: 0,
-                nb_rates: 0,
-                taux_gagnant: 0,
-                taux_place: 0,
-                confiance_moyenne: 0,
-                courses_avec_resultats: 0
-            };
-            
-            if (pronosticsRes && pronosticsRes.ok) {
-                joursConsecutifsSansDonnees = 0; // Reset le compteur
-                
-                const pronosticsData = await pronosticsRes.json();
-                let pronostics = [];
-                
-                // Parser le format (peut être imbriqué)
-                if (Array.isArray(pronosticsData)) {
-                    if (pronosticsData[0]?.pronostics) {
-                        if (Array.isArray(pronosticsData[0].pronostics) && pronosticsData[0].pronostics[0]?.pronostics) {
-                            pronostics = pronosticsData[0].pronostics[0].pronostics;
-                        } else {
-                            pronostics = pronosticsData[0].pronostics;
-                        }
-                    } else {
-                        pronostics = pronosticsData;
-                    }
-                } else if (pronosticsData.pronostics) {
-                    pronostics = pronosticsData.pronostics;
-                }
-                
-                stats.total_courses = pronostics.length;
-                let sommeConfiance = 0;
-                
-                if (resultatsRes && resultatsRes.ok) {
-                    const resultatsData = await resultatsRes.json();
-                    let resultats = [];
-                    
-                    if (Array.isArray(resultatsData)) {
-                        resultats = resultatsData[0]?.courses || resultatsData;
-                    } else {
-                        resultats = resultatsData.courses || [];
-                    }
-                    
-                    // Calculer les stats
-                    pronostics.forEach(prono => {
-                        sommeConfiance += prono.scoreConfiance || 0;
-                        
-                        const resultat = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
-                        if (resultat?.arrivee?.length > 0) {
-                            stats.courses_avec_resultats++;
-                            const chevalProno = prono.classement?.[0]?.numero;
-                            
-                            if (chevalProno === resultat.arrivee[0]) {
-                                stats.nb_gagnants++;
-                                stats.nb_places++;
-                            } else if (resultat.arrivee.slice(0, 3).includes(chevalProno)) {
-                                stats.nb_places++;
-                            } else {
-                                stats.nb_rates++;
-                            }
-                        }
-                    });
-                }
-                
-                stats.confiance_moyenne = pronostics.length > 0 ? Math.round(sommeConfiance / pronostics.length) : 0;
-                stats.taux_gagnant = stats.courses_avec_resultats > 0 ? 
-                    Math.round((stats.nb_gagnants / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
-                stats.taux_place = stats.courses_avec_resultats > 0 ? 
-                    Math.round((stats.nb_places / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
-                
-                historique.push(stats);
-                console.log(`  ✅ ${dateDisplay}: ${stats.taux_gagnant}% gagnant, ${stats.taux_place}% placé`);
-            } else {
-                joursConsecutifsSansDonnees++;
-            }
-            
-        } catch (error) {
-            console.warn(`  ⚠️ Erreur pour ${dateDisplay}:`, error);
-            joursConsecutifsSansDonnees++;
-        }
+        dates.push({
+            date: date,
+            dateStr: getDateString(date),
+            dateDisplay: ddmmyyyyToDisplay(getDateString(date))
+        });
     }
-    
-    console.log(`✅ Historique calculé: ${historique.length} jours`);
+
+    // Traiter par batch
+    for (let batchStart = 0; batchStart < dates.length; batchStart += batchSize) {
+        const batch = dates.slice(batchStart, batchStart + batchSize);
+
+        // Charger tous les jours du batch en parallèle
+        const batchResults = await Promise.all(
+            batch.map(async ({ date, dateStr, dateDisplay }) => {
+                try {
+                    // Charger pronostics et résultats en parallèle
+                    const [pronosticsRes, resultatsRes] = await Promise.all([
+                        fetch(`${GITHUB_RAW_BASE}pronostics-${dateStr}.json`).catch(() => null),
+                        fetch(`${GITHUB_RAW_BASE}resultats-${dateStr}.json`).catch(() => null)
+                    ]);
+
+                    let stats = {
+                        date: dateDisplay,
+                        total_courses: 0,
+                        nb_gagnants: 0,
+                        nb_places: 0,
+                        nb_rates: 0,
+                        taux_gagnant: 0,
+                        taux_place: 0,
+                        confiance_moyenne: 0,
+                        courses_avec_resultats: 0
+                    };
+
+                    if (pronosticsRes && pronosticsRes.ok) {
+                        const pronosticsData = await pronosticsRes.json();
+                        let pronostics = [];
+
+                        // Parser le format (peut être imbriqué)
+                        if (Array.isArray(pronosticsData)) {
+                            if (pronosticsData[0]?.pronostics) {
+                                if (Array.isArray(pronosticsData[0].pronostics) && pronosticsData[0].pronostics[0]?.pronostics) {
+                                    pronostics = pronosticsData[0].pronostics[0].pronostics;
+                                } else {
+                                    pronostics = pronosticsData[0].pronostics;
+                                }
+                            } else {
+                                pronostics = pronosticsData;
+                            }
+                        } else if (pronosticsData.pronostics) {
+                            pronostics = pronosticsData.pronostics;
+                        }
+
+                        stats.total_courses = pronostics.length;
+                        let sommeConfiance = 0;
+
+                        if (resultatsRes && resultatsRes.ok) {
+                            const resultatsData = await resultatsRes.json();
+                            let resultats = [];
+
+                            if (Array.isArray(resultatsData)) {
+                                resultats = resultatsData[0]?.courses || resultatsData;
+                            } else {
+                                resultats = resultatsData.courses || [];
+                            }
+
+                            // Calculer les stats
+                            pronostics.forEach(prono => {
+                                sommeConfiance += prono.scoreConfiance || 0;
+
+                                const resultat = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
+                                if (resultat?.arrivee?.length > 0) {
+                                    stats.courses_avec_resultats++;
+                                    const chevalProno = prono.classement?.[0]?.numero;
+
+                                    if (chevalProno === resultat.arrivee[0]) {
+                                        stats.nb_gagnants++;
+                                        stats.nb_places++;
+                                    } else if (resultat.arrivee.slice(0, 3).includes(chevalProno)) {
+                                        stats.nb_places++;
+                                    } else {
+                                        stats.nb_rates++;
+                                    }
+                                }
+                            });
+                        }
+
+                        stats.confiance_moyenne = pronostics.length > 0 ? Math.round(sommeConfiance / pronostics.length) : 0;
+                        stats.taux_gagnant = stats.courses_avec_resultats > 0 ?
+                            Math.round((stats.nb_gagnants / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
+                        stats.taux_place = stats.courses_avec_resultats > 0 ?
+                            Math.round((stats.nb_places / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
+
+                        console.log(`  ✅ ${dateDisplay}: ${stats.taux_gagnant}% gagnant, ${stats.taux_place}% placé`);
+                        return stats;
+                    }
+
+                    return null;
+                } catch (error) {
+                    console.warn(`  ⚠️ Erreur pour ${dateDisplay}:`, error);
+                    return null;
+                }
+            })
+        );
+
+        // Ajouter les stats valides à l'historique
+        batchResults.forEach(stats => {
+            if (stats) historique.push(stats);
+        });
+    }
+
+    console.log(`✅ Historique calculé: ${historique.length} jours (parallèle)`);
     return historique.reverse(); // Inverser pour avoir du plus ancien au plus récent
 }
 
 // ✅ MODIFIER LA FONCTION updateStatistiquesHistoriques pour utiliser les données calculées
 async function updateStatistiquesHistoriques() {
-    // ✅ CALCULER L'HISTORIQUE EN TEMPS RÉEL au lieu d'utiliser analyse.json
-    const historique = await calculerHistoriqueTempsReel();
-    
+    // ✅ VÉRIFIER LE CACHE D'ABORD
+    const cacheKey = 'historique_cache';
+    let historique = cacheGet(cacheKey);
+
+    if (!historique) {
+        // ✅ CALCULER L'HISTORIQUE EN TEMPS RÉEL au lieu d'utiliser analyse.json
+        console.log('📊 Calcul de l\'historique (pas de cache valide)...');
+        historique = await calculerHistoriqueTempsReel();
+
+        // ✅ SAUVEGARDER DANS LE CACHE
+        if (historique && historique.length > 0) {
+            cacheSet(cacheKey, historique, CONFIG.HISTORIQUE_CACHE_TTL);
+        }
+    } else {
+        console.log('✅ Utilisation du cache pour l\'historique');
+    }
+
     // ✅ STOCKER dans la variable globale pour réutilisation
     historiqueCalcule = historique;
-    
+
     if (!historique || historique.length === 0) {
         console.warn('⚠️ Pas de données historiques calculées');
         return;
