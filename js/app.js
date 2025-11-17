@@ -93,35 +93,20 @@ async function loadAllData(dateStringDDMMYYYY) {
             allData.analyse = { historique: [], stats_globales: {} };
         }
         
-        // Parser pronostics
+        // Parser pronostics avec fonction utilitaire
         if (pronosticsRes && pronosticsRes.ok) {
             const rawPronostics = await pronosticsRes.json();
-            if (Array.isArray(rawPronostics)) {
-                if (rawPronostics[0]?.pronostics) {
-                    if (Array.isArray(rawPronostics[0].pronostics) && 
-                        rawPronostics[0].pronostics[0]?.pronostics) {
-                        allData.pronostics = { pronostics: rawPronostics[0].pronostics[0].pronostics };
-                    } else {
-                        allData.pronostics = { pronostics: rawPronostics[0].pronostics };
-                    }
-                } else {
-                    allData.pronostics = { pronostics: rawPronostics };
-                }
-            } else {
-                allData.pronostics = rawPronostics.pronostics ? rawPronostics : { pronostics: [] };
-            }
+            const pronostics = parsePronosticsData(rawPronostics);
+            allData.pronostics = { pronostics: pronostics };
         } else {
             allData.pronostics = { pronostics: [] };
         }
-        
-        // Parser résultats
+
+        // Parser résultats avec fonction utilitaire
         if (resultatsRes && resultatsRes.ok) {
             const rawResultats = await resultatsRes.json();
-            if (Array.isArray(rawResultats)) {
-                allData.resultats = rawResultats[0]?.courses ? rawResultats[0] : { courses: rawResultats };
-            } else {
-                allData.resultats = rawResultats.courses ? rawResultats : { courses: [] };
-            }
+            const courses = parseResultatsData(rawResultats);
+            allData.resultats = { courses: courses };
         } else {
             allData.resultats = { courses: [] };
         }
@@ -210,6 +195,48 @@ function escapeCsv(text) {
  */
 function el(id) {
     return document.getElementById(id);
+}
+
+// ✅ FONCTIONS UTILITAIRES DE PARSING DE DONNÉES
+
+/**
+ * Parse les données de pronostics qui peuvent avoir différents formats imbriqués
+ * @param {any} rawData - Les données brutes de l'API
+ * @returns {Array} Tableau de pronostics normalisé
+ */
+function parsePronosticsData(rawData) {
+    if (!rawData) return [];
+
+    if (Array.isArray(rawData)) {
+        if (rawData[0]?.pronostics) {
+            if (Array.isArray(rawData[0].pronostics) && rawData[0].pronostics[0]?.pronostics) {
+                return rawData[0].pronostics[0].pronostics;
+            }
+            return rawData[0].pronostics;
+        }
+        return rawData;
+    }
+
+    if (rawData.pronostics) {
+        return Array.isArray(rawData.pronostics) ? rawData.pronostics : [];
+    }
+
+    return [];
+}
+
+/**
+ * Parse les données de résultats qui peuvent avoir différents formats imbriqués
+ * @param {any} rawData - Les données brutes de l'API
+ * @returns {Array} Tableau de courses/résultats normalisé
+ */
+function parseResultatsData(rawData) {
+    if (!rawData) return [];
+
+    if (Array.isArray(rawData)) {
+        return rawData[0]?.courses || rawData;
+    }
+
+    return rawData.courses || [];
 }
 
 // ✅ FONCTIONS DE CACHE LOCALSTORAGE
@@ -546,35 +573,14 @@ async function calculerHistoriqueTempsReel() {
 
                     if (pronosticsRes && pronosticsRes.ok) {
                         const pronosticsData = await pronosticsRes.json();
-                        let pronostics = [];
-
-                        // Parser le format (peut être imbriqué)
-                        if (Array.isArray(pronosticsData)) {
-                            if (pronosticsData[0]?.pronostics) {
-                                if (Array.isArray(pronosticsData[0].pronostics) && pronosticsData[0].pronostics[0]?.pronostics) {
-                                    pronostics = pronosticsData[0].pronostics[0].pronostics;
-                                } else {
-                                    pronostics = pronosticsData[0].pronostics;
-                                }
-                            } else {
-                                pronostics = pronosticsData;
-                            }
-                        } else if (pronosticsData.pronostics) {
-                            pronostics = pronosticsData.pronostics;
-                        }
+                        const pronostics = parsePronosticsData(pronosticsData);
 
                         stats.total_courses = pronostics.length;
                         let sommeConfiance = 0;
 
                         if (resultatsRes && resultatsRes.ok) {
                             const resultatsData = await resultatsRes.json();
-                            let resultats = [];
-
-                            if (Array.isArray(resultatsData)) {
-                                resultats = resultatsData[0]?.courses || resultatsData;
-                            } else {
-                                resultats = resultatsData.courses || [];
-                            }
+                            const resultats = parseResultatsData(resultatsData);
 
                             // Calculer les stats
                             pronostics.forEach(prono => {
