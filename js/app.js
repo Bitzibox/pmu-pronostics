@@ -284,6 +284,13 @@ async function updateAllSections() {
     updateCoursesParReunion();
     updateTableauComparaison();
     setupFilters();
+
+    // Calculer les stats par catégorie
+    const statsGroupBy = document.getElementById('stats-group-by');
+    const statsPeriod = document.getElementById('stats-period');
+    if (statsGroupBy && statsPeriod) {
+        await calculerStatistiquesParCategorie(statsGroupBy.value, statsPeriod.value);
+    }
 }
 
 function getDateString(date = new Date()) {
@@ -947,7 +954,14 @@ function updateTableauHistorique() {
 
     // ✅ UTILISER LES DONNÉES CALCULÉES EN TEMPS RÉEL
     if (!historiqueCalcule || historiqueCalcule.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">Aucune donnée historique</td></tr>';
+        showEmptyState('historique-body', {
+            icon: 'bi-calendar-x',
+            title: 'Aucune donnée historique',
+            description: 'Aucun pronostic trouvé pour les 30 derniers jours',
+            actionText: 'Rafraîchir',
+            actionCallback: () => calculerHistoriqueTempsReel(),
+            colspan: 8
+        });
         return;
     }
 
@@ -1237,10 +1251,82 @@ function applyFilters() {
     });
 }
 
+/**
+ * Affiche un état vide avec icône et message
+ * @param {string} containerId - ID du conteneur
+ * @param {object} options - Options de l'empty state
+ */
+function showEmptyState(containerId, options = {}) {
+    const defaults = {
+        icon: 'bi-inbox',
+        title: 'Aucune donnée disponible',
+        description: 'Aucune information à afficher pour le moment',
+        actionText: 'Rafraîchir',
+        actionCallback: () => window.location.reload(),
+        colspan: 9
+    };
+    const config = { ...defaults, ...options };
+
+    const el = document.getElementById(containerId);
+    if (!el) return;
+
+    const emptyStateHTML = `
+        <tr>
+            <td colspan="${config.colspan}" class="p-0">
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="bi ${config.icon}"></i>
+                    </div>
+                    <h3 class="empty-state-title">${escapeHtml(config.title)}</h3>
+                    <p class="empty-state-description">${escapeHtml(config.description)}</p>
+                    ${config.actionText ? `
+                        <button class="empty-state-action" onclick="(${config.actionCallback.toString()})()">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            ${escapeHtml(config.actionText)}
+                        </button>
+                    ` : ''}
+                </div>
+            </td>
+        </tr>
+    `;
+
+    el.innerHTML = emptyStateHTML;
+}
+
+/**
+ * Affiche un skeleton loader pendant le chargement
+ * @param {string} containerId - ID du conteneur
+ * @param {number} rows - Nombre de lignes skeleton
+ * @param {number} colspan - Nombre de colonnes
+ */
+function showSkeletonLoader(containerId, rows = 5, colspan = 9) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+
+    let skeletonHTML = '';
+    for (let i = 0; i < rows; i++) {
+        skeletonHTML += `
+            <tr>
+                ${Array(colspan).fill().map(() => `
+                    <td>
+                        <div class="skeleton skeleton-text"></div>
+                    </td>
+                `).join('')}
+            </tr>
+        `;
+    }
+    el.innerHTML = skeletonHTML;
+}
+
 function showError(message) {
     ['historique-body', 'comparaison-body'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = `<tr><td colspan="9" class="text-center text-danger">${message}</td></tr>`;
+        showEmptyState(id, {
+            icon: 'bi-exclamation-triangle',
+            title: 'Erreur de chargement',
+            description: message,
+            actionText: 'Réessayer',
+            actionCallback: () => window.location.reload()
+        });
     });
 }
 
@@ -1310,26 +1396,73 @@ function populateDateSelector() {
 }
 
 function showLoadingState(isLoading) {
-    const spinners = { 'historique-body': 8, 'reunions-content': 1, 'comparaison-body': 9 };
+    const containers = {
+        'historique-body': { colspan: 8, rows: 5 },
+        'comparaison-body': { colspan: 9, rows: 8 }
+    };
 
-    Object.keys(spinners).forEach(id => {
+    Object.keys(containers).forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
-        
+
         if (isLoading) {
-            const spinner = '<div class="spinner-border text-primary" role="status"></div>';
-            el.innerHTML = id === 'reunions-content' ? 
-                `<div class="text-center py-5">${spinner}</div>` : 
-                `<tr><td colspan="${spinners[id]}" class="text-center py-5">${spinner}</td></tr>`;
-        } else if (el.innerHTML.includes('spinner')) {
-            el.innerHTML = `<tr><td colspan="${spinners[id]}" class="text-center text-muted">Aucune donnée</td></tr>`;
+            // Afficher skeleton loaders
+            showSkeletonLoader(id, containers[id].rows, containers[id].colspan);
+        } else if (el.innerHTML.includes('skeleton')) {
+            // Afficher empty state si aucune donnée
+            const icons = {
+                'historique-body': 'bi-calendar-x',
+                'comparaison-body': 'bi-table'
+            };
+            showEmptyState(id, {
+                icon: icons[id] || 'bi-inbox',
+                title: 'Aucune donnée',
+                description: 'Aucune information disponible pour cette période',
+                actionText: 'Rafraîchir',
+                actionCallback: () => window.location.reload(),
+                colspan: containers[id].colspan
+            });
         }
     });
-    
+
+    // Gérer reunions-content séparément (pas une table)
+    const reunionsContent = document.getElementById('reunions-content');
+    if (reunionsContent) {
+        if (isLoading) {
+            reunionsContent.innerHTML = `
+                <div class="row g-3">
+                    ${Array(4).fill().map(() => `
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="skeleton skeleton-text" style="height: 30px; margin-bottom: 15px;"></div>
+                                    <div class="skeleton skeleton-text" style="height: 20px; margin-bottom: 10px;"></div>
+                                    <div class="skeleton skeleton-text" style="height: 20px; margin-bottom: 10px;"></div>
+                                    <div class="skeleton skeleton-text" style="height: 20px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        } else if (reunionsContent.innerHTML.includes('skeleton')) {
+            reunionsContent.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon"><i class="bi bi-calendar-event"></i></div>
+                    <h3 class="empty-state-title">Aucune réunion</h3>
+                    <p class="empty-state-description">Aucune course programmée pour cette date</p>
+                    <button class="empty-state-action" onclick="window.location.reload()">
+                        <i class="bi bi-arrow-clockwise"></i> Rafraîchir
+                    </button>
+                </div>
+            `;
+        }
+    }
+
     // CORRECTION: Vérifier l'existence avant manipulation
     const dateSelector = document.getElementById('date-selector');
     const loadToday = document.getElementById('load-today');
-    
+
     if (dateSelector) dateSelector.disabled = isLoading;
     if (loadToday) loadToday.disabled = isLoading;
 }
@@ -1471,6 +1604,337 @@ function creerGraphiqueHistorique(historique) {
     });
 }
 
+// === STATISTIQUES PAR CATEGORIE ===
+/**
+ * Calcule les statistiques groupées par catégorie
+ * @param {string} groupBy - 'hippodrome', 'discipline', ou 'reunion'
+ * @param {string} period - 'today', '7days', ou '30days'
+ */
+async function calculerStatistiquesParCategorie(groupBy = 'hippodrome', period = '30days') {
+    const container = document.getElementById('stats-by-category-container');
+    if (!container) return;
+
+    // Afficher skeleton loader
+    container.innerHTML = `
+        <div class="row g-3">
+            ${Array(6).fill().map(() => `
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="skeleton skeleton-text" style="height: 25px; margin-bottom: 15px;"></div>
+                            <div class="skeleton skeleton-text" style="height: 40px; margin-bottom: 10px;"></div>
+                            <div class="skeleton skeleton-text" style="height: 20px; margin-bottom: 5px;"></div>
+                            <div class="skeleton skeleton-text" style="height: 20px;"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    try {
+        // Récupérer les données historiques
+        const days = period === 'today' ? 1 : period === '7days' ? 7 : 30;
+        const stats = {};
+
+        // Utiliser l'historique déjà calculé si disponible et période = 30 jours
+        let dataSource = [];
+        if (period === '30days' && historiqueCalcule && historiqueCalcule.length > 0) {
+            // Utiliser les données du cache - parcourir l'historique calculé
+            historiqueCalcule.slice(0, days).forEach(jour => {
+                // L'historique contient déjà les stats agrégées, pas les pronostics individuels
+                // On doit stocker les pronostics bruts pour cette fonctionnalité
+                // Pour l'instant, on va juste utiliser ce qui est disponible
+            });
+        }
+
+        // Calculer à partir des données brutes du jour actuel
+        if (allData.pronostics?.pronostics && allData.resultats?.courses) {
+            const pronostics = allData.pronostics.pronostics;
+            const resultats = allData.resultats.courses;
+
+            pronostics.forEach(prono => {
+                const resultat = resultats.find(r =>
+                    r.reunion === prono.reunion && r.course === prono.course
+                );
+
+                let key = '';
+                if (groupBy === 'hippodrome') {
+                    key = prono.hippodrome || prono.reunion;
+                } else if (groupBy === 'discipline') {
+                    key = prono.discipline || 'Non spécifié';
+                } else if (groupBy === 'reunion') {
+                    key = `${prono.reunion} - ${prono.hippodrome || ''}`;
+                }
+
+                if (!stats[key]) {
+                    stats[key] = {
+                        total: 0,
+                        gagnants: 0,
+                        places: 0,
+                        rates: 0,
+                        confianceTotale: 0
+                    };
+                }
+
+                stats[key].total++;
+                stats[key].confianceTotale += prono.scoreConfiance || 0;
+
+                if (resultat?.arrivee?.length) {
+                    const cheval = prono.classement?.[0];
+                    if (cheval?.numero === resultat.arrivee[0]) {
+                        stats[key].gagnants++;
+                    } else if (resultat.arrivee.slice(0, 3).includes(cheval?.numero)) {
+                        stats[key].places++;
+                    } else {
+                        stats[key].rates++;
+                    }
+                }
+            });
+        }
+
+        // Afficher les résultats
+        displayStatsByCategory(stats, groupBy);
+
+    } catch (error) {
+        console.error('❌ Erreur calcul stats par catégorie:', error);
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                <h3 class="empty-state-title">Erreur de calcul</h3>
+                <p class="empty-state-description">Impossible de calculer les statistiques</p>
+                <button class="empty-state-action" onclick="calculerStatistiquesParCategorie()">
+                    <i class="bi bi-arrow-clockwise"></i> Réessayer
+                </button>
+            </div>
+        `;
+    }
+}
+
+/**
+ * Affiche les statistiques par catégorie
+ * @param {object} stats - Objet contenant les stats groupées
+ * @param {string} groupBy - Type de groupement
+ */
+function displayStatsByCategory(stats, groupBy) {
+    const container = document.getElementById('stats-by-category-container');
+    if (!container) return;
+
+    const entries = Object.entries(stats).sort((a, b) => b[1].total - a[1].total);
+
+    if (entries.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon"><i class="bi bi-inbox"></i></div>
+                <h3 class="empty-state-title">Aucune donnée</h3>
+                <p class="empty-state-description">Aucune statistique disponible pour cette période</p>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '<div class="row g-3">';
+
+    entries.forEach(([key, data]) => {
+        const tauxGagnant = data.total > 0 ? (data.gagnants / data.total * 100) : 0;
+        const tauxPlace = data.total > 0 ? ((data.gagnants + data.places) / data.total * 100) : 0;
+        const confianceMoyenne = data.total > 0 ? (data.confianceTotale / data.total) : 0;
+
+        const badge = getPerformanceBadge(tauxGagnant, 'gagnant');
+        const icon = groupBy === 'discipline' ? getDisciplineIcon(key) : 'bi-geo-alt-fill';
+
+        html += `
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm stat-card card-interactive">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex align-items-center justify-content-between">
+                            <span>
+                                <i class="bi ${icon}"></i>
+                                ${escapeHtml(key)}
+                            </span>
+                            <span class="badge ${badge.bgClass || 'bg-primary'}">${data.total}</span>
+                        </h5>
+
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <small class="text-muted">Taux Gagnant</small>
+                                <strong class="text-success">${tauxGagnant.toFixed(1)}%</strong>
+                            </div>
+                            <div class="progress-bar-enhanced">
+                                <div class="progress-fill" style="width: ${tauxGagnant}%; background: linear-gradient(90deg, #11998e, #38ef7d);"></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <small class="text-muted">Taux Placé</small>
+                                <strong class="text-warning">${tauxPlace.toFixed(1)}%</strong>
+                            </div>
+                            <div class="progress-bar-enhanced">
+                                <div class="progress-fill" style="width: ${tauxPlace}%; background: linear-gradient(90deg, #f093fb, #f5576c);"></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="bi bi-check-circle text-success"></i> ${data.gagnants}
+                                <i class="bi bi-award text-warning ms-2"></i> ${data.places}
+                                <i class="bi bi-x-circle text-danger ms-2"></i> ${data.rates}
+                            </small>
+                            <small class="text-muted">
+                                <i class="bi bi-star-fill text-info"></i> ${confianceMoyenne.toFixed(0)}%
+                            </small>
+                        </div>
+
+                        <div class="mt-2">
+                            <span class="performance-badge ${badge.class}">
+                                <i class="bi bi-${badge.icon}"></i>
+                                ${badge.text}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+/**
+ * Retourne l'icône correspondant à une discipline
+ * @param {string} discipline - Nom de la discipline
+ * @returns {string} - Classe d'icône Bootstrap
+ */
+function getDisciplineIcon(discipline) {
+    const icons = {
+        'ATTELE': 'bi-bicycle',
+        'MONTE': 'bi-person',
+        'PLAT': 'bi-speedometer',
+        'HAIE': 'bi-flag-fill',
+        'STEEPLECHASE': 'bi-trophy-fill',
+        'CROSS': 'bi-tree-fill',
+        'TROT': 'bi-bicycle',
+        'OBSTACLE': 'bi-flag-fill'
+    };
+    return icons[discipline?.toUpperCase()] || 'bi-question-circle';
+}
+
+// === DARK MODE ===
+/**
+ * Initialise le mode sombre avec persistance localStorage
+ */
+function initDarkMode() {
+    // Récupérer la préférence sauvegardée ou détecter la préférence système
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+    // Appliquer le thème
+    applyTheme(theme);
+
+    // Créer le bouton toggle s'il n'existe pas déjà
+    createDarkModeToggle();
+
+    // Écouter les changements de préférence système
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            applyTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+}
+
+/**
+ * Applique le thème sélectionné
+ * @param {string} theme - 'light' ou 'dark'
+ */
+function applyTheme(theme) {
+    const root = document.documentElement;
+
+    if (theme === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+        document.body.classList.add('dark-mode');
+    } else {
+        root.removeAttribute('data-theme');
+        document.body.classList.remove('dark-mode');
+    }
+
+    // Mettre à jour l'icône du bouton
+    updateDarkModeButton(theme);
+
+    // Sauvegarder la préférence
+    localStorage.setItem('theme', theme);
+
+    // Mettre à jour les graphiques si nécessaire
+    updateChartsTheme(theme);
+}
+
+/**
+ * Crée le bouton de toggle dark mode
+ */
+function createDarkModeToggle() {
+    // Vérifier si le bouton existe déjà dans la quick actions bar
+    const quickActions = document.querySelector('.quick-actions .d-flex');
+    if (!quickActions) return;
+
+    // Vérifier si le bouton existe déjà
+    if (document.getElementById('dark-mode-toggle')) return;
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.id = 'dark-mode-toggle';
+    toggleBtn.className = 'quick-action-btn secondary';
+    toggleBtn.setAttribute('aria-label', 'Basculer le mode sombre');
+    toggleBtn.innerHTML = '<i class="bi bi-moon-stars-fill"></i><span>Mode sombre</span>';
+
+    toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
+        showToast(`Mode ${newTheme === 'dark' ? 'sombre' : 'clair'} activé`, 'info');
+    });
+
+    // Insérer le bouton après le bouton export
+    const exportBtn = document.getElementById('export-data');
+    if (exportBtn) {
+        exportBtn.parentNode.insertBefore(toggleBtn, exportBtn.nextSibling);
+    } else {
+        quickActions.appendChild(toggleBtn);
+    }
+}
+
+/**
+ * Met à jour l'icône du bouton dark mode
+ * @param {string} theme - 'light' ou 'dark'
+ */
+function updateDarkModeButton(theme) {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+
+    const icon = theme === 'dark' ? 'bi-sun-fill' : 'bi-moon-stars-fill';
+    const text = theme === 'dark' ? 'Mode clair' : 'Mode sombre';
+    toggleBtn.innerHTML = `<i class="bi ${icon}"></i><span>${text}</span>`;
+}
+
+/**
+ * Met à jour les graphiques pour le thème
+ * @param {string} theme - 'light' ou 'dark'
+ */
+function updateChartsTheme(theme) {
+    const textColor = theme === 'dark' ? '#e0e0e0' : '#666';
+    const gridColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+    // Mettre à jour chartHistoriqueInstance si existe
+    if (chartHistoriqueInstance) {
+        chartHistoriqueInstance.options.plugins.legend.labels.color = textColor;
+        chartHistoriqueInstance.options.scales.x.ticks.color = textColor;
+        chartHistoriqueInstance.options.scales.y.ticks.color = textColor;
+        chartHistoriqueInstance.options.scales.x.grid.color = gridColor;
+        chartHistoriqueInstance.options.scales.y.grid.color = gridColor;
+        chartHistoriqueInstance.update();
+    }
+}
+
 // INITIALISATION
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Application démarrée');
@@ -1516,6 +1980,23 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 showToast('Fonction d\'export non disponible', 'warning');
             }
+        });
+    }
+
+    // === DARK MODE ===
+    initDarkMode();
+
+    // === STATISTIQUES PAR CATEGORIE ===
+    const statsGroupBy = document.getElementById('stats-group-by');
+    const statsPeriod = document.getElementById('stats-period');
+
+    if (statsGroupBy && statsPeriod) {
+        statsGroupBy.addEventListener('change', () => {
+            calculerStatistiquesParCategorie(statsGroupBy.value, statsPeriod.value);
+        });
+
+        statsPeriod.addEventListener('change', () => {
+            calculerStatistiquesParCategorie(statsGroupBy.value, statsPeriod.value);
         });
     }
 

@@ -513,3 +513,186 @@ html {
         background: white;
     }
 }
+
+/* === EMPTY STATES === */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    animation: fadeIn 0.6s ease;
+}
+
+.empty-state-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    opacity: 0.3;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.empty-state-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4a5568;
+    margin-bottom: 10px;
+}
+
+.empty-state-description {
+    font-size: 1rem;
+    color: #718096;
+    margin-bottom: 25px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.empty-state-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.empty-state-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+/* === DARK MODE === */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1d23;
+    --bg-secondary: #23262d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --border-color: #3a3d45;
+    --card-bg: #23262d;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .card {
+    background-color: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.dark-mode .table {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.dark-mode .table thead th {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.dark-mode .table tbody tr {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+.dark-mode .table tbody tr:hover {
+    background-color: var(--bg-secondary) !important;
+}
+
+.dark-mode .form-select,
+.dark-mode .form-control,
+.dark-mode input {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+.dark-mode .form-select:focus,
+.dark-mode .form-control:focus,
+.dark-mode input:focus {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25) !important;
+}
+
+.dark-mode .quick-actions {
+    background-color: var(--card-bg) !important;
+    box-shadow: 0 4px 20px var(--shadow) !important;
+}
+
+.dark-mode .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+.dark-mode .border {
+    border-color: var(--border-color) !important;
+}
+
+.dark-mode .skeleton {
+    background: linear-gradient(90deg, #2a2d35 25%, #3a3d45 50%, #2a2d35 75%) !important;
+}
+
+.dark-mode .empty-state-title {
+    color: var(--text-primary) !important;
+}
+
+.dark-mode .empty-state-description {
+    color: var(--text-secondary) !important;
+}
+
+.dark-mode .toast-notification {
+    background-color: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+    box-shadow: 0 8px 24px var(--shadow) !important;
+}
+
+/* Préserver les couleurs des gradients et badges */
+.dark-mode .stat-card,
+.dark-mode .badge,
+.dark-mode .performance-badge,
+.dark-mode .trend-indicator {
+    /* Les gradients et couleurs spécifiques restent inchangés */
+}
+
+/* Améliorer le contraste des graphiques en mode sombre */
+.dark-mode canvas {
+    filter: brightness(0.95);
+}
+
+/* Transition douce lors du changement de thème */
+body,
+.card,
+.table,
+.form-select,
+.form-control,
+.quick-actions {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

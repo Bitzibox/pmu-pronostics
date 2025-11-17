@@ -478,6 +478,50 @@
             </div>
         </section>
 
+        <!-- NOUVEAU: Section Statistiques par Hippodrome/Discipline -->
+        <section id="statistiques-par-categorie" class="mb-5">
+            <h2 class="mb-4">
+                <i class="bi bi-pie-chart-fill"></i> Statistiques par Catégorie
+            </h2>
+
+            <!-- Filtres de vue -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold mb-2">
+                                <i class="bi bi-funnel"></i> Grouper par
+                            </label>
+                            <select id="stats-group-by" class="form-select">
+                                <option value="hippodrome">Hippodrome</option>
+                                <option value="discipline">Discipline</option>
+                                <option value="reunion">Réunion</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold mb-2">
+                                <i class="bi bi-calendar-range"></i> Période
+                            </label>
+                            <select id="stats-period" class="form-select">
+                                <option value="today">Aujourd'hui</option>
+                                <option value="7days">7 derniers jours</option>
+                                <option value="30days" selected>30 derniers jours</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteneur des statistiques -->
+            <div id="stats-by-category-container">
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- NOUVEAU: Section Historique des Statistiques -->
         <section id="statistiques-historiques" class="mb-5">
             <h2 class="mb-4"><i class="bi bi-graph-up"></i> Statistiques Historiques</h2>
@@ -599,33 +643,56 @@
             <h2 class="mb-4"><i class="bi bi-table"></i> Comparaison Pronostics vs. Résultats</h2>
             
             <div class="filter-section">
-                <div class="row g-3">
+                <div class="row g-3 mb-3">
                     <div class="col-md-3">
                         <label class="form-label fw-bold"><i class="bi bi-geo-alt"></i> Hippodrome</label>
                         <select id="filter-reunion" class="form-select"></select>
                     </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold"><i class="bi bi-speedometer"></i> Confiance</label>
-                        <select id="filter-confiance" class="form-select">
-                            <option value="">Toute confiance</option>
-                            <option value="80">Confiance > 80%</option>
-                            <option value="60">Confiance > 60%</option>
-                            <option value="40">Confiance > 40%</option>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold"><i class="bi bi-bicycle"></i> Discipline</label>
+                        <select id="filter-discipline" class="form-select">
+                            <option value="">Toutes</option>
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold"><i class="bi bi-speedometer"></i> Confiance</label>
+                        <select id="filter-confiance" class="form-select">
+                            <option value="">Toute</option>
+                            <option value="80">> 80%</option>
+                            <option value="60">> 60%</option>
+                            <option value="40">> 40%</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
                         <label class="form-label fw-bold"><i class="bi bi-filter"></i> Statut</label>
                         <select id="filter-statut" class="form-select">
-                            <option value="">Tous les statuts</option>
+                            <option value="">Tous</option>
                             <option value="gagnant">✅ Gagnants</option>
                             <option value="place">🥉 Placés</option>
                             <option value="rate">❌ Ratés</option>
+                            <option value="en attente">⏳ En attente</option>
                         </select>
                     </div>
-                    <div class="col-md-3 d-flex align-items-end">
-                        <button id="export-csv" class="btn w-100" style="background: var(--success-gradient); color: white; font-weight: 600;">
-                            <i class="bi bi-download"></i> Exporter CSV
+                    <div class="col-md-3 d-flex align-items-end gap-2">
+                        <button id="clear-filters" class="btn btn-outline-secondary flex-grow-1">
+                            <i class="bi bi-x-circle"></i> Réinit.
                         </button>
+                        <button id="export-csv" class="btn flex-grow-1" style="background: var(--success-gradient); color: white; font-weight: 600;">
+                            <i class="bi bi-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Compteur de résultats -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-info mb-0 py-2 d-flex justify-content-between align-items-center" role="status">
+                            <span>
+                                <i class="bi bi-info-circle-fill"></i>
+                                <strong id="filter-results-count">0</strong> résultat(s)
+                            </span>
+                            <small class="text-muted" id="filter-active-text"></small>
+                        </div>
                     </div>
                 </div>
             </div>
