@@ -1170,9 +1170,10 @@ function updateTableauComparaison() {
     allData.pronostics.pronostics.forEach(prono => {
         const hippodrome = getHippodromeName(prono.pays, prono.reunion);
         const cheval = prono.classement?.[0];
-        
+
         let resultatReel = '<span class="badge bg-secondary">En attente</span>';
         let statut = '<span class="badge bg-secondary">En attente</span>';
+        let statutText = 'en attente'; // Version texte pour data-attribute
 
         const resultat = allData.resultats?.courses?.find(r => r.reunion === prono.reunion && r.course === prono.course);
         if (resultat?.arrivee?.length) {
@@ -1180,21 +1181,29 @@ function updateTableauComparaison() {
             if (position > 0) {
                 const posClass = ['position-1', 'position-2', 'position-3', 'position-other'][Math.min(position - 1, 3)];
                 resultatReel = `<span class="position-badge ${posClass}" style="width:auto;height:auto;padding:5px 10px;">${position}${position===1?'er':'e'}</span>`;
-                
-                if (position === 1) statut = '<span class="badge" style="background:var(--success-gradient);">✅ Gagnant</span>';
-                else if (position <= 3) statut = '<span class="badge" style="background:var(--warning-gradient);">🥉 Placé</span>';
-                else statut = '<span class="badge bg-secondary">❌ Raté</span>';
+
+                if (position === 1) {
+                    statut = '<span class="badge" style="background:var(--success-gradient);">✅ Gagnant</span>';
+                    statutText = 'gagnant';
+                } else if (position <= 3) {
+                    statut = '<span class="badge" style="background:var(--warning-gradient);">🥉 Placé</span>';
+                    statutText = 'place';
+                } else {
+                    statut = '<span class="badge bg-secondary">❌ Raté</span>';
+                    statutText = 'rate';
+                }
             } else {
                 resultatReel = '<span class="badge bg-dark">Non classé</span>';
                 statut = '<span class="badge bg-secondary">❌ Raté</span>';
+                statutText = 'rate';
             }
         }
 
         const nomChevalSecurise = cheval ? `<strong>#${cheval.numero}</strong> - ${escapeHtml(cheval.nom)}` : 'N/A';
         const coteChevalSecurise = escapeHtml(cheval?.cote || 'N/A');
 
-        // Construire les attributs data-* pour le filtrage
-        const dataAttrs = `data-reunion="R${prono.reunion}" data-discipline="${prono.discipline || ''}" data-statut="${statut.toLowerCase()}"`;
+        // Construire les attributs data-* pour le filtrage (utiliser statutText au lieu de statut)
+        const dataAttrs = `data-reunion="R${prono.reunion}" data-discipline="${prono.discipline || ''}" data-statut="${statutText}"`;
 
         html += `
             <tr ${dataAttrs}>
