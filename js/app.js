@@ -5,7 +5,9 @@ const BRANCH = 'main';
 const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/data/`;
 const CONFIG = {
     REFRESH_INTERVAL: 300000, // 5 minutes
-    DATE_FORMAT: 'DD/MM/YYYY'
+    DATE_FORMAT: 'DD/MM/YYYY',
+    CACHE_TTL: 3600000, // 1 heure pour le cache
+    HISTORIQUE_CACHE_TTL: 86400000 // 24 heures pour l'historique
 };
 
 // Mapping des hippodromes PAR PAYS et numéro de réunion
@@ -91,35 +93,20 @@ async function loadAllData(dateStringDDMMYYYY) {
             allData.analyse = { historique: [], stats_globales: {} };
         }
         
-        // Parser pronostics
+        // Parser pronostics avec fonction utilitaire
         if (pronosticsRes && pronosticsRes.ok) {
             const rawPronostics = await pronosticsRes.json();
-            if (Array.isArray(rawPronostics)) {
-                if (rawPronostics[0]?.pronostics) {
-                    if (Array.isArray(rawPronostics[0].pronostics) && 
-                        rawPronostics[0].pronostics[0]?.pronostics) {
-                        allData.pronostics = { pronostics: rawPronostics[0].pronostics[0].pronostics };
-                    } else {
-                        allData.pronostics = { pronostics: rawPronostics[0].pronostics };
-                    }
-                } else {
-                    allData.pronostics = { pronostics: rawPronostics };
-                }
-            } else {
-                allData.pronostics = rawPronostics.pronostics ? rawPronostics : { pronostics: [] };
-            }
+            const pronostics = parsePronosticsData(rawPronostics);
+            allData.pronostics = { pronostics: pronostics };
         } else {
             allData.pronostics = { pronostics: [] };
         }
-        
-        // Parser résultats
+
+        // Parser résultats avec fonction utilitaire
         if (resultatsRes && resultatsRes.ok) {
             const rawResultats = await resultatsRes.json();
-            if (Array.isArray(rawResultats)) {
-                allData.resultats = rawResultats[0]?.courses ? rawResultats[0] : { courses: rawResultats };
-            } else {
-                allData.resultats = rawResultats.courses ? rawResultats : { courses: [] };
-            }
+            const courses = parseResultatsData(rawResultats);
+            allData.resultats = { courses: courses };
         } else {
             allData.resultats = { courses: [] };
         }
@@ -177,6 +164,142 @@ function getHippodromeName(pays, reunion) {
 function getDisciplineInfo(disciplineName) {
     const cleanName = disciplineName ? disciplineName.toUpperCase().trim() : '';
     return DISCIPLINES[cleanName] || { label: disciplineName || 'Inconnu', icon: '❓', color: '#999' };
+}
+
+/**
+ * Échappe les caractères HTML pour prévenir les attaques XSS
+ * @param {string} text - Le texte à sécuriser
+ * @returns {string} Le texte échappé
+ */
+function escapeHtml(text) {
+    if (text === null || text === undefined) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+/**
+ * Échappe les guillemets pour le format CSV
+ * @param {string} text - Le texte à échapper
+ * @returns {string} Le texte échappé pour CSV
+ */
+function escapeCsv(text) {
+    if (text === null || text === undefined) return '';
+    return String(text).replace(/"/g, '""');
+}
+
+/**
+ * Raccourci pour document.getElementById
+ * @param {string} id - L'ID de l'élément
+ * @returns {HTMLElement|null} L'élément trouvé ou null
+ */
+function el(id) {
+    return document.getElementById(id);
+}
+
+// ✅ FONCTIONS UTILITAIRES DE PARSING DE DONNÉES
+
+/**
+ * Parse les données de pronostics qui peuvent avoir différents formats imbriqués
+ * @param {any} rawData - Les données brutes de l'API
+ * @returns {Array} Tableau de pronostics normalisé
+ */
+function parsePronosticsData(rawData) {
+    if (!rawData) return [];
+
+    if (Array.isArray(rawData)) {
+        if (rawData[0]?.pronostics) {
+            if (Array.isArray(rawData[0].pronostics) && rawData[0].pronostics[0]?.pronostics) {
+                return rawData[0].pronostics[0].pronostics;
+            }
+            return rawData[0].pronostics;
+        }
+        return rawData;
+    }
+
+    if (rawData.pronostics) {
+        return Array.isArray(rawData.pronostics) ? rawData.pronostics : [];
+    }
+
+    return [];
+}
+
+/**
+ * Parse les données de résultats qui peuvent avoir différents formats imbriqués
+ * @param {any} rawData - Les données brutes de l'API
+ * @returns {Array} Tableau de courses/résultats normalisé
+ */
+function parseResultatsData(rawData) {
+    if (!rawData) return [];
+
+    if (Array.isArray(rawData)) {
+        return rawData[0]?.courses || rawData;
+    }
+
+    return rawData.courses || [];
+}
+
+// ✅ FONCTIONS DE CACHE LOCALSTORAGE
+
+/**
+ * Sauvegarde des données dans localStorage avec timestamp
+ * @param {string} key - La clé de stockage
+ * @param {any} data - Les données à stocker
+ * @param {number} ttl - Time to live en millisecondes
+ */
+function cacheSet(key, data, ttl = CONFIG.CACHE_TTL) {
+    try {
+        const item = {
+            data: data,
+            timestamp: Date.now(),
+            ttl: ttl
+        };
+        localStorage.setItem(key, JSON.stringify(item));
+        console.log(`💾 Cache sauvegardé: ${key}`);
+    } catch (error) {
+        console.warn(`⚠️ Erreur de cache (set ${key}):`, error);
+    }
+}
+
+/**
+ * Récupère des données du localStorage si elles sont encore valides
+ * @param {string} key - La clé de stockage
+ * @returns {any|null} Les données ou null si expirées/inexistantes
+ */
+function cacheGet(key) {
+    try {
+        const itemStr = localStorage.getItem(key);
+        if (!itemStr) return null;
+
+        const item = JSON.parse(itemStr);
+        const now = Date.now();
+
+        // Vérifier si le cache est expiré
+        if (now - item.timestamp > item.ttl) {
+            console.log(`🗑️ Cache expiré: ${key}`);
+            localStorage.removeItem(key);
+            return null;
+        }
+
+        console.log(`✅ Cache valide: ${key}`);
+        return item.data;
+    } catch (error) {
+        console.warn(`⚠️ Erreur de cache (get ${key}):`, error);
+        return null;
+    }
+}
+
+/**
+ * Supprime une entrée du cache
+ * @param {string} key - La clé à supprimer
+ */
+function cacheClear(key) {
+    try {
+        localStorage.removeItem(key);
+        console.log(`🗑️ Cache supprimé: ${key}`);
+    } catch (error) {
+        console.warn(`⚠️ Erreur de cache (clear ${key}):`, error);
+    }
 }
 
 // ✅ NOUVELLES FONCTIONS D'ENRICHISSEMENT
@@ -402,126 +525,134 @@ function updateStatistiquesGlobales() {
 
 // ✅ NOUVELLE FONCTION : Calculer l'historique en temps réel depuis les fichiers bruts
 async function calculerHistoriqueTempsReel() {
-    const historique = [];
     const today = new Date();
-    
-    console.log('📊 Calcul de l\'historique complet en temps réel...');
-    
-    // ✅ MODIFICATION : Charger TOUS les jours disponibles (maximum 30 jours)
-    // On va chercher jusqu'à ce qu'on trouve 3 jours consécutifs sans données
-    let joursConsecutifsSansDonnees = 0;
-    const maxJours = 30; // Limite de sécurité
-    
-    for (let i = 0; i < maxJours && joursConsecutifsSansDonnees < 3; i++) {
+    console.log('📊 Calcul de l\'historique complet en temps réel (parallèle)...');
+
+    // ✅ OPTIMISATION : Charger tous les jours en parallèle par batch
+    const maxJours = 30;
+    const batchSize = 5; // Charger 5 jours à la fois pour ne pas surcharger
+    const historique = [];
+
+    // Créer les dates à charger
+    const dates = [];
+    for (let i = 0; i < maxJours; i++) {
         const date = new Date(today);
         date.setDate(date.getDate() - i);
-        const dateStr = getDateString(date);
-        const dateDisplay = ddmmyyyyToDisplay(dateStr);
-        
-        try {
-            // Charger pronostics et résultats en parallèle
-            const [pronosticsRes, resultatsRes] = await Promise.all([
-                fetch(`${GITHUB_RAW_BASE}pronostics-${dateStr}.json`).catch(() => null),
-                fetch(`${GITHUB_RAW_BASE}resultats-${dateStr}.json`).catch(() => null)
-            ]);
-            
-            let stats = {
-                date: dateDisplay,
-                total_courses: 0,
-                nb_gagnants: 0,
-                nb_places: 0,
-                nb_rates: 0,
-                taux_gagnant: 0,
-                taux_place: 0,
-                confiance_moyenne: 0,
-                courses_avec_resultats: 0
-            };
-            
-            if (pronosticsRes && pronosticsRes.ok) {
-                joursConsecutifsSansDonnees = 0; // Reset le compteur
-                
-                const pronosticsData = await pronosticsRes.json();
-                let pronostics = [];
-                
-                // Parser le format (peut être imbriqué)
-                if (Array.isArray(pronosticsData)) {
-                    if (pronosticsData[0]?.pronostics) {
-                        if (Array.isArray(pronosticsData[0].pronostics) && pronosticsData[0].pronostics[0]?.pronostics) {
-                            pronostics = pronosticsData[0].pronostics[0].pronostics;
-                        } else {
-                            pronostics = pronosticsData[0].pronostics;
-                        }
-                    } else {
-                        pronostics = pronosticsData;
-                    }
-                } else if (pronosticsData.pronostics) {
-                    pronostics = pronosticsData.pronostics;
-                }
-                
-                stats.total_courses = pronostics.length;
-                let sommeConfiance = 0;
-                
-                if (resultatsRes && resultatsRes.ok) {
-                    const resultatsData = await resultatsRes.json();
-                    let resultats = [];
-                    
-                    if (Array.isArray(resultatsData)) {
-                        resultats = resultatsData[0]?.courses || resultatsData;
-                    } else {
-                        resultats = resultatsData.courses || [];
-                    }
-                    
-                    // Calculer les stats
-                    pronostics.forEach(prono => {
-                        sommeConfiance += prono.scoreConfiance || 0;
-                        
-                        const resultat = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
-                        if (resultat?.arrivee?.length > 0) {
-                            stats.courses_avec_resultats++;
-                            const chevalProno = prono.classement?.[0]?.numero;
-                            
-                            if (chevalProno === resultat.arrivee[0]) {
-                                stats.nb_gagnants++;
-                                stats.nb_places++;
-                            } else if (resultat.arrivee.slice(0, 3).includes(chevalProno)) {
-                                stats.nb_places++;
-                            } else {
-                                stats.nb_rates++;
-                            }
-                        }
-                    });
-                }
-                
-                stats.confiance_moyenne = pronostics.length > 0 ? Math.round(sommeConfiance / pronostics.length) : 0;
-                stats.taux_gagnant = stats.courses_avec_resultats > 0 ? 
-                    Math.round((stats.nb_gagnants / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
-                stats.taux_place = stats.courses_avec_resultats > 0 ? 
-                    Math.round((stats.nb_places / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
-                
-                historique.push(stats);
-                console.log(`  ✅ ${dateDisplay}: ${stats.taux_gagnant}% gagnant, ${stats.taux_place}% placé`);
-            } else {
-                joursConsecutifsSansDonnees++;
-            }
-            
-        } catch (error) {
-            console.warn(`  ⚠️ Erreur pour ${dateDisplay}:`, error);
-            joursConsecutifsSansDonnees++;
-        }
+        dates.push({
+            date: date,
+            dateStr: getDateString(date),
+            dateDisplay: ddmmyyyyToDisplay(getDateString(date))
+        });
     }
-    
-    console.log(`✅ Historique calculé: ${historique.length} jours`);
+
+    // Traiter par batch
+    for (let batchStart = 0; batchStart < dates.length; batchStart += batchSize) {
+        const batch = dates.slice(batchStart, batchStart + batchSize);
+
+        // Charger tous les jours du batch en parallèle
+        const batchResults = await Promise.all(
+            batch.map(async ({ date, dateStr, dateDisplay }) => {
+                try {
+                    // Charger pronostics et résultats en parallèle
+                    const [pronosticsRes, resultatsRes] = await Promise.all([
+                        fetch(`${GITHUB_RAW_BASE}pronostics-${dateStr}.json`).catch(() => null),
+                        fetch(`${GITHUB_RAW_BASE}resultats-${dateStr}.json`).catch(() => null)
+                    ]);
+
+                    let stats = {
+                        date: dateDisplay,
+                        total_courses: 0,
+                        nb_gagnants: 0,
+                        nb_places: 0,
+                        nb_rates: 0,
+                        taux_gagnant: 0,
+                        taux_place: 0,
+                        confiance_moyenne: 0,
+                        courses_avec_resultats: 0
+                    };
+
+                    if (pronosticsRes && pronosticsRes.ok) {
+                        const pronosticsData = await pronosticsRes.json();
+                        const pronostics = parsePronosticsData(pronosticsData);
+
+                        stats.total_courses = pronostics.length;
+                        let sommeConfiance = 0;
+
+                        if (resultatsRes && resultatsRes.ok) {
+                            const resultatsData = await resultatsRes.json();
+                            const resultats = parseResultatsData(resultatsData);
+
+                            // Calculer les stats
+                            pronostics.forEach(prono => {
+                                sommeConfiance += prono.scoreConfiance || 0;
+
+                                const resultat = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
+                                if (resultat?.arrivee?.length > 0) {
+                                    stats.courses_avec_resultats++;
+                                    const chevalProno = prono.classement?.[0]?.numero;
+
+                                    if (chevalProno === resultat.arrivee[0]) {
+                                        stats.nb_gagnants++;
+                                        stats.nb_places++;
+                                    } else if (resultat.arrivee.slice(0, 3).includes(chevalProno)) {
+                                        stats.nb_places++;
+                                    } else {
+                                        stats.nb_rates++;
+                                    }
+                                }
+                            });
+                        }
+
+                        stats.confiance_moyenne = pronostics.length > 0 ? Math.round(sommeConfiance / pronostics.length) : 0;
+                        stats.taux_gagnant = stats.courses_avec_resultats > 0 ?
+                            Math.round((stats.nb_gagnants / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
+                        stats.taux_place = stats.courses_avec_resultats > 0 ?
+                            Math.round((stats.nb_places / stats.courses_avec_resultats) * 100 * 10) / 10 : 0;
+
+                        console.log(`  ✅ ${dateDisplay}: ${stats.taux_gagnant}% gagnant, ${stats.taux_place}% placé`);
+                        return stats;
+                    }
+
+                    return null;
+                } catch (error) {
+                    console.warn(`  ⚠️ Erreur pour ${dateDisplay}:`, error);
+                    return null;
+                }
+            })
+        );
+
+        // Ajouter les stats valides à l'historique
+        batchResults.forEach(stats => {
+            if (stats) historique.push(stats);
+        });
+    }
+
+    console.log(`✅ Historique calculé: ${historique.length} jours (parallèle)`);
     return historique.reverse(); // Inverser pour avoir du plus ancien au plus récent
 }
 
 // ✅ MODIFIER LA FONCTION updateStatistiquesHistoriques pour utiliser les données calculées
 async function updateStatistiquesHistoriques() {
-    // ✅ CALCULER L'HISTORIQUE EN TEMPS RÉEL au lieu d'utiliser analyse.json
-    const historique = await calculerHistoriqueTempsReel();
-    
+    // ✅ VÉRIFIER LE CACHE D'ABORD
+    const cacheKey = 'historique_cache';
+    let historique = cacheGet(cacheKey);
+
+    if (!historique) {
+        // ✅ CALCULER L'HISTORIQUE EN TEMPS RÉEL au lieu d'utiliser analyse.json
+        console.log('📊 Calcul de l\'historique (pas de cache valide)...');
+        historique = await calculerHistoriqueTempsReel();
+
+        // ✅ SAUVEGARDER DANS LE CACHE
+        if (historique && historique.length > 0) {
+            cacheSet(cacheKey, historique, CONFIG.HISTORIQUE_CACHE_TTL);
+        }
+    } else {
+        console.log('✅ Utilisation du cache pour l\'historique');
+    }
+
     // ✅ STOCKER dans la variable globale pour réutilisation
     historiqueCalcule = historique;
-    
+
     if (!historique || historique.length === 0) {
         console.warn('⚠️ Pas de données historiques calculées');
         return;
@@ -750,16 +881,18 @@ function renderPronosticsTop3(prono) {
 
     return prono.classement.slice(0, 3).map((cheval, index) => {
         const positionClass = ['position-1', 'position-2', 'position-3'][index];
+        const nomCheval = escapeHtml(cheval.nom || 'N/A');
+        const coteCheval = escapeHtml(cheval.cote || 'N/A');
         return `
             <div class="pronostic-item">
                 <div class="d-flex align-items-center gap-3">
                     <div class="position-badge ${positionClass}">${index + 1}</div>
                     <div class="cheval-info">
-                        <div class="cheval-nom">${cheval.nom || 'N/A'}</div>
+                        <div class="cheval-nom">${nomCheval}</div>
                         <div class="cheval-numero">Numéro ${cheval.numero}</div>
                     </div>
                     <div class="ms-auto">
-                        <span class="cote-badge"><i class="bi bi-currency-euro"></i> ${cheval.cote || 'N/A'}</span>
+                        <span class="cote-badge"><i class="bi bi-currency-euro"></i> ${coteCheval}</span>
                     </div>
                 </div>
             </div>
@@ -798,13 +931,16 @@ function updateTableauComparaison() {
             }
         }
 
+        const nomChevalSecurise = cheval ? `<strong>#${cheval.numero}</strong> - ${escapeHtml(cheval.nom)}` : 'N/A';
+        const coteChevalSecurise = escapeHtml(cheval?.cote || 'N/A');
+
         html += `
             <tr>
-                <td><strong>${hippodrome}</strong></td>
+                <td><strong>${escapeHtml(hippodrome)}</strong></td>
                 <td>${prono.heure || '--:--'}</td>
                 <td><span class="badge bg-primary">R${prono.reunion}C${prono.course}</span></td>
-                <td>${cheval ? `<strong>#${cheval.numero}</strong> - ${cheval.nom}` : 'N/A'}</td>
-                <td>${cheval?.cote || 'N/A'}</td>
+                <td>${nomChevalSecurise}</td>
+                <td>${coteChevalSecurise}</td>
                 <td><span class="badge bg-info">${prono.scoreConfiance || 0}%</span></td>
                 <td><span class="position-badge position-1" style="width:auto;height:auto;padding:5px 10px;">1er</span></td>
                 <td>${resultatReel}</td>
@@ -889,8 +1025,14 @@ if (exportBtn) {
                 else statut = 'Raté';
             }
 
-            const chevalInfo = cheval ? `#${cheval.numero} - ${cheval.nom}` : 'N/A';
-            csv += `"${prono.hippodrome || prono.reunion}","${prono.heure || '--:--'}","${prono.reunion}${prono.course}","${chevalInfo}",${cheval?.cote || 'N/A'},${prono.scoreConfiance || 0}%,1er,"${resultatReel}","${statut}"\n`;
+            const chevalInfo = cheval ? `#${cheval.numero} - ${escapeCsv(cheval.nom)}` : 'N/A';
+            const hippodromeCsv = escapeCsv(prono.hippodrome || prono.reunion);
+            const heureCsv = escapeCsv(prono.heure || '--:--');
+            const courseCsv = `${prono.reunion}${prono.course}`;
+            const coteCsv = cheval?.cote || 'N/A';
+            const resultatReelCsv = escapeCsv(resultatReel);
+            const statutCsv = escapeCsv(statut);
+            csv += `"${hippodromeCsv}","${heureCsv}","${courseCsv}","${chevalInfo}",${coteCsv},${prono.scoreConfiance || 0}%,1er,"${resultatReelCsv}","${statutCsv}"\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
