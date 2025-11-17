@@ -57,6 +57,13 @@ let allData = { analyse: null, pronostics: null, resultats: null, courses: null,
 let currentDateString = '';
 let lastUpdateTime = Date.now();
 
+// Variables pour tri et pagination
+let currentPage = 1;
+let rowsPerPage = 25;
+let sortColumn = -1;
+let sortDirection = 'asc';
+let tableData = []; // Stocker les données brutes du tableau
+
 // === FONCTIONS D'ERGONOMIE ET ANIMATIONS ===
 
 /**
@@ -1202,6 +1209,9 @@ function updateTableauComparaison() {
     });
 
     tbody.innerHTML = html;
+
+    // Appliquer la pagination après avoir rempli le tableau
+    renderPagination();
 }
 
 function setupFilters() {
@@ -1226,10 +1236,31 @@ function setupFilters() {
         });
     }
 
-    ['filter-reunion', 'filter-confiance', 'filter-statut'].forEach(id => {
+    ['filter-reunion', 'filter-confiance', 'filter-statut', 'filter-discipline'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('change', applyFilters);
     });
+
+    // Bouton clear filters
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', () => {
+            document.getElementById('filter-reunion').value = '';
+            document.getElementById('filter-confiance').value = '';
+            document.getElementById('filter-statut').value = '';
+            const filterDiscipline = document.getElementById('filter-discipline');
+            if (filterDiscipline) filterDiscipline.value = '';
+
+            // Réafficher toutes les lignes
+            document.querySelectorAll('#comparaison-body tr').forEach(row => {
+                row.style.display = '';
+            });
+
+            currentPage = 1;
+            renderPagination();
+            showToast('Filtres réinitialisés', 'info');
+        });
+    }
 }
 
 function applyFilters() {
@@ -1239,16 +1270,20 @@ function applyFilters() {
 
     document.querySelectorAll('#comparaison-body tr').forEach(row => {
         let show = true;
-        
+
         if (filterReunion && !row.cells[0]?.textContent.includes(filterReunion.replace(/.*-R/, 'R'))) show = false;
         if (filterConfiance && show) {
             const confiance = parseInt(row.cells[5]?.textContent.replace('%', '') || '0');
             if (confiance <= parseInt(filterConfiance)) show = false;
         }
         if (filterStatut && show && !row.cells[8]?.textContent.toLowerCase().includes(filterStatut)) show = false;
-        
+
         row.style.display = show ? '' : 'none';
     });
+
+    // Réinitialiser à la page 1 et mettre à jour la pagination
+    currentPage = 1;
+    renderPagination();
 }
 
 /**
@@ -1604,6 +1639,203 @@ function creerGraphiqueHistorique(historique) {
     });
 }
 
+// === TRI ET PAGINATION ===
+/**
+ * Initialise le tri des colonnes du tableau
+ */
+function initTableSorting() {
+    const sortableHeaders = document.querySelectorAll('.sortable');
+    sortableHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const column = parseInt(header.getAttribute('data-column'));
+            handleSort(column);
+        });
+    });
+}
+
+/**
+ * Gère le tri d'une colonne
+ * @param {number} column - Index de la colonne
+ */
+function handleSort(column) {
+    if (sortColumn === column) {
+        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+        sortColumn = column;
+        sortDirection = 'asc';
+    }
+
+    // Mettre à jour les indicateurs visuels
+    updateSortIndicators();
+
+    // Trier et afficher
+    sortAndRenderTable();
+}
+
+/**
+ * Met à jour les indicateurs visuels de tri
+ */
+function updateSortIndicators() {
+    document.querySelectorAll('.sortable').forEach(header => {
+        const column = parseInt(header.getAttribute('data-column'));
+        const icon = header.querySelector('i:last-child');
+
+        if (column === sortColumn) {
+            icon.className = sortDirection === 'asc' ? 'bi bi-arrow-up ms-1' : 'bi bi-arrow-down ms-1';
+            header.style.opacity = '1';
+        } else {
+            icon.className = 'bi bi-arrow-down-up ms-1';
+            header.style.opacity = '0.7';
+        }
+    });
+}
+
+/**
+ * Trie et affiche le tableau
+ */
+function sortAndRenderTable() {
+    const tbody = document.getElementById('comparaison-body');
+    if (!tbody) return;
+
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    rows.sort((a, b) => {
+        const aValue = a.cells[sortColumn]?.textContent.trim() || '';
+        const bValue = b.cells[sortColumn]?.textContent.trim() || '';
+
+        // Tri numérique pour les colonnes numériques
+        if (sortColumn === 4 || sortColumn === 5) { // Cote ou Confiance
+            const aNum = parseFloat(aValue.replace(/[^\d.]/g, '')) || 0;
+            const bNum = parseFloat(bValue.replace(/[^\d.]/g, '')) || 0;
+            return sortDirection === 'asc' ? aNum - bNum : bNum - aNum;
+        }
+
+        // Tri alphabétique pour les autres colonnes
+        if (sortDirection === 'asc') {
+            return aValue.localeCompare(bValue, 'fr');
+        } else {
+            return bValue.localeCompare(aValue, 'fr');
+        }
+    });
+
+    // Réinsérer les lignes triées
+    rows.forEach(row => tbody.appendChild(row));
+
+    // Appliquer la pagination
+    renderPagination();
+}
+
+/**
+ * Initialise la pagination
+ */
+function initPagination() {
+    const rowsPerPageSelect = document.getElementById('rows-per-page');
+    if (rowsPerPageSelect) {
+        rowsPerPageSelect.addEventListener('change', (e) => {
+            rowsPerPage = e.target.value === 'all' ? 999999 : parseInt(e.target.value);
+            currentPage = 1;
+            renderPagination();
+        });
+    }
+}
+
+/**
+ * Affiche la pagination
+ */
+function renderPagination() {
+    const tbody = document.getElementById('comparaison-body');
+    if (!tbody) return;
+
+    const allRows = Array.from(tbody.querySelectorAll('tr')).filter(row => !row.querySelector('.empty-state, .skeleton'));
+    const visibleRows = allRows.filter(row => row.style.display !== 'none');
+    const totalRows = visibleRows.length;
+    const totalPages = rowsPerPage === 999999 ? 1 : Math.ceil(totalRows / rowsPerPage);
+
+    // Assurer que currentPage est valide
+    if (currentPage > totalPages) currentPage = totalPages || 1;
+
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = rowsPerPage === 999999 ? totalRows : Math.min(startIndex + rowsPerPage, totalRows);
+
+    // Masquer toutes les lignes puis afficher seulement celles de la page actuelle
+    visibleRows.forEach((row, index) => {
+        if (index >= startIndex && index < endIndex) {
+            row.classList.remove('d-none');
+        } else {
+            row.classList.add('d-none');
+        }
+    });
+
+    // Mettre à jour les compteurs
+    document.getElementById('showing-from').textContent = totalRows > 0 ? startIndex + 1 : 0;
+    document.getElementById('showing-to').textContent = endIndex;
+    document.getElementById('showing-total').textContent = totalRows;
+    document.getElementById('filter-results-count').textContent = totalRows;
+
+    // Générer les boutons de pagination
+    generatePaginationButtons(totalPages);
+}
+
+/**
+ * Génère les boutons de pagination
+ * @param {number} totalPages - Nombre total de pages
+ */
+function generatePaginationButtons(totalPages) {
+    const paginationList = document.getElementById('pagination-list');
+    if (!paginationList) return;
+
+    paginationList.innerHTML = '';
+
+    if (totalPages <= 1) return;
+
+    // Bouton Précédent
+    const prevLi = document.createElement('li');
+    prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+    prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Précédent"><i class="bi bi-chevron-left"></i></a>`;
+    prevLi.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+            renderPagination();
+        }
+    });
+    paginationList.appendChild(prevLi);
+
+    // Boutons de pages
+    const maxButtons = 7;
+    let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+    let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+    if (endPage - startPage < maxButtons - 1) {
+        startPage = Math.max(1, endPage - maxButtons + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        const li = document.createElement('li');
+        li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        li.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentPage = i;
+            renderPagination();
+        });
+        paginationList.appendChild(li);
+    }
+
+    // Bouton Suivant
+    const nextLi = document.createElement('li');
+    nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+    nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Suivant"><i class="bi bi-chevron-right"></i></a>`;
+    nextLi.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPagination();
+        }
+    });
+    paginationList.appendChild(nextLi);
+}
+
 // === STATISTIQUES PAR CATEGORIE ===
 /**
  * Calcule les statistiques groupées par catégorie
@@ -1935,9 +2167,41 @@ function updateChartsTheme(theme) {
     }
 }
 
+// === SERVICE WORKER ===
+/**
+ * Enregistre le Service Worker pour le mode offline
+ */
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('✅ Service Worker enregistré:', registration.scope);
+
+                    // Vérifier les mises à jour
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // Nouvelle version disponible
+                                showToast('Nouvelle version disponible ! Rechargez la page.', 'info');
+                            }
+                        });
+                    });
+                })
+                .catch((error) => {
+                    console.warn('⚠️ Échec enregistrement Service Worker:', error);
+                });
+        });
+    }
+}
+
 // INITIALISATION
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Application démarrée');
+
+    // Enregistrer le Service Worker
+    registerServiceWorker();
 
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentDateEl = document.getElementById('current-date');
@@ -1999,6 +2263,10 @@ document.addEventListener('DOMContentLoaded', () => {
             calculerStatistiquesParCategorie(statsGroupBy.value, statsPeriod.value);
         });
     }
+
+    // === TRI ET PAGINATION ===
+    initTableSorting();
+    initPagination();
 
     loadAllData(getDateString());
 

@@ -7,6 +7,13 @@
     <meta name="author" content="PMU Pronostics">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://raw.githubusercontent.com https://cdn.jsdelivr.net;">
     <title>Pronostics PMU - Analyse Performance</title>
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PMU Pronostics">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha384-XGjxtQfXaH2tnPFa9x+ruJTuLE3Aa6LhHSWRr1XeTyhezb4abCG4ccI5AkVDxqC+" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
@@ -683,9 +690,9 @@
                     </div>
                 </div>
 
-                <!-- Compteur de résultats -->
+                <!-- Compteur de résultats et pagination -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-6">
                         <div class="alert alert-info mb-0 py-2 d-flex justify-content-between align-items-center" role="status">
                             <span>
                                 <i class="bi bi-info-circle-fill"></i>
@@ -694,24 +701,57 @@
                             <small class="text-muted" id="filter-active-text"></small>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center justify-content-end gap-2 py-2">
+                            <label class="form-label mb-0 fw-bold small">Par page:</label>
+                            <select id="rows-per-page" class="form-select form-select-sm" style="width: auto;">
+                                <option value="10">10</option>
+                                <option value="25" selected>25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="all">Tout</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="card border-0 shadow-sm">
+
+            <div class="card border-0 shadow-sm mt-3">
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead style="background: var(--primary-gradient); color: white;">
                                 <tr>
-                                    <th><i class="bi bi-geo-alt"></i> Hippodrome</th>
-                                    <th><i class="bi bi-clock"></i> Heure</th>
-                                    <th><i class="bi bi-hash"></i> Course</th>
-                                    <th>Cheval Pronostiqué</th>
-                                    <th>Cote</th>
-                                    <th>Confiance</th>
-                                    <th>Position Prédite</th>
-                                    <th>Résultat Réel</th>
-                                    <th>Statut</th>
+                                    <th class="sortable" data-column="0" style="cursor: pointer;">
+                                        <i class="bi bi-geo-alt"></i> Hippodrome
+                                        <i class="bi bi-arrow-down-up ms-1"></i>
+                                    </th>
+                                    <th class="sortable" data-column="1" style="cursor: pointer;">
+                                        <i class="bi bi-clock"></i> Heure
+                                        <i class="bi bi-arrow-down-up ms-1"></i>
+                                    </th>
+                                    <th class="sortable" data-column="2" style="cursor: pointer;">
+                                        <i class="bi bi-hash"></i> Course
+                                        <i class="bi bi-arrow-down-up ms-1"></i>
+                                    </th>
+                                    <th class="sortable" data-column="3" style="cursor: pointer;">
+                                        Cheval
+                                        <i class="bi bi-arrow-down-up ms-1"></i>
+                                    </th>
+                                    <th class="sortable" data-column="4" style="cursor: pointer;">
+                                        Cote
+                                        <i class="bi bi-arrow-down-up ms-1"></i>
+                                    </th>
+                                    <th class="sortable" data-column="5" style="cursor: pointer;">
+                                        Confiance
+                                        <i class="bi bi-arrow-down-up ms-1"></i>
+                                    </th>
+                                    <th>Position</th>
+                                    <th>Résultat</th>
+                                    <th class="sortable" data-column="8" style="cursor: pointer;">
+                                        Statut
+                                        <i class="bi bi-arrow-down-up ms-1"></i>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="comparaison-body">
@@ -724,6 +764,18 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                    <!-- Pagination Controls -->
+                    <div id="pagination-controls" class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                        <div class="text-muted small">
+                            Affichage de <strong id="showing-from">0</strong> à <strong id="showing-to">0</strong> sur <strong id="showing-total">0</strong> résultats
+                        </div>
+                        <nav aria-label="Pagination">
+                            <ul class="pagination pagination-sm mb-0" id="pagination-list">
+                                <!-- Généré dynamiquement -->
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
