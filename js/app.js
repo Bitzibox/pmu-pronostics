@@ -1639,6 +1639,78 @@ function creerGraphiqueHistorique(historique) {
     });
 }
 
+// === RECHERCHE DE CHEVAUX ===
+/**
+ * Initialise la recherche de chevaux
+ */
+function initHorseSearch() {
+    const searchInput = document.getElementById('search-horse');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const searchResults = document.getElementById('search-results');
+    const searchCount = document.getElementById('search-count');
+
+    if (!searchInput) return;
+
+    let searchTimeout;
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(() => {
+            const query = e.target.value.trim().toLowerCase();
+
+            if (query.length === 0) {
+                // Réafficher toutes les lignes
+                document.querySelectorAll('#comparaison-body tr').forEach(row => {
+                    if (!row.classList.contains('d-none')) {
+                        row.style.backgroundColor = '';
+                    }
+                });
+                searchResults.style.display = 'none';
+                applyFilters(); // Ré-appliquer les filtres
+                return;
+            }
+
+            if (query.length < 2) return;
+
+            // Rechercher dans le tableau
+            let found = 0;
+            document.querySelectorAll('#comparaison-body tr').forEach(row => {
+                const horseCell = row.cells[3]; // Colonne cheval
+                if (!horseCell) return;
+
+                const horseText = horseCell.textContent.toLowerCase();
+
+                if (horseText.includes(query)) {
+                    row.style.backgroundColor = '#fff3cd'; // Highlight jaune
+                    found++;
+                } else {
+                    row.style.backgroundColor = '';
+                }
+            });
+
+            // Afficher le compteur
+            searchCount.textContent = found;
+            searchResults.style.display = 'block';
+
+            if (found === 0) {
+                showToast('Aucun cheval trouvé', 'warning');
+            }
+        }, 300); // Debounce 300ms
+    });
+
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            document.querySelectorAll('#comparaison-body tr').forEach(row => {
+                row.style.backgroundColor = '';
+            });
+            searchResults.style.display = 'none';
+            applyFilters();
+        });
+    }
+}
+
 // === TRI ET PAGINATION ===
 /**
  * Initialise le tri des colonnes du tableau
@@ -2263,6 +2335,9 @@ document.addEventListener('DOMContentLoaded', () => {
             calculerStatistiquesParCategorie(statsGroupBy.value, statsPeriod.value);
         });
     }
+
+    // === RECHERCHE CHEVAUX ===
+    initHorseSearch();
 
     // === TRI ET PAGINATION ===
     initTableSorting();
