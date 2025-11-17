@@ -9433,6 +9433,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -9471,7 +9472,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 1,
@@ -9515,7 +9516,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 1,
@@ -9559,7 +9560,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 2,
@@ -9592,7 +9593,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 2,
@@ -9625,7 +9626,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 2,
@@ -9676,7 +9677,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 3,
@@ -9709,7 +9710,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MULTI",
                   "spotAutorise": true,
                   "nbChevauxReglementaire": 4,
@@ -9780,7 +9781,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "FIN_COURSE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 134250,
               "participants": [],
@@ -9790,12 +9791,22 @@
                 "intitule": "PSF STANDARD",
                 "commentaire": "Estimï¿½"
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    5,
+                    12
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "VIL",
                 "libelleCourt": "LYON LA SOIE",
@@ -9820,6 +9831,30 @@
                 ],
                 [
                   6
+                ],
+                [
+                  15
+                ],
+                [
+                  4
+                ],
+                [
+                  2
+                ],
+                [
+                  14
+                ],
+                [
+                  8
+                ],
+                [
+                  9
+                ],
+                [
+                  3
+                ],
+                [
+                  7
                 ]
               ],
               "hasEParis": true
@@ -9832,7 +9867,7 @@
               "numExterneReunion": 4,
               "numOrdre": 4,
               "numExterne": 4,
-              "heureDepart": 1763400720000,
+              "heureDepart": 1763402340000,
               "libelle": "PRIX DE LA POSTE AUX CHEVAUX",
               "libelleCourt": "POSTE AUX CHEV.",
               "montantPrix": 14400,
@@ -10174,7 +10209,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -10208,7 +10243,7 @@
               "numExterneReunion": 4,
               "numOrdre": 5,
               "numExterne": 5,
-              "heureDepart": 1763402340000,
+              "heureDepart": 1763404260000,
               "libelle": "PRIX PAMPONI",
               "libelleCourt": "PAMPONI",
               "montantPrix": 16300,
@@ -10582,7 +10617,7 @@
               "numExterneReunion": 4,
               "numOrdre": 6,
               "numExterne": 6,
-              "heureDepart": 1763404260000,
+              "heureDepart": 1763406180000,
               "libelle": "PRIX DU HARAS DES CHATAIGNIERS",
               "libelleCourt": "HARAS DES CHAT.",
               "montantPrix": 21000,
@@ -10956,7 +10991,7 @@
               "numExterneReunion": 4,
               "numOrdre": 7,
               "numExterne": 7,
-              "heureDepart": 1763406180000,
+              "heureDepart": 1763407980000,
               "libelle": "PRIX DE SAINT-PRIEST",
               "libelleCourt": "DE ST-PRIEST",
               "montantPrix": 19200,
@@ -11366,7 +11401,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -11410,7 +11445,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -11450,7 +11485,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -11483,7 +11518,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -11524,7 +11559,7 @@
                   "typePari": "E_DEUX_SUR_QUATRE",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -11567,7 +11602,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -11607,7 +11642,7 @@
                   "typePari": "E_MULTI",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -11654,7 +11689,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_SOUS_ORDRES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15055,8 +15090,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 4,
-          "numCourse": 4
+          "numReunion": 5,
+          "numCourse": 1
         }
       ],
       "datesProgrammesDisponibles": [
@@ -15066,7 +15101,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1763400636877,
+      "timestamp": 1763401536857,
       "timezoneOffset": 3600000
     },
     "date": "17112025"
