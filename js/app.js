@@ -304,6 +304,58 @@ function cacheClear(key) {
 
 // ✅ NOUVELLES FONCTIONS D'ENRICHISSEMENT
 
+/**
+ * Récupère les informations d'une réunion depuis le fichier courses
+ * @param {string} reunion - Numéro de réunion (ex: "R1" ou "1")
+ * @returns {Object} Informations de la réunion
+ */
+function getReunionInfoFromCoursesFile(reunion) {
+    const info = {
+        hippodrome: null,
+        libelleLong: null,
+        ville: null,
+        pays: null
+    };
+
+    try {
+        if (!allData.courses || !Array.isArray(allData.courses)) {
+            return info;
+        }
+
+        const coursesData = allData.courses[0];
+        if (!coursesData?.programme?.reunions) {
+            return info;
+        }
+
+        const reunionNum = parseInt(reunion.toString().replace('R', ''));
+        const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === reunionNum);
+
+        if (reunionData) {
+            if (reunionData.hippodrome?.libelleCourt) {
+                info.hippodrome = reunionData.hippodrome.libelleCourt;
+            }
+            if (reunionData.hippodrome?.libelleLong) {
+                info.libelleLong = reunionData.hippodrome.libelleLong;
+                // Extraire la ville du libelleLong (ex: "HIPPODROME DU MANS" -> "Le Mans")
+                const match = reunionData.hippodrome.libelleLong.match(/HIPPODROME (?:DE |DU |D')?(.+)/i);
+                if (match) {
+                    info.ville = match[1]
+                        .split('-')
+                        .map(part => part.charAt(0) + part.slice(1).toLowerCase())
+                        .join('-');
+                }
+            }
+            if (reunionData.pays?.code) {
+                info.pays = reunionData.pays.code;
+            }
+        }
+    } catch (error) {
+        console.warn(`⚠️ Erreur getReunionInfo pour R${reunion}:`, error);
+    }
+
+    return info;
+}
+
 function getCourseInfoFromCoursesFile(reunion, course) {
     const info = {
         heure: '--:--',
@@ -757,14 +809,18 @@ function updateCoursesParReunion() {
 
     const pronostics = allData.pronostics.pronostics;
     const reunions = {};
-    
+
     pronostics.forEach(prono => {
         const key = `${prono.pays}-R${prono.reunion}`;
         if (!reunions[key]) {
+            // Récupérer les vraies infos de la réunion depuis le fichier courses
+            const reunionInfo = getReunionInfoFromCoursesFile(prono.reunion);
             reunions[key] = {
-                pays: prono.pays,
+                pays: prono.pays || reunionInfo.pays,
                 reunion: prono.reunion,
-                hippodrome: getHippodromeName(prono.pays, prono.reunion),
+                hippodrome: reunionInfo.hippodrome || getHippodromeName(prono.pays, prono.reunion),
+                ville: reunionInfo.ville,
+                libelleLong: reunionInfo.libelleLong,
                 courses: []
             };
         }
@@ -783,11 +839,16 @@ function updateCoursesParReunion() {
         const isActive = index === 0 ? 'active' : '';
         const showActive = index === 0 ? 'show active' : '';
         
+        // Créer le label de l'hippodrome avec ville si disponible
+        const hippodromeLabel = reunion.ville
+            ? `${reunion.hippodrome} <small class="text-muted">(${reunion.ville})</small>`
+            : reunion.hippodrome;
+
         tabsHtml += `
             <li class="nav-item">
-                <button class="nav-link ${isActive}" id="tab-${key}" data-bs-toggle="tab" 
+                <button class="nav-link ${isActive}" id="tab-${key}" data-bs-toggle="tab"
                         data-bs-target="#content-${key}" type="button">
-                    <i class="bi bi-geo-alt-fill"></i> ${reunion.hippodrome}
+                    <i class="bi bi-geo-alt-fill"></i> ${hippodromeLabel}
                     <span class="badge bg-primary ms-2">${reunion.courses.length}</span>
                 </button>
             </li>
@@ -853,11 +914,16 @@ function renderCoursesForReunion(reunion) {
             }
         }
 
+        // Créer le label de l'hippodrome avec ville
+        const hippodromeDisplay = reunion.ville
+            ? `${reunion.hippodrome} <small>(${reunion.ville})</small>`
+            : reunion.hippodrome;
+
         html += `
             <div class="course-card">
                 <div class="course-header">
                     <div class="hippodrome-info position-relative">
-                        <div class="hippodrome-badge"><i class="bi bi-flag-fill"></i> ${reunion.hippodrome}</div>
+                        <div class="hippodrome-badge"><i class="bi bi-flag-fill"></i> ${hippodromeDisplay}</div>
                         <div class="time-badge"><i class="bi bi-clock-fill"></i> ${heure}</div>
                         <span class="discipline-badge discipline-${disciplineInfo.type}">${disciplineInfo.icon} ${disciplineInfo.label}</span>
                         <div class="ms-auto">${statutBadge}</div>
