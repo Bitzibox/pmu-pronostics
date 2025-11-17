@@ -57,6 +57,13 @@ let allData = { analyse: null, pronostics: null, resultats: null, courses: null,
 let currentDateString = '';
 let lastUpdateTime = Date.now();
 
+// Variables pour tri et pagination
+let currentPage = 1;
+let rowsPerPage = 25;
+let sortColumn = -1;
+let sortDirection = 'asc';
+let tableData = []; // Stocker les données brutes du tableau
+
 // === FONCTIONS D'ERGONOMIE ET ANIMATIONS ===
 
 /**
@@ -284,6 +291,13 @@ async function updateAllSections() {
     updateCoursesParReunion();
     updateTableauComparaison();
     setupFilters();
+
+    // Calculer les stats par catégorie
+    const statsGroupBy = document.getElementById('stats-group-by');
+    const statsPeriod = document.getElementById('stats-period');
+    if (statsGroupBy && statsPeriod) {
+        await calculerStatistiquesParCategorie(statsGroupBy.value, statsPeriod.value);
+    }
 }
 
 function getDateString(date = new Date()) {
@@ -947,7 +961,14 @@ function updateTableauHistorique() {
 
     // ✅ UTILISER LES DONNÉES CALCULÉES EN TEMPS RÉEL
     if (!historiqueCalcule || historiqueCalcule.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">Aucune donnée historique</td></tr>';
+        showEmptyState('historique-body', {
+            icon: 'bi-calendar-x',
+            title: 'Aucune donnée historique',
+            description: 'Aucun pronostic trouvé pour les 30 derniers jours',
+            actionText: 'Rafraîchir',
+            actionCallback: () => calculerHistoriqueTempsReel(),
+            colspan: 8
+        });
         return;
     }
 
@@ -1188,6 +1209,9 @@ function updateTableauComparaison() {
     });
 
     tbody.innerHTML = html;
+
+    // Appliquer la pagination après avoir rempli le tableau
+    renderPagination();
 }
 
 function setupFilters() {
@@ -1212,10 +1236,31 @@ function setupFilters() {
         });
     }
 
-    ['filter-reunion', 'filter-confiance', 'filter-statut'].forEach(id => {
+    ['filter-reunion', 'filter-confiance', 'filter-statut', 'filter-discipline'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener('change', applyFilters);
     });
+
+    // Bouton clear filters
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', () => {
+            document.getElementById('filter-reunion').value = '';
+            document.getElementById('filter-confiance').value = '';
+            document.getElementById('filter-statut').value = '';
+            const filterDiscipline = document.getElementById('filter-discipline');
+            if (filterDiscipline) filterDiscipline.value = '';
+
+            // Réafficher toutes les lignes
+            document.querySelectorAll('#comparaison-body tr').forEach(row => {
+                row.style.display = '';
+            });
+
+            currentPage = 1;
+            renderPagination();
+            showToast('Filtres réinitialisés', 'info');
+        });
+    }
 }
 
 function applyFilters() {
@@ -1225,22 +1270,98 @@ function applyFilters() {
 
     document.querySelectorAll('#comparaison-body tr').forEach(row => {
         let show = true;
-        
+
         if (filterReunion && !row.cells[0]?.textContent.includes(filterReunion.replace(/.*-R/, 'R'))) show = false;
         if (filterConfiance && show) {
             const confiance = parseInt(row.cells[5]?.textContent.replace('%', '') || '0');
             if (confiance <= parseInt(filterConfiance)) show = false;
         }
         if (filterStatut && show && !row.cells[8]?.textContent.toLowerCase().includes(filterStatut)) show = false;
-        
+
         row.style.display = show ? '' : 'none';
     });
+
+    // Réinitialiser à la page 1 et mettre à jour la pagination
+    currentPage = 1;
+    renderPagination();
+}
+
+/**
+ * Affiche un état vide avec icône et message
+ * @param {string} containerId - ID du conteneur
+ * @param {object} options - Options de l'empty state
+ */
+function showEmptyState(containerId, options = {}) {
+    const defaults = {
+        icon: 'bi-inbox',
+        title: 'Aucune donnée disponible',
+        description: 'Aucune information à afficher pour le moment',
+        actionText: 'Rafraîchir',
+        actionCallback: () => window.location.reload(),
+        colspan: 9
+    };
+    const config = { ...defaults, ...options };
+
+    const el = document.getElementById(containerId);
+    if (!el) return;
+
+    const emptyStateHTML = `
+        <tr>
+            <td colspan="${config.colspan}" class="p-0">
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="bi ${config.icon}"></i>
+                    </div>
+                    <h3 class="empty-state-title">${escapeHtml(config.title)}</h3>
+                    <p class="empty-state-description">${escapeHtml(config.description)}</p>
+                    ${config.actionText ? `
+                        <button class="empty-state-action" onclick="(${config.actionCallback.toString()})()">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            ${escapeHtml(config.actionText)}
+                        </button>
+                    ` : ''}
+                </div>
+            </td>
+        </tr>
+    `;
+
+    el.innerHTML = emptyStateHTML;
+}
+
+/**
+ * Affiche un skeleton loader pendant le chargement
+ * @param {string} containerId - ID du conteneur
+ * @param {number} rows - Nombre de lignes skeleton
+ * @param {number} colspan - Nombre de colonnes
+ */
+function showSkeletonLoader(containerId, rows = 5, colspan = 9) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+
+    let skeletonHTML = '';
+    for (let i = 0; i < rows; i++) {
+        skeletonHTML += `
+            <tr>
+                ${Array(colspan).fill().map(() => `
+                    <td>
+                        <div class="skeleton skeleton-text"></div>
+                    </td>
+                `).join('')}
+            </tr>
+        `;
+    }
+    el.innerHTML = skeletonHTML;
 }
 
 function showError(message) {
     ['historique-body', 'comparaison-body'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.innerHTML = `<tr><td colspan="9" class="text-center text-danger">${message}</td></tr>`;
+        showEmptyState(id, {
+            icon: 'bi-exclamation-triangle',
+            title: 'Erreur de chargement',
+            description: message,
+            actionText: 'Réessayer',
+            actionCallback: () => window.location.reload()
+        });
     });
 }
 
@@ -1310,26 +1431,73 @@ function populateDateSelector() {
 }
 
 function showLoadingState(isLoading) {
-    const spinners = { 'historique-body': 8, 'reunions-content': 1, 'comparaison-body': 9 };
+    const containers = {
+        'historique-body': { colspan: 8, rows: 5 },
+        'comparaison-body': { colspan: 9, rows: 8 }
+    };
 
-    Object.keys(spinners).forEach(id => {
+    Object.keys(containers).forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
-        
+
         if (isLoading) {
-            const spinner = '<div class="spinner-border text-primary" role="status"></div>';
-            el.innerHTML = id === 'reunions-content' ? 
-                `<div class="text-center py-5">${spinner}</div>` : 
-                `<tr><td colspan="${spinners[id]}" class="text-center py-5">${spinner}</td></tr>`;
-        } else if (el.innerHTML.includes('spinner')) {
-            el.innerHTML = `<tr><td colspan="${spinners[id]}" class="text-center text-muted">Aucune donnée</td></tr>`;
+            // Afficher skeleton loaders
+            showSkeletonLoader(id, containers[id].rows, containers[id].colspan);
+        } else if (el.innerHTML.includes('skeleton')) {
+            // Afficher empty state si aucune donnée
+            const icons = {
+                'historique-body': 'bi-calendar-x',
+                'comparaison-body': 'bi-table'
+            };
+            showEmptyState(id, {
+                icon: icons[id] || 'bi-inbox',
+                title: 'Aucune donnée',
+                description: 'Aucune information disponible pour cette période',
+                actionText: 'Rafraîchir',
+                actionCallback: () => window.location.reload(),
+                colspan: containers[id].colspan
+            });
         }
     });
-    
+
+    // Gérer reunions-content séparément (pas une table)
+    const reunionsContent = document.getElementById('reunions-content');
+    if (reunionsContent) {
+        if (isLoading) {
+            reunionsContent.innerHTML = `
+                <div class="row g-3">
+                    ${Array(4).fill().map(() => `
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="skeleton skeleton-text" style="height: 30px; margin-bottom: 15px;"></div>
+                                    <div class="skeleton skeleton-text" style="height: 20px; margin-bottom: 10px;"></div>
+                                    <div class="skeleton skeleton-text" style="height: 20px; margin-bottom: 10px;"></div>
+                                    <div class="skeleton skeleton-text" style="height: 20px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        } else if (reunionsContent.innerHTML.includes('skeleton')) {
+            reunionsContent.innerHTML = `
+                <div class="empty-state">
+                    <div class="empty-state-icon"><i class="bi bi-calendar-event"></i></div>
+                    <h3 class="empty-state-title">Aucune réunion</h3>
+                    <p class="empty-state-description">Aucune course programmée pour cette date</p>
+                    <button class="empty-state-action" onclick="window.location.reload()">
+                        <i class="bi bi-arrow-clockwise"></i> Rafraîchir
+                    </button>
+                </div>
+            `;
+        }
+    }
+
     // CORRECTION: Vérifier l'existence avant manipulation
     const dateSelector = document.getElementById('date-selector');
     const loadToday = document.getElementById('load-today');
-    
+
     if (dateSelector) dateSelector.disabled = isLoading;
     if (loadToday) loadToday.disabled = isLoading;
 }
@@ -1471,9 +1639,641 @@ function creerGraphiqueHistorique(historique) {
     });
 }
 
+// === RECHERCHE DE CHEVAUX ===
+/**
+ * Initialise la recherche de chevaux
+ */
+function initHorseSearch() {
+    const searchInput = document.getElementById('search-horse');
+    const clearSearchBtn = document.getElementById('clear-search');
+    const searchResults = document.getElementById('search-results');
+    const searchCount = document.getElementById('search-count');
+
+    if (!searchInput) return;
+
+    let searchTimeout;
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(() => {
+            const query = e.target.value.trim().toLowerCase();
+
+            if (query.length === 0) {
+                // Réafficher toutes les lignes
+                document.querySelectorAll('#comparaison-body tr').forEach(row => {
+                    if (!row.classList.contains('d-none')) {
+                        row.style.backgroundColor = '';
+                    }
+                });
+                searchResults.style.display = 'none';
+                applyFilters(); // Ré-appliquer les filtres
+                return;
+            }
+
+            if (query.length < 2) return;
+
+            // Rechercher dans le tableau
+            let found = 0;
+            document.querySelectorAll('#comparaison-body tr').forEach(row => {
+                const horseCell = row.cells[3]; // Colonne cheval
+                if (!horseCell) return;
+
+                const horseText = horseCell.textContent.toLowerCase();
+
+                if (horseText.includes(query)) {
+                    row.style.backgroundColor = '#fff3cd'; // Highlight jaune
+                    found++;
+                } else {
+                    row.style.backgroundColor = '';
+                }
+            });
+
+            // Afficher le compteur
+            searchCount.textContent = found;
+            searchResults.style.display = 'block';
+
+            if (found === 0) {
+                showToast('Aucun cheval trouvé', 'warning');
+            }
+        }, 300); // Debounce 300ms
+    });
+
+    if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            document.querySelectorAll('#comparaison-body tr').forEach(row => {
+                row.style.backgroundColor = '';
+            });
+            searchResults.style.display = 'none';
+            applyFilters();
+        });
+    }
+}
+
+// === TRI ET PAGINATION ===
+/**
+ * Initialise le tri des colonnes du tableau
+ */
+function initTableSorting() {
+    const sortableHeaders = document.querySelectorAll('.sortable');
+    sortableHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const column = parseInt(header.getAttribute('data-column'));
+            handleSort(column);
+        });
+    });
+}
+
+/**
+ * Gère le tri d'une colonne
+ * @param {number} column - Index de la colonne
+ */
+function handleSort(column) {
+    if (sortColumn === column) {
+        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+        sortColumn = column;
+        sortDirection = 'asc';
+    }
+
+    // Mettre à jour les indicateurs visuels
+    updateSortIndicators();
+
+    // Trier et afficher
+    sortAndRenderTable();
+}
+
+/**
+ * Met à jour les indicateurs visuels de tri
+ */
+function updateSortIndicators() {
+    document.querySelectorAll('.sortable').forEach(header => {
+        const column = parseInt(header.getAttribute('data-column'));
+        const icon = header.querySelector('i:last-child');
+
+        if (column === sortColumn) {
+            icon.className = sortDirection === 'asc' ? 'bi bi-arrow-up ms-1' : 'bi bi-arrow-down ms-1';
+            header.style.opacity = '1';
+        } else {
+            icon.className = 'bi bi-arrow-down-up ms-1';
+            header.style.opacity = '0.7';
+        }
+    });
+}
+
+/**
+ * Trie et affiche le tableau
+ */
+function sortAndRenderTable() {
+    const tbody = document.getElementById('comparaison-body');
+    if (!tbody) return;
+
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    rows.sort((a, b) => {
+        const aValue = a.cells[sortColumn]?.textContent.trim() || '';
+        const bValue = b.cells[sortColumn]?.textContent.trim() || '';
+
+        // Tri numérique pour les colonnes numériques
+        if (sortColumn === 4 || sortColumn === 5) { // Cote ou Confiance
+            const aNum = parseFloat(aValue.replace(/[^\d.]/g, '')) || 0;
+            const bNum = parseFloat(bValue.replace(/[^\d.]/g, '')) || 0;
+            return sortDirection === 'asc' ? aNum - bNum : bNum - aNum;
+        }
+
+        // Tri alphabétique pour les autres colonnes
+        if (sortDirection === 'asc') {
+            return aValue.localeCompare(bValue, 'fr');
+        } else {
+            return bValue.localeCompare(aValue, 'fr');
+        }
+    });
+
+    // Réinsérer les lignes triées
+    rows.forEach(row => tbody.appendChild(row));
+
+    // Appliquer la pagination
+    renderPagination();
+}
+
+/**
+ * Initialise la pagination
+ */
+function initPagination() {
+    const rowsPerPageSelect = document.getElementById('rows-per-page');
+    if (rowsPerPageSelect) {
+        rowsPerPageSelect.addEventListener('change', (e) => {
+            rowsPerPage = e.target.value === 'all' ? 999999 : parseInt(e.target.value);
+            currentPage = 1;
+            renderPagination();
+        });
+    }
+}
+
+/**
+ * Affiche la pagination
+ */
+function renderPagination() {
+    const tbody = document.getElementById('comparaison-body');
+    if (!tbody) return;
+
+    const allRows = Array.from(tbody.querySelectorAll('tr')).filter(row => !row.querySelector('.empty-state, .skeleton'));
+    const visibleRows = allRows.filter(row => row.style.display !== 'none');
+    const totalRows = visibleRows.length;
+    const totalPages = rowsPerPage === 999999 ? 1 : Math.ceil(totalRows / rowsPerPage);
+
+    // Assurer que currentPage est valide
+    if (currentPage > totalPages) currentPage = totalPages || 1;
+
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = rowsPerPage === 999999 ? totalRows : Math.min(startIndex + rowsPerPage, totalRows);
+
+    // Masquer toutes les lignes puis afficher seulement celles de la page actuelle
+    visibleRows.forEach((row, index) => {
+        if (index >= startIndex && index < endIndex) {
+            row.classList.remove('d-none');
+        } else {
+            row.classList.add('d-none');
+        }
+    });
+
+    // Mettre à jour les compteurs
+    document.getElementById('showing-from').textContent = totalRows > 0 ? startIndex + 1 : 0;
+    document.getElementById('showing-to').textContent = endIndex;
+    document.getElementById('showing-total').textContent = totalRows;
+    document.getElementById('filter-results-count').textContent = totalRows;
+
+    // Générer les boutons de pagination
+    generatePaginationButtons(totalPages);
+}
+
+/**
+ * Génère les boutons de pagination
+ * @param {number} totalPages - Nombre total de pages
+ */
+function generatePaginationButtons(totalPages) {
+    const paginationList = document.getElementById('pagination-list');
+    if (!paginationList) return;
+
+    paginationList.innerHTML = '';
+
+    if (totalPages <= 1) return;
+
+    // Bouton Précédent
+    const prevLi = document.createElement('li');
+    prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+    prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Précédent"><i class="bi bi-chevron-left"></i></a>`;
+    prevLi.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage > 1) {
+            currentPage--;
+            renderPagination();
+        }
+    });
+    paginationList.appendChild(prevLi);
+
+    // Boutons de pages
+    const maxButtons = 7;
+    let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+    let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+    if (endPage - startPage < maxButtons - 1) {
+        startPage = Math.max(1, endPage - maxButtons + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        const li = document.createElement('li');
+        li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        li.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        li.addEventListener('click', (e) => {
+            e.preventDefault();
+            currentPage = i;
+            renderPagination();
+        });
+        paginationList.appendChild(li);
+    }
+
+    // Bouton Suivant
+    const nextLi = document.createElement('li');
+    nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+    nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Suivant"><i class="bi bi-chevron-right"></i></a>`;
+    nextLi.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPagination();
+        }
+    });
+    paginationList.appendChild(nextLi);
+}
+
+// === STATISTIQUES PAR CATEGORIE ===
+/**
+ * Calcule les statistiques groupées par catégorie
+ * @param {string} groupBy - 'hippodrome', 'discipline', ou 'reunion'
+ * @param {string} period - 'today', '7days', ou '30days'
+ */
+async function calculerStatistiquesParCategorie(groupBy = 'hippodrome', period = '30days') {
+    const container = document.getElementById('stats-by-category-container');
+    if (!container) return;
+
+    // Afficher skeleton loader
+    container.innerHTML = `
+        <div class="row g-3">
+            ${Array(6).fill().map(() => `
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="skeleton skeleton-text" style="height: 25px; margin-bottom: 15px;"></div>
+                            <div class="skeleton skeleton-text" style="height: 40px; margin-bottom: 10px;"></div>
+                            <div class="skeleton skeleton-text" style="height: 20px; margin-bottom: 5px;"></div>
+                            <div class="skeleton skeleton-text" style="height: 20px;"></div>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    try {
+        // Récupérer les données historiques
+        const days = period === 'today' ? 1 : period === '7days' ? 7 : 30;
+        const stats = {};
+
+        // Utiliser l'historique déjà calculé si disponible et période = 30 jours
+        let dataSource = [];
+        if (period === '30days' && historiqueCalcule && historiqueCalcule.length > 0) {
+            // Utiliser les données du cache - parcourir l'historique calculé
+            historiqueCalcule.slice(0, days).forEach(jour => {
+                // L'historique contient déjà les stats agrégées, pas les pronostics individuels
+                // On doit stocker les pronostics bruts pour cette fonctionnalité
+                // Pour l'instant, on va juste utiliser ce qui est disponible
+            });
+        }
+
+        // Calculer à partir des données brutes du jour actuel
+        if (allData.pronostics?.pronostics && allData.resultats?.courses) {
+            const pronostics = allData.pronostics.pronostics;
+            const resultats = allData.resultats.courses;
+
+            pronostics.forEach(prono => {
+                const resultat = resultats.find(r =>
+                    r.reunion === prono.reunion && r.course === prono.course
+                );
+
+                let key = '';
+                if (groupBy === 'hippodrome') {
+                    key = prono.hippodrome || prono.reunion;
+                } else if (groupBy === 'discipline') {
+                    key = prono.discipline || 'Non spécifié';
+                } else if (groupBy === 'reunion') {
+                    key = `${prono.reunion} - ${prono.hippodrome || ''}`;
+                }
+
+                if (!stats[key]) {
+                    stats[key] = {
+                        total: 0,
+                        gagnants: 0,
+                        places: 0,
+                        rates: 0,
+                        confianceTotale: 0
+                    };
+                }
+
+                stats[key].total++;
+                stats[key].confianceTotale += prono.scoreConfiance || 0;
+
+                if (resultat?.arrivee?.length) {
+                    const cheval = prono.classement?.[0];
+                    if (cheval?.numero === resultat.arrivee[0]) {
+                        stats[key].gagnants++;
+                    } else if (resultat.arrivee.slice(0, 3).includes(cheval?.numero)) {
+                        stats[key].places++;
+                    } else {
+                        stats[key].rates++;
+                    }
+                }
+            });
+        }
+
+        // Afficher les résultats
+        displayStatsByCategory(stats, groupBy);
+
+    } catch (error) {
+        console.error('❌ Erreur calcul stats par catégorie:', error);
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon"><i class="bi bi-exclamation-triangle"></i></div>
+                <h3 class="empty-state-title">Erreur de calcul</h3>
+                <p class="empty-state-description">Impossible de calculer les statistiques</p>
+                <button class="empty-state-action" onclick="calculerStatistiquesParCategorie()">
+                    <i class="bi bi-arrow-clockwise"></i> Réessayer
+                </button>
+            </div>
+        `;
+    }
+}
+
+/**
+ * Affiche les statistiques par catégorie
+ * @param {object} stats - Objet contenant les stats groupées
+ * @param {string} groupBy - Type de groupement
+ */
+function displayStatsByCategory(stats, groupBy) {
+    const container = document.getElementById('stats-by-category-container');
+    if (!container) return;
+
+    const entries = Object.entries(stats).sort((a, b) => b[1].total - a[1].total);
+
+    if (entries.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-state-icon"><i class="bi bi-inbox"></i></div>
+                <h3 class="empty-state-title">Aucune donnée</h3>
+                <p class="empty-state-description">Aucune statistique disponible pour cette période</p>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '<div class="row g-3">';
+
+    entries.forEach(([key, data]) => {
+        const tauxGagnant = data.total > 0 ? (data.gagnants / data.total * 100) : 0;
+        const tauxPlace = data.total > 0 ? ((data.gagnants + data.places) / data.total * 100) : 0;
+        const confianceMoyenne = data.total > 0 ? (data.confianceTotale / data.total) : 0;
+
+        const badge = getPerformanceBadge(tauxGagnant, 'gagnant');
+        const icon = groupBy === 'discipline' ? getDisciplineIcon(key) : 'bi-geo-alt-fill';
+
+        html += `
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm stat-card card-interactive">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex align-items-center justify-content-between">
+                            <span>
+                                <i class="bi ${icon}"></i>
+                                ${escapeHtml(key)}
+                            </span>
+                            <span class="badge ${badge.bgClass || 'bg-primary'}">${data.total}</span>
+                        </h5>
+
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <small class="text-muted">Taux Gagnant</small>
+                                <strong class="text-success">${tauxGagnant.toFixed(1)}%</strong>
+                            </div>
+                            <div class="progress-bar-enhanced">
+                                <div class="progress-fill" style="width: ${tauxGagnant}%; background: linear-gradient(90deg, #11998e, #38ef7d);"></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <small class="text-muted">Taux Placé</small>
+                                <strong class="text-warning">${tauxPlace.toFixed(1)}%</strong>
+                            </div>
+                            <div class="progress-bar-enhanced">
+                                <div class="progress-fill" style="width: ${tauxPlace}%; background: linear-gradient(90deg, #f093fb, #f5576c);"></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="bi bi-check-circle text-success"></i> ${data.gagnants}
+                                <i class="bi bi-award text-warning ms-2"></i> ${data.places}
+                                <i class="bi bi-x-circle text-danger ms-2"></i> ${data.rates}
+                            </small>
+                            <small class="text-muted">
+                                <i class="bi bi-star-fill text-info"></i> ${confianceMoyenne.toFixed(0)}%
+                            </small>
+                        </div>
+
+                        <div class="mt-2">
+                            <span class="performance-badge ${badge.class}">
+                                <i class="bi bi-${badge.icon}"></i>
+                                ${badge.text}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+/**
+ * Retourne l'icône correspondant à une discipline
+ * @param {string} discipline - Nom de la discipline
+ * @returns {string} - Classe d'icône Bootstrap
+ */
+function getDisciplineIcon(discipline) {
+    const icons = {
+        'ATTELE': 'bi-bicycle',
+        'MONTE': 'bi-person',
+        'PLAT': 'bi-speedometer',
+        'HAIE': 'bi-flag-fill',
+        'STEEPLECHASE': 'bi-trophy-fill',
+        'CROSS': 'bi-tree-fill',
+        'TROT': 'bi-bicycle',
+        'OBSTACLE': 'bi-flag-fill'
+    };
+    return icons[discipline?.toUpperCase()] || 'bi-question-circle';
+}
+
+// === DARK MODE ===
+/**
+ * Initialise le mode sombre avec persistance localStorage
+ */
+function initDarkMode() {
+    // Récupérer la préférence sauvegardée ou détecter la préférence système
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+
+    // Appliquer le thème
+    applyTheme(theme);
+
+    // Créer le bouton toggle s'il n'existe pas déjà
+    createDarkModeToggle();
+
+    // Écouter les changements de préférence système
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            applyTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+}
+
+/**
+ * Applique le thème sélectionné
+ * @param {string} theme - 'light' ou 'dark'
+ */
+function applyTheme(theme) {
+    const root = document.documentElement;
+
+    if (theme === 'dark') {
+        root.setAttribute('data-theme', 'dark');
+        document.body.classList.add('dark-mode');
+    } else {
+        root.removeAttribute('data-theme');
+        document.body.classList.remove('dark-mode');
+    }
+
+    // Mettre à jour l'icône du bouton
+    updateDarkModeButton(theme);
+
+    // Sauvegarder la préférence
+    localStorage.setItem('theme', theme);
+
+    // Mettre à jour les graphiques si nécessaire
+    updateChartsTheme(theme);
+}
+
+/**
+ * Crée le bouton de toggle dark mode
+ */
+function createDarkModeToggle() {
+    // Vérifier si le bouton existe déjà dans la quick actions bar
+    const quickActions = document.querySelector('.quick-actions .d-flex');
+    if (!quickActions) return;
+
+    // Vérifier si le bouton existe déjà
+    if (document.getElementById('dark-mode-toggle')) return;
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.id = 'dark-mode-toggle';
+    toggleBtn.className = 'quick-action-btn secondary';
+    toggleBtn.setAttribute('aria-label', 'Basculer le mode sombre');
+    toggleBtn.innerHTML = '<i class="bi bi-moon-stars-fill"></i><span>Mode sombre</span>';
+
+    toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(newTheme);
+        showToast(`Mode ${newTheme === 'dark' ? 'sombre' : 'clair'} activé`, 'info');
+    });
+
+    // Insérer le bouton après le bouton export
+    const exportBtn = document.getElementById('export-data');
+    if (exportBtn) {
+        exportBtn.parentNode.insertBefore(toggleBtn, exportBtn.nextSibling);
+    } else {
+        quickActions.appendChild(toggleBtn);
+    }
+}
+
+/**
+ * Met à jour l'icône du bouton dark mode
+ * @param {string} theme - 'light' ou 'dark'
+ */
+function updateDarkModeButton(theme) {
+    const toggleBtn = document.getElementById('dark-mode-toggle');
+    if (!toggleBtn) return;
+
+    const icon = theme === 'dark' ? 'bi-sun-fill' : 'bi-moon-stars-fill';
+    const text = theme === 'dark' ? 'Mode clair' : 'Mode sombre';
+    toggleBtn.innerHTML = `<i class="bi ${icon}"></i><span>${text}</span>`;
+}
+
+/**
+ * Met à jour les graphiques pour le thème
+ * @param {string} theme - 'light' ou 'dark'
+ */
+function updateChartsTheme(theme) {
+    const textColor = theme === 'dark' ? '#e0e0e0' : '#666';
+    const gridColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+
+    // Mettre à jour chartHistoriqueInstance si existe
+    if (chartHistoriqueInstance) {
+        chartHistoriqueInstance.options.plugins.legend.labels.color = textColor;
+        chartHistoriqueInstance.options.scales.x.ticks.color = textColor;
+        chartHistoriqueInstance.options.scales.y.ticks.color = textColor;
+        chartHistoriqueInstance.options.scales.x.grid.color = gridColor;
+        chartHistoriqueInstance.options.scales.y.grid.color = gridColor;
+        chartHistoriqueInstance.update();
+    }
+}
+
+// === SERVICE WORKER ===
+/**
+ * Enregistre le Service Worker pour le mode offline
+ */
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('✅ Service Worker enregistré:', registration.scope);
+
+                    // Vérifier les mises à jour
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                // Nouvelle version disponible
+                                showToast('Nouvelle version disponible ! Rechargez la page.', 'info');
+                            }
+                        });
+                    });
+                })
+                .catch((error) => {
+                    console.warn('⚠️ Échec enregistrement Service Worker:', error);
+                });
+        });
+    }
+}
+
 // INITIALISATION
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Application démarrée');
+
+    // Enregistrer le Service Worker
+    registerServiceWorker();
 
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentDateEl = document.getElementById('current-date');
@@ -1518,6 +2318,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // === DARK MODE ===
+    initDarkMode();
+
+    // === STATISTIQUES PAR CATEGORIE ===
+    const statsGroupBy = document.getElementById('stats-group-by');
+    const statsPeriod = document.getElementById('stats-period');
+
+    if (statsGroupBy && statsPeriod) {
+        statsGroupBy.addEventListener('change', () => {
+            calculerStatistiquesParCategorie(statsGroupBy.value, statsPeriod.value);
+        });
+
+        statsPeriod.addEventListener('change', () => {
+            calculerStatistiquesParCategorie(statsGroupBy.value, statsPeriod.value);
+        });
+    }
+
+    // === RECHERCHE CHEVAUX ===
+    initHorseSearch();
+
+    // === TRI ET PAGINATION ===
+    initTableSorting();
+    initPagination();
 
     loadAllData(getDateString());
 
