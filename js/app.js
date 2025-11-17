@@ -188,29 +188,34 @@ function getCourseInfoFromCoursesFile(reunion, course) {
         hippodrome: null,
         statut: 'INCONNU',
         distance: null,
-        libelle: null
+        libelle: null,
+        pays: null
     };
-    
+
     try {
         if (!allData.courses || !Array.isArray(allData.courses)) {
             return info;
         }
-        
+
         const coursesData = allData.courses[0];
         if (!coursesData?.programme?.reunions) {
             return info;
         }
-        
+
         const reunionNum = parseInt(reunion.toString().replace('R', ''));
         const courseNum = parseInt(course.toString().replace('C', ''));
-        
+
         const reunionData = coursesData.programme.reunions.find(r => r.numOfficiel === reunionNum);
         if (!reunionData) {
             return info;
         }
-        
+
         if (reunionData.hippodrome?.libelleCourt) {
             info.hippodrome = reunionData.hippodrome.libelleCourt;
+        }
+
+        if (reunionData.pays?.code) {
+            info.pays = reunionData.pays.code;
         }
         
         const courseData = reunionData.courses?.find(c => c.numOrdre === courseNum);
@@ -318,11 +323,15 @@ function enrichirPronosticsAvecCourses() {
                     prono.statut = courseInfo.statut;
                     prono.distance = courseInfo.distance;
                     prono.libelleCourse = courseInfo.libelle;
-                    
+
                     if (courseInfo.hippodrome) {
                         prono.hippodrome = courseInfo.hippodrome;
                     }
-                    
+
+                    if (courseInfo.pays) {
+                        prono.pays = courseInfo.pays;
+                    }
+
                     enriched++;
                 }
                 
@@ -810,11 +819,21 @@ function updateTableauComparaison() {
 function setupFilters() {
     const filterReunion = document.getElementById('filter-reunion');
     if (filterReunion && allData.pronostics?.pronostics) {
-        const reunions = [...new Set(allData.pronostics.pronostics.map(p => `${p.pays}-R${p.reunion}`))];
+        // Créer une liste unique de réunions
+        const reunions = [...new Set(allData.pronostics.pronostics.map(p => {
+            // Extraire le numéro de réunion depuis p.reunion (format "R2" -> 2)
+            const reunionNum = p.reunion ? p.reunion.toString().replace('R', '') : '1';
+            // Utiliser le pays si disponible, sinon 'FRA' par défaut
+            const pays = p.pays || 'FRA';
+            return `${pays}-R${reunionNum}`;
+        }))];
+
         filterReunion.innerHTML = '<option value="">Toutes les réunions</option>';
         reunions.forEach(r => {
             const parts = r.split('-R');
-            const hippodrome = getHippodromeName(parts[0], parseInt(parts[1]));
+            const pays = parts[0];
+            const reunionNum = parseInt(parts[1]);
+            const hippodrome = getHippodromeName(pays, reunionNum);
             filterReunion.innerHTML += `<option value="${r}">${hippodrome}</option>`;
         });
     }
