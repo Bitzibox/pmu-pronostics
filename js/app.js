@@ -179,6 +179,37 @@ function getDisciplineInfo(disciplineName) {
     return DISCIPLINES[cleanName] || { label: disciplineName || 'Inconnu', icon: '❓', color: '#999' };
 }
 
+/**
+ * Échappe les caractères HTML pour prévenir les attaques XSS
+ * @param {string} text - Le texte à sécuriser
+ * @returns {string} Le texte échappé
+ */
+function escapeHtml(text) {
+    if (text === null || text === undefined) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+/**
+ * Échappe les guillemets pour le format CSV
+ * @param {string} text - Le texte à échapper
+ * @returns {string} Le texte échappé pour CSV
+ */
+function escapeCsv(text) {
+    if (text === null || text === undefined) return '';
+    return String(text).replace(/"/g, '""');
+}
+
+/**
+ * Raccourci pour document.getElementById
+ * @param {string} id - L'ID de l'élément
+ * @returns {HTMLElement|null} L'élément trouvé ou null
+ */
+function el(id) {
+    return document.getElementById(id);
+}
+
 // ✅ NOUVELLES FONCTIONS D'ENRICHISSEMENT
 
 function getCourseInfoFromCoursesFile(reunion, course) {
@@ -750,16 +781,18 @@ function renderPronosticsTop3(prono) {
 
     return prono.classement.slice(0, 3).map((cheval, index) => {
         const positionClass = ['position-1', 'position-2', 'position-3'][index];
+        const nomCheval = escapeHtml(cheval.nom || 'N/A');
+        const coteCheval = escapeHtml(cheval.cote || 'N/A');
         return `
             <div class="pronostic-item">
                 <div class="d-flex align-items-center gap-3">
                     <div class="position-badge ${positionClass}">${index + 1}</div>
                     <div class="cheval-info">
-                        <div class="cheval-nom">${cheval.nom || 'N/A'}</div>
+                        <div class="cheval-nom">${nomCheval}</div>
                         <div class="cheval-numero">Numéro ${cheval.numero}</div>
                     </div>
                     <div class="ms-auto">
-                        <span class="cote-badge"><i class="bi bi-currency-euro"></i> ${cheval.cote || 'N/A'}</span>
+                        <span class="cote-badge"><i class="bi bi-currency-euro"></i> ${coteCheval}</span>
                     </div>
                 </div>
             </div>
@@ -798,13 +831,16 @@ function updateTableauComparaison() {
             }
         }
 
+        const nomChevalSecurise = cheval ? `<strong>#${cheval.numero}</strong> - ${escapeHtml(cheval.nom)}` : 'N/A';
+        const coteChevalSecurise = escapeHtml(cheval?.cote || 'N/A');
+
         html += `
             <tr>
-                <td><strong>${hippodrome}</strong></td>
+                <td><strong>${escapeHtml(hippodrome)}</strong></td>
                 <td>${prono.heure || '--:--'}</td>
                 <td><span class="badge bg-primary">R${prono.reunion}C${prono.course}</span></td>
-                <td>${cheval ? `<strong>#${cheval.numero}</strong> - ${cheval.nom}` : 'N/A'}</td>
-                <td>${cheval?.cote || 'N/A'}</td>
+                <td>${nomChevalSecurise}</td>
+                <td>${coteChevalSecurise}</td>
                 <td><span class="badge bg-info">${prono.scoreConfiance || 0}%</span></td>
                 <td><span class="position-badge position-1" style="width:auto;height:auto;padding:5px 10px;">1er</span></td>
                 <td>${resultatReel}</td>
@@ -889,8 +925,14 @@ if (exportBtn) {
                 else statut = 'Raté';
             }
 
-            const chevalInfo = cheval ? `#${cheval.numero} - ${cheval.nom}` : 'N/A';
-            csv += `"${prono.hippodrome || prono.reunion}","${prono.heure || '--:--'}","${prono.reunion}${prono.course}","${chevalInfo}",${cheval?.cote || 'N/A'},${prono.scoreConfiance || 0}%,1er,"${resultatReel}","${statut}"\n`;
+            const chevalInfo = cheval ? `#${cheval.numero} - ${escapeCsv(cheval.nom)}` : 'N/A';
+            const hippodromeCsv = escapeCsv(prono.hippodrome || prono.reunion);
+            const heureCsv = escapeCsv(prono.heure || '--:--');
+            const courseCsv = `${prono.reunion}${prono.course}`;
+            const coteCsv = cheval?.cote || 'N/A';
+            const resultatReelCsv = escapeCsv(resultatReel);
+            const statutCsv = escapeCsv(statut);
+            csv += `"${hippodromeCsv}","${heureCsv}","${courseCsv}","${chevalInfo}",${coteCsv},${prono.scoreConfiance || 0}%,1er,"${resultatReelCsv}","${statutCsv}"\n`;
         });
 
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
