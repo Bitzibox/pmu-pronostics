@@ -1202,14 +1202,17 @@ function updateTableauComparaison() {
         const nomChevalSecurise = cheval ? `<strong>#${cheval.numero}</strong> - ${escapeHtml(cheval.nom)}` : 'N/A';
         const coteChevalSecurise = escapeHtml(cheval?.cote || 'N/A');
 
+        // Normaliser le numéro de réunion (enlever le R s'il existe)
+        const reunionNum = prono.reunion ? prono.reunion.toString().replace('R', '') : '1';
+
         // Construire les attributs data-* pour le filtrage (utiliser statutText au lieu de statut)
-        const dataAttrs = `data-reunion="R${prono.reunion}" data-discipline="${prono.discipline || ''}" data-statut="${statutText}"`;
+        const dataAttrs = `data-reunion="R${reunionNum}" data-discipline="${prono.discipline || ''}" data-statut="${statutText}"`;
 
         html += `
             <tr ${dataAttrs}>
                 <td><strong>${escapeHtml(hippodrome)}</strong></td>
                 <td>${prono.heure || '--:--'}</td>
-                <td><span class="badge bg-primary">R${prono.reunion}C${prono.course}</span></td>
+                <td><span class="badge bg-primary">R${reunionNum}C${prono.course}</span></td>
                 <td>${nomChevalSecurise}</td>
                 <td>${coteChevalSecurise}</td>
                 <td><span class="badge bg-info">${prono.scoreConfiance || 0}%</span></td>
