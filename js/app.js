@@ -1193,8 +1193,11 @@ function updateTableauComparaison() {
         const nomChevalSecurise = cheval ? `<strong>#${cheval.numero}</strong> - ${escapeHtml(cheval.nom)}` : 'N/A';
         const coteChevalSecurise = escapeHtml(cheval?.cote || 'N/A');
 
+        // Construire les attributs data-* pour le filtrage
+        const dataAttrs = `data-reunion="R${prono.reunion}" data-discipline="${prono.discipline || ''}" data-statut="${statut.toLowerCase()}"`;
+
         html += `
-            <tr>
+            <tr ${dataAttrs}>
                 <td><strong>${escapeHtml(hippodrome)}</strong></td>
                 <td>${prono.heure || '--:--'}</td>
                 <td><span class="badge bg-primary">R${prono.reunion}C${prono.course}</span></td>
@@ -1231,8 +1234,36 @@ function setupFilters() {
             const parts = r.split('-R');
             const pays = parts[0];
             const reunionNum = parseInt(parts[1]);
-            const hippodrome = getHippodromeName(pays, reunionNum);
+
+            // Utiliser les données réelles du fichier courses.json au lieu du mapping statique
+            const reunionInfo = getReunionInfoFromCoursesFile(reunionNum);
+            let hippodrome;
+
+            if (reunionInfo.hippodrome && reunionInfo.ville) {
+                // Format: "LE MANS (Mans)"
+                hippodrome = `${reunionInfo.hippodrome} (${reunionInfo.ville})`;
+            } else {
+                // Fallback sur le mapping statique si pas de données
+                hippodrome = getHippodromeName(pays, reunionNum);
+            }
+
             filterReunion.innerHTML += `<option value="${r}">${hippodrome}</option>`;
+        });
+    }
+
+    // Peupler le filtre discipline
+    const filterDiscipline = document.getElementById('filter-discipline');
+    if (filterDiscipline && allData.pronostics?.pronostics) {
+        const disciplines = [...new Set(allData.pronostics.pronostics
+            .map(p => p.discipline)
+            .filter(d => d))]; // Filtrer les undefined/null
+
+        filterDiscipline.innerHTML = '<option value="">Toutes</option>';
+        disciplines.sort().forEach(disc => {
+            const disciplineInfo = DISCIPLINES[disc] || {};
+            const label = disciplineInfo.label || disc;
+            const icon = disciplineInfo.icon || '';
+            filterDiscipline.innerHTML += `<option value="${disc}">${icon} ${label}</option>`;
         });
     }
 
@@ -1267,19 +1298,54 @@ function applyFilters() {
     const filterReunion = document.getElementById('filter-reunion')?.value || '';
     const filterConfiance = document.getElementById('filter-confiance')?.value || '';
     const filterStatut = document.getElementById('filter-statut')?.value || '';
+    const filterDiscipline = document.getElementById('filter-discipline')?.value || '';
+
+    let visibleCount = 0;
 
     document.querySelectorAll('#comparaison-body tr').forEach(row => {
         let show = true;
 
-        if (filterReunion && !row.cells[0]?.textContent.includes(filterReunion.replace(/.*-R/, 'R'))) show = false;
+        // Filtre par réunion (utiliser data-reunion)
+        if (filterReunion) {
+            const reunionNumber = filterReunion.replace(/.*-R/, 'R');
+            if (row.dataset.reunion !== reunionNumber) show = false;
+        }
+
+        // Filtre par discipline (utiliser data-discipline)
+        if (filterDiscipline && show) {
+            if (row.dataset.discipline !== filterDiscipline) show = false;
+        }
+
+        // Filtre par confiance
         if (filterConfiance && show) {
             const confiance = parseInt(row.cells[5]?.textContent.replace('%', '') || '0');
             if (confiance <= parseInt(filterConfiance)) show = false;
         }
-        if (filterStatut && show && !row.cells[8]?.textContent.toLowerCase().includes(filterStatut)) show = false;
+
+        // Filtre par statut
+        if (filterStatut && show) {
+            if (!row.dataset.statut.includes(filterStatut.toLowerCase())) show = false;
+        }
 
         row.style.display = show ? '' : 'none';
+        if (show) visibleCount++;
     });
+
+    // Mettre à jour le compteur de filtres actifs
+    const filterActiveText = document.getElementById('filter-active-text');
+    if (filterActiveText) {
+        const activeFilters = [];
+        if (filterReunion) activeFilters.push('Hippodrome');
+        if (filterDiscipline) activeFilters.push('Discipline');
+        if (filterConfiance) activeFilters.push('Confiance');
+        if (filterStatut) activeFilters.push('Statut');
+
+        if (activeFilters.length > 0) {
+            filterActiveText.textContent = `Filtres: ${activeFilters.join(', ')}`;
+        } else {
+            filterActiveText.textContent = '';
+        }
+    }
 
     // Réinitialiser à la page 1 et mettre à jour la pagination
     currentPage = 1;
