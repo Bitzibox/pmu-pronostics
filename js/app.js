@@ -55,6 +55,151 @@ let chartHistoriqueInstance = null;
 let historiqueCalcule = null; // ✅ Stocker l'historique calculé en temps réel
 let allData = { analyse: null, pronostics: null, resultats: null, courses: null, programme: null };
 let currentDateString = '';
+let lastUpdateTime = Date.now();
+
+// === FONCTIONS D'ERGONOMIE ET ANIMATIONS ===
+
+/**
+ * Animation count-up pour les chiffres
+ * @param {HTMLElement} element - L'élément contenant le chiffre
+ * @param {number} end - La valeur finale
+ * @param {number} duration - Durée de l'animation en ms
+ * @param {string} suffix - Suffixe (%, etc.)
+ */
+function animateCountUp(element, end, duration = 1000, suffix = '') {
+    if (!element) return;
+
+    const start = 0;
+    const startTime = performance.now();
+    const isFloat = end % 1 !== 0;
+
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Easing function (ease-out)
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = start + (end - start) * easeOut;
+
+        element.textContent = isFloat
+            ? current.toFixed(1) + suffix
+            : Math.floor(current) + suffix;
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else {
+            element.textContent = isFloat ? end.toFixed(1) + suffix : end + suffix;
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
+/**
+ * Détermine le badge de performance selon le taux
+ * @param {number} rate - Taux en pourcentage
+ * @param {string} type - Type de métrique (gagnant, place, confiance)
+ * @returns {Object} Badge avec classe et texte
+ */
+function getPerformanceBadge(rate, type = 'gagnant') {
+    const thresholds = {
+        gagnant: { excellent: 40, good: 25, average: 15 },
+        place: { excellent: 70, good: 50, average: 30 },
+        confiance: { excellent: 80, good: 65, average: 50 }
+    };
+
+    const t = thresholds[type];
+
+    if (rate >= t.excellent) {
+        return { class: 'badge-excellent', text: '🏆 Excellent', icon: 'trophy-fill' };
+    } else if (rate >= t.good) {
+        return { class: 'badge-good', text: '✨ Très bon', icon: 'star-fill' };
+    } else if (rate >= t.average) {
+        return { class: 'badge-average', text: '👍 Correct', icon: 'hand-thumbs-up' };
+    } else {
+        return { class: 'badge-improve', text: '📈 À améliorer', icon: 'graph-up-arrow' };
+    }
+}
+
+/**
+ * Met à jour une barre de progression
+ * @param {string} elementId - ID de l'élément
+ * @param {number} percentage - Pourcentage (0-100)
+ */
+function updateProgressBar(elementId, percentage) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        setTimeout(() => {
+            element.style.width = percentage + '%';
+        }, 100);
+    }
+}
+
+/**
+ * Affiche une notification toast
+ * @param {string} message - Message à afficher
+ * @param {string} type - Type (success, info, warning)
+ */
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container') || createToastContainer();
+    const toast = document.createElement('div');
+    toast.className = `toast-notification toast-${type}`;
+
+    const icons = {
+        success: 'check-circle-fill',
+        info: 'info-circle-fill',
+        warning: 'exclamation-triangle-fill'
+    };
+
+    toast.innerHTML = `
+        <i class="bi bi-${icons[type]}" style="font-size: 1.5rem; color: ${type === 'success' ? '#38ef7d' : type === 'warning' ? '#f5576c' : '#667eea'}"></i>
+        <div>
+            <strong>${type === 'success' ? 'Succès' : type === 'warning' ? 'Attention' : 'Info'}</strong>
+            <p style="margin:0; font-size: 0.9rem;">${message}</p>
+        </div>
+        <button onclick="this.parentElement.remove()" style="background:none; border:none; font-size:1.2rem; cursor:pointer; color:#999;">×</button>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
+}
+
+function createToastContainer() {
+    const container = document.createElement('div');
+    container.id = 'toast-container';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+    return container;
+}
+
+/**
+ * Met à jour le temps de dernière mise à jour
+ */
+function updateLastUpdateTime() {
+    const element = document.getElementById('last-update-time');
+    if (!element) return;
+
+    function update() {
+        const elapsed = Math.floor((Date.now() - lastUpdateTime) / 1000);
+
+        if (elapsed < 60) {
+            element.textContent = 'Maintenant';
+        } else if (elapsed < 3600) {
+            const mins = Math.floor(elapsed / 60);
+            element.textContent = `Il y a ${mins} min`;
+        } else {
+            const hours = Math.floor(elapsed / 3600);
+            element.textContent = `Il y a ${hours}h`;
+        }
+    }
+
+    update();
+    setInterval(update, 30000); // Update every 30 seconds
+}
 
 // Fonction principale de chargement
 async function loadAllData(dateStringDDMMYYYY) {
@@ -561,18 +706,45 @@ function updateStatistiquesGlobales() {
         }
     });
 
-    const tauxGagnant = coursesAvecResultats > 0 ? Math.round((nbGagnants / coursesAvecResultats) * 100) : 0;
-    const tauxPlace = coursesAvecResultats > 0 ? Math.round((nbPlaces / coursesAvecResultats) * 100) : 0;
+    const tauxGagnant = coursesAvecResultats > 0 ? Math.round((nbGagnants / coursesAvecResultats) * 100 * 10) / 10 : 0;
+    const tauxPlace = coursesAvecResultats > 0 ? Math.round((nbPlaces / coursesAvecResultats) * 100 * 10) / 10 : 0;
     const confianceMoyenne = pronostics.length > 0 ? Math.round(sommeConfiance / pronostics.length) : 0;
 
-    const el = (id) => document.getElementById(id);
-    if (el('taux-gagnant')) el('taux-gagnant').textContent = tauxGagnant + '%';
-    if (el('taux-place')) el('taux-place').textContent = tauxPlace + '%';
-    if (el('confiance-moyenne')) el('confiance-moyenne').textContent = confianceMoyenne + '%';
-    if (el('courses-analysees')) el('courses-analysees').textContent = pronostics.length;
-    if (el('nb-gagnants')) el('nb-gagnants').innerHTML = `<i class="bi bi-trophy"></i> ${nbGagnants}`;
-    if (el('nb-places')) el('nb-places').innerHTML = `<i class="bi bi-award"></i> ${nbPlaces}`;
-    if (el('nb-rates')) el('nb-rates').innerHTML = `<i class="bi bi-x-circle"></i> ${nbRates}`;
+    const elById = (id) => document.getElementById(id);
+
+    // Animations count-up
+    animateCountUp(elById('taux-gagnant'), tauxGagnant, 1200, '%');
+    animateCountUp(elById('taux-place'), tauxPlace, 1200, '%');
+    animateCountUp(elById('confiance-moyenne'), confianceMoyenne, 1200, '%');
+    animateCountUp(elById('courses-analysees'), pronostics.length, 1000, '');
+
+    // Barres de progression
+    updateProgressBar('progress-gagnant', tauxGagnant);
+    updateProgressBar('progress-place', tauxPlace);
+    updateProgressBar('progress-confiance', confianceMoyenne);
+
+    // Badges de performance
+    const badgeGagnant = getPerformanceBadge(tauxGagnant, 'gagnant');
+    const badgePlace = getPerformanceBadge(tauxPlace, 'place');
+    const badgeConfiance = getPerformanceBadge(confianceMoyenne, 'confiance');
+
+    if (elById('badge-gagnant')) {
+        elById('badge-gagnant').className = `performance-badge ${badgeGagnant.class}`;
+        elById('badge-gagnant').innerHTML = `<i class="bi bi-${badgeGagnant.icon}"></i> ${badgeGagnant.text}`;
+    }
+    if (elById('badge-place')) {
+        elById('badge-place').className = `performance-badge ${badgePlace.class}`;
+        elById('badge-place').innerHTML = `<i class="bi bi-${badgePlace.icon}"></i> ${badgePlace.text}`;
+    }
+    if (elById('badge-confiance')) {
+        elById('badge-confiance').className = `performance-badge ${badgeConfiance.class}`;
+        elById('badge-confiance').innerHTML = `<i class="bi bi-${badgeConfiance.icon}"></i> ${badgeConfiance.text}`;
+    }
+
+    // Statistiques dans le récapitulatif
+    if (elById('nb-gagnants')) elById('nb-gagnants').innerHTML = `<i class="bi bi-trophy"></i> ${nbGagnants}`;
+    if (elById('nb-places')) elById('nb-places').innerHTML = `<i class="bi bi-award"></i> ${nbPlaces}`;
+    if (elById('nb-rates')) elById('nb-rates').innerHTML = `<i class="bi bi-x-circle"></i> ${nbRates}`;
 }
 
 // ✅ NOUVELLE FONCTION : Calculer l'historique en temps réel depuis les fichiers bruts
@@ -1302,19 +1474,59 @@ function creerGraphiqueHistorique(historique) {
 // INITIALISATION
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Application démarrée');
-    
+
     const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     const currentDateEl = document.getElementById('current-date');
     if (currentDateEl) {
         currentDateEl.textContent = new Date().toLocaleDateString('fr-FR', dateOptions);
     }
-    
+
+    // Initialiser le timer de mise à jour
+    updateLastUpdateTime();
+
+    // Quick Actions Event Listeners
+    const refreshBtn = document.getElementById('refresh-data');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', async () => {
+            refreshBtn.disabled = true;
+            refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise spin-animation"></i> <span>Rafraîchissement...</span>';
+
+            try {
+                await loadAllData(currentDateString || getDateString());
+                lastUpdateTime = Date.now();
+                updateLastUpdateTime();
+                showToast('Données rafraîchies avec succès', 'success');
+            } catch (error) {
+                showToast('Erreur lors du rafraîchissement', 'warning');
+            } finally {
+                refreshBtn.disabled = false;
+                refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i> <span>Rafraîchir</span>';
+            }
+        });
+    }
+
+    const exportBtn = document.getElementById('export-data');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+            // Déclencher l'export CSV existant
+            const exportCsvBtn = document.getElementById('export-csv');
+            if (exportCsvBtn) {
+                exportCsvBtn.click();
+                showToast('Export CSV lancé', 'info');
+            } else {
+                showToast('Fonction d\'export non disponible', 'warning');
+            }
+        });
+    }
+
     loadAllData(getDateString());
-    
+
     setInterval(() => {
         if (currentDateString === getDateString()) {
             console.log('🔄 Rafraîchissement automatique');
             loadAllData(currentDateString);
+            lastUpdateTime = Date.now();
+            showToast('Données automatiquement rafraîchies', 'info');
         }
     }, CONFIG.REFRESH_INTERVAL);
     
