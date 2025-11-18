@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": true,
+      "cached": false,
       "date": 1763420400000,
       "dateProgrammeActif": 1763420400000,
       "timezoneOffset": 3600000,
@@ -13675,6 +13675,7 @@
             },
             {
               "cached": false,
+              "arriveeDefinitive": true,
               "departImminent": false,
               "timezoneOffset": 3600000,
               "numReunion": 5,
@@ -13713,7 +13714,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13736,7 +13737,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13759,7 +13760,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13775,7 +13776,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13791,7 +13792,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -13818,8 +13819,9 @@
                   "complement": false
                 }
               ],
-              "statut": "CHEVAUX_SOUS_ORDRES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 58390,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -13827,7 +13829,18 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    8,
+                    9,
+                    10
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -13842,6 +13855,35 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  2
+                ],
+                [
+                  4
+                ],
+                [
+                  11
+                ],
+                [
+                  6
+                ],
+                [
+                  5
+                ],
+                [
+                  12
+                ],
+                [
+                  7
+                ],
+                [
+                  3
+                ],
+                [
+                  1
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -13989,7 +14031,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -14367,7 +14409,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 4,
+          "prochaineCourse": 5,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1763453700000,
@@ -14909,7 +14951,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15304,8 +15346,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 5,
-          "numCourse": 4
+          "numReunion": 6,
+          "numCourse": 9
         }
       ],
       "datesProgrammesDisponibles": [
@@ -15315,7 +15357,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1763498757763,
+      "timestamp": 1763499658137,
       "timezoneOffset": 3600000
     },
     "date": "18112025"
