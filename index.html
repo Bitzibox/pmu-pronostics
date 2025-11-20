@@ -483,6 +483,50 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ROI & Gains Potentiels -->
+            <div class="mt-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <h5 class="mb-0"><i class="bi bi-currency-euro"></i> ROI & Gains Potentiels (Mise 20€/course)</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center g-3">
+                            <div class="col-md-3">
+                                <div class="p-3 border rounded-3" style="border-color: #667eea !important; background: #f0f2ff;">
+                                    <h3 class="text-primary mb-1" id="total-mise">0€</h3>
+                                    <p class="mb-0 small text-muted">Total Misé</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 border rounded-3" style="border-color: #11998e !important; background: #f0fdf4;">
+                                    <h3 class="text-success mb-1" id="total-gains">0€</h3>
+                                    <p class="mb-0 small text-muted">Total Gains</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 border rounded-3" id="profit-card">
+                                    <h3 class="mb-1" id="profit-net">0€</h3>
+                                    <p class="mb-0 small text-muted">Profit/Perte Net</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-3 border rounded-3" id="roi-card">
+                                    <h3 class="mb-1" id="roi-percent">0%</h3>
+                                    <p class="mb-0 small text-muted">ROI (Return On Investment)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 p-3 bg-light rounded">
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle"></i>
+                                <strong>Calcul:</strong> Gains = Cote × 20€ pour chaque pronostic gagnant (1ère place).
+                                Les cotes sont issues des pronostics. Le ROI est calculé comme (Gains - Mises) / Mises × 100.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- NOUVEAU: Section Statistiques par Hippodrome/Discipline -->

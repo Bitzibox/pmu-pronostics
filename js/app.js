@@ -759,6 +759,66 @@ function updateStatistiquesGlobales() {
     if (elById('nb-gagnants')) elById('nb-gagnants').innerHTML = `<i class="bi bi-trophy"></i> ${nbGagnants}`;
     if (elById('nb-places')) elById('nb-places').innerHTML = `<i class="bi bi-award"></i> ${nbPlaces}`;
     if (elById('nb-rates')) elById('nb-rates').innerHTML = `<i class="bi bi-x-circle"></i> ${nbRates}`;
+
+    // === CALCUL ROI & GAINS (Mise 20€ par course) ===
+    const miseParCourse = 20;
+    let totalMise = 0;
+    let totalGains = 0;
+
+    pronostics.forEach(prono => {
+        totalMise += miseParCourse;
+
+        const resultat = resultats.find(r => r.reunion === prono.reunion && r.course === prono.course);
+        if (resultat?.arrivee?.length > 0) {
+            const chevalPronostique = prono.classement?.[0];
+
+            // Si le cheval a gagné (1ère place)
+            if (chevalPronostique?.numero === resultat.arrivee[0]) {
+                // Gain = cote × mise
+                const cote = parseFloat(chevalPronostique.cote) || 0;
+                totalGains += cote * miseParCourse;
+            }
+        }
+    });
+
+    const profitNet = totalGains - totalMise;
+    const roiPercent = totalMise > 0 ? ((profitNet / totalMise) * 100) : 0;
+
+    // Mise à jour de l'affichage
+    if (elById('total-mise')) elById('total-mise').textContent = `${totalMise.toFixed(0)}€`;
+    if (elById('total-gains')) elById('total-gains').textContent = `${totalGains.toFixed(2)}€`;
+    if (elById('profit-net')) {
+        elById('profit-net').textContent = `${profitNet >= 0 ? '+' : ''}${profitNet.toFixed(2)}€`;
+        elById('profit-net').className = profitNet >= 0 ? 'text-success mb-1' : 'text-danger mb-1';
+    }
+    if (elById('roi-percent')) {
+        elById('roi-percent').textContent = `${roiPercent >= 0 ? '+' : ''}${roiPercent.toFixed(1)}%`;
+        elById('roi-percent').className = roiPercent >= 0 ? 'text-success mb-1' : 'text-danger mb-1';
+    }
+
+    // Styliser les cards en fonction du profit/perte
+    const profitCard = elById('profit-card');
+    const roiCard = elById('roi-card');
+
+    if (profitCard) {
+        if (profitNet >= 0) {
+            profitCard.style.borderColor = '#11998e';
+            profitCard.style.background = '#f0fdf4';
+        } else {
+            profitCard.style.borderColor = '#f5576c';
+            profitCard.style.background = '#fff0f5';
+        }
+    }
+
+    if (roiCard) {
+        if (roiPercent >= 0) {
+            roiCard.style.borderColor = '#11998e';
+            roiCard.style.background = '#f0fdf4';
+        } else {
+            roiCard.style.borderColor = '#f5576c';
+            roiCard.style.background = '#fff0f5';
+        }
+    }
 }
 
 // ✅ NOUVELLE FONCTION : Calculer l'historique en temps réel depuis les fichiers bruts
