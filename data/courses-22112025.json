@@ -1565,7 +1565,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_SOUS_ORDRES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -3620,7 +3620,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 1,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             },
             {
@@ -6073,7 +6073,7 @@
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "LYO",
                 "libelleCourt": "LYON-PARILLY",
@@ -6118,7 +6118,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 2,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             }
           ],
@@ -7947,7 +7947,7 @@
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "FON",
                 "libelleCourt": "FONTAINEBLEAU",
@@ -9497,7 +9497,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 3,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             }
           ],
@@ -12536,7 +12536,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 4,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             }
           ],
@@ -14787,7 +14787,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 5,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             }
           ],
@@ -15184,7 +15184,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 6,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             }
           ],
@@ -16206,7 +16206,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 7,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             }
           ],
@@ -16423,7 +16423,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 8,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             }
           ],
@@ -17004,6 +17004,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 9,
               "numExterneReunion": 9,
@@ -17116,8 +17117,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 279850,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -17126,7 +17128,26 @@
                 "intitule": "Souple",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "ARRETE",
+                  "numeroParticipants": [
+                    6,
+                    11,
+                    13,
+                    14
+                  ]
+                },
+                {
+                  "type": "TOMBE",
+                  "numeroParticipants": [
+                    1,
+                    7
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -17141,6 +17162,32 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  10
+                ],
+                [
+                  3
+                ],
+                [
+                  5
+                ],
+                [
+                  4
+                ],
+                [
+                  9
+                ],
+                [
+                  2
+                ],
+                [
+                  12
+                ],
+                [
+                  8
+                ]
+              ],
               "hasEParis": false
             },
             {
@@ -17257,7 +17304,7 @@
                   "complement": true
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17575,7 +17622,7 @@
               "course": {
                 "dateProgramme": 1763766000000,
                 "numReunion": 9,
-                "numOrdre": 6
+                "numOrdre": 8
               }
             }
           ],
@@ -17598,7 +17645,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1763820060129,
+      "timestamp": 1763820960262,
       "timezoneOffset": 3600000
     },
     "date": "22112025"
