@@ -14539,7 +14539,7 @@
               "numExterneReunion": 5,
               "numOrdre": 9,
               "numExterne": 9,
-              "heureDepart": 1764625200000,
+              "heureDepart": 1764625380000,
               "libelle": "DARIO EL GRANDE H.",
               "libelleCourt": "DARIO EL GRANDE",
               "montantPrix": 2809,
@@ -14762,7 +14762,7 @@
               "numExterneReunion": 5,
               "numOrdre": 10,
               "numExterne": 10,
-              "heureDepart": 1764627000000,
+              "heureDepart": 1764627300000,
               "libelle": "DARTEK H.",
               "libelleCourt": "DARTEK",
               "montantPrix": 2684,
@@ -14900,7 +14900,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -16226,6 +16226,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 6,
               "numExterneReunion": 6,
@@ -16352,8 +16353,9 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 86200,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16361,7 +16363,16 @@
                 "intitule": "PSF LENTE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    7
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -16385,13 +16396,22 @@
                 ],
                 [
                   5
+                ],
+                [
+                  4
+                ],
+                [
+                  3
+                ],
+                [
+                  6
                 ]
               ],
               "hasEParis": true
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "PLAT"
           ],
@@ -18828,7 +18848,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1764626453013,
+      "timestamp": 1764627352972,
       "timezoneOffset": 3600000
     },
     "date": "01122025"
