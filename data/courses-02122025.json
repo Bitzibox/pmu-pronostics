@@ -14177,6 +14177,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -14318,7 +14319,7 @@
                   "codePari": "E_REPORT_PLUS"
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 178300,
               "participants": [],
@@ -14334,7 +14335,8 @@
                   ]
                 }
               ],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -14358,6 +14360,18 @@
                 ],
                 [
                   5
+                ],
+                [
+                  10
+                ],
+                [
+                  9
+                ],
+                [
+                  1
+                ],
+                [
+                  11
                 ]
               ],
               "hasEParis": true
@@ -14370,7 +14384,7 @@
               "numExterneReunion": 5,
               "numOrdre": 8,
               "numExterne": 8,
-              "heureDepart": 1764708300000,
+              "heureDepart": 1764708780000,
               "libelle": "PRIX ORNITHOGALUM                       BELGIQUE",
               "libelleCourt": "ORNITHOGALUM",
               "montantPrix": 2000,
@@ -14506,7 +14520,7 @@
                   "codePari": "E_REPORT_PLUS"
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15163,7 +15177,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15186,7 +15200,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15209,7 +15223,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15225,7 +15239,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15241,7 +15255,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15268,8 +15282,8 @@
                   "codePari": "E_REPORT_PLUS"
                 }
               ],
-              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE",
+              "categorieStatut": "ARRIVEE",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -15292,6 +15306,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  6
+                ],
+                [
+                  4
+                ],
+                [
+                  3
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -15972,7 +15997,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 4,
+          "prochaineCourse": 5,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1764663300000,
@@ -15989,8 +16014,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 6,
-          "numCourse": 4
+          "numReunion": 5,
+          "numCourse": 8
         }
       ],
       "datesProgrammesDisponibles": [
@@ -16000,7 +16025,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1764707453773,
+      "timestamp": 1764708352181,
       "timezoneOffset": 3600000
     },
     "date": "02122025"
