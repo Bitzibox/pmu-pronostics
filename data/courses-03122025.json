@@ -16528,6 +16528,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -16671,8 +16672,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 115870,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16681,7 +16683,16 @@
                 "intitule": "Léger",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    7
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -16705,6 +16716,33 @@
                 ],
                 [
                   10
+                ],
+                [
+                  1
+                ],
+                [
+                  9
+                ],
+                [
+                  8
+                ],
+                [
+                  11
+                ],
+                [
+                  4
+                ],
+                [
+                  12
+                ],
+                [
+                  6
+                ],
+                [
+                  5
+                ],
+                [
+                  3
                 ]
               ],
               "hasEParis": true
@@ -16717,7 +16755,7 @@
               "numExterneReunion": 7,
               "numOrdre": 3,
               "numExterne": 3,
-              "heureDepart": 1764797700000,
+              "heureDepart": 1764798000000,
               "libelle": "OKEY H.",
               "libelleCourt": "OKEY",
               "montantPrix": 1860,
@@ -16855,7 +16893,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "JOKEYS_MONTENT_A_CHEVAL",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17398,7 +17436,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17807,7 +17845,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1764796552989,
+      "timestamp": 1764797453004,
       "timezoneOffset": 3600000
     },
     "date": "03122025"
