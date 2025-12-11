@@ -28,6 +28,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -66,7 +67,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -110,7 +111,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -154,16 +155,16 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "2b2564f5-d622-4d76-9bfd-1be517615f1b",
@@ -187,16 +188,16 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "d8a730ac-7722-4869-a463-e40d881679c9",
@@ -220,17 +221,17 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -250,13 +251,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -271,16 +272,16 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "a25a24c5-71b6-4ee8-b26d-40b50584a693",
@@ -304,22 +305,22 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "37bf5193-d506-4a01-bc0b-09fe4e5fed8a",
@@ -332,18 +333,18 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -373,8 +374,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "FIN_COURSE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 101190,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -382,11 +384,21 @@
                 "intitule": "PSF STANDARD",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    12
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "replayDisponible": false,
+              "pronosticsExpires": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CHA",
                 "libelleCourt": "CHANTILLY",
@@ -408,6 +420,27 @@
                 ],
                 [
                   1
+                ],
+                [
+                  5
+                ],
+                [
+                  3
+                ],
+                [
+                  7
+                ],
+                [
+                  9
+                ],
+                [
+                  4
+                ],
+                [
+                  10
+                ],
+                [
+                  8
                 ]
               ],
               "hasEParis": true
@@ -544,13 +577,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "9b1ce0e4-bf44-4fac-862c-811fef943370",
@@ -577,13 +610,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "8cf7d428-5fa0-40ad-8f67-e706c4774d4a",
@@ -610,14 +643,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -637,13 +670,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -661,13 +694,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "f6201508-24c7-444c-badd-f00bf866f187",
@@ -694,20 +727,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "262e2d15-2738-47af-bf81-b0086a0f4e45",
@@ -720,19 +753,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -762,7 +795,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -775,6 +808,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHA",
@@ -919,13 +953,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "ed042df1-b030-49c0-9207-344205292cbc",
@@ -952,13 +986,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "4183281a-caa6-403e-9004-d6937a9888a3",
@@ -985,14 +1019,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -1012,13 +1046,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -1036,13 +1070,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "b35698a1-e125-447d-aa9d-f2df53bbf808",
@@ -1069,20 +1103,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "b333b072-40a5-40b3-b154-f9bd8648d2fe",
@@ -1095,19 +1129,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -1150,6 +1184,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHA",
@@ -1294,13 +1329,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "ab5190de-02fb-4460-a42b-7853513000da",
@@ -1327,13 +1362,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "4036e100-0354-42f8-8876-a7989516bceb",
@@ -1360,14 +1395,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -1387,13 +1422,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -1411,20 +1446,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "04eb3b64-1772-417c-8cf0-93b0e641b655",
@@ -1437,19 +1472,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "TIERCE",
@@ -1461,13 +1496,13 @@
                   "misEnPaiement": false,
                   "codePari": "TIERCE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "5545348e-f9ad-4eb0-b5e1-4aa88222286c",
@@ -1480,13 +1515,13 @@
                   "reportable": false,
                   "codePari": "E_TIERCE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "typePari": "QUARTE_PLUS",
@@ -1497,13 +1532,13 @@
                   "misEnPaiement": false,
                   "codePari": "QUARTE_PLUS",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "c6bc034b-c11b-4985-bd40-ead60a909250",
@@ -1516,13 +1551,13 @@
                   "reportable": false,
                   "codePari": "E_QUARTE_PLUS",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "typePari": "QUINTE_PLUS",
@@ -1541,14 +1576,14 @@
                   "misEnPaiement": false,
                   "codePari": "QUINTE_PLUS",
                   "spotAutorise": true,
-                  "ordre": true,
-                  "combine": true,
-                  "nbChevauxReglementaire": 5,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
-                  ]
+                  ],
+                  "ordre": true,
+                  "combine": true,
+                  "nbChevauxReglementaire": 5,
+                  "complement": true
                 },
                 {
                   "poolId": "ddb40237-a7d7-422b-adb4-fba04c384fed",
@@ -1568,14 +1603,14 @@
                   },
                   "codePari": "E_QUINTE_PLUS",
                   "spotAutorise": true,
-                  "ordre": true,
-                  "combine": true,
-                  "nbChevauxReglementaire": 5,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
-                  ]
+                  ],
+                  "ordre": true,
+                  "combine": true,
+                  "nbChevauxReglementaire": 5,
+                  "complement": true
                 },
                 {
                   "typePari": "TIC_TROIS",
@@ -1645,6 +1680,7 @@
                   "cagnotteInternet": true
                 }
               ],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHA",
@@ -1789,13 +1825,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "948a565d-43d0-4a50-af6c-7f74324d5809",
@@ -1822,13 +1858,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "9dd34147-3d29-4a8c-b557-3551beda128a",
@@ -1855,14 +1891,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -1882,13 +1918,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -1906,13 +1942,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "de933ce5-ea51-40a9-ba24-885a9fa5ac24",
@@ -1939,20 +1975,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "001c94d8-776b-4472-8b5e-abd8886d9437",
@@ -1965,19 +2001,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -2020,6 +2056,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHA",
@@ -2164,13 +2201,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "59507a2e-628c-4f21-ad74-c1dcf1300287",
@@ -2197,13 +2234,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "0e2baa75-632f-4bff-be11-edbfd4bc73b3",
@@ -2230,14 +2267,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -2257,13 +2294,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -2281,13 +2318,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "468ced73-3d41-46b0-a725-59ba5b22e39a",
@@ -2314,20 +2351,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "28800515-1460-4282-9992-ca64f5625710",
@@ -2340,19 +2377,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -2395,6 +2432,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHA",
@@ -2539,13 +2577,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "c5ff6f29-d42f-4d76-9003-f9622c1972fa",
@@ -2572,13 +2610,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "7177d46a-c501-4fd9-bbeb-f15e90cff405",
@@ -2605,14 +2643,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -2632,13 +2670,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -2656,13 +2694,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "cf49bf46-5a78-4fdc-9739-c10fce238cc9",
@@ -2689,20 +2727,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "f63955bb-804a-4540-9359-4d30abdf7593",
@@ -2715,19 +2753,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -2777,6 +2815,7 @@
                   "cagnotteInternet": true
                 }
               ],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHA",
@@ -2921,13 +2960,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "725db5ad-405e-4b85-8b42-a748cba8138b",
@@ -2954,13 +2993,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "9ad5d7a5-7212-4f74-962f-f03d8cd06f1c",
@@ -2987,14 +3026,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -3014,13 +3053,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -3038,13 +3077,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "558cc2b6-7599-44c9-8672-c34ba4e1a8ee",
@@ -3071,20 +3110,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "2f4aef2b-2742-42c1-9e6e-482a146774e7",
@@ -3097,19 +3136,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "PICK5",
@@ -3120,15 +3159,15 @@
                   "misEnPaiement": false,
                   "codePari": "PICK5",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 5,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     10,
                     25,
                     50
-                  ]
+                  ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 5,
+                  "complement": true
                 },
                 {
                   "poolId": "d4308db7-ed75-43de-bf7d-c2817107c4ba",
@@ -3141,14 +3180,14 @@
                   "reportable": false,
                   "codePari": "E_PICK5",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 5,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
-                  ]
+                  ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 5,
+                  "complement": true
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -3191,6 +3230,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHA",
@@ -3431,13 +3471,13 @@
                   "misEnPaiement": true,
                   "codePari": "COUPLE_ORDRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "8e5cf03f-3f26-4e42-8413-853e4f527818",
@@ -3464,13 +3504,13 @@
                   "misEnPaiement": true,
                   "codePari": "TRIO_ORDRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "2031a283-2335-41a7-8e78-828199c776f7",
@@ -3497,13 +3537,13 @@
                   "misEnPaiement": true,
                   "codePari": "SUPER_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "242a7a9a-c6f2-423e-8cb0-b772e54332cb",
@@ -3516,13 +3556,13 @@
                   "reportable": false,
                   "codePari": "E_SUPER_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -3563,11 +3603,27 @@
                 "intitule": "Très souple",
                 "commentaire": ""
               },
+              "incidents": [
+                {
+                  "type": "ARRETE",
+                  "numeroParticipants": [
+                    4,
+                    7
+                  ]
+                },
+                {
+                  "type": "TOMBE",
+                  "numeroParticipants": [
+                    6
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -3725,13 +3781,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "5978d7a1-52c1-4c35-8076-b49da37b0ea9",
@@ -3758,13 +3814,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "968bc609-aef7-473c-a6f3-9c0a5e4362fe",
@@ -3791,14 +3847,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -3818,13 +3874,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -3842,13 +3898,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "4b6fff1b-b84d-4c22-a700-b12d2e39dea7",
@@ -3875,19 +3931,19 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "8215f345-f8c5-4bbc-b707-c917fd307cf0",
@@ -3900,18 +3956,18 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -3941,7 +3997,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "PROGRAMMEE",
+              "statut": "CHEVAUX_SOUS_ORDRES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -3955,6 +4011,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -4098,13 +4155,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "9f5d8c73-9367-446e-9220-7e7435044e47",
@@ -4131,13 +4188,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "e5f9ac60-7435-4abf-98eb-6f0f8d774b3d",
@@ -4164,14 +4221,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -4191,13 +4248,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -4215,13 +4272,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "ce56c4fd-7889-4139-9ae6-ed2f856bf28d",
@@ -4248,19 +4305,19 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "0841bc16-3387-4013-8d17-fe107be5e252",
@@ -4273,18 +4330,18 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -4328,6 +4385,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -4471,13 +4529,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "5cf0b378-8784-4b06-b9b3-46f361365e7f",
@@ -4504,13 +4562,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "9226cb49-39e0-4813-b107-f2f9081641b5",
@@ -4537,14 +4595,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -4564,13 +4622,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -4588,13 +4646,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "3b7470c5-0412-4ba1-b48d-4af56981f2e9",
@@ -4621,20 +4679,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "51136445-268f-4b7a-baf0-3b84cbefac46",
@@ -4647,19 +4705,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -4703,6 +4761,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -4846,13 +4905,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "634333c1-0048-494f-b4b4-73ff64814218",
@@ -4879,13 +4938,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "6f2617d8-cd25-415e-9cb4-3d28bf1657c7",
@@ -4912,14 +4971,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -4939,13 +4998,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -4963,13 +5022,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "84b0b49c-0fef-455a-9f31-832ac58b853a",
@@ -4996,20 +5055,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "966ef867-00dd-4e3e-b510-b9fb773ba131",
@@ -5022,19 +5081,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "QUARTE_PLUS",
@@ -5045,13 +5104,13 @@
                   "misEnPaiement": false,
                   "codePari": "QUARTE_PLUS",
                   "spotAutorise": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": true,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -5095,6 +5154,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -5238,13 +5298,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "05f24420-4b23-4fe9-bb60-e26716b80f95",
@@ -5271,13 +5331,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "177c5d11-b0c3-4100-b83a-8435612c7185",
@@ -5304,14 +5364,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -5331,13 +5391,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -5355,13 +5415,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "00044b1e-8c91-4d94-bd86-94284147463e",
@@ -5388,20 +5448,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "a7be1d5b-0f1f-4277-8d50-579db1a12028",
@@ -5414,19 +5474,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -5470,6 +5530,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -5613,13 +5674,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "5c41163d-3a67-4667-ade5-c9d39dd5a42c",
@@ -5646,13 +5707,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "61619b2b-cec4-45fd-9000-2af9d57791c9",
@@ -5679,14 +5740,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -5706,13 +5767,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -5730,13 +5791,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "84b29fe8-01e6-4d60-8b94-7aaedfea50c4",
@@ -5763,19 +5824,19 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "dfa5b069-541f-48a4-aee4-c386d0081848",
@@ -5788,18 +5849,18 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -5843,6 +5904,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -6031,13 +6093,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "264827a8-73bc-4a24-bea4-99715d13d19f",
@@ -6064,13 +6126,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "9108142f-3304-4262-8c70-34cf5f08526d",
@@ -6097,14 +6159,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -6124,13 +6186,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -6148,13 +6210,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "880b9650-9ab0-44be-a518-48c90dc417e7",
@@ -6181,20 +6243,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "74a7a02b-2ddc-4209-be23-aa26921d04f7",
@@ -6207,19 +6269,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -6256,6 +6318,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -6399,13 +6462,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "7db8f428-ef6a-41a4-9d86-ceab47e9934c",
@@ -6432,13 +6495,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "23a9821f-3bd0-431d-ad8b-3042cae51951",
@@ -6465,14 +6528,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -6492,13 +6555,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -6516,13 +6579,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "5f7ca445-def9-44bd-83c0-d8088166a45e",
@@ -6549,20 +6612,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "e6f81b43-3897-4b78-afe4-bba3f07ec08d",
@@ -6575,19 +6638,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -6624,6 +6687,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -6767,13 +6831,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "4a03a38d-8ea8-4f27-a5a2-5d36b82747b7",
@@ -6800,13 +6864,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "f52280f9-3a54-4eb2-b8f2-5058abbccd00",
@@ -6833,14 +6897,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -6860,13 +6924,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -6884,13 +6948,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "0aca2d55-3923-4c6e-a875-dc8bebc1f3c7",
@@ -6917,20 +6981,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "6c91a35a-2b1d-45e9-b438-47a6170c41f5",
@@ -6943,19 +7007,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -6992,6 +7056,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -7135,13 +7200,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "8fc5e1b5-74b5-4702-ab6d-13ded6d4ab73",
@@ -7168,13 +7233,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "f2b6110b-3ed3-48dc-9ad0-7918e0b60669",
@@ -7201,14 +7266,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -7228,13 +7293,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -7252,13 +7317,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "617e0542-2f42-44b2-a4fb-5a073dfb6cba",
@@ -7285,20 +7350,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "b612dfb3-2332-4a6d-b1fd-9993f9829992",
@@ -7311,19 +7376,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "PICK5",
@@ -7334,15 +7399,15 @@
                   "misEnPaiement": false,
                   "codePari": "PICK5",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 5,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     10,
                     25,
                     50
-                  ]
+                  ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 5,
+                  "complement": true
                 },
                 {
                   "poolId": "17cd468a-f8dc-40ee-962e-34ec17f71d21",
@@ -7355,14 +7420,14 @@
                   "reportable": false,
                   "codePari": "E_PICK5",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 5,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
-                  ]
+                  ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 5,
+                  "complement": true
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -7399,6 +7464,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -7542,13 +7608,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "ced58961-73a1-4a5d-9735-5d9fad96303a",
@@ -7575,13 +7641,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "6ccb5a53-325d-4fca-a9cb-316fa02d0fc6",
@@ -7608,14 +7674,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -7635,13 +7701,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -7659,13 +7725,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "2b2b9bcf-c52e-4e39-9e73-0af9ff6e6fb2",
@@ -7692,20 +7758,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "c65f09fa-b1f5-41ae-b2fd-aa6c5e75ef66",
@@ -7718,19 +7784,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -7767,6 +7833,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -7910,13 +7977,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "2c7012a5-59dd-45d8-9fe0-7065c0cc7891",
@@ -7943,13 +8010,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "b0201ddf-6e04-4a81-bff0-f5138ed4f816",
@@ -7976,14 +8043,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -8003,13 +8070,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -8027,13 +8094,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "e2fa0591-d2a7-451d-8f82-7c260ca8983b",
@@ -8060,19 +8127,19 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "a7b19a01-8d90-4713-bca1-9a0f4ffbca46",
@@ -8085,18 +8152,18 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -8133,6 +8200,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -8276,13 +8344,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "f57b3713-83df-4a8c-84b8-d96ea09e4a2f",
@@ -8309,13 +8377,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "a31ebe12-d065-48ed-b6de-ab72ce78a19e",
@@ -8342,14 +8410,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -8369,13 +8437,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -8393,13 +8461,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "bb8477ed-99ad-43b2-80ad-13d207704fb7",
@@ -8426,19 +8494,19 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "b6b4d0f3-edb0-4303-81f8-f46bbf3ae761",
@@ -8451,18 +8519,18 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -8499,6 +8567,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -8642,13 +8711,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "8822fdf7-3b52-477f-b887-df2ca7809742",
@@ -8675,13 +8744,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "6cc6f91c-b5e8-468f-9078-29a0c9f08146",
@@ -8708,14 +8777,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -8735,13 +8804,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -8759,13 +8828,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "f64ece7b-0e7e-4617-96ea-777f9351add0",
@@ -8792,20 +8861,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "96bc0903-f765-40be-a67b-afb1f3c1f4c9",
@@ -8818,19 +8887,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -8867,6 +8936,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -9072,13 +9142,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "f3459e29-6867-4303-91f6-f5b41f936138",
@@ -9105,13 +9175,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "765ee765-6ba8-4ab4-969a-70ef0c8c545d",
@@ -9138,14 +9208,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -9165,13 +9235,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -9189,13 +9259,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "197bf2c8-638d-4f0b-a1c2-87f88f971abd",
@@ -9222,20 +9292,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "884481ce-3b66-4d60-a8eb-270091d1b7e9",
@@ -9248,19 +9318,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -9297,6 +9367,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -9440,13 +9511,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "804ec9fa-ea8e-4d1c-9739-35ce8c564d30",
@@ -9473,13 +9544,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "d65243a1-eebc-439a-b4b3-e1c6049b787e",
@@ -9506,14 +9577,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -9533,13 +9604,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -9557,13 +9628,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "4b03a079-cd8a-4179-a0d1-d2024f2672f5",
@@ -9590,19 +9661,19 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "c50076c7-dd89-4238-a83b-9c0fdf97751c",
@@ -9615,18 +9686,18 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -9663,6 +9734,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -9806,13 +9878,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "9c28786b-19fe-42f9-bda5-dcedcf3b3694",
@@ -9839,13 +9911,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "df8b5400-d2b5-432d-bc14-1cba3007c0f3",
@@ -9872,14 +9944,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -9899,13 +9971,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -9923,13 +9995,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "d1c80a9e-5dca-4143-af54-62d85c0a4090",
@@ -9956,20 +10028,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "d41b94de-6824-4932-8dd3-16fe2f5e43ef",
@@ -9982,19 +10054,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -10031,6 +10103,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -10174,13 +10247,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "badba56c-adfb-4dae-a21b-631772b460c3",
@@ -10207,13 +10280,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "2ee84159-03c3-41c9-a659-e948e055760e",
@@ -10240,14 +10313,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -10267,13 +10340,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -10291,13 +10364,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "3f71d709-597e-4472-9215-6e29014132f8",
@@ -10324,20 +10397,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "b51487d9-7bcd-4881-919a-10969f3860c3",
@@ -10350,19 +10423,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -10399,6 +10472,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -10542,13 +10616,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "fba8a811-dacc-4773-815b-dbba152d2f23",
@@ -10575,13 +10649,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "b369df84-4141-4974-b6c3-e377d3868509",
@@ -10608,14 +10682,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -10635,13 +10709,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -10659,13 +10733,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "2b629d52-84d0-488b-915c-086d9ce1c2c7",
@@ -10692,20 +10766,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "b20064c7-6873-4e77-a935-8945a22f6209",
@@ -10718,19 +10792,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -10767,6 +10841,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -10910,13 +10985,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "b89c129c-1205-4e7b-9396-2125863df872",
@@ -10943,13 +11018,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "e1f4235f-e198-49e6-a846-062e038f9860",
@@ -10976,14 +11051,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -11003,13 +11078,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -11027,13 +11102,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "01c6926c-d010-4c60-9d56-3a765cd59bdb",
@@ -11060,19 +11135,19 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "7cdd6302-43b5-496a-83b1-c5b88b99d858",
@@ -11085,18 +11160,18 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -11133,6 +11208,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -11276,13 +11352,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "9c5d9c58-11fd-44aa-9efe-11c106970836",
@@ -11309,13 +11385,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "3af23fca-a0b9-4798-b333-bc7f06895aad",
@@ -11342,14 +11418,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -11369,13 +11445,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -11393,13 +11469,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "41f140d4-6029-4a1b-95b3-e1d897a02795",
@@ -11426,20 +11502,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "d07662f4-5a2f-49df-a4a2-048642c2a672",
@@ -11452,19 +11528,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -11501,6 +11577,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -11644,13 +11721,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "7cdce9c6-2f94-4d67-8ba5-2a0ea819b759",
@@ -11677,13 +11754,13 @@
                   "misEnPaiement": false,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "851faa85-c22d-4649-8314-ce8ec7a7c278",
@@ -11710,14 +11787,14 @@
                   "misEnPaiement": false,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 2,
-                  "complement": true,
                   "valeursFlexiAutorisees": [
                     25,
                     50
                   ],
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 2,
+                  "complement": true,
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -11737,13 +11814,13 @@
                   "reportable": true,
                   "codePari": "E_DEUX_SUR_QUATRE",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 2,
                   "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "infosJackpot": {
                     "miseBase": 400,
                     "tauxContribution": {
@@ -11761,13 +11838,13 @@
                   "misEnPaiement": false,
                   "codePari": "TRIO",
                   "spotAutorise": true,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 3,
-                  "complement": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "complement": true
                 },
                 {
                   "poolId": "048d4dd0-e128-4390-b89c-5e1f0bfdcf7d",
@@ -11794,20 +11871,20 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "poolId": "0e468f89-c709-439a-8548-623bf4a988ba",
@@ -11820,19 +11897,19 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "ordre": false,
-                  "combine": true,
-                  "nbChevauxReglementaire": 4,
-                  "complement": false,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ]
+                  "ordre": false,
+                  "combine": true,
+                  "nbChevauxReglementaire": 4,
+                  "complement": false
                 },
                 {
                   "typePari": "REPORT_PLUS",
@@ -11869,6 +11946,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PON",
@@ -12080,6 +12158,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -12246,6 +12325,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -12396,6 +12476,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -12546,6 +12627,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -12712,6 +12794,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -12862,6 +12945,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -13012,6 +13096,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -13162,6 +13247,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -13328,6 +13414,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
+              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -13378,7 +13465,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1765450803911,
+      "timestamp": 1765451703929,
       "timezoneOffset": 3600000
     },
     "date": "11122025"
