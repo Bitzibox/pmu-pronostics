@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": false,
+      "cached": true,
       "date": 1765494000000,
       "dateProgrammeActif": 1765494000000,
       "timezoneOffset": 3600000,
@@ -17390,6 +17390,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 8,
               "numExterneReunion": 8,
@@ -17427,7 +17428,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -17450,7 +17451,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -17473,7 +17474,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -17489,7 +17490,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -17505,7 +17506,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -17533,8 +17534,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "DEPART_DANS_TROIS_MINUTES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 75130,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -17543,7 +17545,8 @@
                 "intitule": "Léger",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -17558,6 +17561,41 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  2
+                ],
+                [
+                  4
+                ],
+                [
+                  1
+                ],
+                [
+                  8
+                ],
+                [
+                  11
+                ],
+                [
+                  6
+                ],
+                [
+                  3
+                ],
+                [
+                  9
+                ],
+                [
+                  5
+                ],
+                [
+                  7
+                ],
+                [
+                  10
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -17568,7 +17606,7 @@
               "numExterneReunion": 8,
               "numOrdre": 5,
               "numExterne": 5,
-              "heureDepart": 1765575900000,
+              "heureDepart": 1765576080000,
               "libelle": "GRAFITO H.",
               "libelleCourt": "GRAFITO",
               "montantPrix": 2103,
@@ -17706,7 +17744,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17914,7 +17952,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 4,
+          "prochaineCourse": 5,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1765527300000,
@@ -18752,7 +18790,7 @@
       "prochainesCoursesAPartir": [
         {
           "numReunion": 8,
-          "numCourse": 4
+          "numCourse": 5
         }
       ],
       "datesProgrammesDisponibles": [
@@ -18764,7 +18802,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1765574158233,
+      "timestamp": 1765575058060,
       "timezoneOffset": 3600000
     },
     "date": "12122025"
