@@ -3600,7 +3600,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 1,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             },
             {
@@ -3629,7 +3629,7 @@
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
+            "datePrevision": 1765700100000,
             "nebulositeCode": "P8c",
             "nebulositeLibelleCourt": "Pluie faible",
             "nebulositeLibelleLong": "Le ciel sera chargé et s'accompagnera de pluies de faible intensité.",
@@ -4782,6 +4782,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -4820,7 +4821,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT_INTERNATIONAL",
                   "nbChevauxReglementaire": 1,
                   "ordre": false,
@@ -4834,7 +4835,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE_INTERNATIONAL",
                   "nbChevauxReglementaire": 1,
                   "ordre": false,
@@ -4848,7 +4849,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "valeursFlexiAutorisees": [
                     50
@@ -4881,7 +4882,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "valeursFlexiAutorisees": [
                     50
@@ -4914,7 +4915,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_ORDRE_INTERNATIONAL",
                   "nbChevauxReglementaire": 2,
                   "ordre": true,
@@ -4928,7 +4929,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "valeursFlexiAutorisees": [
                     25,
@@ -4979,7 +4980,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "valeursFlexiAutorisees": [
                     50
@@ -5012,7 +5013,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MULTI",
                   "valeursFlexiAutorisees": [
                     25,
@@ -5082,8 +5083,9 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "FIN_COURSE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 93470,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -5092,7 +5094,8 @@
                 "intitule": "Bon",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -5122,6 +5125,33 @@
                 ],
                 [
                   5
+                ],
+                [
+                  10
+                ],
+                [
+                  12
+                ],
+                [
+                  4
+                ],
+                [
+                  7
+                ],
+                [
+                  6
+                ],
+                [
+                  14
+                ],
+                [
+                  13
+                ],
+                [
+                  9
+                ],
+                [
+                  11
                 ]
               ],
               "hasEParis": true
@@ -5134,7 +5164,7 @@
               "numExterneReunion": 2,
               "numOrdre": 8,
               "numExterne": 8,
-              "heureDepart": 1765701600000,
+              "heureDepart": 1765701900000,
               "libelle": "THE LONGINES HONG KONG CUP",
               "libelleCourt": "HONG KONG CUP",
               "montantPrix": 4948000,
@@ -5273,7 +5303,7 @@
                   "complement": true
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -5977,12 +6007,12 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 2,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
+            "datePrevision": 1765700100000,
             "nebulositeCode": "P5",
             "nebulositeLibelleCourt": "Très Nuageux",
             "nebulositeLibelleLong": "Les nuages l'emporteront et les éclaircies restront rares.",
@@ -7874,18 +7904,18 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 3,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
+            "datePrevision": 1765700100000,
             "nebulositeCode": "P6",
             "nebulositeLibelleCourt": "Couvert",
             "nebulositeLibelleLong": "Le ciel sera couvert mais il ne devrait pas pleuvoir.",
             "temperature": 8,
-            "forceVent": 14,
-            "directionVent": "S"
+            "forceVent": 15,
+            "directionVent": "SO"
           },
           "offresInternet": false,
           "cagnottes": [],
@@ -10559,15 +10589,15 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 4,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
-            "nebulositeCode": "P4",
-            "nebulositeLibelleCourt": "Peu Nuageux",
-            "nebulositeLibelleLong": "Le soleil l'emportera et les nuages resteront discrets.",
+            "datePrevision": 1765700100000,
+            "nebulositeCode": "P1",
+            "nebulositeLibelleCourt": "Soleil",
+            "nebulositeLibelleLong": "Le soleil brillera généreusement.",
             "temperature": 12,
             "forceVent": 2,
             "directionVent": "E"
@@ -13439,16 +13469,16 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 5,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
-            "nebulositeCode": "P6",
-            "nebulositeLibelleCourt": "Couvert",
-            "nebulositeLibelleLong": "Le ciel sera couvert mais il ne devrait pas pleuvoir.",
-            "temperature": 10,
+            "datePrevision": 1765700100000,
+            "nebulositeCode": "P5",
+            "nebulositeLibelleCourt": "Très Nuageux",
+            "nebulositeLibelleLong": "Les nuages l'emporteront et les éclaircies restront rares.",
+            "temperature": 11,
             "forceVent": 17,
             "directionVent": "SE"
           },
@@ -15952,17 +15982,17 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 6,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
+            "datePrevision": 1765700100000,
             "nebulositeCode": "P13a",
             "nebulositeLibelleCourt": "Ondées Orageuses",
             "nebulositeLibelleLong": "Il faudra craindre un risque d'averse à caractère orageux.",
             "temperature": 21,
-            "forceVent": 15,
+            "forceVent": 17,
             "directionVent": "S"
           },
           "offresInternet": false,
@@ -16837,17 +16867,17 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 7,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
-            "nebulositeCode": "P8c",
-            "nebulositeLibelleCourt": "Pluie faible",
-            "nebulositeLibelleLong": "Le ciel sera chargé et s'accompagnera de pluies de faible intensité.",
+            "datePrevision": 1765700100000,
+            "nebulositeCode": "P4",
+            "nebulositeLibelleCourt": "Peu Nuageux",
+            "nebulositeLibelleLong": "Le soleil l'emportera et les nuages resteront discrets.",
             "temperature": 32,
-            "forceVent": 24,
+            "forceVent": 23,
             "directionVent": "E"
           },
           "offresInternet": false,
@@ -17869,18 +17899,18 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 8,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
+            "datePrevision": 1765700100000,
             "nebulositeCode": "P6",
             "nebulositeLibelleCourt": "Couvert",
             "nebulositeLibelleLong": "Le ciel sera couvert mais il ne devrait pas pleuvoir.",
-            "temperature": 20,
-            "forceVent": 20,
-            "directionVent": "S"
+            "temperature": 21,
+            "forceVent": 23,
+            "directionVent": "SE"
           },
           "offresInternet": false,
           "cagnottes": []
@@ -19874,17 +19904,17 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 9,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
+            "datePrevision": 1765700100000,
             "nebulositeCode": "P6",
             "nebulositeLibelleCourt": "Couvert",
             "nebulositeLibelleLong": "Le ciel sera couvert mais il ne devrait pas pleuvoir.",
             "temperature": 9,
-            "forceVent": 15,
+            "forceVent": 18,
             "directionVent": "S"
           },
           "offresInternet": true,
@@ -22122,17 +22152,17 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 10,
-                "numOrdre": 4
+                "numOrdre": 7
               }
             }
           ],
           "meteo": {
-            "datePrevision": 1765613700000,
-            "nebulositeCode": "P6",
-            "nebulositeLibelleCourt": "Couvert",
-            "nebulositeLibelleLong": "Le ciel sera couvert mais il ne devrait pas pleuvoir.",
+            "datePrevision": 1765700100000,
+            "nebulositeCode": "P5",
+            "nebulositeLibelleCourt": "Très Nuageux",
+            "nebulositeLibelleLong": "Les nuages l'emporteront et les éclaircies restront rares.",
             "temperature": 10,
-            "forceVent": 14,
+            "forceVent": 12,
             "directionVent": "SE"
           },
           "offresInternet": true,
@@ -22153,7 +22183,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1765700156558,
+      "timestamp": 1765701057520,
       "timezoneOffset": 3600000
     },
     "date": "14122025"
