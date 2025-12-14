@@ -3692,6 +3692,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -3729,7 +3730,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3773,7 +3774,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -3817,7 +3818,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -3850,7 +3851,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -3883,7 +3884,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -3916,7 +3917,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SUPER_QUATRE",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -3973,7 +3974,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 151980,
               "participants": [],
@@ -3988,12 +3989,13 @@
                   ]
                 }
               ],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "VIN",
                 "libelleCourt": "VINCENNES",
@@ -4015,13 +4017,19 @@
                 ],
                 [
                   3
+                ],
+                [
+                  1
+                ],
+                [
+                  8
                 ]
               ],
               "hasEParis": true
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "TROT"
           ],
@@ -4060,7 +4068,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 1,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             },
             {
@@ -6586,7 +6594,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 2,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -8701,7 +8709,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 3,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -11741,7 +11749,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 4,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -13546,7 +13554,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -13569,7 +13577,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13590,7 +13598,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -13613,7 +13621,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13634,7 +13642,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -13653,7 +13661,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13667,7 +13675,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -13686,7 +13694,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13700,7 +13708,7 @@
                 {
                   "typePari": "DEUX_SUR_QUATRE",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -13727,7 +13735,7 @@
                   "typePari": "E_DEUX_SUR_QUATRE",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -13751,7 +13759,7 @@
                 {
                   "typePari": "TRIO",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -13770,7 +13778,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -13784,7 +13792,7 @@
                 {
                   "typePari": "MINI_MULTI",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -13809,7 +13817,7 @@
                   "typePari": "E_MINI_MULTI",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -13830,7 +13838,7 @@
                 },
                 {
                   "typePari": "REPORT_PLUS",
-                  "enVente": true,
+                  "enVente": false,
                   "reportable": false,
                   "codePari": "REPORT_PLUS",
                   "spotAutorise": false,
@@ -13856,8 +13864,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "JOKEYS_MONTENT_A_CHEVAL",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 101650,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -13880,6 +13889,18 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  6
+                ],
+                [
+                  2,
+                  4
+                ],
+                [
+                  1
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -13890,7 +13911,7 @@
               "numExterneReunion": 5,
               "numOrdre": 6,
               "numExterne": 6,
-              "heureDepart": 1765735320000,
+              "heureDepart": 1765735620000,
               "libelle": "PRIX DES GUIRLANDES DE NOEL",
               "libelleCourt": "GUIRLANDES NOEL",
               "montantPrix": 21000,
@@ -14857,14 +14878,14 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 5,
+          "prochaineCourse": 6,
           "parisEvenement": [
             {
               "codePari": "EB5",
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 5,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -15153,7 +15174,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17428,7 +17449,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 6,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -18313,7 +18334,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 7,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -19375,7 +19396,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 8,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -21740,7 +21761,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 9,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -24410,7 +24431,7 @@
               "course": {
                 "dateProgramme": 1765666800000,
                 "numReunion": 10,
-                "numOrdre": 4
+                "numOrdre": 5
               }
             }
           ],
@@ -24429,8 +24450,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 5,
-          "numCourse": 5
+          "numReunion": 6,
+          "numCourse": 1
         }
       ],
       "datesProgrammesDisponibles": [
@@ -24441,7 +24462,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1765733457880,
+      "timestamp": 1765734357910,
       "timezoneOffset": 3600000
     },
     "date": "14122025"
