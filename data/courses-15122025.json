@@ -14142,7 +14142,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_SOUS_ORDRES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -14903,6 +14903,7 @@
           "courses": [
             {
               "cached": false,
+              "arriveeDefinitive": true,
               "departImminent": false,
               "timezoneOffset": 3600000,
               "numReunion": 6,
@@ -14941,7 +14942,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -14964,7 +14965,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -14987,7 +14988,7 @@
                   "typePari": "E_COUPLE_ORDRE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15003,7 +15004,7 @@
                   "typePari": "E_TRIO_ORDRE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15030,8 +15031,9 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_DANS_TROIS_MINUTES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 73720,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -15039,7 +15041,8 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -15054,6 +15057,29 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  7
+                ],
+                [
+                  4
+                ],
+                [
+                  1
+                ],
+                [
+                  3
+                ],
+                [
+                  6
+                ],
+                [
+                  2
+                ],
+                [
+                  5
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -15201,7 +15227,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15734,7 +15760,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 5,
+          "prochaineCourse": 6,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1765786500000,
@@ -15751,8 +15777,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 6,
-          "numCourse": 5
+          "numReunion": 5,
+          "numCourse": 2
         }
       ],
       "datesProgrammesDisponibles": [
@@ -15762,7 +15788,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1765828831283,
+      "timestamp": 1765829731317,
       "timezoneOffset": 3600000
     },
     "date": "15122025"
