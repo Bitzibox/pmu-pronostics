@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": true,
+      "cached": false,
       "date": 1765839600000,
       "dateProgrammeActif": 1765839600000,
       "timezoneOffset": 3600000,
@@ -14070,6 +14070,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -14212,8 +14213,9 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 56900,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -14221,7 +14223,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    10
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -14236,6 +14247,38 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  3
+                ],
+                [
+                  7
+                ],
+                [
+                  6
+                ],
+                [
+                  9
+                ],
+                [
+                  4
+                ],
+                [
+                  5
+                ],
+                [
+                  8
+                ],
+                [
+                  1
+                ],
+                [
+                  11
+                ],
+                [
+                  2
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -14246,7 +14289,7 @@
               "numExterneReunion": 5,
               "numOrdre": 6,
               "numExterne": 6,
-              "heureDepart": 1765922400000,
+              "heureDepart": 1765923000000,
               "libelle": "BORREGO",
               "libelleCourt": "BORREGO",
               "montantPrix": 1090,
@@ -14383,7 +14426,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "JOKEYS_MONTENT_A_CHEVAL",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17312,7 +17355,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1765921532225,
+      "timestamp": 1765922432348,
       "timezoneOffset": 3600000
     },
     "date": "16122025"
