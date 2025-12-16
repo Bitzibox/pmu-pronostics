@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": true,
+      "cached": false,
       "date": 1765839600000,
       "dateProgrammeActif": 1765839600000,
       "timezoneOffset": 3600000,
@@ -13447,6 +13447,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -13589,7 +13590,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 64190,
               "participants": [],
@@ -13599,7 +13600,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    6
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -13623,6 +13633,21 @@
                 ],
                 [
                   5
+                ],
+                [
+                  3
+                ],
+                [
+                  4
+                ],
+                [
+                  1
+                ],
+                [
+                  7
+                ],
+                [
+                  2
                 ]
               ],
               "hasEParis": true
@@ -13772,7 +13797,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17214,7 +17239,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1765916132172,
+      "timestamp": 1765917032271,
       "timezoneOffset": 3600000
     },
     "date": "16122025"
