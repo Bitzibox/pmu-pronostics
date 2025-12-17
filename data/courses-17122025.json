@@ -62,7 +62,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -85,7 +85,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -106,7 +106,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -129,7 +129,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -150,7 +150,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -169,7 +169,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -183,7 +183,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -202,7 +202,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -216,7 +216,7 @@
                 {
                   "typePari": "DEUX_SUR_QUATRE",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -243,7 +243,7 @@
                   "typePari": "E_DEUX_SUR_QUATRE",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -267,7 +267,7 @@
                 {
                   "typePari": "MULTI",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -276,15 +276,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -293,7 +293,7 @@
                   "typePari": "E_MULTI",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -302,21 +302,21 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
                   ],
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "complement": false
                 },
                 {
                   "typePari": "TIERCE",
                   "miseBase": 100,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -335,7 +335,7 @@
                   "typePari": "E_TIERCE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -352,7 +352,7 @@
                 {
                   "typePari": "QUARTE_PLUS",
                   "miseBase": 150,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -371,7 +371,7 @@
                   "typePari": "E_QUARTE_PLUS",
                   "miseBase": 150,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -388,7 +388,7 @@
                 {
                   "typePari": "QUINTE_PLUS",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "nouveauQuinte": true,
@@ -397,7 +397,26 @@
                     "tauxContribution": {
                       "numerateur": 1,
                       "denominateur": 3
-                    }
+                    },
+                    "tirage": [
+                      {
+                        "coef": 2,
+                        "numeros": [
+                          15,
+                          16,
+                          20,
+                          21,
+                          22,
+                          24
+                        ]
+                      },
+                      {
+                        "coef": 10,
+                        "numeros": [
+                          7
+                        ]
+                      }
+                    ]
                   },
                   "misEnPaiement": false,
                   "codePari": "QUINTE_PLUS",
@@ -416,7 +435,7 @@
                   "typePari": "E_QUINTE_PLUS",
                   "miseBase": 200,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -425,7 +444,26 @@
                     "tauxContribution": {
                       "numerateur": 1,
                       "denominateur": 3
-                    }
+                    },
+                    "tirage": [
+                      {
+                        "coef": 2,
+                        "numeros": [
+                          15,
+                          16,
+                          20,
+                          21,
+                          22,
+                          24
+                        ]
+                      },
+                      {
+                        "coef": 10,
+                        "numeros": [
+                          7
+                        ]
+                      }
+                    ]
                   },
                   "codePari": "E_QUINTE_PLUS",
                   "spotAutorise": true,
@@ -441,7 +479,7 @@
                 {
                   "typePari": "TIC_TROIS",
                   "miseBase": 450,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -454,7 +492,7 @@
                 },
                 {
                   "typePari": "REPORT_PLUS",
-                  "enVente": true,
+                  "enVente": false,
                   "reportable": false,
                   "codePari": "REPORT_PLUS",
                   "spotAutorise": false,
@@ -479,8 +517,8 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE",
+              "categorieStatut": "ARRIVEE",
               "participants": [],
               "ecuries": [],
               "rapportsDefinitifsDisponibles": false,
@@ -498,6 +536,23 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  11
+                ],
+                [
+                  5
+                ],
+                [
+                  14
+                ],
+                [
+                  9
+                ],
+                [
+                  12
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -784,14 +839,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -809,13 +864,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -1151,14 +1206,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -1176,13 +1231,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -1518,15 +1573,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -1544,14 +1599,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -1887,15 +1942,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -1913,14 +1968,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -2295,14 +2350,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -2320,13 +2375,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -2662,15 +2717,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -2688,14 +2743,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -3031,15 +3086,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -3057,14 +3112,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -3166,7 +3221,7 @@
             "TROT_MONTE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 1,
+          "prochaineCourse": 2,
           "parisEvenement": [
             {
               "codePari": "QUINTE_PLUS",
@@ -3489,14 +3544,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -3514,13 +3569,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -3859,14 +3914,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -3884,13 +3939,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -4229,14 +4284,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -4254,13 +4309,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -4599,14 +4654,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -4624,13 +4679,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -4732,6 +4787,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -4770,7 +4826,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT_INTERNATIONAL",
                   "spotAutorise": false,
                   "ordre": false,
@@ -4784,7 +4840,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE_INTERNATIONAL",
                   "spotAutorise": false,
                   "ordre": false,
@@ -4830,7 +4886,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_ORDRE_INTERNATIONAL",
                   "spotAutorise": false,
                   "ordre": true,
@@ -4871,8 +4927,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 69950,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -4881,7 +4938,8 @@
                 "intitule": "Bon",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -4905,6 +4963,33 @@
                 ],
                 [
                   7
+                ],
+                [
+                  5
+                ],
+                [
+                  9
+                ],
+                [
+                  3
+                ],
+                [
+                  2
+                ],
+                [
+                  6
+                ],
+                [
+                  1
+                ],
+                [
+                  4
+                ],
+                [
+                  11
+                ],
+                [
+                  10
                 ]
               ],
               "hasEParis": true
@@ -5051,7 +5136,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -7454,14 +7539,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -7479,13 +7564,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -7828,14 +7913,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -7853,13 +7938,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -8202,15 +8287,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -8228,14 +8313,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -8641,14 +8726,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -8666,13 +8751,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -9013,14 +9098,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -9038,13 +9123,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -9385,15 +9470,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -9411,14 +9496,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -9759,15 +9844,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -9785,14 +9870,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -10133,15 +10218,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -10159,14 +10244,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -10507,15 +10592,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -10533,14 +10618,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -10881,14 +10966,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -10906,13 +10991,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -11253,14 +11338,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -11278,13 +11363,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -11669,14 +11754,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -11694,13 +11779,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -12322,14 +12407,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -12347,13 +12432,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -12696,14 +12781,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -12721,13 +12806,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -13070,14 +13155,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
                   ],
                   "complement": false
                 },
@@ -13095,13 +13180,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
+                  "valeursFlexiAutorisees": [
+                    50
+                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
-                  ],
-                  "valeursFlexiAutorisees": [
-                    50
                   ],
                   "complement": false
                 },
@@ -16474,8 +16559,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 1,
-          "numCourse": 1
+          "numReunion": 2,
+          "numCourse": 6
         }
       ],
       "datesProgrammesDisponibles": [
@@ -16485,7 +16570,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1765975532736,
+      "timestamp": 1765976432739,
       "timezoneOffset": 3600000
     },
     "date": "17122025"
