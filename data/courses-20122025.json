@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": true,
+      "cached": false,
       "date": 1766185200000,
       "dateProgrammeActif": 1766185200000,
       "timezoneOffset": 3600000,
@@ -3975,7 +3975,7 @@
               "course": {
                 "dateProgramme": 1766185200000,
                 "numReunion": 1,
-                "numOrdre": 7
+                "numOrdre": 4
               }
             },
             {
@@ -5396,7 +5396,7 @@
               "course": {
                 "dateProgramme": 1766185200000,
                 "numReunion": 2,
-                "numOrdre": 7
+                "numOrdre": 4
               }
             }
           ],
@@ -7720,7 +7720,7 @@
               "course": {
                 "dateProgramme": 1766185200000,
                 "numReunion": 3,
-                "numOrdre": 7
+                "numOrdre": 4
               }
             }
           ],
@@ -11351,7 +11351,7 @@
               "course": {
                 "dateProgramme": 1766185200000,
                 "numReunion": 4,
-                "numOrdre": 7
+                "numOrdre": 4
               }
             }
           ],
@@ -14765,7 +14765,7 @@
               "course": {
                 "dateProgramme": 1766185200000,
                 "numReunion": 5,
-                "numOrdre": 7
+                "numOrdre": 4
               }
             },
             {
@@ -17061,7 +17061,7 @@
               "course": {
                 "dateProgramme": 1766185200000,
                 "numReunion": 6,
-                "numOrdre": 7
+                "numOrdre": 4
               }
             }
           ],
@@ -18446,7 +18446,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ARRIVEE_DEFINITIVE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "indicateurEvenementArriveeProvisoire": "ENQUETE",
               "detailsIndicateurEvenementArriveeProvisoire": "TERMINEE SANS MODIFICATION",
@@ -18459,6 +18459,17 @@
                 "intitule": "Bon",
                 "commentaire": ""
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    13,
+                    14,
+                    15,
+                    16
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
@@ -18484,6 +18495,33 @@
                 ],
                 [
                   3
+                ],
+                [
+                  8
+                ],
+                [
+                  9
+                ],
+                [
+                  6
+                ],
+                [
+                  2
+                ],
+                [
+                  5
+                ],
+                [
+                  10
+                ],
+                [
+                  4
+                ],
+                [
+                  7
+                ],
+                [
+                  1
                 ]
               ],
               "hasEParis": true
@@ -18635,8 +18673,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_DEFINITIVE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 69660,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -18644,6 +18683,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    2,
+                    4,
+                    7
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
@@ -18669,6 +18718,15 @@
                 ],
                 [
                   9
+                ],
+                [
+                  5
+                ],
+                [
+                  8
+                ],
+                [
+                  1
                 ]
               ],
               "hasEParis": true
@@ -18676,6 +18734,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -18713,7 +18772,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18736,7 +18795,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18759,7 +18818,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18775,7 +18834,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18791,7 +18850,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -18819,8 +18878,10 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE",
+              "categorieStatut": "ARRIVEE",
+              "indicateurEvenementArriveeProvisoire": "ENQUETE",
+              "detailsIndicateurEvenementArriveeProvisoire": "TERMINEE SANS MODIFICATION",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -18829,7 +18890,16 @@
                 "intitule": "Bon",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "ARRETE",
+                  "numeroParticipants": [
+                    5
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -18844,6 +18914,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  4
+                ],
+                [
+                  2
+                ],
+                [
+                  8
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -19185,14 +19266,14 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 9,
+          "prochaineCourse": 10,
           "parisEvenement": [
             {
               "codePari": "EB5",
               "course": {
                 "dateProgramme": 1766185200000,
                 "numReunion": 7,
-                "numOrdre": 7
+                "numOrdre": 4
               }
             }
           ],
@@ -19212,7 +19293,7 @@
       "prochainesCoursesAPartir": [
         {
           "numReunion": 7,
-          "numCourse": 9
+          "numCourse": 10
         }
       ],
       "datesProgrammesDisponibles": [
@@ -19224,7 +19305,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1766265316705,
+      "timestamp": 1766266216774,
       "timezoneOffset": 3600000
     },
     "date": "20122025"
