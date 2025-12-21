@@ -14745,6 +14745,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -14888,8 +14889,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 85500,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -14897,7 +14899,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    7
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -14912,6 +14923,32 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  6
+                ],
+                [
+                  2
+                ],
+                [
+                  5
+                ],
+                [
+                  9
+                ],
+                [
+                  4
+                ],
+                [
+                  8
+                ],
+                [
+                  3
+                ],
+                [
+                  1
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -15060,7 +15097,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15479,7 +15516,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1766350814312,
+      "timestamp": 1766351714338,
       "timezoneOffset": 3600000
     },
     "date": "21122025"
