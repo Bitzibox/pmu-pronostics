@@ -15567,6 +15567,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -15710,8 +15711,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 69650,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -15719,7 +15721,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    14
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -15743,13 +15754,43 @@
                 ],
                 [
                   5
+                ],
+                [
+                  10
+                ],
+                [
+                  1
+                ],
+                [
+                  12
+                ],
+                [
+                  11
+                ],
+                [
+                  2
+                ],
+                [
+                  4
+                ],
+                [
+                  13
+                ],
+                [
+                  6
+                ],
+                [
+                  3
+                ],
+                [
+                  8
                 ]
               ],
               "hasEParis": true
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "PLAT"
           ],
@@ -16832,7 +16873,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16855,7 +16896,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16878,7 +16919,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16894,7 +16935,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16910,7 +16951,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -16937,8 +16978,8 @@
                   "complement": false
                 }
               ],
-              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "categorieStatut": "ARRIVEE",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16961,6 +17002,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  10
+                ],
+                [
+                  7
+                ],
+                [
+                  5
+                ]
+              ],
               "hasEParis": true
             }
           ],
@@ -16973,7 +17025,6 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 8,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1766391300000,
@@ -16988,12 +17039,7 @@
           "cagnottes": []
         }
       ],
-      "prochainesCoursesAPartir": [
-        {
-          "numReunion": 6,
-          "numCourse": 8
-        }
-      ],
+      "prochainesCoursesAPartir": [],
       "datesProgrammesDisponibles": [
         "22122025",
         "23122025",
@@ -17002,7 +17048,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1766442630332,
+      "timestamp": 1766443530348,
       "timezoneOffset": 3600000
     },
     "date": "22122025"
