@@ -3397,7 +3397,7 @@
               "numExterneReunion": 1,
               "numOrdre": 9,
               "numExterne": 9,
-              "heureDepart": 1766592000000,
+              "heureDepart": 1766592180000,
               "libelle": "PRIX DE BELLE ILE",
               "libelleCourt": "DE BELLE ILE",
               "montantPrix": 40000,
@@ -3735,7 +3735,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -7403,6 +7403,7 @@
           "courses": [
             {
               "cached": false,
+              "arriveeDefinitive": true,
               "departImminent": false,
               "timezoneOffset": 3600000,
               "numReunion": 3,
@@ -7438,10 +7439,10 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -7461,7 +7462,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -7482,10 +7483,10 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -7505,7 +7506,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -7526,10 +7527,10 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "valeursFlexiAutorisees": [
                     50
@@ -7545,7 +7546,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -7559,10 +7560,10 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "valeursFlexiAutorisees": [
                     50
@@ -7578,7 +7579,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -7592,10 +7593,10 @@
                 {
                   "typePari": "DEUX_SUR_QUATRE",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "valeursFlexiAutorisees": [
                     25,
@@ -7619,7 +7620,7 @@
                   "typePari": "E_DEUX_SUR_QUATRE",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -7643,10 +7644,10 @@
                 {
                   "typePari": "TRIO",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "valeursFlexiAutorisees": [
                     50
@@ -7662,7 +7663,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -7676,10 +7677,10 @@
                 {
                   "typePari": "MINI_MULTI",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "valeursFlexiAutorisees": [
                     25,
@@ -7701,7 +7702,7 @@
                   "typePari": "E_MINI_MULTI",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -7722,7 +7723,7 @@
                 },
                 {
                   "typePari": "REPORT_PLUS",
-                  "enVente": true,
+                  "enVente": false,
                   "reportable": false,
                   "codePari": "REPORT_PLUS",
                   "spotAutorise": false,
@@ -7747,11 +7748,21 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_DANS_TROIS_MINUTES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "FIN_COURSE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 178630,
               "participants": [],
               "ecuries": [],
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                  "numeroParticipants": [
+                    6
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -7766,6 +7777,35 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  8
+                ],
+                [
+                  3
+                ],
+                [
+                  1
+                ],
+                [
+                  10
+                ],
+                [
+                  2
+                ],
+                [
+                  4
+                ],
+                [
+                  9
+                ],
+                [
+                  5
+                ],
+                [
+                  7
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -8052,7 +8092,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -10066,7 +10106,7 @@
             "TROT_ATTELE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 1,
+          "prochaineCourse": 2,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1766564100000,
@@ -10084,8 +10124,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 3,
-          "numCourse": 1
+          "numReunion": 1,
+          "numCourse": 9
         }
       ],
       "datesProgrammesDisponibles": [
@@ -10098,7 +10138,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1766591131687,
+      "timestamp": 1766592031723,
       "timezoneOffset": 3600000
     },
     "date": "24122025"
