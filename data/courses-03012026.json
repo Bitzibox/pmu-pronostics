@@ -4131,7 +4131,7 @@
               "course": {
                 "dateProgramme": 1767394800000,
                 "numReunion": 1,
-                "numOrdre": 4
+                "numOrdre": 8
               }
             },
             {
@@ -7148,7 +7148,7 @@
               "course": {
                 "dateProgramme": 1767394800000,
                 "numReunion": 2,
-                "numOrdre": 4
+                "numOrdre": 8
               }
             }
           ],
@@ -10295,7 +10295,7 @@
               "course": {
                 "dateProgramme": 1767394800000,
                 "numReunion": 3,
-                "numOrdre": 4
+                "numOrdre": 8
               }
             }
           ],
@@ -13524,7 +13524,7 @@
               "course": {
                 "dateProgramme": 1767394800000,
                 "numReunion": 4,
-                "numOrdre": 4
+                "numOrdre": 8
               }
             }
           ],
@@ -15364,7 +15364,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15387,7 +15387,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15410,7 +15410,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15426,7 +15426,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15442,7 +15442,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15469,10 +15469,20 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 228680,
               "participants": [],
               "ecuries": [],
+              "incidents": [
+                {
+                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                  "numeroParticipants": [
+                    2,
+                    5
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -15488,6 +15498,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  4
+                ],
+                [
+                  8
+                ],
+                [
+                  7
+                ]
+              ],
               "hasEParis": true
             }
           ],
@@ -15500,14 +15521,13 @@
             "TROT_ATTELE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 6,
           "parisEvenement": [
             {
               "codePari": "EB5",
               "course": {
                 "dateProgramme": 1767394800000,
                 "numReunion": 5,
-                "numOrdre": 4
+                "numOrdre": 8
               }
             }
           ],
@@ -16085,7 +16105,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -16615,7 +16635,7 @@
               "course": {
                 "dateProgramme": 1767394800000,
                 "numReunion": 6,
-                "numOrdre": 4
+                "numOrdre": 8
               }
             }
           ],
@@ -17187,7 +17207,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17884,7 +17904,7 @@
               "course": {
                 "dateProgramme": 1767394800000,
                 "numReunion": 7,
-                "numOrdre": 4
+                "numOrdre": 8
               }
             }
           ],
@@ -19888,7 +19908,7 @@
               "course": {
                 "dateProgramme": 1767394800000,
                 "numReunion": 8,
-                "numOrdre": 4
+                "numOrdre": 8
               }
             }
           ],
@@ -19907,8 +19927,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 5,
-          "numCourse": 6
+          "numReunion": 7,
+          "numCourse": 5
         }
       ],
       "datesProgrammesDisponibles": [
@@ -19920,7 +19940,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1767472215928,
+      "timestamp": 1767473115912,
       "timezoneOffset": 3600000
     },
     "date": "03012026"
