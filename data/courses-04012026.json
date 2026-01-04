@@ -1693,7 +1693,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -9011,6 +9011,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -9048,7 +9049,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -9092,7 +9093,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -9136,7 +9137,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -9169,7 +9170,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -9202,7 +9203,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -9253,7 +9254,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -9286,7 +9287,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
                   "valeursRisqueAutorisees": [
@@ -9355,7 +9356,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 301660,
               "participants": [],
@@ -9366,11 +9367,12 @@
                 "intitule": "Très souple",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAG",
                 "libelleCourt": "CAGNES/MER",
@@ -9392,6 +9394,21 @@
                 ],
                 [
                   7
+                ],
+                [
+                  8
+                ],
+                [
+                  3
+                ],
+                [
+                  6
+                ],
+                [
+                  2
+                ],
+                [
+                  5
                 ]
               ],
               "hasEParis": true
@@ -9743,7 +9760,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17516,7 +17533,7 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "BOU",
                 "libelleCourt": "LE BOUSCAT",
@@ -18070,7 +18087,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_SOUS_ORDRES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -19805,7 +19822,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -19821,7 +19838,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19842,7 +19859,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -19858,7 +19875,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19879,7 +19896,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -19898,7 +19915,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19912,7 +19929,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -19931,7 +19948,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19945,7 +19962,7 @@
                 {
                   "typePari": "TRIO",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -19964,7 +19981,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -19991,8 +20008,9 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_DANS_TROIS_MINUTES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 208460,
               "participants": [],
               "ecuries": [],
               "rapportsDefinitifsDisponibles": false,
@@ -20009,6 +20027,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  3
+                ],
+                [
+                  5
+                ],
+                [
+                  11
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -20019,7 +20048,7 @@
               "numExterneReunion": 10,
               "numOrdre": 6,
               "numExterne": 6,
-              "heureDepart": 1767537000000,
+              "heureDepart": 1767537300000,
               "libelle": "PRIX DU PICOTIN",
               "libelleCourt": "DU PICOTIN",
               "montantPrix": 14500,
@@ -20508,7 +20537,7 @@
             "TROT_MONTE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 5,
+          "prochaineCourse": 6,
           "parisEvenement": [
             {
               "codePari": "EB5",
@@ -20534,7 +20563,11 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 10,
+          "numReunion": 1,
+          "numCourse": 4
+        },
+        {
+          "numReunion": 9,
           "numCourse": 5
         }
       ],
@@ -20546,7 +20579,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1767535213286,
+      "timestamp": 1767536116478,
       "timezoneOffset": 3600000
     },
     "date": "04012026"
