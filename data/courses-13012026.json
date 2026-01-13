@@ -14352,6 +14352,7 @@
             },
             {
               "cached": false,
+              "arriveeDefinitive": true,
               "departImminent": false,
               "timezoneOffset": 3600000,
               "numReunion": 6,
@@ -14495,7 +14496,7 @@
                   "ordre": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 64190,
               "participants": [],
@@ -14505,7 +14506,17 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    3,
+                    11
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -14529,13 +14540,34 @@
                 ],
                 [
                   1
+                ],
+                [
+                  2
+                ],
+                [
+                  7
+                ],
+                [
+                  5
+                ],
+                [
+                  9
+                ],
+                [
+                  12
+                ],
+                [
+                  8
+                ],
+                [
+                  6
                 ]
               ],
               "hasEParis": true
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "PLAT"
           ],
@@ -14565,7 +14597,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1768343416085,
+      "timestamp": 1768344315989,
       "timezoneOffset": 3600000
     },
     "date": "13012026"
