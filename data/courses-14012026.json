@@ -20488,6 +20488,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 9,
               "numExterneReunion": 9,
@@ -20630,8 +20631,9 @@
                   "spotAutorise": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 57370,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -20640,7 +20642,24 @@
                 "intitule": "Bon léger",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    2,
+                    4,
+                    10
+                  ]
+                },
+                {
+                  "type": "ARRETE",
+                  "numeroParticipants": [
+                    1
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -20664,6 +20683,18 @@
                 ],
                 [
                   7
+                ],
+                [
+                  8
+                ],
+                [
+                  9
+                ],
+                [
+                  3
+                ],
+                [
+                  5
                 ]
               ],
               "hasEParis": true
@@ -20813,7 +20844,7 @@
                   "spotAutorise": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -21049,7 +21080,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1768427115265,
+      "timestamp": 1768428015182,
       "timezoneOffset": 3600000
     },
     "date": "14012026"
