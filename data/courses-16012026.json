@@ -16182,6 +16182,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 6,
               "numExterneReunion": 6,
@@ -16325,8 +16326,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 100530,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16334,7 +16336,17 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    3,
+                    9
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -16358,13 +16370,31 @@
                 ],
                 [
                   6
+                ],
+                [
+                  1
+                ],
+                [
+                  8
+                ],
+                [
+                  7
+                ],
+                [
+                  4
+                ],
+                [
+                  2
+                ],
+                [
+                  5
                 ]
               ],
               "hasEParis": true
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "PLAT"
           ],
@@ -17501,7 +17531,7 @@
               "numExterneReunion": 7,
               "numOrdre": 6,
               "numExterne": 6,
-              "heureDepart": 1768601400000,
+              "heureDepart": 1768601580000,
               "libelle": "OURO PRETO H.",
               "libelleCourt": "OURO PRETO",
               "montantPrix": 2629,
@@ -17639,7 +17669,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_SOUS_ORDRES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17878,7 +17908,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1768600824271,
+      "timestamp": 1768601724443,
       "timezoneOffset": 3600000
     },
     "date": "16012026"
