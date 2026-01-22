@@ -3739,7 +3739,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -9841,6 +9841,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -9879,7 +9880,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -9923,7 +9924,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -9967,7 +9968,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -10000,7 +10001,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -10033,7 +10034,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -10084,7 +10085,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "ordre": false,
@@ -10117,7 +10118,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MULTI",
                   "spotAutorise": true,
                   "ordre": false,
@@ -10188,8 +10189,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "FIN_COURSE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 160720,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -10197,11 +10199,12 @@
                 "intitule": "PSF STANDARD",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "DEA",
                 "libelleCourt": "DEAUVILLE",
@@ -10211,6 +10214,56 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  8
+                ],
+                [
+                  7
+                ],
+                [
+                  13
+                ],
+                [
+                  9
+                ],
+                [
+                  2
+                ],
+                [
+                  12
+                ],
+                [
+                  6
+                ],
+                [
+                  5
+                ],
+                [
+                  16
+                ],
+                [
+                  11
+                ],
+                [
+                  15
+                ],
+                [
+                  4
+                ],
+                [
+                  3
+                ],
+                [
+                  1
+                ],
+                [
+                  14
+                ],
+                [
+                  10
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -10563,7 +10616,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15518,7 +15571,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1769100314593,
+      "timestamp": 1769101214576,
       "timezoneOffset": 3600000
     },
     "date": "22012026"
