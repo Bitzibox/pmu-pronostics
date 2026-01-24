@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": false,
+      "cached": true,
       "date": 1769209200000,
       "dateProgrammeActif": 1769209200000,
       "timezoneOffset": 3600000,
@@ -310,14 +310,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -335,13 +335,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -377,20 +377,11 @@
               "dureeCourse": 199030,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "NON_PARTANT",
-                  "numeroParticipants": [
-                    3
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -438,6 +429,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -475,7 +467,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -519,7 +511,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -563,7 +555,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -596,7 +588,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -629,7 +621,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -681,7 +673,7 @@
                   "audience": "NATIONAL",
                   "cagnotte": 30000,
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "ordre": false,
@@ -714,20 +706,20 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -745,13 +737,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -782,11 +774,13 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 154790,
               "participants": [],
               "ecuries": [],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [
@@ -803,8 +797,7 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "VIN",
                 "libelleCourt": "VINCENNES",
@@ -814,6 +807,35 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  10
+                ],
+                [
+                  12
+                ],
+                [
+                  9
+                ],
+                [
+                  5
+                ],
+                [
+                  1
+                ],
+                [
+                  11
+                ],
+                [
+                  8
+                ],
+                [
+                  6
+                ],
+                [
+                  4
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -1100,14 +1122,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -1125,13 +1147,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -1162,7 +1184,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -1170,7 +1192,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -1440,15 +1461,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -1466,14 +1487,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -1659,7 +1680,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -1963,15 +1983,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -1989,14 +2009,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -2055,7 +2075,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -2358,14 +2377,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -2383,13 +2402,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -2481,7 +2500,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -2785,15 +2803,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -2811,14 +2829,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -2871,7 +2889,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -3174,14 +3191,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -3199,13 +3216,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -3304,7 +3321,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -3601,15 +3617,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -3627,14 +3643,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -3673,7 +3689,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -3971,14 +3986,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -3996,13 +4011,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -4054,7 +4069,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIN",
@@ -4519,20 +4533,11 @@
               "dureeCourse": 240300,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    7
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "WOL",
@@ -4852,14 +4857,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -4877,13 +4882,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -4919,28 +4924,11 @@
               "dureeCourse": 158000,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "NON_PARTANT",
-                  "numeroParticipants": [
-                    6
-                  ]
-                },
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    1,
-                    4,
-                    5
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "WOL",
@@ -5262,21 +5250,11 @@
               "dureeCourse": 155200,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    8,
-                    9
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "WOL",
@@ -5596,14 +5574,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -5621,13 +5599,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -5663,21 +5641,11 @@
               "dureeCourse": 161200,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    4,
-                    8
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "WOL",
@@ -6006,20 +5974,11 @@
               "dureeCourse": 193600,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    5
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "WOL",
@@ -6380,7 +6339,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -6685,7 +6643,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -6990,7 +6947,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -7309,15 +7265,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -7335,14 +7291,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -7390,7 +7346,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -7733,15 +7688,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -7759,14 +7714,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -7814,7 +7769,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -8160,7 +8114,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_SOUS_ORDRES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -8173,7 +8127,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -8471,15 +8424,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -8497,14 +8450,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -8549,7 +8502,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -8847,15 +8799,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -8873,14 +8825,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -8942,7 +8894,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAG",
@@ -9294,14 +9245,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -9319,13 +9270,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -9368,7 +9319,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PLB",
@@ -9666,15 +9616,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -9692,14 +9642,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -9742,7 +9692,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PLB",
@@ -10040,14 +9989,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -10065,13 +10014,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -10114,7 +10063,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PLB",
@@ -10412,14 +10360,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -10437,13 +10385,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -10486,7 +10434,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PLB",
@@ -10784,14 +10731,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -10809,13 +10756,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -10858,7 +10805,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PLB",
@@ -11156,15 +11102,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -11182,14 +11128,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -11232,7 +11178,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PLB",
@@ -11542,7 +11487,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PLB",
@@ -11852,7 +11796,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PLB",
@@ -12202,15 +12145,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -12228,14 +12171,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -12274,7 +12217,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GAL",
@@ -12571,14 +12513,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -12596,13 +12538,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -12641,7 +12583,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GAL",
@@ -12938,15 +12879,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -12964,14 +12905,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -13010,7 +12951,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GAL",
@@ -13307,15 +13247,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -13333,14 +13273,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -13396,7 +13336,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GAL",
@@ -13693,14 +13632,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -13718,13 +13657,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -13763,7 +13702,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GAL",
@@ -14060,14 +13998,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -14085,13 +14023,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -14130,7 +14068,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GAL",
@@ -14427,14 +14364,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -14452,13 +14389,13 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -14497,7 +14434,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GAL",
@@ -14794,15 +14730,15 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "complement": false
                 },
@@ -14820,14 +14756,14 @@
                   "ordre": false,
                   "combine": true,
                   "nbChevauxReglementaire": 4,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "complement": false
                 },
@@ -14866,7 +14802,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GAL",
@@ -15088,7 +15023,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -15240,7 +15174,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -15407,7 +15340,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -15559,7 +15491,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -15711,7 +15642,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "GPD",
@@ -15913,7 +15843,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -16079,7 +16008,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -16229,7 +16157,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -16395,7 +16322,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -16545,7 +16471,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -16711,7 +16636,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -16877,7 +16801,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "PMO",
@@ -17104,7 +17027,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHM",
@@ -17303,20 +17225,11 @@
                 "intitule": "Souple",
                 "commentaire": ""
               },
-              "incidents": [
-                {
-                  "type": "ARRETE",
-                  "numeroParticipants": [
-                    7
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHM",
@@ -17517,7 +17430,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHM",
@@ -17673,7 +17585,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CHM",
@@ -17967,23 +17878,11 @@
               "dureeCourse": 231560,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    1,
-                    6,
-                    9,
-                    11
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "ARG",
@@ -18251,23 +18150,11 @@
               "dureeCourse": 165830,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    1,
-                    9,
-                    13,
-                    15
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "ARG",
@@ -18315,6 +18202,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 9,
               "numExterneReunion": 9,
@@ -18349,7 +18237,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -18365,7 +18253,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18386,7 +18274,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -18402,7 +18290,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18423,7 +18311,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -18442,7 +18330,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18456,7 +18344,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -18475,7 +18363,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18489,7 +18377,7 @@
                 {
                   "typePari": "TRIO",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -18508,7 +18396,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "LOCAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -18535,15 +18423,16 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_DANS_TROIS_MINUTES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 163480,
               "participants": [],
               "ecuries": [],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "ARG",
@@ -18554,6 +18443,32 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  2
+                ],
+                [
+                  8
+                ],
+                [
+                  7
+                ],
+                [
+                  11
+                ],
+                [
+                  4
+                ],
+                [
+                  14
+                ],
+                [
+                  16
+                ],
+                [
+                  13
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -18779,7 +18694,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -18787,7 +18702,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "ARG",
@@ -19031,7 +18945,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "ARG",
@@ -19275,7 +19188,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "ARG",
@@ -19519,7 +19431,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "ARG",
@@ -19763,7 +19674,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "ARG",
@@ -19786,7 +19696,7 @@
             "TROT_ATTELE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 3,
+          "prochaineCourse": 4,
           "parisEvenement": [
             {
               "codePari": "EB5",
@@ -19812,8 +19722,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 9,
-          "numCourse": 3
+          "numReunion": 3,
+          "numCourse": 6
         }
       ],
       "datesProgrammesDisponibles": [
@@ -19825,7 +19735,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1769259614698,
+      "timestamp": 1769260514456,
       "timezoneOffset": 3600000
     },
     "date": "24012026"
