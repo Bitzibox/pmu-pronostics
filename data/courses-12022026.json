@@ -15594,6 +15594,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -15737,8 +15738,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "CHEVAUX_SOUS_ORDRES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 63710,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -15746,7 +15748,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    8
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -15761,6 +15772,32 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  7
+                ],
+                [
+                  5
+                ],
+                [
+                  2
+                ],
+                [
+                  9
+                ],
+                [
+                  6
+                ],
+                [
+                  1
+                ],
+                [
+                  4
+                ],
+                [
+                  3
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -15771,7 +15808,7 @@
               "numExterneReunion": 5,
               "numOrdre": 9,
               "numExterne": 9,
-              "heureDepart": 1770933000000,
+              "heureDepart": 1770933300000,
               "libelle": "HUYE PAPITA",
               "libelleCourt": "HUYE PAPITA",
               "montantPrix": 1526,
@@ -15893,7 +15930,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -16101,7 +16138,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 8,
+          "prochaineCourse": 9,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1770884100000,
@@ -16671,7 +16708,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_DEFINITIVE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
               "dureeCourse": 104340,
               "participants": [],
@@ -16706,6 +16743,21 @@
                 ],
                 [
                   4
+                ],
+                [
+                  7
+                ],
+                [
+                  2
+                ],
+                [
+                  6
+                ],
+                [
+                  8
+                ],
+                [
+                  3
                 ]
               ],
               "hasEParis": true
@@ -17096,8 +17148,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 5,
-          "numCourse": 8
+          "numReunion": 6,
+          "numCourse": 10
         }
       ],
       "datesProgrammesDisponibles": [
@@ -17109,7 +17161,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1770931852920,
+      "timestamp": 1770932752957,
       "timezoneOffset": 3600000
     },
     "date": "12022026"
