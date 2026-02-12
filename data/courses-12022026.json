@@ -11169,6 +11169,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -11206,7 +11207,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -11250,7 +11251,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -11294,7 +11295,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -11327,7 +11328,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -11360,7 +11361,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -11411,7 +11412,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -11444,7 +11445,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MULTI",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -11514,16 +11515,39 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 211360,
               "participants": [],
               "ecuries": [],
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    6
+                  ]
+                },
+                {
+                  "type": "ARRETE",
+                  "numeroParticipants": [
+                    17
+                  ]
+                },
+                {
+                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                  "numeroParticipants": [
+                    5,
+                    16
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "ROU",
                 "libelleCourt": "MAUQUENCHY",
@@ -11533,6 +11557,47 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  9
+                ],
+                [
+                  1
+                ],
+                [
+                  14
+                ],
+                [
+                  7
+                ],
+                [
+                  13
+                ],
+                [
+                  8
+                ],
+                [
+                  10
+                ],
+                [
+                  4
+                ],
+                [
+                  3
+                ],
+                [
+                  2
+                ],
+                [
+                  12
+                ],
+                [
+                  15
+                ],
+                [
+                  11
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -11543,7 +11608,7 @@
               "numExterneReunion": 4,
               "numOrdre": 5,
               "numExterne": 5,
-              "heureDepart": 1770918900000,
+              "heureDepart": 1770920820000,
               "libelle": "PRIX DES ETABLISSEMENTS FREULET",
               "libelleCourt": "ETABL. FREULET",
               "montantPrix": 21000,
@@ -11881,7 +11946,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -11910,7 +11975,7 @@
               "numExterneReunion": 4,
               "numOrdre": 6,
               "numExterne": 6,
-              "heureDepart": 1770920820000,
+              "heureDepart": 1770922740000,
               "libelle": "PRIX DU PAYS DE BRAY",
               "libelleCourt": "DU PAYS DE BRAY",
               "montantPrix": 17000,
@@ -12277,7 +12342,7 @@
               "numExterneReunion": 4,
               "numOrdre": 7,
               "numExterne": 7,
-              "heureDepart": 1770922740000,
+              "heureDepart": 1770924660000,
               "libelle": "PRIX MARCEAU DECLE",
               "libelleCourt": "MARCEAU DECLE",
               "montantPrix": 16500,
@@ -12644,7 +12709,7 @@
               "numExterneReunion": 4,
               "numOrdre": 8,
               "numExterne": 8,
-              "heureDepart": 1770924660000,
+              "heureDepart": 1770926400000,
               "libelle": "PRIX HORSE WINNER",
               "libelleCourt": "HORSE WINNER",
               "montantPrix": 6000,
@@ -13053,6 +13118,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -13091,7 +13157,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -13135,7 +13201,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -13179,7 +13245,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -13212,7 +13278,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -13245,7 +13311,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -13296,7 +13362,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -13329,7 +13395,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
                   "valeursFlexiAutorisees": [
@@ -13398,8 +13464,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 64180,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -13407,7 +13474,8 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -13422,6 +13490,47 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  4
+                ],
+                [
+                  11
+                ],
+                [
+                  5
+                ],
+                [
+                  8
+                ],
+                [
+                  7
+                ],
+                [
+                  9
+                ],
+                [
+                  10
+                ],
+                [
+                  3
+                ],
+                [
+                  2
+                ],
+                [
+                  6
+                ],
+                [
+                  12
+                ],
+                [
+                  1
+                ],
+                [
+                  13
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -13772,7 +13881,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -16525,8 +16634,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 4,
-          "numCourse": 5
+          "numReunion": 5,
+          "numCourse": 2
         }
       ],
       "datesProgrammesDisponibles": [
@@ -16538,7 +16647,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1770918353283,
+      "timestamp": 1770919253217,
       "timezoneOffset": 3600000
     },
     "date": "12022026"
