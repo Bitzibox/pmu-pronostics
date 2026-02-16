@@ -13641,6 +13641,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -13784,8 +13785,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "CHEVAUX_SOUS_ORDRES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 158980,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -13793,7 +13795,16 @@
                 "intitule": "PSF STANDARD",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "ARRETE",
+                  "numeroParticipants": [
+                    2
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -13808,11 +13819,34 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  4
+                ],
+                [
+                  6
+                ],
+                [
+                  5
+                ],
+                [
+                  7
+                ],
+                [
+                  1
+                ],
+                [
+                  8
+                ],
+                [
+                  3
+                ]
+              ],
               "hasEParis": true
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "PLAT"
           ],
@@ -13820,7 +13854,6 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 7,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1771229700000,
@@ -14000,8 +14033,9 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_DEFINITIVE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 70370,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -14034,6 +14068,39 @@
                 ],
                 [
                   5
+                ],
+                [
+                  11
+                ],
+                [
+                  9
+                ],
+                [
+                  7
+                ],
+                [
+                  2
+                ],
+                [
+                  3
+                ],
+                [
+                  10
+                ],
+                [
+                  4
+                ],
+                [
+                  13
+                ],
+                [
+                  6
+                ],
+                [
+                  8
+                ],
+                [
+                  1
                 ]
               ],
               "hasEParis": true
@@ -14183,7 +14250,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15082,7 +15149,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -15617,8 +15684,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 5,
-          "numCourse": 7
+          "numReunion": 6,
+          "numCourse": 5
         }
       ],
       "datesProgrammesDisponibles": [
@@ -15628,7 +15695,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1771272021581,
+      "timestamp": 1771272921568,
       "timezoneOffset": 3600000
     },
     "date": "16022026"
