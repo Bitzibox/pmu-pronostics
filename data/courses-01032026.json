@@ -27,8 +27,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -337,8 +337,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -697,8 +697,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -1288,8 +1288,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -1659,8 +1659,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -2137,8 +2137,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -2559,8 +2559,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -3044,6 +3044,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -3081,7 +3082,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "ordre": false,
                   "combine": true,
@@ -3126,7 +3127,7 @@
                   "audience": "NATIONAL",
                   "cagnotte": 40000,
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "ordre": false,
                   "combine": true,
@@ -3170,7 +3171,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "ordre": false,
                   "combine": true,
@@ -3203,7 +3204,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "ordre": false,
                   "combine": true,
@@ -3236,7 +3237,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "ordre": false,
                   "combine": true,
@@ -3287,7 +3288,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "ordre": false,
                   "combine": true,
@@ -3320,7 +3321,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MULTI",
                   "ordre": false,
                   "combine": true,
@@ -3391,8 +3392,9 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "DEPART_CONFIRME",
-              "categorieStatut": "EN_COURS",
+              "statut": "FIN_COURSE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 370000,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -3401,7 +3403,26 @@
                 "intitule": "Collant",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    9
+                  ]
+                },
+                {
+                  "type": "ARRETE",
+                  "numeroParticipants": [
+                    1,
+                    5,
+                    6,
+                    11,
+                    14
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [
@@ -3429,11 +3450,37 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  10
+                ],
+                [
+                  8
+                ],
+                [
+                  4
+                ],
+                [
+                  2
+                ],
+                [
+                  3
+                ],
+                [
+                  7
+                ],
+                [
+                  12
+                ],
+                [
+                  13
+                ]
+              ],
               "hasEParis": true
             }
           ],
           "audience": "NATIONAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "OBSTACLE"
           ],
@@ -3471,7 +3518,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 1,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             },
             {
@@ -3576,8 +3623,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -3782,8 +3829,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -4159,8 +4206,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -4536,8 +4583,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 2,
               "numExterneReunion": 2,
@@ -4924,7 +4971,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 2,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -4962,8 +5009,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -5303,8 +5350,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -5723,8 +5770,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -6022,8 +6069,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -6428,8 +6475,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 3,
               "numExterneReunion": 3,
@@ -6860,7 +6907,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 3,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -6898,8 +6945,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -7235,8 +7282,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -7575,8 +7622,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -7994,8 +8041,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -8408,8 +8455,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -8833,8 +8880,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -9260,8 +9307,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -9671,8 +9718,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 4,
               "numExterneReunion": 4,
@@ -10116,7 +10163,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 4,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -10154,8 +10201,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -10569,8 +10616,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -10988,8 +11035,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -11335,8 +11382,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 5,
               "numExterneReunion": 5,
@@ -11611,7 +11658,7 @@
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CEP",
                 "libelleCourt": "LA CEPIERE",
@@ -11896,7 +11943,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ROUGE_AUX_PARTANTS",
+              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -12972,7 +13019,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 5,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -13291,7 +13338,7 @@
                   "spotAutorise": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -14303,7 +14350,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 6,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -14341,8 +14388,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -14536,8 +14583,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -14747,8 +14794,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -14959,7 +15006,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 7,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -16215,7 +16262,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 8,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -17281,7 +17328,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 9,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -17318,8 +17365,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 10,
               "numExterneReunion": 10,
@@ -17611,8 +17658,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 10,
               "numExterneReunion": 10,
@@ -17912,8 +17959,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 10,
               "numExterneReunion": 10,
@@ -18193,8 +18240,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 10,
               "numExterneReunion": 10,
@@ -18472,8 +18519,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 10,
               "numExterneReunion": 10,
@@ -18771,8 +18818,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 10,
               "numExterneReunion": 10,
@@ -19110,8 +19157,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 10,
               "numExterneReunion": 10,
@@ -19405,7 +19452,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 10,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -19443,8 +19490,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 10,
@@ -19717,8 +19764,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 10,
@@ -20004,8 +20051,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 10,
@@ -20300,8 +20347,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 10,
@@ -20598,8 +20645,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 10,
@@ -20883,8 +20930,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 10,
@@ -21128,8 +21175,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 10,
@@ -21464,8 +21511,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 11,
               "numExterneReunion": 10,
@@ -21783,7 +21830,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 11,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -21821,8 +21868,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 12,
               "numExterneReunion": 10,
@@ -22051,7 +22098,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 12,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -22089,8 +22136,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 13,
               "numExterneReunion": 11,
@@ -22372,8 +22419,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 13,
               "numExterneReunion": 11,
@@ -22652,8 +22699,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 13,
               "numExterneReunion": 11,
@@ -22945,8 +22992,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 13,
               "numExterneReunion": 11,
@@ -23221,8 +23268,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 13,
               "numExterneReunion": 11,
@@ -23501,8 +23548,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 13,
               "numExterneReunion": 11,
@@ -23780,8 +23827,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 13,
               "numExterneReunion": 11,
@@ -24086,7 +24133,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 13,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -24123,8 +24170,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 14,
               "numExterneReunion": 11,
@@ -24421,8 +24468,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 14,
               "numExterneReunion": 11,
@@ -24714,8 +24761,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 14,
               "numExterneReunion": 11,
@@ -25013,8 +25060,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 14,
               "numExterneReunion": 11,
@@ -25303,8 +25350,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 14,
               "numExterneReunion": 11,
@@ -25599,8 +25646,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 14,
               "numExterneReunion": 11,
@@ -25885,8 +25932,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 14,
               "numExterneReunion": 11,
@@ -26191,7 +26238,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 14,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -26228,8 +26275,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 15,
               "numExterneReunion": 11,
@@ -26410,8 +26457,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 15,
               "numExterneReunion": 11,
@@ -26582,8 +26629,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 15,
               "numExterneReunion": 11,
@@ -26771,8 +26818,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 15,
               "numExterneReunion": 11,
@@ -26958,8 +27005,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 15,
               "numExterneReunion": 11,
@@ -27137,8 +27184,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 15,
               "numExterneReunion": 11,
@@ -27315,8 +27362,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 15,
               "numExterneReunion": 11,
@@ -27516,7 +27563,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 15,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -27544,8 +27591,8 @@
           "courses": [
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 16,
               "numExterneReunion": 11,
@@ -27711,8 +27758,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 16,
               "numExterneReunion": 11,
@@ -27899,8 +27946,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 16,
               "numExterneReunion": 11,
@@ -28072,8 +28119,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 16,
               "numExterneReunion": 11,
@@ -28252,8 +28299,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 16,
               "numExterneReunion": 11,
@@ -28432,8 +28479,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 16,
               "numExterneReunion": 11,
@@ -28613,8 +28660,8 @@
             },
             {
               "cached": false,
-              "arriveeDefinitive": true,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 16,
               "numExterneReunion": 11,
@@ -28812,7 +28859,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 16,
-                "numOrdre": 7
+                "numOrdre": 2
               }
             }
           ],
@@ -28833,7 +28880,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1772385354661,
+      "timestamp": 1772386254785,
       "timezoneOffset": 3600000
     },
     "date": "01032026"
