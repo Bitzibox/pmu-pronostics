@@ -3518,7 +3518,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 1,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             },
             {
@@ -4971,7 +4971,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 2,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -6907,7 +6907,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 3,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -10163,7 +10163,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 4,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -13146,7 +13146,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 5,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -14627,7 +14627,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 6,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -15283,7 +15283,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 7,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -15968,6 +15968,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 3600000,
               "numReunion": 8,
               "numExterneReunion": 8,
@@ -16005,7 +16006,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16028,7 +16029,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16051,7 +16052,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16067,7 +16068,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16083,7 +16084,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -16111,8 +16112,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "DEPART_DANS_TROIS_MINUTES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 66550,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16120,7 +16122,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    4
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -16135,6 +16146,44 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  11
+                ],
+                [
+                  7
+                ],
+                [
+                  8
+                ],
+                [
+                  3
+                ],
+                [
+                  6
+                ],
+                [
+                  13
+                ],
+                [
+                  12
+                ],
+                [
+                  9
+                ],
+                [
+                  5
+                ],
+                [
+                  1
+                ],
+                [
+                  10
+                ],
+                [
+                  2
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -16283,7 +16332,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -16663,14 +16712,14 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 4,
+          "prochaineCourse": 5,
           "parisEvenement": [
             {
               "codePari": "EB5",
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 8,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -17472,7 +17521,7 @@
                   "spotAutorise": false
                 }
               ],
-              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -17860,7 +17909,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 9,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -19984,7 +20033,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 10,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -22362,7 +22411,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 11,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -22630,7 +22679,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 12,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -24665,7 +24714,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 13,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -26770,7 +26819,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 14,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -28095,7 +28144,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 15,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -29391,7 +29440,7 @@
               "course": {
                 "dateProgramme": 1772319600000,
                 "numReunion": 16,
-                "numOrdre": 4
+                "numOrdre": 2
               }
             }
           ],
@@ -29401,8 +29450,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 8,
-          "numCourse": 4
+          "numReunion": 9,
+          "numCourse": 9
         }
       ],
       "datesProgrammesDisponibles": [
@@ -29412,7 +29461,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1772397953195,
+      "timestamp": 1772398853182,
       "timezoneOffset": 3600000
     },
     "date": "01032026"
