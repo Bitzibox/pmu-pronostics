@@ -10522,7 +10522,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -10545,7 +10545,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -10566,7 +10566,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -10589,7 +10589,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -10610,7 +10610,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -10629,7 +10629,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -10643,7 +10643,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -10662,7 +10662,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -10676,7 +10676,7 @@
                 {
                   "typePari": "DEUX_SUR_QUATRE",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -10703,7 +10703,7 @@
                   "typePari": "E_DEUX_SUR_QUATRE",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -10727,7 +10727,7 @@
                 {
                   "typePari": "TRIO",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -10746,7 +10746,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -10760,7 +10760,7 @@
                 {
                   "typePari": "MINI_MULTI",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -10785,7 +10785,7 @@
                   "typePari": "E_MINI_MULTI",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -10806,7 +10806,7 @@
                 },
                 {
                   "typePari": "REPORT_PLUS",
-                  "enVente": true,
+                  "enVente": false,
                   "reportable": false,
                   "codePari": "REPORT_PLUS",
                   "spotAutorise": false,
@@ -10831,10 +10831,21 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "categorieStatut": "ARRIVEE",
+              "dureeCourse": 210440,
               "participants": [],
               "ecuries": [],
+              "incidents": [
+                {
+                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
+                  "numeroParticipants": [
+                    2,
+                    6,
+                    11
+                  ]
+                }
+              ],
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
@@ -10850,6 +10861,20 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  7
+                ],
+                [
+                  5
+                ],
+                [
+                  8
+                ],
+                [
+                  4
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -11198,7 +11223,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -11599,7 +11624,7 @@
             "TROT_ATTELE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 6,
+          "prochaineCourse": 7,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1776928500000,
@@ -12878,7 +12903,7 @@
               "numExterneReunion": 5,
               "numOrdre": 4,
               "numExterne": 4,
-              "heureDepart": 1776967380000,
+              "heureDepart": 1776967680000,
               "libelle": "PRIX LE CROISE LAROCHE                  BELGIQUE",
               "libelleCourt": "CROISE LAROCHE",
               "montantPrix": 2500,
@@ -14288,15 +14313,14 @@
                   "complement": false
                 }
               ],
-              "typePiste": "HERBE",
+              "typePiste": "GAZON",
               "statut": "PROGRAMMEE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
-                "valeurMesure": "3,0",
-                "heureMesure": "2026-04-23T16:06",
-                "intitule": "Bon",
+                "heureMesure": "2026-04-23T19:48",
+                "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
               "rapportsDefinitifsDisponibles": false,
@@ -14789,15 +14813,14 @@
                   "complement": false
                 }
               ],
-              "typePiste": "HERBE",
+              "typePiste": "GAZON",
               "statut": "PROGRAMMEE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
-                "valeurMesure": "3,0",
-                "heureMesure": "2026-04-23T16:06",
-                "intitule": "Bon",
+                "heureMesure": "2026-04-23T19:48",
+                "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
               "rapportsDefinitifsDisponibles": false,
@@ -15889,8 +15912,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 4,
-          "numCourse": 6
+          "numReunion": 5,
+          "numCourse": 4
         }
       ],
       "datesProgrammesDisponibles": [
@@ -15901,7 +15924,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1776966348331,
+      "timestamp": 1776967251881,
       "timezoneOffset": 7200000
     },
     "date": "23042026"
