@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": false,
+      "cached": true,
       "date": 1777068000000,
       "dateProgrammeActif": 1777068000000,
       "timezoneOffset": 7200000,
@@ -15459,7 +15459,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15482,7 +15482,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15505,7 +15505,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15521,7 +15521,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -15537,7 +15537,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -15565,8 +15565,8 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
-              "categorieStatut": "A_PARTIR",
+              "statut": "DEPART_CONFIRME",
+              "categorieStatut": "EN_COURS",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -15946,7 +15946,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 9,
+          "prochaineCourse": 10,
           "parisEvenement": [
             {
               "codePari": "EB5",
@@ -16724,8 +16724,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_DEFINITIVE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 126750,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16758,6 +16759,21 @@
                 ],
                 [
                   6
+                ],
+                [
+                  2
+                ],
+                [
+                  5
+                ],
+                [
+                  3
+                ],
+                [
+                  7
+                ],
+                [
+                  8
                 ]
               ],
               "hasEParis": true
@@ -16908,7 +16924,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "DEPART_DANS_TROIS_MINUTES",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -21817,6 +21833,9 @@
               ],
               "statut": "ARRIVEE_PROVISOIRE",
               "categorieStatut": "ARRIVEE",
+              "indicateurEvenementArriveeProvisoire": "ENQUETE",
+              "detailsIndicateurEvenementArriveeProvisoire": "TERMINEE AVEC MODIFICATION",
+              "dureeCourse": 183120,
               "participants": [],
               "ecuries": [],
               "incidents": [
@@ -21834,7 +21853,7 @@
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "AMI",
                 "libelleCourt": "AMIENS",
@@ -21846,13 +21865,13 @@
               "formuleChampLibreIndisponible": false,
               "ordreArrivee": [
                 [
-                  4
-                ],
-                [
                   2
                 ],
                 [
                   7
+                ],
+                [
+                  3
                 ]
               ],
               "hasEParis": true
@@ -21893,8 +21912,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 6,
-          "numCourse": 9
+          "numReunion": 7,
+          "numCourse": 5
         }
       ],
       "datesProgrammesDisponibles": [
@@ -21906,7 +21925,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1777148143980,
+      "timestamp": 1777149044059,
       "timezoneOffset": 7200000
     },
     "date": "25042026"
