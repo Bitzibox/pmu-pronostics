@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": false,
+      "cached": true,
       "date": 1777240800000,
       "dateProgrammeActif": 1777240800000,
       "timezoneOffset": 7200000,
@@ -308,14 +308,14 @@
                   "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -333,13 +333,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -730,14 +730,14 @@
                   "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -755,13 +755,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1496,15 +1496,15 @@
                   "misEnPaiement": true,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1522,14 +1522,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1681,7 +1681,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -1704,7 +1704,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -1725,7 +1725,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -1748,7 +1748,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -1769,7 +1769,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -1788,7 +1788,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -1802,7 +1802,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -1821,7 +1821,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -1835,7 +1835,7 @@
                 {
                   "typePari": "DEUX_SUR_QUATRE",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -1862,7 +1862,7 @@
                   "typePari": "E_DEUX_SUR_QUATRE",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -1886,21 +1886,21 @@
                 {
                   "typePari": "MULTI",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1912,20 +1912,20 @@
                   "typePari": "E_MULTI",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -1935,7 +1935,7 @@
                 {
                   "typePari": "TIERCE",
                   "miseBase": 100,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -1954,7 +1954,7 @@
                   "typePari": "E_TIERCE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -1971,7 +1971,7 @@
                 {
                   "typePari": "QUARTE_PLUS",
                   "miseBase": 150,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -1990,7 +1990,7 @@
                   "typePari": "E_QUARTE_PLUS",
                   "miseBase": 150,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -2007,7 +2007,7 @@
                 {
                   "typePari": "QUINTE_PLUS",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "nouveauQuinte": true,
@@ -2016,7 +2016,26 @@
                     "tauxContribution": {
                       "numerateur": 1,
                       "denominateur": 3
-                    }
+                    },
+                    "tirage": [
+                      {
+                        "coef": 2,
+                        "numeros": [
+                          9,
+                          20,
+                          23,
+                          26,
+                          29,
+                          30
+                        ]
+                      },
+                      {
+                        "coef": 10,
+                        "numeros": [
+                          22
+                        ]
+                      }
+                    ]
                   },
                   "misEnPaiement": false,
                   "codePari": "QUINTE_PLUS",
@@ -2035,7 +2054,7 @@
                   "typePari": "E_QUINTE_PLUS",
                   "miseBase": 200,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -2044,7 +2063,26 @@
                     "tauxContribution": {
                       "numerateur": 1,
                       "denominateur": 3
-                    }
+                    },
+                    "tirage": [
+                      {
+                        "coef": 2,
+                        "numeros": [
+                          9,
+                          20,
+                          23,
+                          26,
+                          29,
+                          30
+                        ]
+                      },
+                      {
+                        "coef": 10,
+                        "numeros": [
+                          22
+                        ]
+                      }
+                    ]
                   },
                   "codePari": "E_QUINTE_PLUS",
                   "spotAutorise": true,
@@ -2060,7 +2098,7 @@
                 {
                   "typePari": "TIC_TROIS",
                   "miseBase": 450,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -2073,7 +2111,7 @@
                 },
                 {
                   "typePari": "REPORT_PLUS",
-                  "enVente": true,
+                  "enVente": false,
                   "reportable": false,
                   "codePari": "REPORT_PLUS",
                   "spotAutorise": false,
@@ -2099,8 +2137,8 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "JOKEYS_MONTENT_A_CHEVAL",
-              "categorieStatut": "A_PARTIR",
+              "statut": "DEPART_CONFIRME",
+              "categorieStatut": "EN_COURS",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -2408,15 +2446,15 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -2434,14 +2472,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -2785,14 +2823,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -2810,13 +2848,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3160,15 +3198,15 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3186,14 +3224,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3537,15 +3575,15 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3563,14 +3601,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -3681,7 +3719,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 5,
+          "prochaineCourse": 6,
           "parisEvenement": [
             {
               "codePari": "QUINTE_PLUS",
@@ -4030,14 +4068,14 @@
                   "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4055,13 +4093,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4736,15 +4774,15 @@
                   "misEnPaiement": true,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -4762,14 +4800,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -5148,15 +5186,15 @@
                   "misEnPaiement": true,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -5174,14 +5212,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -5547,14 +5585,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -5572,13 +5610,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -5914,15 +5952,15 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -5940,14 +5978,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -6283,15 +6321,15 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -6309,14 +6347,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -6652,15 +6690,15 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -6678,14 +6716,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7067,14 +7105,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7092,13 +7130,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7453,14 +7491,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7478,13 +7516,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7822,14 +7860,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -7847,13 +7885,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -8191,14 +8229,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -8216,13 +8254,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -10071,14 +10109,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -10096,13 +10134,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -10438,14 +10476,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -10463,13 +10501,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -10805,14 +10843,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -10830,13 +10868,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -11211,15 +11249,15 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -11237,14 +11275,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -11580,15 +11618,15 @@
                   "misEnPaiement": false,
                   "codePari": "MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -11606,14 +11644,14 @@
                   "reportable": false,
                   "codePari": "E_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6,
                     7
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -12254,14 +12292,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -12279,13 +12317,13 @@
                   "reportable": false,
                   "codePari": "E_MINI_MULTI",
                   "spotAutorise": true,
-                  "valeursFlexiAutorisees": [
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -14076,14 +14114,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": false,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -15365,14 +15403,14 @@
                   "misEnPaiement": false,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": false,
-                  "valeursFlexiAutorisees": [
-                    25,
-                    50
-                  ],
                   "valeursRisqueAutorisees": [
                     4,
                     5,
                     6
+                  ],
+                  "valeursFlexiAutorisees": [
+                    25,
+                    50
                   ],
                   "ordre": false,
                   "combine": true,
@@ -15950,7 +15988,7 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 1,
+          "numReunion": 2,
           "numCourse": 5
         }
       ],
@@ -15961,7 +15999,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1777290345602,
+      "timestamp": 1777291242757,
       "timezoneOffset": 7200000
     },
     "date": "27042026"
