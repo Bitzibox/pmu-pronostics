@@ -289,26 +289,11 @@
                 "intitule": "Lourd",
                 "commentaire": ""
               },
-              "incidents": [
-                {
-                  "type": "ARRETE",
-                  "numeroParticipants": [
-                    4
-                  ]
-                },
-                {
-                  "type": "TOMBE",
-                  "numeroParticipants": [
-                    5
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -635,20 +620,11 @@
                 "intitule": "Lourd",
                 "commentaire": ""
               },
-              "incidents": [
-                {
-                  "type": "ARRETE",
-                  "numeroParticipants": [
-                    8
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -690,6 +666,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 7200000,
               "numReunion": 1,
               "numExterneReunion": 1,
@@ -727,7 +704,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -771,7 +748,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "SIMPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -815,7 +792,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_GAGNANT",
                   "spotAutorise": true,
                   "ordre": false,
@@ -848,7 +825,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "COUPLE_PLACE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -881,7 +858,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "DEUX_SUR_QUATRE",
                   "spotAutorise": true,
                   "ordre": false,
@@ -932,7 +909,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "TRIO",
                   "spotAutorise": true,
                   "ordre": false,
@@ -965,7 +942,7 @@
                   "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
-                  "misEnPaiement": false,
+                  "misEnPaiement": true,
                   "codePari": "MINI_MULTI",
                   "spotAutorise": true,
                   "ordre": false,
@@ -1034,8 +1011,10 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "indicateurEvenementArriveeProvisoire": "ENQUETE",
+              "detailsIndicateurEvenementArriveeProvisoire": "TERMINEE SANS MODIFICATION",
               "dureeCourse": 269990,
               "participants": [],
               "ecuries": [],
@@ -1045,20 +1024,12 @@
                 "intitule": "Lourd",
                 "commentaire": ""
               },
-              "incidents": [
-                {
-                  "type": "TOMBE",
-                  "numeroParticipants": [
-                    4
-                  ]
-                }
-              ],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "AUT",
                 "libelleCourt": "AUTEUIL",
@@ -1080,6 +1051,27 @@
                 ],
                 [
                   7
+                ],
+                [
+                  5
+                ],
+                [
+                  10
+                ],
+                [
+                  11
+                ],
+                [
+                  8
+                ],
+                [
+                  12
+                ],
+                [
+                  1
+                ],
+                [
+                  3
                 ]
               ],
               "hasEParis": true
@@ -1545,7 +1537,7 @@
                 }
               ],
               "typePiste": "HERBE",
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -1573,7 +1565,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -1963,7 +1954,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -2390,7 +2380,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -2780,7 +2769,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -3209,7 +3197,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AUT",
@@ -3686,7 +3673,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "O01",
@@ -4084,27 +4070,11 @@
               "dureeCourse": 156700,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    2,
-                    6
-                  ]
-                },
-                {
-                  "type": "DISTANCE",
-                  "numeroParticipants": [
-                    7
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "O01",
@@ -4499,22 +4469,11 @@
               "dureeCourse": 152700,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    2,
-                    3,
-                    11
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "O01",
@@ -4907,23 +4866,11 @@
               "dureeCourse": 152500,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    2,
-                    7,
-                    10,
-                    11
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "O01",
@@ -5315,28 +5262,11 @@
               "dureeCourse": 155900,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "NON_PARTANT",
-                  "numeroParticipants": [
-                    8
-                  ]
-                },
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    2,
-                    3,
-                    5
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "O01",
@@ -5771,7 +5701,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -5787,30 +5717,11 @@
               "dureeCourse": 162860,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "NON_PARTANT",
-                  "numeroParticipants": [
-                    8
-                  ]
-                },
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    5,
-                    6,
-                    10,
-                    11,
-                    14
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAE",
@@ -6188,7 +6099,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -6206,23 +6117,11 @@
               "dureeCourse": 187700,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    4,
-                    6,
-                    8,
-                    11
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAE",
@@ -6597,7 +6496,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -6613,24 +6512,11 @@
               "dureeCourse": 184660,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    1,
-                    4,
-                    6,
-                    7,
-                    12
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAE",
@@ -7007,7 +6893,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -7023,25 +6909,11 @@
               "dureeCourse": 180330,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    1,
-                    3,
-                    4,
-                    7,
-                    8,
-                    14
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAE",
@@ -7419,7 +7291,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -7435,27 +7307,11 @@
               "dureeCourse": 179020,
               "participants": [],
               "ecuries": [],
-              "incidents": [
-                {
-                  "type": "NON_PARTANT",
-                  "numeroParticipants": [
-                    5
-                  ]
-                },
-                {
-                  "type": "DISQUALIFIE_POUR_ALLURE_IRREGULIERE",
-                  "numeroParticipants": [
-                    1,
-                    10
-                  ]
-                }
-              ],
               "rapportsDefinitifsDisponibles": true,
               "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAE",
@@ -7833,7 +7689,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -7854,7 +7710,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "CAE",
@@ -7945,7 +7800,7 @@
                 {
                   "typePari": "SIMPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -7968,7 +7823,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -7989,7 +7844,7 @@
                 {
                   "typePari": "SIMPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -8012,7 +7867,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -8033,7 +7888,7 @@
                 {
                   "typePari": "COUPLE_GAGNANT",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -8052,7 +7907,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -8066,7 +7921,7 @@
                 {
                   "typePari": "COUPLE_PLACE",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -8085,7 +7940,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -8099,7 +7954,7 @@
                 {
                   "typePari": "DEUX_SUR_QUATRE",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": true,
                   "misEnPaiement": false,
@@ -8126,7 +7981,7 @@
                   "typePari": "E_DEUX_SUR_QUATRE",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -8150,7 +8005,7 @@
                 {
                   "typePari": "TRIO",
                   "miseBase": 200,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -8169,7 +8024,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -8183,7 +8038,7 @@
                 {
                   "typePari": "MULTI",
                   "miseBase": 300,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "misEnPaiement": false,
@@ -8209,7 +8064,7 @@
                   "typePari": "E_MULTI",
                   "miseBase": 300,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -8231,7 +8086,7 @@
                 },
                 {
                   "typePari": "REPORT_PLUS",
-                  "enVente": true,
+                  "enVente": false,
                   "reportable": false,
                   "codePari": "REPORT_PLUS",
                   "spotAutorise": false,
@@ -8245,7 +8100,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -8256,15 +8111,14 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "categorieStatut": "ARRIVEE",
               "participants": [],
               "ecuries": [],
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAE",
@@ -8275,6 +8129,23 @@
               "courseTrackee": false,
               "courseExclusiveInternet": false,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  9
+                ],
+                [
+                  12
+                ],
+                [
+                  5
+                ],
+                [
+                  11
+                ],
+                [
+                  7
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -8612,7 +8483,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -8631,7 +8502,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAE",
@@ -8655,7 +8525,7 @@
             "TROT_MONTE"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 7,
+          "prochaineCourse": 8,
           "parisEvenement": [
             {
               "codePari": "EB5",
@@ -9060,7 +8930,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "DIE",
@@ -9449,7 +9318,6 @@
                   "cagnotteInternet": true
                 }
               ],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "DIE",
@@ -9824,7 +9692,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "DIE",
@@ -10137,7 +10004,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "DIE",
@@ -10512,7 +10378,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "DIE",
@@ -10887,7 +10752,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "DIE",
@@ -11200,7 +11064,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "DIE",
@@ -11575,7 +11438,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "DIE",
@@ -12010,7 +11872,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIC",
@@ -12315,7 +12176,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIC",
@@ -12699,7 +12559,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIC",
@@ -13066,7 +12925,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIC",
@@ -13433,7 +13291,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIC",
@@ -13800,7 +13657,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIC",
@@ -14169,7 +14025,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "VIC",
@@ -14498,7 +14353,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAR",
@@ -14772,7 +14626,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAR",
@@ -15046,7 +14899,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAR",
@@ -15320,7 +15172,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "CAR",
@@ -15526,7 +15377,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "NBU",
@@ -15741,11 +15591,15 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "heureMesure": "2026-05-16T14:53",
+                "intitule": "PSF RAPIDE",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "U15",
@@ -15908,11 +15762,16 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,0",
+                "heureMesure": "2026-05-16T14:53",
+                "intitule": "Bon",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "U15",
@@ -16059,11 +15918,16 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,0",
+                "heureMesure": "2026-05-16T14:53",
+                "intitule": "Bon",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "U15",
@@ -16226,11 +16090,16 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,0",
+                "heureMesure": "2026-05-16T14:53",
+                "intitule": "Bon",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "U15",
@@ -16393,11 +16262,16 @@
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
+              "penetrometre": {
+                "valeurMesure": "3,0",
+                "heureMesure": "2026-05-16T14:53",
+                "intitule": "Bon",
+                "commentaire": ""
+              },
               "rapportsDefinitifsDisponibles": false,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "U15",
@@ -16564,7 +16438,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": true,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "U15",
@@ -16783,7 +16656,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "MXD",
@@ -16950,7 +16822,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "MXD",
@@ -17117,7 +16988,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "MXD",
@@ -17284,7 +17154,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "MXD",
@@ -17435,7 +17304,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "MXD",
@@ -17731,7 +17599,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AMI",
@@ -17975,7 +17842,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AMI",
@@ -18260,7 +18126,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AMI",
@@ -18504,7 +18369,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AMI",
@@ -18748,7 +18612,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AMI",
@@ -18992,7 +18855,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AMI",
@@ -19236,7 +19098,6 @@
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
-              "pronosticsExpires": false,
               "replayDisponible": false,
               "hippodrome": {
                 "codeHippodrome": "AMI",
@@ -19287,8 +19148,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 3,
-          "numCourse": 7
+          "numReunion": 1,
+          "numCourse": 4
         }
       ],
       "datesProgrammesDisponibles": [
@@ -19300,7 +19161,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1778935500683,
+      "timestamp": 1778936400541,
       "timezoneOffset": 7200000
     },
     "date": "16052026"
