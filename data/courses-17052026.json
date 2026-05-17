@@ -16254,6 +16254,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 7200000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -16397,8 +16398,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 66030,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16406,7 +16408,17 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    6,
+                    12
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -16430,6 +16442,39 @@
                 ],
                 [
                   3
+                ],
+                [
+                  5
+                ],
+                [
+                  7
+                ],
+                [
+                  10
+                ],
+                [
+                  4
+                ],
+                [
+                  9
+                ],
+                [
+                  15
+                ],
+                [
+                  11
+                ],
+                [
+                  13
+                ],
+                [
+                  14
+                ],
+                [
+                  16
+                ],
+                [
+                  2
                 ]
               ],
               "hasEParis": true
@@ -16580,7 +16625,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -18755,7 +18800,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18778,7 +18823,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18801,7 +18846,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18817,7 +18862,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18833,7 +18878,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -18860,8 +18905,8 @@
                   "complement": false
                 }
               ],
-              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
-              "categorieStatut": "A_PARTIR",
+              "statut": "DEPART_CONFIRME",
+              "categorieStatut": "EN_COURS",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -19394,7 +19439,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 6,
+          "prochaineCourse": 7,
           "parisEvenement": [
             {
               "codePari": "EB5",
@@ -22356,8 +22401,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 11,
-          "numCourse": 6
+          "numReunion": 7,
+          "numCourse": 8
         }
       ],
       "datesProgrammesDisponibles": [
@@ -22368,7 +22413,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1779048001760,
+      "timestamp": 1779048901607,
       "timezoneOffset": 7200000
     },
     "date": "17052026"
