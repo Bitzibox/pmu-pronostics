@@ -4001,7 +4001,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 1,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             },
             {
@@ -5413,7 +5413,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 2,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -7019,7 +7019,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 3,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -10375,7 +10375,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 4,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -11055,7 +11055,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 5,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             },
             {
@@ -14328,7 +14328,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 6,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -16036,6 +16036,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 7200000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -16179,8 +16180,9 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 84840,
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16188,7 +16190,16 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "incidents": [
+                {
+                  "type": "NON_PARTANT",
+                  "numeroParticipants": [
+                    8
+                  ]
+                }
+              ],
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -16212,6 +16223,30 @@
                 ],
                 [
                   11
+                ],
+                [
+                  5
+                ],
+                [
+                  7
+                ],
+                [
+                  2
+                ],
+                [
+                  6
+                ],
+                [
+                  9
+                ],
+                [
+                  3
+                ],
+                [
+                  12
+                ],
+                [
+                  4
                 ]
               ],
               "hasEParis": true
@@ -16362,7 +16397,7 @@
                 }
               ],
               "typePiste": "GAZON",
-              "statut": "PROGRAMMEE",
+              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -16906,7 +16941,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 7,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -17533,7 +17568,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 8,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -18007,7 +18042,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 9,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -18243,7 +18278,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 10,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -18501,7 +18536,7 @@
               "numExterneReunion": 11,
               "numOrdre": 5,
               "numExterne": 5,
-              "heureDepart": 1779046500000,
+              "heureDepart": 1779046680000,
               "libelle": "PREMIO CLASICO BLEND (L)",
               "libelleCourt": "CLASICO BLEND",
               "montantPrix": 20645,
@@ -18533,7 +18568,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18556,7 +18591,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -18579,7 +18614,7 @@
                   "typePari": "E_COUPLE_ORDRE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -18595,7 +18630,7 @@
                   "typePari": "E_TRIO_ORDRE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -18622,8 +18657,8 @@
                   "complement": false
                 }
               ],
-              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
-              "categorieStatut": "A_PARTIR",
+              "statut": "DEPART_CONFIRME",
+              "categorieStatut": "EN_COURS",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -19328,14 +19363,14 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 5,
+          "prochaineCourse": 6,
           "parisEvenement": [
             {
               "codePari": "EB5",
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 11,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -19606,7 +19641,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 12,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -22271,7 +22306,7 @@
               "course": {
                 "dateProgramme": 1778968800000,
                 "numReunion": 13,
-                "numOrdre": 6
+                "numOrdre": 4
               }
             }
           ],
@@ -22290,8 +22325,8 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 11,
-          "numCourse": 5
+          "numReunion": 7,
+          "numCourse": 7
         }
       ],
       "datesProgrammesDisponibles": [
@@ -22302,7 +22337,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1779046200518,
+      "timestamp": 1779047101749,
       "timezoneOffset": 7200000
     },
     "date": "17052026"
