@@ -1,7 +1,7 @@
 [
   {
     "programme": {
-      "cached": false,
+      "cached": true,
       "date": 1779228000000,
       "dateProgrammeActif": 1779228000000,
       "timezoneOffset": 7200000,
@@ -18502,6 +18502,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 7200000,
               "numReunion": 8,
               "numExterneReunion": 8,
@@ -18644,7 +18645,7 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE_NON_VALIDEE",
+              "statut": "FIN_COURSE",
               "categorieStatut": "ARRIVEE",
               "indicateurEvenementArriveeProvisoire": "ENQUETE",
               "detailsIndicateurEvenementArriveeProvisoire": "TERMINEE AVEC MODIFICATION",
@@ -18656,7 +18657,8 @@
                 "intitule": "PSF RAPIDE",
                 "commentaire": ""
               },
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
@@ -18829,7 +18831,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "CHEVAUX_ENTRENT_EN_PISTE",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -19018,7 +19020,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -19199,7 +19201,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -19301,7 +19303,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19324,7 +19326,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19347,7 +19349,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19363,7 +19365,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -19379,7 +19381,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -19395,7 +19397,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -19406,8 +19408,8 @@
                   "complement": false
                 }
               ],
-              "statut": "DEPART_DANS_TROIS_MINUTES",
-              "categorieStatut": "A_PARTIR",
+              "statut": "ARRIVEE_PROVISOIRE",
+              "categorieStatut": "ARRIVEE",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -19430,6 +19432,17 @@
               "courseTrackee": false,
               "courseExclusiveInternet": true,
               "formuleChampLibreIndisponible": false,
+              "ordreArrivee": [
+                [
+                  8
+                ],
+                [
+                  9
+                ],
+                [
+                  10
+                ]
+              ],
               "hasEParis": true
             },
             {
@@ -19550,7 +19563,7 @@
                   "typePari": "E_REPORT_PLUS",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "reportable": false,
                   "codePari": "E_REPORT_PLUS",
@@ -19561,7 +19574,7 @@
                   "complement": false
                 }
               ],
-              "statut": "PROGRAMMEE",
+              "statut": "ROUGE_AUX_PARTANTS",
               "categorieStatut": "A_PARTIR",
               "participants": [],
               "ecuries": [],
@@ -19597,7 +19610,7 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 9,
+          "prochaineCourse": 10,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1779261300000,
@@ -19614,7 +19627,7 @@
       ],
       "prochainesCoursesAPartir": [
         {
-          "numReunion": 9,
+          "numReunion": 8,
           "numCourse": 9
         }
       ],
@@ -19626,7 +19639,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1779311735279,
+      "timestamp": 1779312635145,
       "timezoneOffset": 7200000
     },
     "date": "20052026"
