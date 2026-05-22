@@ -16367,7 +16367,7 @@
                   "typePari": "E_SIMPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16390,7 +16390,7 @@
                   "typePari": "E_SIMPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16413,7 +16413,7 @@
                   "typePari": "E_COUPLE_GAGNANT",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16429,7 +16429,7 @@
                   "typePari": "E_COUPLE_PLACE",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": true,
@@ -16445,7 +16445,7 @@
                   "typePari": "E_TRIO",
                   "miseBase": 100,
                   "miseMax": 3000000,
-                  "enVente": true,
+                  "enVente": false,
                   "audience": "NATIONAL",
                   "cagnotte": 0,
                   "reportable": false,
@@ -16472,8 +16472,8 @@
                   "complement": false
                 }
               ],
-              "statut": "ROUGE_AUX_PARTANTS",
-              "categorieStatut": "A_PARTIR",
+              "statut": "DEPART_CONFIRME",
+              "categorieStatut": "EN_COURS",
               "participants": [],
               "ecuries": [],
               "penetrometre": {
@@ -16508,7 +16508,6 @@
             "PLAT"
           ],
           "derniereReunion": false,
-          "prochaineCourse": 9,
           "parisEvenement": [],
           "meteo": {
             "datePrevision": 1779434100000,
@@ -18592,6 +18591,7 @@
             {
               "cached": false,
               "departImminent": false,
+              "arriveeDefinitive": true,
               "timezoneOffset": 7200000,
               "numReunion": 7,
               "numExterneReunion": 7,
@@ -18812,8 +18812,9 @@
                   "complement": false
                 }
               ],
-              "statut": "ARRIVEE_PROVISOIRE",
+              "statut": "ARRIVEE_DEFINITIVE_COMPLETE",
               "categorieStatut": "ARRIVEE",
+              "dureeCourse": 217150,
               "participants": [],
               "ecuries": [],
               "incidents": [
@@ -18825,12 +18826,13 @@
                   ]
                 }
               ],
-              "rapportsDefinitifsDisponibles": false,
+              "rapportsDefinitifsDisponibles": true,
+              "isArriveeDefinitive": true,
               "isDepartImminent": false,
               "isDepartAJPlusUn": false,
               "cagnottes": [],
               "pronosticsExpires": false,
-              "replayDisponible": false,
+              "replayDisponible": true,
               "hippodrome": {
                 "codeHippodrome": "LAV",
                 "libelleCourt": "LAVAL",
@@ -18849,13 +18851,46 @@
                 ],
                 [
                   16
+                ],
+                [
+                  14
+                ],
+                [
+                  7
+                ],
+                [
+                  13
+                ],
+                [
+                  12
+                ],
+                [
+                  10
+                ],
+                [
+                  8
+                ],
+                [
+                  6
+                ],
+                [
+                  2
+                ],
+                [
+                  9
+                ],
+                [
+                  15
+                ],
+                [
+                  11
                 ]
               ],
               "hasEParis": true
             }
           ],
           "audience": "LOCAL",
-          "statut": "PROGRAMMEE",
+          "statut": "TERMINEE",
           "disciplinesMere": [
             "TROT"
           ],
@@ -18878,12 +18913,7 @@
           "cagnottes": []
         }
       ],
-      "prochainesCoursesAPartir": [
-        {
-          "numReunion": 6,
-          "numCourse": 9
-        }
-      ],
+      "prochainesCoursesAPartir": [],
       "datesProgrammesDisponibles": [
         "22052026",
         "23052026",
@@ -18894,7 +18924,7 @@
       ]
     },
     "timestampPMU": {
-      "timestamp": 1779483635041,
+      "timestamp": 1779484535038,
       "timezoneOffset": 7200000
     },
     "date": "22052026"
